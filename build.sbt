@@ -18,6 +18,7 @@ lazy val assemble   = TaskKey[Unit]("assemble", "Package the project into a sing
 
 def copyJsTaskFactory(fastOptimized: Boolean) = Def.task {
   val sv = scalaVersion.value
+  // Le nom du dossier doit correspondre au 'name' du projet (en minuscules)
   val bundleDir =
     if (fastOptimized) "appemojionary-fastopt"
     else "appemojionary-opt"
@@ -40,23 +41,25 @@ def copyJsTaskFactory(fastOptimized: Boolean) = Def.task {
 lazy val appEmojionary = (crossProject(JVMPlatform, JSPlatform) in file("./apps"))
   .settings(commonSettings)
   .settings(
+    name := "appemojionary",
+    
+    // CORRECTION ICI : Passage à la version 4.0.2 pour éviter le conflit
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %%% "ujson" % "4.3.0"
+      "com.lihaoyi" %%% "upickle" % "4.0.2"
     )
   )
   .jsSettings(
-  scalaJSUseMainModuleInitializer := true,
-  mainClass := Some("apps.MainJS"),
-  test / aggregate := false,
-  Test / test := {},
-  Test / testOnly := {},
-  libraryDependencies ++= Seq(
-    "org.scala-lang" %% "scala3-library" % "3.7.2",
-    "org.scala-js" %%% "scalajs-dom" % "2.8.1",
-    "com.lihaoyi" %%% "scalatags" % "0.13.1"
+    scalaJSUseMainModuleInitializer := true,
+    mainClass := Some("apps.MainJS"),
+    test / aggregate := false,
+    Test / test := {},
+    Test / testOnly := {},
+    libraryDependencies ++= Seq(
+      "org.scala-lang" %% "scala3-library" % "3.7.2",
+      "org.scala-js" %%% "scalajs-dom" % "2.8.1",
+      "com.lihaoyi" %%% "scalatags" % "0.13.1"
+    )
   )
-)
-
   .jvmSettings(
     assembly / assemblyJarName := "webapp.jar",
     assembly / assemblyMergeStrategy := { case _ => sbtassembly.MergeStrategy.first },
