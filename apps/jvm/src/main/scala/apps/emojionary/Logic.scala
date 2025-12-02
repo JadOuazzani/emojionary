@@ -101,7 +101,32 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
   // ============ PROJECT ============
   
   override def project(state: State)(userId: UserId): View =
-    ???
+    val now = System.currentTimeMillis()
+    val remaining = math.max(0L, state.timerEndMs - now)
+    val amIDescriber = state.isDescriber(userId)
+  
+    // Describer sees word during game, everyone sees at GameEnd
+    val visibleWord = state.phase match
+      case Phase.WaitingForHint | Phase.Guessing if amIDescriber => state.secretWord
+      case Phase.GameEnd => state.secretWord
+      case _ => None
+  
+    // Only Describer sees available emojis, and only when picking
+    val visibleEmojis = state.phase match
+      case Phase.WaitingForHint if amIDescriber => availableEmojis(state)
+      case _ => List.empty
+  
+    View(
+      phase = state.phase,
+      amIDescriber = amIDescriber,
+      allScores = state.scores,
+      hints = state.hints,
+      guesses = state.guesses,
+      remainingTimeMs = remaining,
+      secretWord = visibleWord,
+      winner = state.winner,
+      availableEmojis = visibleEmojis
+    )
 
   // ============ TRANSITION ============
   
@@ -114,11 +139,35 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
   
   private def handleTick(state: State, tick: Tick): Try[Seq[Action[State]]] =
     state.phase match
-      case Phase.Guessing =>
-        ???  // Check if timer expired → WaitingForHint or GameEnd
+      case Phase.Guessing if tick.systemMillis >= state.timerEndMs =>
+        // Timer expired
+        if state.hintCount >= Rules.MaxHints then
+          // Max hints reached, game over with no winner
+          val newState = state.copy(
+            phase = Phase.GameEnd,
+            timerEndMs = tick.systemMillis + Rules.GameEndDurationMs
+          )
+          Success(Seq(Action.Render(newState)))
+        else
+          // Go to next hint
+          val newState = state.copy(phase = Phase.WaitingForHint)
+          Success(Seq(Action.Render(newState)))
       
-      case Phase.GameEnd =>
-        ???  // Check if timer expired → start new game
+      case Phase.GameEnd if tick.systemMillis >= state.timerEndMs =>
+        // Auto-continue to new game
+        val newDescriberIdx = nextDescriberIndex(state, state.winner)
+        val newState = State(
+          playerOrder = state.playerOrder,
+          describerIndex = newDescriberIdx,
+          scores = state.scores,
+          phase = Phase.WaitingForHint,
+          secretWord = None,
+          hints = List.empty,
+          guesses = List.empty,
+          timerEndMs = 0L,
+          winner = None
+        )
+        Success(Seq(Action.Render(newState)))
       
       case _ =>
         Success(Seq(Action.Render(state)))
@@ -137,24 +186,91 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         handleSubmitGuess(state, userId, text)
 
   private def handleStartGame(state: State, userId: UserId): Try[Seq[Action[State]]] =
-    ???
+    if state.phase != Phase.WaitingToStart then
+      Failure(IllegalStateException("Game already started"))
+    else if !state.canStart then
+      Failure(IllegalStateException("Need at least 2 players"))
+    else
+      val newState = state.copy(phase = Phase.WaitingForHint)
+      Success(Seq(Action.Render(newState)))
 
   private def handleSendFirstHint(state: State, userId: UserId, secretWord: Word, emoji: Emoji): Try[Seq[Action[State]]] =
-    ???
+    if state.phase != Phase.WaitingForHint then
+      Failure(IllegalStateException("Not waiting for hint"))
+    else if !state.isDescriber(userId) then
+      Failure(IllegalStateException("Only Describer can send hints"))
+    else if state.hints.nonEmpty then
+      Failure(IllegalStateException("Use SendHint for subsequent hints"))
+    else if !AllEmojis.contains(emoji) then
+      Failure(IllegalArgumentException("Invalid emoji"))
+    else if secretWord.trim.isEmpty then
+      Failure(IllegalArgumentException("Secret word cannot be empty"))
+    else
+      val now = System.currentTimeMillis()
+      val newState = state.copy(
+        phase = Phase.Guessing,
+        secretWord = Some(secretWord.trim.toLowerCase),
+        hints = List(emoji),
+        timerEndMs = now + Rules.HintDurationMs
+      )
+      Success(Seq(Action.Render(newState)))
 
   private def handleSendHint(state: State, userId: UserId, emoji: Emoji): Try[Seq[Action[State]]] =
-    ???
+    if state.phase != Phase.WaitingForHint then
+      Failure(IllegalStateException("Not waiting for hint"))
+    else if !state.isDescriber(userId) then
+      Failure(IllegalStateException("Only Describer can send hints"))
+    else if state.hints.isEmpty then
+      Failure(IllegalStateException("Use SendFirstHint for first hint"))
+    else if !AllEmojis.contains(emoji) then
+      Failure(IllegalArgumentException("Invalid emoji"))
+    else if state.hints.contains(emoji) then
+      Failure(IllegalArgumentException("Emoji already used"))
+    else
+      val now = System.currentTimeMillis()
+      val newState = state.copy(
+        phase = Phase.Guessing,
+        hints = state.hints :+ emoji,
+        timerEndMs = now + Rules.HintDurationMs
+      )
+      Success(Seq(Action.Render(newState)))
 
   private def handleSubmitGuess(state: State, userId: UserId, text: String): Try[Seq[Action[State]]] =
-    ???
+    if state.phase != Phase.Guessing then
+      Failure(IllegalStateException("Not in guessing phase"))
+    else if !state.isGuesser(userId) then
+      Failure(IllegalStateException("Describer cannot guess"))
+    else
+      val normalizedGuess = text.trim.toLowerCase
+      val isCorrect = state.secretWord.exists(_ == normalizedGuess)
+      
+      if isCorrect then
+        val points = calculatePoints(state.hintCount)
+        val newScores = state.scores.updated(userId, state.scores.getOrElse(userId, 0) + points)
+        val now = System.currentTimeMillis()
+        val newState = state.copy(
+          phase = Phase.GameEnd,
+          guesses = state.guesses :+ text.trim,
+          scores = newScores,
+          winner = Some(userId),
+          timerEndMs = now + Rules.GameEndDurationMs
+        )
+        Success(Seq(Action.Render(newState)))
+      else
+        val newState = state.copy(guesses = state.guesses :+ text.trim)
+        Success(Seq(Action.Render(newState)))
 
   // ============ HELPERS ============
   
-  private def availableEmojis(state: State): Vector[Emoji] =
-    AllEmojis.filterNot(state.hints.contains)
+  private def availableEmojis(state: State): List[Emoji] =
+    AllEmojis.filterNot(state.hints.contains).toList
   
   private def nextDescriberIndex(state: State, winner: Option[UserId]): Int =
-    ???  // winner's index, or round-robin
+    winner match
+      case Some(winnerId) =>
+        state.playerOrder.indexOf(winnerId)
+      case None =>
+        (state.describerIndex + 1) % state.playerOrder.size
   
   private def calculatePoints(hintCount: Int): Int =
-    ???  // MaxHints - hintCount + 1
+    Rules.MaxHints - hintCount + 1

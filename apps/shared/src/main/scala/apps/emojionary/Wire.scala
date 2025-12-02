@@ -38,7 +38,6 @@ object Wire extends AppWire[Event, View]:
       Obj(
         "phase" -> encodePhase(v.phase),
         "amIDescriber" -> v.amIDescriber,
-        "myScore" -> v.myScore,
         "allScores" -> Obj.from(v.allScores.map((k, s) => k -> Num(s))),
         "hints" -> Arr.from(v.hints.map(Str(_))),
         "guesses" -> Arr.from(v.guesses.map(Str(_))),
@@ -53,7 +52,6 @@ object Wire extends AppWire[Event, View]:
       View(
         phase = decodePhase(obj("phase")),
         amIDescriber = obj("amIDescriber").bool,
-        myScore = obj("myScore").num.toInt,
         allScores = obj("allScores").obj.map((k, v) => k -> v.num.toInt).toMap,
         hints = obj("hints").arr.map(_.str).toList,
         guesses = obj("guesses").arr.map(_.str).toList,

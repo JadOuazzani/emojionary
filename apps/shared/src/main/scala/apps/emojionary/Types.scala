@@ -60,7 +60,6 @@ case class State(
 case class View(
   phase: Phase,
   amIDescriber: Boolean,
-  myScore: Int,
   allScores: Map[UserId, Int],
   hints: List[Emoji],
   guesses: List[String],
