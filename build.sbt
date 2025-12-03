@@ -43,14 +43,16 @@ lazy val appEmojionary = (crossProject(JVMPlatform, JSPlatform) in file("./apps"
   .settings(
     name := "appemojionary",
     
-    // CORRECTION ICI : Passage à la version 4.0.2 pour éviter le conflit
+    // Version compatible avec le cours
     libraryDependencies ++= Seq(
       "com.lihaoyi" %%% "upickle" % "4.0.2"
     )
   )
   .jsSettings(
     scalaJSUseMainModuleInitializer := true,
-    mainClass := Some("apps.MainJS"),
+    // --- CORRECTION CRUCIALE ICI ---
+    Compile / mainClass := Some("apps.MainJS"),
+    // -------------------------------
     test / aggregate := false,
     Test / test := {},
     Test / testOnly := {},

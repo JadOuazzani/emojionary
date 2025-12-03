@@ -7,7 +7,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ CONFIGURATION ============
   
-  override val clockPeriodMs: Int = 100
+  override val clockPeriodMs: Int = 1000
   override val clockDrivenWire: AppWire[Event, View] = Wire
   
   override val appInfo: AppInfo = AppInfo(

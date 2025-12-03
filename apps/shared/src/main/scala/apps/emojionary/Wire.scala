@@ -38,10 +38,10 @@ object Wire extends AppWire[Event, View]:
       Obj(
         "phase" -> encodePhase(v.phase),
         "amIDescriber" -> v.amIDescriber,
-        "allScores" -> Obj.from(v.allScores.map((k, s) => k -> Num(s))),
+        "allScores" -> Obj.from(v.allScores.map((k, s) => k -> Num(s.toDouble))),
         "hints" -> Arr.from(v.hints.map(Str(_))),
         "guesses" -> Arr.from(v.guesses.map(Str(_))),
-        "remainingTimeMs" -> v.remainingTimeMs,
+        "remainingTimeMs" -> Num(v.remainingTimeMs.toDouble),
         "secretWord" -> v.secretWord.map(Str(_)).getOrElse(Null),
         "winner" -> v.winner.map(Str(_)).getOrElse(Null),
         "availableEmojis" -> Arr.from(v.availableEmojis.map(Str(_)))
