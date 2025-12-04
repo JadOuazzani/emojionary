@@ -35135,14 +35135,12 @@ $c_Lapps_EmojionaryUIInstance.prototype.onEmojiClicked__Lapps_emojionary_View__T
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   var currentHintCount = $n($n(view).Lapps_emojionary_View__f_hints).length__I();
-  if ((currentHintCount !== this.Lapps_EmojionaryUIInstance__f_lastHintCount)) {
+  if ((currentHintCount > this.Lapps_EmojionaryUIInstance__f_lastHintCount)) {
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
     this.Lapps_EmojionaryUIInstance__f_lastHintCount = currentHintCount;
-    if ((currentHintCount > 0)) {
-      window.setTimeout((() => {
-        this.guessInput__Lorg_scalajs_dom_HTMLInputElement().focus();
-      }), 0.0);
-    }
+    window.setTimeout((() => {
+      this.guessInput__Lorg_scalajs_dom_HTMLInputElement().focus();
+    }), 0.0);
   }
   var $x_19 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
   var $x_18 = $m_sr_ScalaRunTime$();

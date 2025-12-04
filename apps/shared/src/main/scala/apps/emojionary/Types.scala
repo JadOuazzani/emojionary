@@ -6,6 +6,12 @@ import cs214.webapp.UserId
 type Emoji = String
 type Word = String
 
+case class GuessEntry(
+  player: UserId,
+  text: String,
+  correct: Boolean
+)
+
 // Constants
 object Rules:
   val MaxHints: Int = 5
@@ -34,7 +40,7 @@ case class State(
   phase: Phase,
   secretWord: Option[Word],
   hints: List[Emoji],
-  guesses: List[String],
+  guesses: List[GuessEntry],
   timerEndMs: Long,
   winner: Option[UserId]
 ):
@@ -66,5 +72,6 @@ case class View(
   remainingTimeMs: Long,
   secretWord: Option[Word],
   winner: Option[UserId],
-  availableEmojis: List[Emoji]
+  availableEmojis: List[Emoji],
+  myWrongGuesses: List[String]
 )

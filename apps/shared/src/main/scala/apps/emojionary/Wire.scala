@@ -44,7 +44,8 @@ object Wire extends AppWire[Event, View]:
         "remainingTimeMs" -> Num(v.remainingTimeMs.toDouble),
         "secretWord" -> v.secretWord.map(Str(_)).getOrElse(Null),
         "winner" -> v.winner.map(Str(_)).getOrElse(Null),
-        "availableEmojis" -> Arr.from(v.availableEmojis.map(Str(_)))
+        "availableEmojis" -> Arr.from(v.availableEmojis.map(Str(_))),
+        "myWrongGuesses" -> Arr.from(v.myWrongGuesses.map(Str(_)))
       )
     
     def decode(json: Value): Try[View] = Try {
@@ -62,7 +63,9 @@ object Wire extends AppWire[Event, View]:
         winner = obj("winner") match
           case Null => None
           case s => Some(s.str),
-        availableEmojis = obj("availableEmojis").arr.map(_.str).toList
+        availableEmojis = obj("availableEmojis").arr.map(_.str).toList,
+        myWrongGuesses = obj("myWrongGuesses").arr.map(_.str).toList
+
       )
     }
 

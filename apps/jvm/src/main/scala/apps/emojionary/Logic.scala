@@ -115,17 +115,28 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
     val visibleEmojis = state.phase match
       case Phase.WaitingForHint if amIDescriber => availableEmojis(state)
       case _ => List.empty
+
+    val allGuessesText: List[String] = state.guesses.map(_.text)
+
+    // Errors history of THIS player only
+    val myWrongGuesses: List[String] =
+    state.guesses.collect {
+      case GuessEntry(player, text, correct)
+          if player == userId && !correct =>
+        text
+    }
   
     View(
       phase = state.phase,
       amIDescriber = amIDescriber,
       allScores = state.scores,
       hints = state.hints,
-      guesses = state.guesses,
+      guesses = allGuessesText,
       remainingTimeMs = remaining,
       secretWord = visibleWord,
       winner = state.winner,
-      availableEmojis = visibleEmojis
+      availableEmojis = visibleEmojis,
+      myWrongGuesses = myWrongGuesses
     )
 
   // ============ TRANSITION ============
@@ -244,20 +255,26 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       val normalizedGuess = text.trim.toLowerCase
       val isCorrect = state.secretWord.exists(_ == normalizedGuess)
       
+      val entry = GuessEntry(
+      player = userId,
+      text = text.trim,
+      correct = isCorrect
+      )
+
       if isCorrect then
         val points = calculatePoints(state.hintCount)
         val newScores = state.scores.updated(userId, state.scores.getOrElse(userId, 0) + points)
         val now = System.currentTimeMillis()
         val newState = state.copy(
           phase = Phase.GameEnd,
-          guesses = state.guesses :+ text.trim,
+          guesses = state.guesses :+ entry,
           scores = newScores,
           winner = Some(userId),
           timerEndMs = now + Rules.GameEndDurationMs
         )
         Success(Seq(Action.Render(newState)))
       else
-        val newState = state.copy(guesses = state.guesses :+ text.trim)
+        val newState = state.copy(guesses = state.guesses :+ entry)
         Success(Seq(Action.Render(newState)))
 
   // ============ HELPERS ============
