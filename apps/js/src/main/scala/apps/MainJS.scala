@@ -7,17 +7,12 @@ import cs214.webapp.client.*
 import cs214.webapp.client.graphics.WebClientAppInstance
 import apps.emojionary.{Wire, Event, View, Phase}
 
-// 1. L'OBJET PRINCIPAL (Config)
-// On étend WSClientApp car c'est le contrat officiel de la librairie
 object MainJS extends WSClientApp {
   def appId: String = "emojionary"
   def uiId: String = "html"
 
-  // --- LE DÉMARRAGE MANUEL (Comme on n'a pas ApplicationJS) ---
   def main(args: Array[String]): Unit = {
-    // 1. On s'enregistre auprès du moteur du framework
     WebClient.register(this)
-    // 2. On lance le moteur (il va chercher la div #app-container tout seul)
     WebClient.start()
   }
 
@@ -26,7 +21,6 @@ object MainJS extends WSClientApp {
   }
 }
 
-// 2. L'INSTANCE UI (Le Visuel)
 class EmojionaryUIInstance(
     userId: UserId,
     sendMessage: ujson.Value => Unit,
@@ -34,6 +28,43 @@ class EmojionaryUIInstance(
 ) extends WebClientAppInstance[Event, View](userId, sendMessage, target) {
 
   override val wire = apps.emojionary.Wire
+
+  // --- ÉLÉMENTS PERSISTANTS ---
+  
+  lazy val secretInput: dom.html.Input = {
+    input(
+      id := "secret-word-input", 
+      tpe := "text", 
+      placeholder := "Ex: Pizza...",
+      autofocus := true
+    ).render
+  }
+
+  lazy val guessInput: dom.html.Input = {
+    val el = input(
+      id := "guess-input", 
+      tpe := "text", 
+      placeholder := "Réponse...",
+      autofocus := true
+    ).render
+    
+    el.onkeydown = (e: dom.KeyboardEvent) => {
+      if (e.key == "Enter") submitGuess()
+    }
+    el
+  }
+
+  // Fonction pour maintenir le focus lors des mises à jour d'interface
+  def maintainFocus(el: dom.html.Input): Unit = {
+    if (dom.document.activeElement == el) {
+      val start = el.selectionStart
+      val end = el.selectionEnd
+      dom.window.setTimeout(() => {
+        el.focus()
+        el.setSelectionRange(start, end)
+      }, 0)
+    }
+  }
 
   override def render(userId: UserId, view: View): Frag = {
     div(cls := "app-container",
@@ -49,6 +80,10 @@ class EmojionaryUIInstance(
   // --- ÉCRANS ---
 
   def renderStartButton(): Frag = {
+    // Reset des champs
+    secretInput.value = ""
+    guessInput.value = ""
+    
     div(
       h2("Bienvenue sur Emojionary !"),
       button(cls := "btn-start", onclick := { () => sendEvent(Event.StartGame) }, "Démarrer la partie 🚀")
@@ -81,9 +116,10 @@ class EmojionaryUIInstance(
   def renderDescriberControls(view: View): Frag = {
     div(
       if (view.hints.isEmpty) {
+        maintainFocus(secretInput)
         div(cls := "secret-word-section",
           p("Choisis le mot secret + 1er Emoji :"),
-          input(id := "secret-word-input", tpe := "text", placeholder := "Ex: Pizza...")
+          secretInput
         )
       } else {
         div(cls := "secret-reminder", "Mot secret : ", strong(view.secretWord.getOrElse("???").toString))
@@ -98,12 +134,11 @@ class EmojionaryUIInstance(
 
   def onEmojiClicked(view: View, emoji: String): Unit = {
     if (view.hints.isEmpty) {
-      val input = dom.document.getElementById("secret-word-input")
-      // Protection contre le null (si l'élément n'est pas encore rendu)
-      if (input != null) {
-        val word = input.asInstanceOf[dom.html.Input].value.trim
-        if (word.nonEmpty) sendEvent(Event.SendFirstHint(word, emoji))
-        else dom.window.alert("Mot secret obligatoire !")
+      val word = secretInput.value.trim
+      if (word.nonEmpty) {
+        sendEvent(Event.SendFirstHint(word, emoji))
+      } else {
+        dom.window.alert("Mot secret obligatoire !")
       }
     } else {
       sendEvent(Event.SendHint(emoji))
@@ -111,29 +146,25 @@ class EmojionaryUIInstance(
   }
 
   def renderGuesserControls(view: View): Frag = {
+    maintainFocus(guessInput)
+    
     div(cls := "guesser-controls",
       p("Regarde les indices :"),
       div(cls := "hints-display", 
         if (view.hints.isEmpty) span("En attente...") else view.hints.mkString(" ")
       ),
       div(cls := "input-group",
-        input(id := "guess-input", tpe := "text", placeholder := "Réponse...",
-          onkeydown := { (e: dom.KeyboardEvent) => if (e.key == "Enter") submitGuess() }
-        ),
+        guessInput,
         button(cls := "btn-guess", onclick := { () => submitGuess() }, "Deviner")
       )
     )
   }
 
   def submitGuess(): Unit = {
-    val input = dom.document.getElementById("guess-input")
-    if (input != null) {
-      val field = input.asInstanceOf[dom.html.Input]
-      val text = field.value.trim
-      if (text.nonEmpty) {
-        sendEvent(Event.SubmitGuess(text))
-        field.value = ""
-      }
+    val text = guessInput.value.trim
+    if (text.nonEmpty) {
+      sendEvent(Event.SubmitGuess(text))
+      guessInput.value = "" // On vide juste le champ pour la prochaine tentative
     }
   }
 
@@ -148,7 +179,7 @@ class EmojionaryUIInstance(
     .hints-display { font-size: 3em; margin: 20px 0; background: #ecf0f1; padding: 10px; border-radius: 10px; letter-spacing: 5px; min-height: 60px; }
     #secret-word-input, #guess-input { padding: 10px; font-size: 1.1em; width: 60%; border: 2px solid #ddd; border-radius: 6px; }
     .btn-start { background: #27ae60; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 1.2em; cursor: pointer; margin-top: 20px;}
-    .btn-guess { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 1.1em; margin-left: 5px; cursor: pointer; }
+    .btn-guess { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 1.1em; margin-left: 5px; cursor: pointer; transition: background 0.3s; }
     .secret-reminder { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }
   """
 }
