@@ -82,6 +82,25 @@ class EmojionaryUIInstance(
     )
   }
 
+  // --- TIMER UI ---
+
+  def renderTimer(view: View): Frag = {
+    // convertir ms -> secondes (minimum 0)
+    val rawSeconds = (view.remainingTimeMs / 1000L).toInt
+    val seconds = if (rawSeconds < 0) 0 else rawSeconds
+
+    if (view.phase == Phase.Guessing)
+      div(cls := "timer",
+        span(cls := "timer-label", "Temps restant : "),
+        span(
+          cls := (if seconds <= 5 then "timer-value danger" else "timer-value"),
+          s"${seconds}s"
+        )
+      )
+    else
+      frag() // pas de timer dans les autres phases
+  }
+
   // --- ÉCRANS ---
 
   def renderStartButton(): Frag = {
@@ -172,6 +191,8 @@ class EmojionaryUIInstance(
 
     // Colonne de droite : zone de jeu principale
     div(cls := "main-panel",
+      renderTimer(view),
+
       if (view.amIDescriber)
         frag(
           h3(cls := "role-title", "Tu fais deviner ! 🤫"),
@@ -223,37 +244,49 @@ class EmojionaryUIInstance(
   def renderGuesserControls(view: View): Frag = {
     val currentHintCount = view.hints.length
 
-    // LOGIQUE DE DÉBLOCAGE :
-    // Si on a reçu de nouveaux indices par rapport à la dernière fois, on débloque !
+    // Déblocage quand on reçoit de nouveaux indices
     if (currentHintCount > lastHintCount) {
       waitingForNextHint = false
       lastHintCount = currentHintCount
-      // Petit focus auto pour être sympa quand ça réapparaît
       dom.window.setTimeout(() => guessInput.focus(), 0)
     }
 
+    // On regarde aussi la phase côté serveur
+    val isWaitingForHintPhase = view.phase == Phase.WaitingForHint
+
     div(cls := "guesser-controls",
       p("Regarde les indices :"),
-      div(cls := "hints-display", 
-        if (view.hints.isEmpty) span("En attente...") else view.hints.mkString(" ")
+      div(
+        cls := "hints-display",
+        if (view.hints.isEmpty) span("En attente...")
+        else view.hints.mkString(" ")
       ),
-      
-      // AFFICHAGE CONDITIONNEL
+
+      // 1) Pas encore d'indices du tout
       if (view.hints.isEmpty) {
-        // Cas 1 : Pas encore d'indices
-        div(cls := "status-message", "⏳ Le dessinateur choisit le premier indice...")
-      } else if (waitingForNextHint) {
-        // Cas 2 : On a déjà essayé pour cet indice (et raté, sinon la partie serait finie)
-        div(cls := "status-message",
-            p(style := "color: #e74c3c; font-weight: bold;", "❌ Ce n'est pas ça !"),
-            p("Attends le prochain indice pour retenter... 👀")
+        div(cls := "status-message", "⏳ Le décrypteur choisit le premier indice...")
+      }
+      // 2) Le serveur est en phase WaitingForHint (timer fini) OU on a déjà tenté pour cet indice
+      else if (isWaitingForHintPhase || waitingForNextHint) {
+        div(
+          cls := "status-message",
+          p(
+            style := "color: #e67e22; font-weight: bold;",
+            "⏳ En attente du prochain indice..."
+          ),
+          p("Tu ne peux plus proposer pour l'indice actuel.")
         )
-      } else {
-        // Cas 3 : C'est à nous !
+      }
+      // 3) Phase Guessing et on a le droit de répondre
+      else {
         maintainFocus(guessInput)
         div(cls := "input-group",
           guessInput,
-          button(cls := "btn-guess", onclick := { () => submitGuess() }, "Deviner")
+          button(
+            cls := "btn-guess",
+            onclick := { () => submitGuess() },
+            "Deviner"
+          )
         )
       }
     )
@@ -431,6 +464,31 @@ class EmojionaryUIInstance(
       color: #555;
     }
     
+    .timer {
+      margin: 10px auto 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #fdf6e3;
+      border: 1px solid #f1c40f33;
+      font-size: 0.95em;
+      color: #7d6608;
+    }
+
+    .timer-label {
+      font-weight: 500;
+    }
+
+    .timer-value {
+      font-weight: 600;
+    }
+
+    .timer-value.danger {
+      color: #c0392b;
+    }
+
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
   """
