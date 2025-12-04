@@ -54,6 +54,11 @@ class EmojionaryUIInstance(
     el
   }
 
+  // --- ÉTAT LOCAL UI ---
+  // Sert à savoir si on doit bloquer le joueur en attendant le prochain indice
+  private var lastHintCount: Int = 0
+  private var waitingForNextHint: Boolean = false
+
   // Fonction pour maintenir le focus lors des mises à jour d'interface
   def maintainFocus(el: dom.html.Input): Unit = {
     if (dom.document.activeElement == el) {
@@ -80,9 +85,11 @@ class EmojionaryUIInstance(
   // --- ÉCRANS ---
 
   def renderStartButton(): Frag = {
-    // Reset des champs
+    // Reset complet
     secretInput.value = ""
     guessInput.value = ""
+    lastHintCount = 0
+    waitingForNextHint = false
     
     div(
       h2("Bienvenue sur Emojionary !"),
@@ -146,17 +153,41 @@ class EmojionaryUIInstance(
   }
 
   def renderGuesserControls(view: View): Frag = {
-    maintainFocus(guessInput)
-    
+    val currentHintCount = view.hints.length
+
+    // LOGIQUE DE DÉBLOCAGE :
+    // Si on a reçu de nouveaux indices par rapport à la dernière fois, on débloque !
+    if (currentHintCount > lastHintCount) {
+      waitingForNextHint = false
+      lastHintCount = currentHintCount
+      // Petit focus auto pour être sympa quand ça réapparaît
+      dom.window.setTimeout(() => guessInput.focus(), 0)
+    }
+
     div(cls := "guesser-controls",
       p("Regarde les indices :"),
       div(cls := "hints-display", 
         if (view.hints.isEmpty) span("En attente...") else view.hints.mkString(" ")
       ),
-      div(cls := "input-group",
-        guessInput,
-        button(cls := "btn-guess", onclick := { () => submitGuess() }, "Deviner")
-      )
+      
+      // AFFICHAGE CONDITIONNEL
+      if (view.hints.isEmpty) {
+        // Cas 1 : Pas encore d'indices
+        div(cls := "status-message", "⏳ Le dessinateur choisit le premier indice...")
+      } else if (waitingForNextHint) {
+        // Cas 2 : On a déjà essayé pour cet indice (et raté, sinon la partie serait finie)
+        div(cls := "status-message",
+            p(style := "color: #e74c3c; font-weight: bold;", "❌ Ce n'est pas ça !"),
+            p("Attends le prochain indice pour retenter... 👀")
+        )
+      } else {
+        // Cas 3 : C'est à nous !
+        maintainFocus(guessInput)
+        div(cls := "input-group",
+          guessInput,
+          button(cls := "btn-guess", onclick := { () => submitGuess() }, "Deviner")
+        )
+      }
     )
   }
 
@@ -164,7 +195,9 @@ class EmojionaryUIInstance(
     val text = guessInput.value.trim
     if (text.nonEmpty) {
       sendEvent(Event.SubmitGuess(text))
-      guessInput.value = "" // On vide juste le champ pour la prochaine tentative
+      guessInput.value = "" 
+      // On verrouille immédiatement l'interface
+      waitingForNextHint = true
     }
   }
 
@@ -181,5 +214,7 @@ class EmojionaryUIInstance(
     .btn-start { background: #27ae60; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 1.2em; cursor: pointer; margin-top: 20px;}
     .btn-guess { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 1.1em; margin-left: 5px; cursor: pointer; transition: background 0.3s; }
     .secret-reminder { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }
+    .status-message { padding: 20px; background: #f8f9fa; border-radius: 8px; color: #7f8c8d; font-size: 1.1em; animation: fadeIn 0.3s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   """
 }
