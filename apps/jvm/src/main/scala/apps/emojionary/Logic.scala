@@ -94,6 +94,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       secretWord = None,
       hints = List.empty,
       guesses = List.empty,
+      currentHintGuessers = Set.empty,
       timerEndMs = 0L,
       winner = None
     )
@@ -175,6 +176,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
           secretWord = None,
           hints = List.empty,
           guesses = List.empty,
+          currentHintGuessers = Set.empty,
           timerEndMs = 0L,
           winner = None
         )
@@ -222,6 +224,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         phase = Phase.Guessing,
         secretWord = Some(secretWord.trim.toLowerCase),
         hints = List(emoji),
+        currentHintGuessers = Set.empty,
         timerEndMs = now + Rules.HintDurationMs
       )
       Success(Seq(Action.Render(newState)))
@@ -242,6 +245,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       val newState = state.copy(
         phase = Phase.Guessing,
         hints = state.hints :+ emoji,
+        currentHintGuessers = Set.empty,
         timerEndMs = now + Rules.HintDurationMs
       )
       Success(Seq(Action.Render(newState)))
@@ -274,7 +278,42 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         )
         Success(Seq(Action.Render(newState)))
       else
-        val newState = state.copy(guesses = state.guesses :+ entry)
+        val allGuessers: Set[UserId] =
+        state.playerOrder.filterNot(uid => state.isDescriber(uid)).toSet
+
+        val updatedGuessers: Set[UserId] =
+          state.currentHintGuessers + userId
+
+        // tous les guessers ont tenté leur chance ?
+        val everyoneAnswered = updatedGuessers == allGuessers
+
+        val now = System.currentTimeMillis()
+
+        val newState =
+          if everyoneAnswered then
+            // si on est déjà au nombre max d’indices -> fin de partie sans gagnant
+            if state.hintCount >= Rules.MaxHints then
+              state.copy(
+                phase = Phase.GameEnd,
+                guesses = state.guesses :+ entry,
+                currentHintGuessers = updatedGuessers,
+                winner = None,
+                timerEndMs = now + Rules.GameEndDurationMs
+              )
+            else
+              // sinon, on repasse en WaitingForHint pour permettre un nouvel emoji
+              state.copy(
+                phase = Phase.WaitingForHint,
+                guesses = state.guesses :+ entry,
+                currentHintGuessers = updatedGuessers,
+                timerEndMs = 0L
+              )
+          else
+            // il reste encore des joueurs qui n'ont pas répondu → on reste en Guessing
+            state.copy(
+              guesses = state.guesses :+ entry,
+              currentHintGuessers = updatedGuessers
+            )
         Success(Seq(Action.Render(newState)))
 
   // ============ HELPERS ============

@@ -41,6 +41,7 @@ case class State(
   secretWord: Option[Word],
   hints: List[Emoji],
   guesses: List[GuessEntry],
+  currentHintGuessers: Set[UserId],
   timerEndMs: Long,
   winner: Option[UserId]
 ):
