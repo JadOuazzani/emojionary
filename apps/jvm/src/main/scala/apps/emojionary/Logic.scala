@@ -3,6 +3,7 @@ package apps.emojionary
 import cs214.webapp.*
 import cs214.webapp.server.ClockDrivenStateMachine
 import scala.util.{Try, Success, Failure}
+
 class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ CONFIGURATION ============
@@ -22,33 +23,28 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
   val AllEmojis: Vector[Emoji] = Vector(
     // 😀 Faces & emotions
     "😀","😃","😄","😁","😆","😅","🤣","😂","🙂","🙃","😉","😊","😇","🥰","😍","🤩","😘","😗","😚","😙",
-    "😋","😛","😜","🤪","😝","🤑","🤗","🤭","🤫","🤔","🤐","🤨","😐","😑","😶","🫥","😶‍🌫️","🙄","😏",
+    "😋","😛","😜","🤪","😝","🤑","🤗","🤭","🤔","🤐","🤨","😐","😑","😶","🫥","😶‍🌫️","🙄","😏",
     "😣","😥","😮","🤐","😯","😪","😫","🥱","😴","😌","😛","😜","😝","🤤","😓","😔","😕","🫤","🙃",
     "😖","😞","😟","😤","😢","😭","😦","😧","😨","😩","😬","😰","😱","🥵","🥶","😳","🤯","😵","😵‍💫",
     "🥴","😲","🤠","🥳","😎","🤓","🧐","😒","😡","😠","🤬","😷","🤒","🤕","🤢","🤮","🤧","😇","🤥",
     "😈","👿","💀","☠️","👻","👽","🤖","💩",
-
-    // 👋 Gestures / hands (sans tons de peau)
+    // 👋 Gestures / hands
     "👋","🤚","✋","🖐️","👌","🤌","🤏","✌️","🤞","🤟","🤘","🤙","👈","👉","👆","👇","☝️","👍","👎",
     "✊","👊","🤛","🤜","👏","🙌","👐","🤲","🤝","🙏",
-
-    // 🧍 People & roles (neutre)
+    // 🧍 People & roles
     "🧑","👧","👦","👩","👨","🧓","👶","🧒","🧑‍🎓","🧑‍🏫","🧑‍💻","🧑‍🔬","🧑‍🎨","🧑‍🚀","🧑‍🍳",
     "🧑‍⚕️","🧑‍🌾","🧑‍🔧","🧑‍🎤","🧑‍🎮","🧑‍✈️","🧑‍🚒","🧑‍⚖️","🕵️","💂","👷","🧑‍🏭",
     "🦸","🦹","🧙","🧝","🧛","🧟","🧞","🧜",
-
     // 🐶 Animals
     "🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐽","🐸","🐵","🙈","🙉","🙊",
     "🐔","🐧","🐦","🐤","🐣","🐥","🦆","🦅","🦉","🦇","🐺","🐗","🐴","🦄","🐝","🪲","🐛","🦋","🐌",
     "🐞","🦂","🕷️","🕸️","🐢","🐍","🦎","🐙","🦑","🦐","🦞","🦀","🐠","🐟","🐡","🦈","🐬","🐳","🐋",
     "🦭","🐊","🦧","🦍","🐘","🦣","🦏","🦛","🦓","🦒","🦘","🐪","🐫","🦙","🦌","🐄","🐂","🐃","🐎",
     "🐖","🐏","🐑","🦝","🦨","🦡","🦫","🦦","🦥","🐁","🐀","🐿️","🦔","🐾",
-
     // 🌿 Nature & weather
     "🌵","🌴","🌲","🌳","🌱","🌿","☘️","🍀","🎍","🎋","🍃","🍂","🍁","🪴","🌸","🌼","🌻","🌺","🌹",
     "🥀","🌷","🌾","🌙","🌚","🌛","⭐","🌟","✨","⚡","☀️","🌤️","⛅","🌥️","☁️","🌦️","🌧️","⛈️","🌩️",
     "🌨️","❄️","☃️","⛄","💨","🌪️","🌫️","🌈","☔","💧","💦","🔥","🌊","🫧",
-
     // 🍎 Food & drink
     "🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈","🍒","🍑","🥭","🍍","🥥","🥝","🍅","🍆",
     "🥑","🥦","🥬","🥒","🌶️","🫑","🌽","🥕","🧄","🧅","🥔","🍠","🫘","🥜","🌰","🍞","🥐","🥖","🫓","🥨",
@@ -56,31 +52,27 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
     "🍲","🥣","🥗","🍿","🧈","🧂","🥫","🍝","🍜","🍜","🍛","🍣","🍱","🥟","🍤","🍙","🍚","🍘","🍥",
     "🦪","🍦","🍧","🍨","🍩","🍪","🎂","🍰","🧁","🥧","🍫","🍬","🍭","🍮","🍯",
     "☕","🫖","🍵","🥛","🧃","🥤","🧋","🍶","🍺","🍻","🥂","🍷","🍸","🍹","🧉","🍾",
-
     // ⚽ Sports & activities
     "⚽","🏀","🏈","⚾","🥎","🎾","🏐","🏉","🥏","🎱","🏓","🏸","🏒","🏑","🥍","🏏","⛳","🥊","🥋",
     "🎽","🛹","🛼","⛸️","🥌","🛷","🎿","🏂","🏋️","🤼","🤸","⛹️","🤺","🏊","🚣","🧗","🚴","🚵","🏇",
     "🧘","🏄","🏆","🥇","🥈","🥉","🎯","🪀","🪁","🎳","🎮","🕹️","🎲","♟️","🧩","🎨","🎭","🎤","🎧",
     "🎼","🎹","🥁","🪘","🎷","🎺","🎸","🪕","🎻",
-
     // 🚗 Travel & places
     "🚗","🚕","🚙","🚌","🚎","🏎️","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🛵","🏍️","🚲","🛴","🚨",
     "🚁","✈️","🛫","🛬","🛩️","🚀","🛸","🚂","🚆","🚄","🚅","🚈","🚇","🚊","🚉","🛶","⛵","🛥️","🚤",
     "🛳️","⚓","🗺️","🗽","🗼","🏰","🏯","🏟️","🏛️","⛪","🕌","🛕","🕍","⛩️","🗻","🏔️","⛰️","🌋","🏜️",
     "🏖️","🏝️","🏞️","🌅","🌄","🌆","🌇","🌃","🌉","🏙️",
-
-    // 🧰 Objects (utiles en UI)
+    // 🧰 Objects
     "⌛","⏳","⏰","⏱️","📱","💻","🖥️","⌨️","🖱️","🖨️","📷","📸","🎥","📺","📡","🔋","🔌","💡","🔦",
     "🕯️","🧯","🧲","🧪","🧫","🧬","🔬","🔭","📡","📘","📗","📙","📕","📓","📒","📔","📚","📖","🔖",
     "📝","✏️","🖊️","🖋️","✒️","🖍️","📐","📏","🧮","📎","🖇️","📌","📍","✂️","🗃️","🗂️","🗄️",
     "🗑️","🔒","🔓","🔑","🗝️","🔨","🪓","⛏️","🧰","🔧","🪛","🔩","⚙️","🧱","🪜","🧹","🧺","🧻",
     "🧼","🪥","🧽","🛁","🚪","🪟","🪑","🛏️",
-
     // ❤️ Symbols
     "❤️","🧡","💛","💚","💙","💜","🖤","🤍","🤎","💔","❤️‍🔥","❤️‍🩹","💖","💗","💓","💞","💕","💘",
     "💯","✅","☑️","❌","❗","❓","‼️","⁉️","➕","➖","✖️","➗","🔁","🔄","🎵","🎶","🔔","🔕","📢","📣",
     "🟢","🟡","🟠","🔴","⚫","⚪","🟣","🟤","🔺","🔻","⭐","✨"
-)
+  )
 
 
   // ============ INIT ============
@@ -166,20 +158,8 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
           Success(Seq(Action.Render(newState)))
       
       case Phase.GameEnd if tick.systemMillis >= state.timerEndMs =>
-        // Auto-continue to new game
-        val newDescriberIdx = nextDescriberIndex(state, state.winner)
-        val newState = State(
-          playerOrder = state.playerOrder,
-          describerIndex = newDescriberIdx,
-          scores = state.scores,
-          phase = Phase.WaitingForHint,
-          secretWord = None,
-          hints = List.empty,
-          guesses = List.empty,
-          currentHintGuessers = Set.empty,
-          timerEndMs = 0L,
-          winner = None
-        )
+        // Auto-continue to new game (Timer-based)
+        val newState = startNewRound(state)
         Success(Seq(Action.Render(newState)))
       
       case _ =>
@@ -199,13 +179,35 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         handleSubmitGuess(state, userId, text)
 
   private def handleStartGame(state: State, userId: UserId): Try[Seq[Action[State]]] =
-    if state.phase != Phase.WaitingToStart then
-      Failure(IllegalStateException("Game already started"))
-    else if !state.canStart then
-      Failure(IllegalStateException("Need at least 2 players"))
+    // FIX: On autorise StartGame si on est en WaitingToStart OU en GameEnd
+    if state.phase == Phase.WaitingToStart then
+        if !state.canStart then Failure(IllegalStateException("Need at least 2 players"))
+        else
+            val newState = state.copy(phase = Phase.WaitingForHint)
+            Success(Seq(Action.Render(newState)))
+    else if state.phase == Phase.GameEnd then
+        // Redémarrage manuel via bouton "Rejouer" avant la fin du timer
+        val newState = startNewRound(state)
+        Success(Seq(Action.Render(newState)))
     else
-      val newState = state.copy(phase = Phase.WaitingForHint)
-      Success(Seq(Action.Render(newState)))
+        Failure(IllegalStateException("Game already started"))
+
+  // Helper pour démarrer un nouveau round (utilisé par timer et bouton manuel)
+  private def startNewRound(state: State): State = {
+    val newDescriberIdx = nextDescriberIndex(state, state.winner)
+    State(
+        playerOrder = state.playerOrder,
+        describerIndex = newDescriberIdx,
+        scores = state.scores,
+        phase = Phase.WaitingForHint,
+        secretWord = None,
+        hints = List.empty,
+        guesses = List.empty,
+        currentHintGuessers = Set.empty,
+        timerEndMs = 0L,
+        winner = None
+    )
+  }
 
   private def handleSendFirstHint(state: State, userId: UserId, secretWord: Word, emoji: Emoji): Try[Seq[Action[State]]] =
     if state.phase != Phase.WaitingForHint then
@@ -260,9 +262,9 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       val isCorrect = state.secretWord.exists(_ == normalizedGuess)
       
       val entry = GuessEntry(
-      player = userId,
-      text = text.trim,
-      correct = isCorrect
+        player = userId,
+        text = text.trim,
+        correct = isCorrect
       )
 
       if isCorrect then
@@ -278,10 +280,10 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         )
         Success(Seq(Action.Render(newState)))
       else
-        val allGuessers: Set[UserId] =
-        state.playerOrder.filterNot(uid => state.isDescriber(uid)).toSet
+        val allGuessers: Set[UserId] = 
+          state.playerOrder.filterNot(uid => state.isDescriber(uid)).toSet
 
-        val updatedGuessers: Set[UserId] =
+        val updatedGuessers: Set[UserId] = 
           state.currentHintGuessers + userId
 
         // tous les guessers ont tenté leur chance ?
@@ -289,7 +291,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
         val now = System.currentTimeMillis()
 
-        val newState =
+        val newState = 
           if everyoneAnswered then
             // si on est déjà au nombre max d’indices -> fin de partie sans gagnant
             if state.hintCount >= Rules.MaxHints then

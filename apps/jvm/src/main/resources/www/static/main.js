@@ -35079,10 +35079,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderTimer__Lapps_emojionary_View__Lsca
   }
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderStartButton__Lscalatags_generic_Frag = (function() {
-  this.secretInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
-  this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
-  this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
-  this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  this.resetLocalState__V();
   var $x_14 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
   var $x_13 = $m_sr_ScalaRunTime$();
   var $x_12 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-screen", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
@@ -35157,7 +35154,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderEndScreen__T__Lapps_emojionary_Vie
     var f$1 = $as_F0(f);
     return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
   }));
-  return $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_10, $x_7, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Rejouer"))])))])));
+  return $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_10, $x_7, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Rejouer tout de suite"))])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
   var this$1 = $n($n(view).Lapps_emojionary_View__f_allScores);
@@ -35205,34 +35202,47 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderScoreBoard__T__Lapps_emojionary_Vi
   })))))]))))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderActiveGame__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
-  var $x_11 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_10 = $m_sr_ScalaRunTime$();
-  var $x_9 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-layout", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_8 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("sidebar", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view), this.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag(view)])));
+  var $x_16 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
+  var $x_15 = $m_sr_ScalaRunTime$();
+  var $x_14 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-layout", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
+  var $x_12 = $m_sr_ScalaRunTime$();
+  var $x_11 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("sidebar", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_10 = this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view);
+  if ((!$n(view).Lapps_emojionary_View__f_amIDescriber)) {
+    var $x_9 = this.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
+  } else {
+    var this$1 = $m_Lscalatags_JsDom$all$();
+    var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
+    var this$3 = $m_s_$less$colon$less$();
+    var ev = this$3.s_$less$colon$less$__f_singleton;
+    var $x_9 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$1, frags, ev);
+  }
+  var $x_8 = $x_13.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_12.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11, $x_10, $x_9])));
   var $x_7 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
   var $x_6 = $m_sr_ScalaRunTime$();
   var $x_5 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("main-panel", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
   var $x_4 = this.renderTimer__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
   if ($n(view).Lapps_emojionary_View__f_amIDescriber) {
-    var this$3 = $m_Lscalatags_JsDom$all$();
+    var this$6 = $m_Lscalatags_JsDom$all$();
     var $x_2 = $m_sr_ScalaRunTime$();
-    var this$2 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
+    var this$5 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
     var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu fais deviner ! \ud83e\udd2b"))]));
-    var frags = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs), this.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
-    var this$5 = $m_s_$less$colon$less$();
-    var ev = this$5.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$3, frags, ev);
+    var frags$1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$5.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs), this.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
+    var this$8 = $m_s_$less$colon$less$();
+    var ev$1 = this$8.s_$less$colon$less$__f_singleton;
+    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$6, frags$1, ev$1);
   } else {
-    var this$8 = $m_Lscalatags_JsDom$all$();
+    var this$11 = $m_Lscalatags_JsDom$all$();
     var $x_3 = $m_sr_ScalaRunTime$();
-    var this$7 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
+    var this$10 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
     var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu dois deviner ! \ud83e\udd14"))]));
-    var frags$1 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$7.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1), this.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
-    var this$10 = $m_s_$less$colon$less$();
-    var ev$1 = this$10.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$8, frags$1, ev$1);
+    var frags$2 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$10.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1), this.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
+    var this$13 = $m_s_$less$colon$less$();
+    var ev$2 = this$13.s_$less$colon$less$__f_singleton;
+    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$11, frags$2, ev$2);
   }
-  return $x_11.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_10.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_9, $x_8, $n($x_7).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_5, $x_4, $x_1])))])));
+  return $x_16.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14, $x_8, $n($x_7).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_5, $x_4, $x_1])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   var $x_21 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
@@ -35313,8 +35323,18 @@ $c_Lapps_EmojionaryUIInstance.prototype.onEmojiClicked__Lapps_emojionary_View__T
     this.sendEvent__O__V(new $c_Lapps_emojionary_Event$SendHint(emoji));
   }
 });
+$c_Lapps_EmojionaryUIInstance.prototype.resetLocalState__V = (function() {
+  this.secretInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
+  this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
+  this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
+  this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+});
 $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   var currentHintCount = $n($n(view).Lapps_emojionary_View__f_hints).length__I();
+  if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
+    this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
+    this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  }
   if ((currentHintCount > this.Lapps_EmojionaryUIInstance__f_lastHintCount)) {
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
     this.Lapps_EmojionaryUIInstance__f_lastHintCount = currentHintCount;
@@ -35422,7 +35442,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.submitGuess__V = (function() {
   }
 });
 $c_Lapps_EmojionaryUIInstance.prototype.css__T = (function() {
-  return "\n    body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; height: 100vh; }\n    .app-container {\n      background: white;\n      width: 900px;              \n      padding: 24px;\n      border-radius: 20px;\n      text-align: left;\n      box-shadow: 0 4px 18px rgba(0,0,0,0.08);\n      margin-top: 20px;\n    }    \n    .role-title { color: #333; margin-bottom: 20px; }\n    .emoji-keyboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 5px; margin-top: 15px; max-height: 300px; overflow-y: auto; padding: 10px; background: #fafafa; border-radius: 8px; }\n    .emoji-key { font-size: 1.5em; background: white; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; padding: 5px; }\n    .emoji-key:hover { background: #e3f2fd; transform: scale(1.1); }\n    .hints-display { font-size: 3em; margin: 20px 0; background: #ecf0f1; padding: 10px; border-radius: 10px; letter-spacing: 5px; min-height: 60px; }\n    #secret-word-input, #guess-input { padding: 10px; font-size: 1.1em; width: 60%; border: 2px solid #ddd; border-radius: 6px; }\n    .btn-start { background: #27ae60; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 1.2em; cursor: pointer; margin-top: 20px;}\n    .btn-guess { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 1.1em; margin-left: 5px; cursor: pointer; transition: background 0.3s; }\n    .secret-reminder { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }\n    .status-message { padding: 20px; background: #f8f9fa; border-radius: 8px; color: #7f8c8d; font-size: 1.1em; animation: fadeIn 0.3s; }\n    \n        /* === Layout g\u00e9n\u00e9ral de la page de jeu === */\n    .game-layout {\n      display: grid;\n      grid-template-columns: 280px 1fr;\n      gap: 24px;\n      align-items: flex-start;\n    }\n\n    .sidebar {\n      display: flex;\n      flex-direction: column;\n      gap: 12px;\n    }\n\n    .main-panel {\n      text-align: center;\n    }\n\n    /* === Scoreboard === */\n    .scoreboard {\n      background: #f7f9fb;\n      border-radius: 12px;\n      padding: 10px 14px;\n      font-size: 0.9em;\n      border: 1px solid #e3e9f0;\n    }\n\n    .scoreboard h3 {\n      margin-top: 0;\n      margin-bottom: 6px;\n      font-size: 1em;\n    }\n\n    .scoreboard table {\n      width: 100%;\n      border-collapse: collapse;\n    }\n\n    .scoreboard th,\n    .scoreboard td {\n      padding: 4px 6px;\n      border-bottom: 1px solid #edf1f5;\n    }\n\n    .score-row.you {\n      background: #eafaf1;\n      font-weight: 600;\n    }\n\n    /* === Historique d'erreurs === */\n    .guess-history {\n      background: #fdfefe;\n      border-radius: 12px;\n      padding: 8px 10px;\n      font-size: 0.9em;\n      text-align: left;\n      border: 1px solid #e3e9f0;\n    }\n\n    .guess-history h3 {\n      margin-top: 0;\n      margin-bottom: 6px;\n      font-size: 1em;\n    }\n\n    .guess-history ul {\n      list-style: none;\n      padding-left: 0;\n      margin: 4px 0 0 0;\n      max-height: 120px;\n      overflow-y: auto;\n    }\n\n    .guess-history li {\n      padding: 2px 0;\n    }\n\n    .empty-history {\n      font-size: 0.85em;\n      color: #7f8c8d;\n      margin: 4px 0 0 0;\n      font-style: italic;\n    }\n\n    /* === Page d'accueil === */\n    .start-screen {\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n      align-items: center;\n      text-align: center;\n      padding: 10px 20px;\n    }\n\n    .app-title {\n      font-size: 2rem;\n      margin: 0;\n      color: #2c3e50;\n    }\n\n    .app-subtitle {\n      margin: 4px 0 8px 0;\n      color: #7f8c8d;\n    }\n\n    .rules-card {\n      background: #f7f9fb;\n      border-radius: 14px;\n      padding: 14px 18px;\n      border: 1px solid #e3e9f0;\n      text-align: left;\n      max-width: 520px;\n    }\n\n    .rules-list {\n      margin: 0;\n      padding-left: 18px;\n      font-size: 0.95em;\n      color: #555;\n    }\n    \n    .timer {\n      margin: 10px auto 0 auto;\n      display: inline-flex;\n      align-items: center;\n      gap: 6px;\n      padding: 6px 12px;\n      border-radius: 999px;\n      background: #fdf6e3;\n      border: 1px solid #f1c40f33;\n      font-size: 0.95em;\n      color: #7d6608;\n    }\n\n    .timer-label {\n      font-weight: 500;\n    }\n\n    .timer-value {\n      font-weight: 600;\n    }\n\n    .timer-value.danger {\n      color: #c0392b;\n    }\n\n    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }\n\n  ";
+  return "\n    body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; height: 100vh; }\n    .app-container {\n      background: white;\n      width: 900px;              \n      padding: 24px;\n      border-radius: 20px;\n      text-align: left;\n      box-shadow: 0 4px 18px rgba(0,0,0,0.08);\n      margin-top: 20px;\n    }    \n    .role-title { color: #333; margin-bottom: 20px; }\n    .emoji-keyboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 5px; margin-top: 15px; max-height: 300px; overflow-y: auto; padding: 10px; background: #fafafa; border-radius: 8px; }\n    .emoji-key { font-size: 1.5em; background: white; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; padding: 5px; }\n    .emoji-key:hover { background: #e3f2fd; transform: scale(1.1); }\n    .hints-display { font-size: 3em; margin: 20px 0; background: #ecf0f1; padding: 10px; border-radius: 10px; letter-spacing: 5px; min-height: 60px; }\n    #secret-word-input, #guess-input { padding: 10px; font-size: 1.1em; width: 60%; border: 2px solid #ddd; border-radius: 6px; }\n    .btn-start { background: #27ae60; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 1.2em; cursor: pointer; margin-top: 20px;}\n    .btn-guess { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 1.1em; margin-left: 5px; cursor: pointer; transition: background 0.3s; }\n    .secret-reminder { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }\n    .status-message { padding: 20px; background: #f8f9fa; border-radius: 8px; color: #7f8c8d; font-size: 1.1em; animation: fadeIn 0.3s; }\n    \n    .game-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: flex-start; }\n    .sidebar { display: flex; flex-direction: column; gap: 12px; }\n    .main-panel { text-align: center; }\n    .scoreboard { background: #f7f9fb; border-radius: 12px; padding: 10px 14px; font-size: 0.9em; border: 1px solid #e3e9f0; }\n    .scoreboard h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }\n    .scoreboard table { width: 100%; border-collapse: collapse; }\n    .scoreboard th, .scoreboard td { padding: 4px 6px; border-bottom: 1px solid #edf1f5; }\n    .score-row.you { background: #eafaf1; font-weight: 600; }\n    .guess-history { background: #fdfefe; border-radius: 12px; padding: 8px 10px; font-size: 0.9em; text-align: left; border: 1px solid #e3e9f0; }\n    .guess-history h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }\n    .guess-history ul { list-style: none; padding-left: 0; margin: 4px 0 0 0; max-height: 120px; overflow-y: auto; }\n    .guess-history li { padding: 2px 0; }\n    .empty-history { font-size: 0.85em; color: #7f8c8d; margin: 4px 0 0 0; font-style: italic; }\n    .start-screen { display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; padding: 10px 20px; }\n    .app-title { font-size: 2rem; margin: 0; color: #2c3e50; }\n    .app-subtitle { margin: 4px 0 8px 0; color: #7f8c8d; }\n    .rules-card { background: #f7f9fb; border-radius: 14px; padding: 14px 18px; border: 1px solid #e3e9f0; text-align: left; max-width: 520px; }\n    .rules-list { margin: 0; padding-left: 18px; font-size: 0.95em; color: #555; }\n    .timer { margin: 10px auto 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #fdf6e3; border: 1px solid #f1c40f33; font-size: 0.95em; color: #7d6608; }\n    .timer-label { font-weight: 500; }\n    .timer-value { font-weight: 600; }\n    .timer-value.danger { color: #c0392b; }\n    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }\n  ";
 });
 var $d_Lapps_EmojionaryUIInstance = new $TypeData().initClass($c_Lapps_EmojionaryUIInstance, "apps.EmojionaryUIInstance", ({
   Lapps_EmojionaryUIInstance: 1,

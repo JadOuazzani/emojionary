@@ -55,11 +55,10 @@ class EmojionaryUIInstance(
   }
 
   // --- ÉTAT LOCAL UI ---
-  // Sert à savoir si on doit bloquer le joueur en attendant le prochain indice
   private var lastHintCount: Int = 0
   private var waitingForNextHint: Boolean = false
 
-  // Fonction pour maintenir le focus lors des mises à jour d'interface
+  // Fonction pour maintenir le focus
   def maintainFocus(el: dom.html.Input): Unit = {
     if (dom.document.activeElement == el) {
       val start = el.selectionStart
@@ -85,7 +84,6 @@ class EmojionaryUIInstance(
   // --- TIMER UI ---
 
   def renderTimer(view: View): Frag = {
-    // convertir ms -> secondes (minimum 0)
     val rawSeconds = (view.remainingTimeMs / 1000L).toInt
     val seconds = if (rawSeconds < 0) 0 else rawSeconds
 
@@ -98,38 +96,35 @@ class EmojionaryUIInstance(
         )
       )
     else
-      frag() // pas de timer dans les autres phases
+      frag() 
   }
 
   // --- ÉCRANS ---
 
   def renderStartButton(): Frag = {
-    // Reset complet
-    secretInput.value = ""
-    guessInput.value = ""
-    lastHintCount = 0
-    waitingForNextHint = false
+    // Reset manuel (utile au tout premier lancement)
+    resetLocalState()
     
     div(cls := "start-screen",
-    h1(cls := "app-title", "Emojionary"),
-    p(cls := "app-subtitle", "Fais deviner un mot en n'utilisant que des emojis ✨"),
+      h1(cls := "app-title", "Emojionary"),
+      p(cls := "app-subtitle", "Fais deviner un mot en n'utilisant que des emojis ✨"),
 
-    div(cls := "rules-card",
-      h3("Règles du jeu"),
-      ul(cls := "rules-list",
-        li("Un joueur choisit un mot secret."),
-        li("Il envoie une suite d'emojis comme indices."),
-        li("Les autres joueurs essaient de deviner le mot."),
-        li("Plus tu trouves vite, plus tu marques de points !")
+      div(cls := "rules-card",
+        h3("Règles du jeu"),
+        ul(cls := "rules-list",
+          li("Un joueur choisit un mot secret."),
+          li("Il envoie une suite d'emojis comme indices."),
+          li("Les autres joueurs essaient de deviner le mot."),
+          li("Plus tu trouves vite, plus tu marques de points !")
+        )
+      ),
+
+      button(
+        cls := "btn-start",
+        onclick := { () => sendEvent(Event.StartGame) },
+        "Démarrer la partie 🚀"
       )
-    ),
-
-    button(
-      cls := "btn-start",
-      onclick := { () => sendEvent(Event.StartGame) },
-      "Démarrer la partie 🚀"
     )
-  )
   }
 
   def renderEndScreen(currentUser: UserId, view: View): Frag = {
@@ -141,9 +136,11 @@ class EmojionaryUIInstance(
       },
       p(s"Le mot était : ${view.secretWord.getOrElse("???")}"),
       renderScoreBoard(currentUser, view),
-      button(cls := "btn-start", onclick := { () => sendEvent(Event.StartGame) }, "Rejouer")
+      // Le bouton StartGame ici va déclencher le redémarrage immédiat grâce au fix dans Logic.scala
+      button(cls := "btn-start", onclick := { () => sendEvent(Event.StartGame) }, "Rejouer tout de suite")
     )
   }
+
   // --- TABLEAU DE SCORES ---
 
   private def shortId(uid: UserId): String =
@@ -158,20 +155,12 @@ class EmojionaryUIInstance(
         p(cls := "empty-scores", "Aucun point pour l'instant.")
       else
         table(
-          thead(
-            tr(
-              th("Joueur"),
-              th("Points")
-            )
-          ),
+          thead(tr(th("Joueur"), th("Points"))),
           tbody(
             ordered.map { case (uid, score) =>
               val isYou = uid == currentUser
               tr(cls := (if isYou then "score-row you" else "score-row"),
-                td(
-                  if isYou then s"Toi (${shortId(uid)})"
-                  else shortId(uid)
-                ),
+                td(if isYou then s"Toi (${shortId(uid)})" else shortId(uid)),
                 td(score.toString)
               )
             }*
@@ -180,32 +169,30 @@ class EmojionaryUIInstance(
     )
   }
 
-
   def renderActiveGame(currentUser: UserId, view: View): Frag = {
-  div(cls := "game-layout",            // <-- nouvelle classe racine
-    // Colonne de gauche : tableau de bord
-    div(cls := "sidebar",
-      renderScoreBoard(currentUser, view),
-      renderGuessHistory(view)
-    ),
+    div(cls := "game-layout",
+      div(cls := "sidebar",
+        renderScoreBoard(currentUser, view),
+        // FIX 1: On n'affiche l'historique QUE si on n'est PAS le dessinateur
+        if (!view.amIDescriber) renderGuessHistory(view) else frag()
+      ),
 
-    // Colonne de droite : zone de jeu principale
-    div(cls := "main-panel",
-      renderTimer(view),
+      div(cls := "main-panel",
+        renderTimer(view),
 
-      if (view.amIDescriber)
-        frag(
-          h3(cls := "role-title", "Tu fais deviner ! 🤫"),
-          renderDescriberControls(view)
-        )
-      else
-        frag(
-          h3(cls := "role-title", "Tu dois deviner ! 🤔"),
-          renderGuesserControls(view)
-        )
+        if (view.amIDescriber)
+          frag(
+            h3(cls := "role-title", "Tu fais deviner ! 🤫"),
+            renderDescriberControls(view)
+          )
+        else
+          frag(
+            h3(cls := "role-title", "Tu dois deviner ! 🤔"),
+            renderGuesserControls(view)
+          )
+      )
     )
-  )
-}
+  }
 
   // --- CONTROLES ---
 
@@ -241,17 +228,31 @@ class EmojionaryUIInstance(
     }
   }
 
+  // Helper pour nettoyer l'état local entre les parties
+  def resetLocalState(): Unit = {
+    secretInput.value = ""
+    guessInput.value = ""
+    lastHintCount = 0
+    waitingForNextHint = false
+  }
+
   def renderGuesserControls(view: View): Frag = {
     val currentHintCount = view.hints.length
 
-    // Déblocage quand on reçoit de nouveaux indices
+    // FIX 2 (Reset): Si c'est le début d'une nouvelle manche (0 indices), on force le reset
+    if (view.hints.isEmpty) {
+       // C'est ici que la magie opère pour éviter le blocage "infini" au redémarrage
+       lastHintCount = 0
+       waitingForNextHint = false
+    }
+
+    // Déblocage standard quand un nouvel indice arrive
     if (currentHintCount > lastHintCount) {
       waitingForNextHint = false
       lastHintCount = currentHintCount
       dom.window.setTimeout(() => guessInput.focus(), 0)
     }
 
-    // On regarde aussi la phase côté serveur
     val isWaitingForHintPhase = view.phase == Phase.WaitingForHint
 
     div(cls := "guesser-controls",
@@ -262,37 +263,26 @@ class EmojionaryUIInstance(
         else view.hints.mkString(" ")
       ),
 
-      // 1) Pas encore d'indices du tout
       if (view.hints.isEmpty) {
         div(cls := "status-message", "⏳ Le décrypteur choisit le premier indice...")
       }
-      // 2) Le serveur est en phase WaitingForHint (timer fini) OU on a déjà tenté pour cet indice
       else if (isWaitingForHintPhase || waitingForNextHint) {
         div(
           cls := "status-message",
-          p(
-            style := "color: #e67e22; font-weight: bold;",
-            "⏳ En attente du prochain indice..."
-          ),
+          p(style := "color: #e67e22; font-weight: bold;", "⏳ En attente du prochain indice..."),
           p("Tu ne peux plus proposer pour l'indice actuel.")
         )
       }
-      // 3) Phase Guessing et on a le droit de répondre
       else {
         maintainFocus(guessInput)
         div(cls := "input-group",
           guessInput,
-          button(
-            cls := "btn-guess",
-            onclick := { () => submitGuess() },
-            "Deviner"
-          )
+          button(cls := "btn-guess", onclick := { () => submitGuess() }, "Deviner")
         )
       }
     )
   }
 
-// HISTORIQUE DES ERREURS (privé au joueur courant) ---
   def renderGuessHistory(view: View): Frag = {
     val errors = view.myWrongGuesses
 
@@ -309,13 +299,11 @@ class EmojionaryUIInstance(
     )
   }
 
-
   def submitGuess(): Unit = {
     val text = guessInput.value.trim
     if (text.nonEmpty) {
       sendEvent(Event.SubmitGuess(text))
       guessInput.value = "" 
-      // On verrouille immédiatement l'interface
       waitingForNextHint = true
     }
   }
@@ -343,153 +331,28 @@ class EmojionaryUIInstance(
     .secret-reminder { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }
     .status-message { padding: 20px; background: #f8f9fa; border-radius: 8px; color: #7f8c8d; font-size: 1.1em; animation: fadeIn 0.3s; }
     
-        /* === Layout général de la page de jeu === */
-    .game-layout {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .main-panel {
-      text-align: center;
-    }
-
-    /* === Scoreboard === */
-    .scoreboard {
-      background: #f7f9fb;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-size: 0.9em;
-      border: 1px solid #e3e9f0;
-    }
-
-    .scoreboard h3 {
-      margin-top: 0;
-      margin-bottom: 6px;
-      font-size: 1em;
-    }
-
-    .scoreboard table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .scoreboard th,
-    .scoreboard td {
-      padding: 4px 6px;
-      border-bottom: 1px solid #edf1f5;
-    }
-
-    .score-row.you {
-      background: #eafaf1;
-      font-weight: 600;
-    }
-
-    /* === Historique d'erreurs === */
-    .guess-history {
-      background: #fdfefe;
-      border-radius: 12px;
-      padding: 8px 10px;
-      font-size: 0.9em;
-      text-align: left;
-      border: 1px solid #e3e9f0;
-    }
-
-    .guess-history h3 {
-      margin-top: 0;
-      margin-bottom: 6px;
-      font-size: 1em;
-    }
-
-    .guess-history ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 4px 0 0 0;
-      max-height: 120px;
-      overflow-y: auto;
-    }
-
-    .guess-history li {
-      padding: 2px 0;
-    }
-
-    .empty-history {
-      font-size: 0.85em;
-      color: #7f8c8d;
-      margin: 4px 0 0 0;
-      font-style: italic;
-    }
-
-    /* === Page d'accueil === */
-    .start-screen {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: center;
-      text-align: center;
-      padding: 10px 20px;
-    }
-
-    .app-title {
-      font-size: 2rem;
-      margin: 0;
-      color: #2c3e50;
-    }
-
-    .app-subtitle {
-      margin: 4px 0 8px 0;
-      color: #7f8c8d;
-    }
-
-    .rules-card {
-      background: #f7f9fb;
-      border-radius: 14px;
-      padding: 14px 18px;
-      border: 1px solid #e3e9f0;
-      text-align: left;
-      max-width: 520px;
-    }
-
-    .rules-list {
-      margin: 0;
-      padding-left: 18px;
-      font-size: 0.95em;
-      color: #555;
-    }
-    
-    .timer {
-      margin: 10px auto 0 auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #fdf6e3;
-      border: 1px solid #f1c40f33;
-      font-size: 0.95em;
-      color: #7d6608;
-    }
-
-    .timer-label {
-      font-weight: 500;
-    }
-
-    .timer-value {
-      font-weight: 600;
-    }
-
-    .timer-value.danger {
-      color: #c0392b;
-    }
-
+    .game-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: flex-start; }
+    .sidebar { display: flex; flex-direction: column; gap: 12px; }
+    .main-panel { text-align: center; }
+    .scoreboard { background: #f7f9fb; border-radius: 12px; padding: 10px 14px; font-size: 0.9em; border: 1px solid #e3e9f0; }
+    .scoreboard h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }
+    .scoreboard table { width: 100%; border-collapse: collapse; }
+    .scoreboard th, .scoreboard td { padding: 4px 6px; border-bottom: 1px solid #edf1f5; }
+    .score-row.you { background: #eafaf1; font-weight: 600; }
+    .guess-history { background: #fdfefe; border-radius: 12px; padding: 8px 10px; font-size: 0.9em; text-align: left; border: 1px solid #e3e9f0; }
+    .guess-history h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }
+    .guess-history ul { list-style: none; padding-left: 0; margin: 4px 0 0 0; max-height: 120px; overflow-y: auto; }
+    .guess-history li { padding: 2px 0; }
+    .empty-history { font-size: 0.85em; color: #7f8c8d; margin: 4px 0 0 0; font-style: italic; }
+    .start-screen { display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; padding: 10px 20px; }
+    .app-title { font-size: 2rem; margin: 0; color: #2c3e50; }
+    .app-subtitle { margin: 4px 0 8px 0; color: #7f8c8d; }
+    .rules-card { background: #f7f9fb; border-radius: 14px; padding: 14px 18px; border: 1px solid #e3e9f0; text-align: left; max-width: 520px; }
+    .rules-list { margin: 0; padding-left: 18px; font-size: 0.95em; color: #555; }
+    .timer { margin: 10px auto 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #fdf6e3; border: 1px solid #f1c40f33; font-size: 0.95em; color: #7d6608; }
+    .timer-label { font-weight: 500; }
+    .timer-value { font-weight: 600; }
+    .timer-value.danger { color: #c0392b; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
   """
 }
