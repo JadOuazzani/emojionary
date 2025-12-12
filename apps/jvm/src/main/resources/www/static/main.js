@@ -35245,70 +35245,105 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderActiveGame__T__Lapps_emojionary_Vi
   return $x_16.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14, $x_8, $n($x_7).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_5, $x_4, $x_1])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
-  var $x_21 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_20 = $m_sr_ScalaRunTime$();
+  if (($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z() && (this.Lapps_EmojionaryUIInstance__f_lastHintCount > 0))) {
+    this.secretInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
+    this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
+  }
+  var x = $n(view).Lapps_emojionary_View__f_phase;
+  var x$2 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+  if ((x === null)) {
+    var isWaitingForGuessers = (x$2 === null);
+  } else {
+    var this$1 = $n(x);
+    var isWaitingForGuessers = (this$1 === x$2);
+  }
+  var $x_25 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
+  var $x_24 = $m_sr_ScalaRunTime$();
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
     this.maintainFocus__Lorg_scalajs_dom_HTMLInputElement__V(this.secretInput__Lorg_scalajs_dom_HTMLInputElement());
-    var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_12 = $m_sr_ScalaRunTime$();
-    var $x_11 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis le mot secret + 1er Emoji :"))])));
-    var this$2 = $m_Lscalatags_JsDom$all$();
+    var $x_17 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
+    var $x_16 = $m_sr_ScalaRunTime$();
+    var $x_15 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+    var this$3 = $n($m_Lscalatags_JsDom$all$().h4__Lscalatags_generic_TypedTag());
+    var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("margin-bottom: 10px; color: #2c3e50;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfaf \u00c0 toi de faire deviner !"))]));
+    var $x_14 = this$3.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
+    var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis le mot secret + 1er Emoji :"))])));
+    var this$5 = $m_Lscalatags_JsDom$all$();
     var e = this.secretInput__Lorg_scalajs_dom_HTMLInputElement();
-    var $x_9 = $x_13.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_12.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11, $x_10, new $c_Lscalatags_LowPriorityImplicits$bindNode(this$2, e)])));
+    var $x_12 = $x_17.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_16.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_15, $x_14, $x_13, new $c_Lscalatags_LowPriorityImplicits$bindNode(this$5, e)])));
   } else {
-    var $x_19 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
+    var $x_23 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
+    var $x_22 = $m_sr_ScalaRunTime$();
+    var $x_21 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-reminder", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+    $m_Lscalatags_JsDom$all$();
+    var $x_20 = new $c_Lscalatags_JsDom$StringFrag("Mot secret : ");
+    var $x_19 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
     var $x_18 = $m_sr_ScalaRunTime$();
-    var $x_17 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-reminder", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
     $m_Lscalatags_JsDom$all$();
-    var $x_16 = new $c_Lscalatags_JsDom$StringFrag("Mot secret : ");
-    var $x_15 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
-    var $x_14 = $m_sr_ScalaRunTime$();
-    $m_Lscalatags_JsDom$all$();
-    var this$4 = $n($n(view).Lapps_emojionary_View__f_secretWord);
-    var this$5 = $n($as_T((this$4.isEmpty__Z() ? "???" : this$4.get__O())));
-    var $x_9 = $x_19.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_17, $x_16, $n($x_15).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_14.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(this$5)])))])));
+    var this$7 = $n($n(view).Lapps_emojionary_View__f_secretWord);
+    var this$8 = $n($as_T((this$7.isEmpty__Z() ? "???" : this$7.get__O())));
+    var $x_12 = $x_23.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_22.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_21, $x_20, $n($x_19).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(this$8)])))])));
   }
-  var $x_8 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-  var $x_7 = $m_sr_ScalaRunTime$();
-  var $x_6 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-keyboard", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var this$13 = $m_Lscalatags_JsDom$all$();
-  var this$10 = $n($n(view).Lapps_emojionary_View__f_availableEmojis);
-  var f$2 = ((emoji) => {
-    var emoji$1 = $as_T(emoji);
-    var $x_5 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag()));
-    var $x_4 = $m_sr_ScalaRunTime$();
-    var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-key", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var $x_2 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
-    var $x_1 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
-      this.onEmojiClicked__Lapps_emojionary_View__T__V(view, emoji$1);
-    }));
-    $m_Lscalatags_JsDom$all$();
-    var ev = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((f) => {
-      var f$1 = $as_F0(f);
-      return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
-    }));
-    return $x_5.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji$1))])));
-  });
-  if ((this$10 === $m_sci_Nil$())) {
-    var xs = $m_sci_Nil$();
+  if (isWaitingForGuessers) {
+    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("color: #3498db; font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3 Les joueurs r\u00e9fl\u00e9chissent..."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu ne peux pas envoyer d'indice pour le moment."))])))])));
   } else {
-    var x0 = this$10.head__O();
-    var h = new $c_sci_$colon$colon(f$2(x0), $m_sci_Nil$());
-    var t = h;
-    var rest = $as_sci_List(this$10.tail__O());
-    while ((rest !== $m_sci_Nil$())) {
-      var x0$1 = $n(rest).head__O();
-      var nx = new $c_sci_$colon$colon(f$2(x0$1), $m_sci_Nil$());
-      $n(t).sci_$colon$colon__f_next = nx;
-      t = nx;
-      rest = $as_sci_List($n(rest).tail__O());
+    var this$25 = $m_Lscalatags_JsDom$all$();
+    var $x_11 = $m_sr_ScalaRunTime$();
+    var this$12 = $n($n(view).Lapps_emojionary_View__f_hints);
+    if ((!this$12.isEmpty__Z())) {
+      var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("background: #eafaf1; color: #27ae60;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udc49 C'est \u00e0 toi !"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis un nouvel emoji pour les aider."))])))])));
+    } else {
+      var this$15 = $m_Lscalatags_JsDom$all$();
+      var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
+      var this$17 = $m_s_$less$colon$less$();
+      var ev = this$17.s_$less$colon$less$__f_singleton;
+      var $x_10 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$15, frags, ev);
     }
-    var xs = h;
+    var $x_9 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
+    var $x_8 = $m_sr_ScalaRunTime$();
+    var $x_7 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-keyboard", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+    var this$24 = $m_Lscalatags_JsDom$all$();
+    var this$21 = $n($n(view).Lapps_emojionary_View__f_availableEmojis);
+    var f$2 = ((emoji) => {
+      var emoji$1 = $as_T(emoji);
+      var $x_6 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag()));
+      var $x_5 = $m_sr_ScalaRunTime$();
+      var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-key", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+      var $x_3 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
+      var $x_2 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
+        this.onEmojiClicked__Lapps_emojionary_View__T__V(view, emoji$1);
+      }));
+      $m_Lscalatags_JsDom$all$();
+      var ev$1 = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((f) => {
+        var f$1 = $as_F0(f);
+        return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
+      }));
+      return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev$1)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji$1))])));
+    });
+    if ((this$21 === $m_sci_Nil$())) {
+      var xs$1 = $m_sci_Nil$();
+    } else {
+      var x0 = this$21.head__O();
+      var h = new $c_sci_$colon$colon(f$2(x0), $m_sci_Nil$());
+      var t = h;
+      var rest = $as_sci_List(this$21.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var x0$1 = $n(rest).head__O();
+        var nx = new $c_sci_$colon$colon(f$2(x0$1), $m_sci_Nil$());
+        $n(t).sci_$colon$colon__f_next = nx;
+        t = nx;
+        rest = $as_sci_List($n(rest).tail__O());
+      }
+      var xs$1 = h;
+    }
+    var this$23 = $m_s_$less$colon$less$();
+    var ev$2 = this$23.s_$less$colon$less$__f_singleton;
+    var frags$1 = $x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([$x_10, $n($x_9).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, new $c_Lscalatags_JsDom$Cap$SeqFrag(this$24, xs$1, ev$2)])))]));
+    var this$27 = $m_s_$less$colon$less$();
+    var ev$3 = this$27.s_$less$colon$less$__f_singleton;
+    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$25, frags$1, ev$3);
   }
-  var this$12 = $m_s_$less$colon$less$();
-  var ev$1 = this$12.s_$less$colon$less$__f_singleton;
-  return $x_21.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_20.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_9, $n($x_8).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_7.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_6, new $c_Lscalatags_JsDom$Cap$SeqFrag(this$13, xs, ev$1)])))])));
+  return $x_25.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_24.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_1])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.onEmojiClicked__Lapps_emojionary_View__T__V = (function(view, emoji) {
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
@@ -35334,10 +35369,12 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
     this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+    this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
   }
   if ((currentHintCount > this.Lapps_EmojionaryUIInstance__f_lastHintCount)) {
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
     this.Lapps_EmojionaryUIInstance__f_lastHintCount = currentHintCount;
+    this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
     window.setTimeout((() => {
       this.guessInput__Lorg_scalajs_dom_HTMLInputElement().focus();
     }), 0.0);
