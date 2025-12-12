@@ -102,7 +102,7 @@ class EmojionaryUIInstance(
   // --- ÉCRANS ---
 
   def renderStartButton(): Frag = {
-    // Reset manuel (utile au tout premier lancement)
+    // Reset manuel
     resetLocalState()
     
     div(cls := "start-screen",
@@ -136,7 +136,6 @@ class EmojionaryUIInstance(
       },
       p(s"Le mot était : ${view.secretWord.getOrElse("???")}"),
       renderScoreBoard(currentUser, view),
-      // Le bouton StartGame ici va déclencher le redémarrage immédiat grâce au fix dans Logic.scala
       button(cls := "btn-start", onclick := { () => sendEvent(Event.StartGame) }, "Rejouer tout de suite")
     )
   }
@@ -173,7 +172,6 @@ class EmojionaryUIInstance(
     div(cls := "game-layout",
       div(cls := "sidebar",
         renderScoreBoard(currentUser, view),
-        // FIX 1: On n'affiche l'historique QUE si on n'est PAS le dessinateur
         if (!view.amIDescriber) renderGuessHistory(view) else frag()
       ),
 
@@ -197,21 +195,54 @@ class EmojionaryUIInstance(
   // --- CONTROLES ---
 
   def renderDescriberControls(view: View): Frag = {
+    // Reset automatique si changement de round
+    if (view.hints.isEmpty && lastHintCount > 0) {
+        secretInput.value = ""
+        lastHintCount = 0
+    }
+
+    // Le dessinateur est en attente si le serveur est en phase 'Guessing'
+    // (cela veut dire qu'il a déjà envoyé son indice et que le chrono tourne)
+    val isWaitingForGuessers = view.phase == Phase.Guessing
+
     div(
+      // 1. Zone du haut : Mot Secret
       if (view.hints.isEmpty) {
         maintainFocus(secretInput)
         div(cls := "secret-word-section",
+          h4(style := "margin-bottom: 10px; color: #2c3e50;", "🎯 À toi de faire deviner !"),
           p("Choisis le mot secret + 1er Emoji :"),
           secretInput
         )
       } else {
         div(cls := "secret-reminder", "Mot secret : ", strong(view.secretWord.getOrElse("???").toString))
       },
-      div(cls := "emoji-keyboard",
-        view.availableEmojis.map { emoji =>
-          button(cls := "emoji-key", onclick := { () => onEmojiClicked(view, emoji) }, emoji)
-        }
-      )
+
+      // 2. Zone du bas : Messages d'état ou Clavier
+      if (isWaitingForGuessers) {
+        // Cas : Les autres sont en train de réfléchir
+        div(cls := "status-message",
+          p(style := "color: #3498db; font-weight: bold;", "⏳ Les joueurs réfléchissent..."),
+          p("Tu ne peux pas envoyer d'indice pour le moment.")
+        )
+      } else {
+        // Cas : C'est à moi de jouer (WaitingForHint)
+        frag(
+          // Si ce n'est pas le tout début (où on a déjà le formulaire au-dessus), on ajoute un rappel
+          if (view.hints.nonEmpty) 
+            div(cls := "status-message", style := "background: #eafaf1; color: #27ae60;",
+               p(style := "font-weight: bold;", "👉 C'est à toi !"),
+               p("Choisis un nouvel emoji pour les aider.")
+            )
+          else frag(),
+
+          div(cls := "emoji-keyboard",
+            view.availableEmojis.map { emoji =>
+              button(cls := "emoji-key", onclick := { () => onEmojiClicked(view, emoji) }, emoji)
+            }
+          )
+        )
+      }
     )
   }
 
@@ -228,7 +259,6 @@ class EmojionaryUIInstance(
     }
   }
 
-  // Helper pour nettoyer l'état local entre les parties
   def resetLocalState(): Unit = {
     secretInput.value = ""
     guessInput.value = ""
@@ -239,17 +269,16 @@ class EmojionaryUIInstance(
   def renderGuesserControls(view: View): Frag = {
     val currentHintCount = view.hints.length
 
-    // FIX 2 (Reset): Si c'est le début d'une nouvelle manche (0 indices), on force le reset
     if (view.hints.isEmpty) {
-       // C'est ici que la magie opère pour éviter le blocage "infini" au redémarrage
        lastHintCount = 0
        waitingForNextHint = false
+       guessInput.value = "" 
     }
 
-    // Déblocage standard quand un nouvel indice arrive
     if (currentHintCount > lastHintCount) {
       waitingForNextHint = false
       lastHintCount = currentHintCount
+      guessInput.value = "" 
       dom.window.setTimeout(() => guessInput.focus(), 0)
     }
 
