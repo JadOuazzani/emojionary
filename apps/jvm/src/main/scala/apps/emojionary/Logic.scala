@@ -3,11 +3,12 @@ package apps.emojionary
 import cs214.webapp.*
 import cs214.webapp.server.ClockDrivenStateMachine
 import scala.util.{Try, Success, Failure}
+
 class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ CONFIGURATION ============
   
-  override val clockPeriodMs: Int = 100
+  override val clockPeriodMs: Int = 1000
   override val clockDrivenWire: AppWire[Event, View] = Wire
   
   override val appInfo: AppInfo = AppInfo(
@@ -22,33 +23,28 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
   val AllEmojis: Vector[Emoji] = Vector(
     // 😀 Faces & emotions
     "😀","😃","😄","😁","😆","😅","🤣","😂","🙂","🙃","😉","😊","😇","🥰","😍","🤩","😘","😗","😚","😙",
-    "😋","😛","😜","🤪","😝","🤑","🤗","🤭","🤫","🤔","🤐","🤨","😐","😑","😶","🫥","😶‍🌫️","🙄","😏",
+    "😋","😛","😜","🤪","😝","🤑","🤗","🤭","🤔","🤐","🤨","😐","😑","😶","🫥","😶‍🌫️","🙄","😏",
     "😣","😥","😮","🤐","😯","😪","😫","🥱","😴","😌","😛","😜","😝","🤤","😓","😔","😕","🫤","🙃",
     "😖","😞","😟","😤","😢","😭","😦","😧","😨","😩","😬","😰","😱","🥵","🥶","😳","🤯","😵","😵‍💫",
     "🥴","😲","🤠","🥳","😎","🤓","🧐","😒","😡","😠","🤬","😷","🤒","🤕","🤢","🤮","🤧","😇","🤥",
     "😈","👿","💀","☠️","👻","👽","🤖","💩",
-
-    // 👋 Gestures / hands (sans tons de peau)
+    // 👋 Gestures / hands
     "👋","🤚","✋","🖐️","👌","🤌","🤏","✌️","🤞","🤟","🤘","🤙","👈","👉","👆","👇","☝️","👍","👎",
     "✊","👊","🤛","🤜","👏","🙌","👐","🤲","🤝","🙏",
-
-    // 🧍 People & roles (neutre)
+    // 🧍 People & roles
     "🧑","👧","👦","👩","👨","🧓","👶","🧒","🧑‍🎓","🧑‍🏫","🧑‍💻","🧑‍🔬","🧑‍🎨","🧑‍🚀","🧑‍🍳",
     "🧑‍⚕️","🧑‍🌾","🧑‍🔧","🧑‍🎤","🧑‍🎮","🧑‍✈️","🧑‍🚒","🧑‍⚖️","🕵️","💂","👷","🧑‍🏭",
     "🦸","🦹","🧙","🧝","🧛","🧟","🧞","🧜",
-
     // 🐶 Animals
     "🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐽","🐸","🐵","🙈","🙉","🙊",
     "🐔","🐧","🐦","🐤","🐣","🐥","🦆","🦅","🦉","🦇","🐺","🐗","🐴","🦄","🐝","🪲","🐛","🦋","🐌",
     "🐞","🦂","🕷️","🕸️","🐢","🐍","🦎","🐙","🦑","🦐","🦞","🦀","🐠","🐟","🐡","🦈","🐬","🐳","🐋",
     "🦭","🐊","🦧","🦍","🐘","🦣","🦏","🦛","🦓","🦒","🦘","🐪","🐫","🦙","🦌","🐄","🐂","🐃","🐎",
     "🐖","🐏","🐑","🦝","🦨","🦡","🦫","🦦","🦥","🐁","🐀","🐿️","🦔","🐾",
-
     // 🌿 Nature & weather
     "🌵","🌴","🌲","🌳","🌱","🌿","☘️","🍀","🎍","🎋","🍃","🍂","🍁","🪴","🌸","🌼","🌻","🌺","🌹",
     "🥀","🌷","🌾","🌙","🌚","🌛","⭐","🌟","✨","⚡","☀️","🌤️","⛅","🌥️","☁️","🌦️","🌧️","⛈️","🌩️",
     "🌨️","❄️","☃️","⛄","💨","🌪️","🌫️","🌈","☔","💧","💦","🔥","🌊","🫧",
-
     // 🍎 Food & drink
     "🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈","🍒","🍑","🥭","🍍","🥥","🥝","🍅","🍆",
     "🥑","🥦","🥬","🥒","🌶️","🫑","🌽","🥕","🧄","🧅","🥔","🍠","🫘","🥜","🌰","🍞","🥐","🥖","🫓","🥨",
@@ -56,31 +52,27 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
     "🍲","🥣","🥗","🍿","🧈","🧂","🥫","🍝","🍜","🍜","🍛","🍣","🍱","🥟","🍤","🍙","🍚","🍘","🍥",
     "🦪","🍦","🍧","🍨","🍩","🍪","🎂","🍰","🧁","🥧","🍫","🍬","🍭","🍮","🍯",
     "☕","🫖","🍵","🥛","🧃","🥤","🧋","🍶","🍺","🍻","🥂","🍷","🍸","🍹","🧉","🍾",
-
     // ⚽ Sports & activities
     "⚽","🏀","🏈","⚾","🥎","🎾","🏐","🏉","🥏","🎱","🏓","🏸","🏒","🏑","🥍","🏏","⛳","🥊","🥋",
     "🎽","🛹","🛼","⛸️","🥌","🛷","🎿","🏂","🏋️","🤼","🤸","⛹️","🤺","🏊","🚣","🧗","🚴","🚵","🏇",
     "🧘","🏄","🏆","🥇","🥈","🥉","🎯","🪀","🪁","🎳","🎮","🕹️","🎲","♟️","🧩","🎨","🎭","🎤","🎧",
     "🎼","🎹","🥁","🪘","🎷","🎺","🎸","🪕","🎻",
-
     // 🚗 Travel & places
     "🚗","🚕","🚙","🚌","🚎","🏎️","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🛵","🏍️","🚲","🛴","🚨",
     "🚁","✈️","🛫","🛬","🛩️","🚀","🛸","🚂","🚆","🚄","🚅","🚈","🚇","🚊","🚉","🛶","⛵","🛥️","🚤",
     "🛳️","⚓","🗺️","🗽","🗼","🏰","🏯","🏟️","🏛️","⛪","🕌","🛕","🕍","⛩️","🗻","🏔️","⛰️","🌋","🏜️",
     "🏖️","🏝️","🏞️","🌅","🌄","🌆","🌇","🌃","🌉","🏙️",
-
-    // 🧰 Objects (utiles en UI)
+    // 🧰 Objects
     "⌛","⏳","⏰","⏱️","📱","💻","🖥️","⌨️","🖱️","🖨️","📷","📸","🎥","📺","📡","🔋","🔌","💡","🔦",
     "🕯️","🧯","🧲","🧪","🧫","🧬","🔬","🔭","📡","📘","📗","📙","📕","📓","📒","📔","📚","📖","🔖",
     "📝","✏️","🖊️","🖋️","✒️","🖍️","📐","📏","🧮","📎","🖇️","📌","📍","✂️","🗃️","🗂️","🗄️",
     "🗑️","🔒","🔓","🔑","🗝️","🔨","🪓","⛏️","🧰","🔧","🪛","🔩","⚙️","🧱","🪜","🧹","🧺","🧻",
     "🧼","🪥","🧽","🛁","🚪","🪟","🪑","🛏️",
-
     // ❤️ Symbols
     "❤️","🧡","💛","💚","💙","💜","🖤","🤍","🤎","💔","❤️‍🔥","❤️‍🩹","💖","💗","💓","💞","💕","💘",
     "💯","✅","☑️","❌","❗","❓","‼️","⁉️","➕","➖","✖️","➗","🔁","🔄","🎵","🎶","🔔","🔕","📢","📣",
     "🟢","🟡","🟠","🔴","⚫","⚪","🟣","🟤","🔺","🔻","⭐","✨"
-)
+  )
 
 
   // ============ INIT ============
@@ -94,6 +86,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       secretWord = None,
       hints = List.empty,
       guesses = List.empty,
+      currentHintGuessers = Set.empty,
       timerEndMs = 0L,
       winner = None
     )
@@ -115,17 +108,28 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
     val visibleEmojis = state.phase match
       case Phase.WaitingForHint if amIDescriber => availableEmojis(state)
       case _ => List.empty
+
+    val allGuessesText: List[String] = state.guesses.map(_.text)
+
+    // Errors history of THIS player only
+    val myWrongGuesses: List[String] =
+    state.guesses.collect {
+      case GuessEntry(player, text, correct)
+          if player == userId && !correct =>
+        text
+    }
   
     View(
       phase = state.phase,
       amIDescriber = amIDescriber,
       allScores = state.scores,
       hints = state.hints,
-      guesses = state.guesses,
+      guesses = allGuessesText,
       remainingTimeMs = remaining,
       secretWord = visibleWord,
       winner = state.winner,
-      availableEmojis = visibleEmojis
+      availableEmojis = visibleEmojis,
+      myWrongGuesses = myWrongGuesses
     )
 
   // ============ TRANSITION ============
@@ -154,19 +158,8 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
           Success(Seq(Action.Render(newState)))
       
       case Phase.GameEnd if tick.systemMillis >= state.timerEndMs =>
-        // Auto-continue to new game
-        val newDescriberIdx = nextDescriberIndex(state, state.winner)
-        val newState = State(
-          playerOrder = state.playerOrder,
-          describerIndex = newDescriberIdx,
-          scores = state.scores,
-          phase = Phase.WaitingForHint,
-          secretWord = None,
-          hints = List.empty,
-          guesses = List.empty,
-          timerEndMs = 0L,
-          winner = None
-        )
+        // Auto-continue to new game (Timer-based)
+        val newState = startNewRound(state)
         Success(Seq(Action.Render(newState)))
       
       case _ =>
@@ -186,13 +179,35 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         handleSubmitGuess(state, userId, text)
 
   private def handleStartGame(state: State, userId: UserId): Try[Seq[Action[State]]] =
-    if state.phase != Phase.WaitingToStart then
-      Failure(IllegalStateException("Game already started"))
-    else if !state.canStart then
-      Failure(IllegalStateException("Need at least 2 players"))
+    // FIX: On autorise StartGame si on est en WaitingToStart OU en GameEnd
+    if state.phase == Phase.WaitingToStart then
+        if !state.canStart then Failure(IllegalStateException("Need at least 2 players"))
+        else
+            val newState = state.copy(phase = Phase.WaitingForHint)
+            Success(Seq(Action.Render(newState)))
+    else if state.phase == Phase.GameEnd then
+        // Redémarrage manuel via bouton "Rejouer" avant la fin du timer
+        val newState = startNewRound(state)
+        Success(Seq(Action.Render(newState)))
     else
-      val newState = state.copy(phase = Phase.WaitingForHint)
-      Success(Seq(Action.Render(newState)))
+        Failure(IllegalStateException("Game already started"))
+
+  // Helper pour démarrer un nouveau round (utilisé par timer et bouton manuel)
+  private def startNewRound(state: State): State = {
+    val newDescriberIdx = nextDescriberIndex(state, state.winner)
+    State(
+        playerOrder = state.playerOrder,
+        describerIndex = newDescriberIdx,
+        scores = state.scores,
+        phase = Phase.WaitingForHint,
+        secretWord = None,
+        hints = List.empty,
+        guesses = List.empty,
+        currentHintGuessers = Set.empty,
+        timerEndMs = 0L,
+        winner = None
+    )
+  }
 
   private def handleSendFirstHint(state: State, userId: UserId, secretWord: Word, emoji: Emoji): Try[Seq[Action[State]]] =
     if state.phase != Phase.WaitingForHint then
@@ -211,6 +226,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         phase = Phase.Guessing,
         secretWord = Some(secretWord.trim.toLowerCase),
         hints = List(emoji),
+        currentHintGuessers = Set.empty,
         timerEndMs = now + Rules.HintDurationMs
       )
       Success(Seq(Action.Render(newState)))
@@ -231,6 +247,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       val newState = state.copy(
         phase = Phase.Guessing,
         hints = state.hints :+ emoji,
+        currentHintGuessers = Set.empty,
         timerEndMs = now + Rules.HintDurationMs
       )
       Success(Seq(Action.Render(newState)))
@@ -244,20 +261,61 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       val normalizedGuess = text.trim.toLowerCase
       val isCorrect = state.secretWord.exists(_ == normalizedGuess)
       
+      val entry = GuessEntry(
+        player = userId,
+        text = text.trim,
+        correct = isCorrect
+      )
+
       if isCorrect then
         val points = calculatePoints(state.hintCount)
         val newScores = state.scores.updated(userId, state.scores.getOrElse(userId, 0) + points)
         val now = System.currentTimeMillis()
         val newState = state.copy(
           phase = Phase.GameEnd,
-          guesses = state.guesses :+ text.trim,
+          guesses = state.guesses :+ entry,
           scores = newScores,
           winner = Some(userId),
           timerEndMs = now + Rules.GameEndDurationMs
         )
         Success(Seq(Action.Render(newState)))
       else
-        val newState = state.copy(guesses = state.guesses :+ text.trim)
+        val allGuessers: Set[UserId] = 
+          state.playerOrder.filterNot(uid => state.isDescriber(uid)).toSet
+
+        val updatedGuessers: Set[UserId] = 
+          state.currentHintGuessers + userId
+
+        // tous les guessers ont tenté leur chance ?
+        val everyoneAnswered = updatedGuessers == allGuessers
+
+        val now = System.currentTimeMillis()
+
+        val newState = 
+          if everyoneAnswered then
+            // si on est déjà au nombre max d’indices -> fin de partie sans gagnant
+            if state.hintCount >= Rules.MaxHints then
+              state.copy(
+                phase = Phase.GameEnd,
+                guesses = state.guesses :+ entry,
+                currentHintGuessers = updatedGuessers,
+                winner = None,
+                timerEndMs = now + Rules.GameEndDurationMs
+              )
+            else
+              // sinon, on repasse en WaitingForHint pour permettre un nouvel emoji
+              state.copy(
+                phase = Phase.WaitingForHint,
+                guesses = state.guesses :+ entry,
+                currentHintGuessers = updatedGuessers,
+                timerEndMs = 0L
+              )
+          else
+            // il reste encore des joueurs qui n'ont pas répondu → on reste en Guessing
+            state.copy(
+              guesses = state.guesses :+ entry,
+              currentHintGuessers = updatedGuessers
+            )
         Success(Seq(Action.Render(newState)))
 
   // ============ HELPERS ============
