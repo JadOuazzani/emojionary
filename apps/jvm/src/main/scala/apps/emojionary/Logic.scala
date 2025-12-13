@@ -72,7 +72,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
     "❤️","🧡","💛","💚","💙","💜","🖤","🤍","🤎","💔","❤️‍🔥","❤️‍🩹","💖","💗","💓","💞","💕","💘",
     "💯","✅","☑️","❌","❗","❓","‼️","⁉️","➕","➖","✖️","➗","🔁","🔄","🎵","🎶","🔔","🔕","📢","📣",
     "🟢","🟡","🟠","🔴","⚫","⚪","🟣","🟤","🔺","🔻","⭐","✨"
-  )
+  ).distinct
 
   // Validate emoji list at class load time
   require(AllEmojis.nonEmpty, "AllEmojis must not be empty")
