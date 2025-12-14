@@ -4,12 +4,72 @@ import cs214.webapp.*
 import ujson.*
 import scala.util.Try
 
+/**
+ * Wire protocol for Emojionary game communication.
+ * 
+ * This object handles the serialization and deserialization of game events
+ * and views between the client (browser) and server. It implements the
+ * [[cs214.webapp.AppWire]] interface with JSON as the transport format.
+ * 
+ * == Design by Contract ==
+ * All encoding/decoding methods use `require` for precondition validation
+ * and `ensuring` for postcondition verification to guarantee data integrity.
+ * 
+ * == Thread Safety ==
+ * All methods are pure functions with no shared mutable state, making them
+ * inherently thread-safe.
+ * 
+ * @see [[Event]] for the events that can be encoded/decoded
+ * @see [[View]] for the view structure that is serialized
+ */
 object Wire extends AppWire[Event, View]:
 
   // ============ EVENT FORMAT ============
   
+  /**
+   * Wire format for game events.
+   * 
+   * Handles serialization of player actions to JSON for transmission
+   * to the server, and deserialization of JSON back to Event objects.
+   * 
+   * == JSON Structure ==
+   * All events are encoded as JSON objects with a "type" field:
+   * {{{
+   * // StartGame
+   * { "type": "StartGame" }
+   * 
+   * // SendFirstHint
+   * { "type": "SendFirstHint", "secretWord": "scala", "emoji": "🔥" }
+   * 
+   * // SendHint
+   * { "type": "SendHint", "emoji": "💡" }
+   * 
+   * // SubmitGuess
+   * { "type": "SubmitGuess", "text": "programming" }
+   * }}}
+   */
   override object eventFormat extends WireFormat[Event]:
     
+    /**
+     * Encodes a game event to JSON.
+     * 
+     * @param e the event to encode; must not be null
+     * @return a JSON object representing the event
+     * @throws IllegalArgumentException if:
+     *   - `e` is null
+     *   - `secretWord` is empty (for SendFirstHint)
+     *   - `emoji` is empty (for SendFirstHint, SendHint)
+     *   - `text` is empty (for SubmitGuess)
+     * 
+     * @example
+     * {{{
+     * val json = Wire.eventFormat.encode(Event.StartGame)
+     * // Returns: {"type": "StartGame"}
+     * 
+     * val json2 = Wire.eventFormat.encode(Event.SendHint("🎯"))
+     * // Returns: {"type": "SendHint", "emoji": "🎯"}
+     * }}}
+     */
     def encode(e: Event): Value = 
       require(e != null, "Event cannot be null")
       
@@ -32,6 +92,27 @@ object Wire extends AppWire[Event, View]:
         "Encoded event must contain type field"
       )
     
+    /**
+     * Decodes a JSON value to a game event.
+     * 
+     * @param json the JSON value to decode; must be a valid JSON object
+     * @return a `Try[Event]` containing the decoded event on success,
+     *         or a `Failure` with the error on failure
+     * @throws IllegalArgumentException (wrapped in Failure) if:
+     *   - `json` is null or not an object
+     *   - required fields are missing
+     *   - field values are empty when they shouldn't be
+     * @throws DecodingException (wrapped in Failure) if the event type is unknown
+     * 
+     * @example
+     * {{{
+     * val event = Wire.eventFormat.decode(Obj("type" -> "StartGame"))
+     * // Returns: Success(Event.StartGame)
+     * 
+     * val event2 = Wire.eventFormat.decode(Obj("type" -> "Unknown"))
+     * // Returns: Failure(DecodingException("Unknown event type: Unknown"))
+     * }}}
+     */
     def decode(json: Value): Try[Event] = Try {
       require(json != null, "JSON cannot be null")
       require(json.objOpt.isDefined, "JSON must be an object")
@@ -68,8 +149,61 @@ object Wire extends AppWire[Event, View]:
 
   // ============ VIEW FORMAT ============
   
+  /**
+   * Wire format for game views.
+   * 
+   * Handles serialization of the game state projection (View) to JSON
+   * for transmission to clients, and deserialization back to View objects.
+   * 
+   * == JSON Structure ==
+   * Views are encoded as JSON objects with all game state fields:
+   * {{{
+   * {
+   *   "phase": "Guessing",
+   *   "amIDescriber": false,
+   *   "allScores": {"player1": 5, "player2": 3},
+   *   "hints": ["🔥", "💻"],
+   *   "guesses": ["java", "python"],
+   *   "remainingTimeMs": 15000,
+   *   "secretWord": null,
+   *   "winner": null,
+   *   "availableEmojis": [],
+   *   "myWrongGuesses": ["java", "python"]
+   * }
+   * }}}
+   * 
+   * @note `secretWord` is `null` for guessers (they can't see it)
+   * @note `availableEmojis` is empty for non-describers
+   */
   override object viewFormat extends WireFormat[View]:
     
+    /**
+     * Encodes a game view to JSON.
+     * 
+     * @param v the view to encode; must not be null
+     * @return a JSON object representing the view
+     * @throws IllegalArgumentException if:
+     *   - `v` is null
+     *   - `remainingTimeMs` is negative
+     *   - any score is negative
+     * 
+     * @example
+     * {{{
+     * val view = View(
+     *   phase = Phase.Guessing,
+     *   amIDescriber = false,
+     *   allScores = Map("p1" -> 5),
+     *   hints = List("🔥"),
+     *   guesses = List("java"),
+     *   remainingTimeMs = 10000L,
+     *   secretWord = None,
+     *   winner = None,
+     *   availableEmojis = Nil,
+     *   myWrongGuesses = List("java")
+     * )
+     * val json = Wire.viewFormat.encode(view)
+     * }}}
+     */
     def encode(v: View): Value =
       require(v != null, "View cannot be null")
       require(v.remainingTimeMs >= 0, "Remaining time cannot be negative")
@@ -98,6 +232,38 @@ object Wire extends AppWire[Event, View]:
         "Encoded view must contain all required fields"
       )
     
+    /**
+     * Decodes a JSON value to a game view.
+     * 
+     * @param json the JSON value to decode; must be a valid JSON object
+     * @return a `Try[View]` containing the decoded view on success,
+     *         or a `Failure` with the error on failure
+     * @throws IllegalArgumentException (wrapped in Failure) if:
+     *   - `json` is null or not an object
+     *   - any required field is missing
+     *   - `remainingTimeMs` is negative
+     *   - any score is negative
+     *   - hints exceed `Rules.MaxHints`
+     * @throws DecodingException (wrapped in Failure) if the phase is unknown
+     * 
+     * @example
+     * {{{
+     * val json = Obj(
+     *   "phase" -> "WaitingToStart",
+     *   "amIDescriber" -> true,
+     *   "allScores" -> Obj(),
+     *   "hints" -> Arr(),
+     *   "guesses" -> Arr(),
+     *   "remainingTimeMs" -> 0,
+     *   "secretWord" -> Null,
+     *   "winner" -> Null,
+     *   "availableEmojis" -> Arr(),
+     *   "myWrongGuesses" -> Arr()
+     * )
+     * val view = Wire.viewFormat.decode(json)
+     * // Returns: Success(View(...))
+     * }}}
+     */
     def decode(json: Value): Try[View] = Try {
       require(json != null, "JSON cannot be null")
       require(json.objOpt.isDefined, "JSON must be an object")
@@ -148,6 +314,21 @@ object Wire extends AppWire[Event, View]:
 
   // ============ HELPERS ============
   
+  /**
+   * Encodes a game phase to its JSON string representation.
+   * 
+   * @param phase the phase to encode; must not be null
+   * @return a JSON string value representing the phase
+   * @throws IllegalArgumentException if `phase` is null
+   * 
+   * == Phase Mappings ==
+   * | Phase | JSON String |
+   * |-------|-------------|
+   * | `WaitingToStart` | `"WaitingToStart"` |
+   * | `WaitingForHint` | `"WaitingForHint"` |
+   * | `Guessing` | `"Guessing"` |
+   * | `GameEnd` | `"GameEnd"` |
+   */
   private def encodePhase(phase: Phase): Value = 
     require(phase != null, "Phase cannot be null")
     
@@ -161,7 +342,17 @@ object Wire extends AppWire[Event, View]:
       v.strOpt.isDefined && v.str.nonEmpty,
       "Encoded phase must be a non-empty string"
     )
-    
+  
+  /**
+   * Decodes a JSON string to a game phase.
+   * 
+   * @param json the JSON value to decode; must be a non-null string
+   * @return the corresponding `Phase` enum value
+   * @throws IllegalArgumentException if `json` is null or not a string
+   * @throws DecodingException if the phase string is not recognized
+   * 
+   * @see [[encodePhase]] for the inverse operation
+   */
   private def decodePhase(json: Value): Phase = 
     require(json != null, "Phase JSON cannot be null")
     require(json.strOpt.isDefined, "Phase must be a string")

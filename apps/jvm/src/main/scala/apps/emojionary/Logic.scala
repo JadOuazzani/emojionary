@@ -4,13 +4,56 @@ import cs214.webapp.*
 import cs214.webapp.server.ClockDrivenStateMachine
 import scala.util.{Try, Success, Failure}
 
+/**
+ * Game logic for Emojionary.
+ * 
+ * This class implements the [[cs214.webapp.server.ClockDrivenStateMachine]] interface,
+ * providing the core game mechanics including state initialization, player view projection,
+ * and event/tick handling.
+ * 
+ * == Game Flow ==
+ * {{{
+ * 1. init()      → Creates initial state with all players, scores at 0
+ * 2. StartGame   → Transitions to WaitingForHint, first player becomes Describer
+ * 3. SendFirstHint → Describer sets secret word + first emoji, starts timer
+ * 4. Guessing    → Players guess, timer ticks every second
+ * 5. SendHint    → If timer expires and hints < max, Describer adds emoji
+ * 6. GameEnd     → Correct guess or max hints reached, shows winner
+ * 7. Auto-restart → After GameEndDurationMs, winner becomes new Describer
+ * }}}
+ * 
+ * == Design by Contract ==
+ * All public methods use `require` for precondition validation and `ensuring`
+ * for postcondition verification. State transitions are validated to maintain
+ * game invariants.
+ * 
+ * == Thread Safety ==
+ * The state machine is designed to be called from a single thread by the
+ * webapp framework. All state mutations return new State objects.
+ * 
+ * @see [[State]] for the complete game state structure
+ * @see [[View]] for the player-visible projection
+ * @see [[Event]] for the events this logic handles
+ */
 class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ CONFIGURATION ============
   
+  /**
+   * Clock tick period in milliseconds.
+   * The framework calls [[transition]] with a [[Tick]] event at this interval.
+   */
   override val clockPeriodMs: Int = 1000
+  
+  /**
+   * Wire protocol for serializing events and views.
+   * @see [[Wire]] for the JSON encoding/decoding implementation
+   */
   override val clockDrivenWire: AppWire[Event, View] = Wire
   
+  /**
+   * Application metadata displayed in the webapp interface.
+   */
   override val appInfo: AppInfo = AppInfo(
     id = "emojionary",
     name = "Emojionary",
@@ -20,6 +63,23 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ EMOJI LIST ============
   
+  /**
+   * Complete list of available emojis for the game.
+   * 
+   * Contains 500+ emojis organized into 8 categories:
+   *   - 😀 Faces & emotions
+   *   - 👋 Gestures / hands
+   *   - 🧍 People & roles
+   *   - 🐶 Animals
+   *   - 🌿 Nature & weather
+   *   - 🍎 Food & drink
+   *   - ⚽ Sports & activities
+   *   - 🚗 Travel & places
+   *   - 🧰 Objects
+   *   - ❤️ Symbols
+   * 
+   * @note This is a `Vector` for O(1) random access and `contains` checks.
+   */
   val AllEmojis: Vector[Emoji] = Vector(
     // 😀 Faces & emotions
     "😀","😃","😄","😁","😆","😅","🤣","😂","🙂","🙃","😉","😊","😇","🥰","😍","🤩","😘","😗","😚","😙",
@@ -77,6 +137,29 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ INIT ============
   
+  /**
+   * Initializes a new game with the given players.
+   * 
+   * Creates the initial game state with:
+   *   - All players in the given order
+   *   - First player (index 0) as the initial Describer
+   *   - All scores set to 0
+   *   - Phase set to `WaitingToStart`
+   * 
+   * @param clients the sequence of player IDs joining the game
+   * @return the initial game state
+   * @throws IllegalArgumentException if:
+   *   - `clients` is empty
+   *   - `clients` contains duplicate player IDs
+   * 
+   * @example
+   * {{{
+   * val logic = new Logic
+   * val state = logic.init(Seq("player1", "player2", "player3"))
+   * // state.phase == Phase.WaitingToStart
+   * // state.scores == Map("player1" -> 0, "player2" -> 0, "player3" -> 0)
+   * }}}
+   */
   override def init(clients: Seq[UserId]): State =
     require(clients.nonEmpty, "Cannot start game with no players")
     require(clients.distinct.size == clients.size, "Duplicate player IDs not allowed")
@@ -105,6 +188,32 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ PROJECT ============
   
+  /**
+   * Projects the game state to a player-specific view.
+   * 
+   * Creates a [[View]] that hides information the player shouldn't see:
+   *   - Secret word: Only visible to Describer during game, everyone at GameEnd
+   *   - Available emojis: Only visible to Describer during WaitingForHint
+   *   - Wrong guesses: Only shows the requesting player's own mistakes
+   * 
+   * @param state the current game state
+   * @param userId the player requesting the view
+   * @return the player-specific view of the game
+   * @throws IllegalArgumentException if `userId` is not a player in the game
+   * 
+   * @example
+   * {{{
+   * val view = logic.project(state)("player1")
+   * // If player1 is the Describer:
+   * //   view.amIDescriber == true
+   * //   view.secretWord == Some("scala")
+   * //   view.availableEmojis == List("🔥", "💡", ...)
+   * // If player1 is a guesser:
+   * //   view.amIDescriber == false
+   * //   view.secretWord == None
+   * //   view.availableEmojis == Nil
+   * }}}
+   */
   override def project(state: State)(userId: UserId): View =
     require(state.playerOrder.contains(userId), s"Unknown player: $userId")
     
@@ -154,6 +263,23 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ TRANSITION ============
   
+  /**
+   * Handles state transitions from events or clock ticks.
+   * 
+   * This is the main entry point for all game state changes. It dispatches
+   * to [[handleTick]] for timer events or [[handleEvent]] for player actions.
+   * 
+   * @param state the current game state
+   * @param userId the user ID associated with the event (system ID for ticks)
+   * @param event either a `Tick` (from system clock) or an `Event` (from player)
+   * @return a `Try` containing the list of actions to perform, or a `Failure`
+   * @throws IllegalArgumentException (in Failure) if:
+   *   - `userId` is not a player (for player events only)
+   *   - The event is invalid for the current state
+   * 
+   * @note For `Tick` events, the `userId` is a system-generated ID (e.g.,
+   *       "emojionary/.../clock") and is NOT validated against players.
+   */
   override def transition(state: State)(userId: UserId, event: Either[Tick, Event]): Try[Seq[Action[State]]] =
     event match
       case Left(tick) => 
@@ -165,6 +291,19 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ TICK HANDLER ============
   
+  /**
+   * Handles clock tick events for timer-based transitions.
+   * 
+   * Manages automatic state transitions when timers expire:
+   *   - `Guessing` → `GameEnd`: If timer expires and max hints reached
+   *   - `Guessing` → `WaitingForHint`: If timer expires and more hints available
+   *   - `GameEnd` → `WaitingForHint`: Auto-restart after display duration
+   * 
+   * @param state the current game state
+   * @param tick the tick event with system timestamp
+   * @return a `Try` containing the render action with potentially updated state
+   * @throws IllegalArgumentException (in Failure) if tick timestamp is negative
+   */
   private def handleTick(state: State, tick: Tick): Try[Seq[Action[State]]] =
     require(tick.systemMillis >= 0, "Invalid tick timestamp")
     
@@ -194,6 +333,14 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ EVENT HANDLERS ============
   
+  /**
+   * Dispatches player events to their specific handlers.
+   * 
+   * @param state the current game state
+   * @param userId the player who sent the event
+   * @param event the event to handle
+   * @return a `Try` containing the actions to perform
+   */
   private def handleEvent(state: State, userId: UserId, event: Event): Try[Seq[Action[State]]] =
     event match
       case Event.StartGame =>
@@ -205,6 +352,18 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       case Event.SubmitGuess(text) =>
         handleSubmitGuess(state, userId, text)
 
+  /**
+   * Handles the StartGame event.
+   * 
+   * Transitions from `WaitingToStart` to `WaitingForHint`, or restarts
+   * from `GameEnd` before the auto-restart timer.
+   * 
+   * @param state the current game state
+   * @param userId the player requesting to start (any player can start)
+   * @return Success with render action, or Failure if:
+   *   - Less than 2 players (from WaitingToStart)
+   *   - Game already in progress (Guessing or WaitingForHint)
+   */
   private def handleStartGame(state: State, userId: UserId): Try[Seq[Action[State]]] =
     if state.phase == Phase.WaitingToStart then
         if !state.canStart then Failure(IllegalStateException("Need at least 2 players"))
@@ -213,13 +372,23 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
               .ensuring(_.phase == Phase.WaitingForHint)
             Success(Seq(Action.Render(newState)))
     else if state.phase == Phase.GameEnd then
-        // Redémarrage manuel via bouton "Rejouer" avant la fin du timer
+        // Manual restart via "Play Again" button before timer expires
         val newState = startNewRound(state)
         Success(Seq(Action.Render(newState)))
     else
         Failure(IllegalStateException("Game already started"))
 
-  // Helper pour démarrer un nouveau round (utilisé par timer et bouton manuel)
+  /**
+   * Starts a new round, resetting round-specific state.
+   * 
+   * Used both by the auto-restart timer and the manual "Play Again" button.
+   * The winner of the previous round becomes the new Describer. If there
+   * was no winner, the Describer rotates to the next player.
+   * 
+   * @param state the current game state (must be in GameEnd or have players)
+   * @return a fresh state for the new round
+   * @throws IllegalArgumentException if player order is empty
+   */
   private def startNewRound(state: State): State =
     require(state.playerOrder.nonEmpty, "Cannot start round with no players")
     
@@ -247,6 +416,22 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       s.describerIndex < s.playerOrder.size
     }
 
+  /**
+   * Handles the first hint of a round, setting the secret word.
+   * 
+   * Transitions from `WaitingForHint` to `Guessing` and starts the timer.
+   * 
+   * @param state the current game state
+   * @param userId the player sending the hint (must be Describer)
+   * @param secretWord the word that guessers must guess
+   * @param emoji the first emoji hint
+   * @return Success with render action, or Failure if:
+   *   - Not in WaitingForHint phase
+   *   - User is not the Describer
+   *   - Hints already exist (use SendHint instead)
+   *   - Emoji is not in [[AllEmojis]]
+   *   - Secret word is empty
+   */
   private def handleSendFirstHint(state: State, userId: UserId, secretWord: Word, emoji: Emoji): Try[Seq[Action[State]]] =
     require(secretWord != null, "Secret word cannot be null")
     require(emoji != null, "Emoji cannot be null")
@@ -277,6 +462,21 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       }
       Success(Seq(Action.Render(newState)))
 
+  /**
+   * Handles subsequent hints after the first.
+   * 
+   * Transitions from `WaitingForHint` to `Guessing` and resets the timer.
+   * 
+   * @param state the current game state
+   * @param userId the player sending the hint (must be Describer)
+   * @param emoji the emoji to add as a hint
+   * @return Success with render action, or Failure if:
+   *   - Not in WaitingForHint phase
+   *   - User is not the Describer
+   *   - No hints exist yet (use SendFirstHint instead)
+   *   - Emoji is not in [[AllEmojis]]
+   *   - Emoji was already used as a hint
+   */
   private def handleSendHint(state: State, userId: UserId, emoji: Emoji): Try[Seq[Action[State]]] =
     require(emoji != null, "Emoji cannot be null")
     
@@ -305,6 +505,26 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
       }
       Success(Seq(Action.Render(newState)))
 
+  /**
+   * Handles a guess submission from a player.
+   * 
+   * == Correct Guess ==
+   * Transitions to `GameEnd`, awards points, and records the winner.
+   * Points = MaxHints - hintCount + 1 (fewer hints = more points).
+   * 
+   * == Wrong Guess ==
+   * Records the guess and tracks that this player has guessed.
+   * If all guessers have guessed wrong:
+   *   - If max hints reached → `GameEnd` with no winner
+   *   - Otherwise → `WaitingForHint` for next emoji
+   * 
+   * @param state the current game state
+   * @param userId the player submitting the guess (must not be Describer)
+   * @param text the guessed word
+   * @return Success with render action, or Failure if:
+   *   - Not in Guessing phase
+   *   - User is the Describer (Describers cannot guess)
+   */
   private def handleSubmitGuess(state: State, userId: UserId, text: String): Try[Seq[Action[State]]] =
     require(text != null, "Guess text cannot be null")
     
@@ -346,14 +566,14 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         val updatedGuessers: Set[UserId] = 
           state.currentHintGuessers + userId
 
-        // tous les guessers ont tenté leur chance ?
+        // Have all guessers attempted for this hint?
         val everyoneAnswered = updatedGuessers == allGuessers
 
         val now = System.currentTimeMillis()
 
         val newState = 
           if everyoneAnswered then
-            // si on est déjà au nombre max d'indices -> fin de partie sans gagnant
+            // If at max hints → game over with no winner
             if state.hintCount >= Rules.MaxHints then
               state.copy(
                 phase = Phase.GameEnd,
@@ -367,7 +587,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
                 s.guesses.size == state.guesses.size + 1
               }
             else
-              // sinon, on repasse en WaitingForHint pour permettre un nouvel emoji
+              // Otherwise, go back to WaitingForHint for another emoji
               state.copy(
                 phase = Phase.WaitingForHint,
                 guesses = state.guesses :+ entry,
@@ -378,7 +598,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
                 s.guesses.size == state.guesses.size + 1
               }
           else
-            // il reste encore des joueurs qui n'ont pas répondu → on reste en Guessing
+            // Still waiting for other players to guess
             state.copy(
               guesses = state.guesses :+ entry,
               currentHintGuessers = updatedGuessers
@@ -391,11 +611,31 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
 
   // ============ HELPERS ============
   
+  /**
+   * Returns the list of emojis that haven't been used as hints yet.
+   * 
+   * @param state the current game state
+   * @return list of available emojis (all emojis minus those in hints)
+   * @throws IllegalArgumentException if hints list is null
+   */
   private def availableEmojis(state: State): List[Emoji] =
     require(state.hints != null, "Hints list cannot be null")
     AllEmojis.filterNot(state.hints.contains).distinct.toList
       .ensuring(result => result.forall(e => !state.hints.contains(e)))
   
+  /**
+   * Calculates the next Describer index for a new round.
+   * 
+   * If there was a winner, they become the next Describer.
+   * Otherwise, the Describer rotates to the next player in order.
+   * 
+   * @param state the current game state
+   * @param winner the winner of the previous round, if any
+   * @return the index of the next Describer in playerOrder
+   * @throws IllegalArgumentException if:
+   *   - Player order is empty
+   *   - Winner is not in player order (if Some)
+   */
   private def nextDescriberIndex(state: State, winner: Option[UserId]): Int =
     require(state.playerOrder.nonEmpty, "Player order cannot be empty")
     
@@ -408,6 +648,22 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
         (state.describerIndex + 1) % state.playerOrder.size
     result.ensuring(idx => idx >= 0 && idx < state.playerOrder.size)
   
+  /**
+   * Calculates points awarded for a correct guess.
+   * 
+   * Points decrease with more hints used:
+   * | Hints | Points |
+   * |-------|--------|
+   * | 1     | 5      |
+   * | 2     | 4      |
+   * | 3     | 3      |
+   * | 4     | 2      |
+   * | 5     | 1      |
+   * 
+   * @param hintCount the number of hints used (1 to MaxHints)
+   * @return the points to award (MaxHints - hintCount + 1)
+   * @throws IllegalArgumentException if hintCount is not in valid range
+   */
   private def calculatePoints(hintCount: Int): Int =
     require(hintCount >= 1, s"Hint count must be at least 1, got $hintCount")
     require(hintCount <= Rules.MaxHints, s"Hint count cannot exceed ${Rules.MaxHints}, got $hintCount")
