@@ -1,4 +1,4 @@
-package apps.emojionary
+package apps.ul2025app93
 
 import munit.FunSuite
 import cs214.webapp.*

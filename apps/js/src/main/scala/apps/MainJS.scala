@@ -5,17 +5,20 @@ import scalatags.JsDom.all.*
 import cs214.webapp.*
 import cs214.webapp.client.*
 import cs214.webapp.client.graphics.WebClientAppInstance
-import apps.emojionary.{Wire, Event, View, Phase}
+import apps.ul2025app93.{Wire, Event, View, Phase}
+import scala.scalajs.js.annotation.JSExportTopLevel
 
 /** Entry point for the Emojionary Scala.js web client.
   *
   * Registers the application in the CS214 WebClient runtime and starts the
   * websocket-based client so users can join and interact with the game.
   */
+
+@JSExportTopLevel("ul2025app93")
 object MainJS extends WSClientApp {
 
   /** Unique application identifier (must match the server-side app id). */
-  def appId: String = "emojionary"
+  def appId: String = "ul2025app93"
 
   /** UI implementation identifier (HTML/ScalaTags UI). */
   def uiId: String = "html"
@@ -59,7 +62,7 @@ class EmojionaryUIInstance(
 ) extends WebClientAppInstance[Event, View](userId, sendMessage, target) {
 
   /** Wire protocol used to encode/decode events and views. */
-  override val wire = apps.emojionary.Wire
+  override val wire = apps.ul2025app93.Wire
 
   /** Loads Google Fonts at runtime by injecting a `<link>` tag into the document head.
     *

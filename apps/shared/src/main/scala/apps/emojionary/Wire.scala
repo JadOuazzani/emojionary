@@ -1,4 +1,4 @@
-package apps.emojionary
+package apps.ul2025app93
 
 import cs214.webapp.*
 import ujson.*
