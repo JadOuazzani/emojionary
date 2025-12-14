@@ -17,8 +17,8 @@ case class GuessEntry(
 // Constants
 object Rules:
   val MaxHints: Int = 5
-  val HintDurationMs: Long = 30_000
-  val GameEndDurationMs: Long = 5_000
+  val HintDurationMs: Long = 25_000
+  val GameEndDurationMs: Long = 20_000
 
   // Validate constants at load time
   require(MaxHints > 0, "MaxHints must be positive")
