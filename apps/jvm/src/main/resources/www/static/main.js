@@ -1126,7 +1126,7 @@ function $c_Lapps_emojionary_Rules$() {
   $n_Lapps_emojionary_Rules$ = this;
   this.Lapps_emojionary_Rules$__f_MaxHints = 5;
   this.Lapps_emojionary_Rules$__f_HintDurationMs = new $c_RTLong(30000, 0);
-  this.Lapps_emojionary_Rules$__f_GameEndDurationMs = new $c_RTLong(5000, 0);
+  this.Lapps_emojionary_Rules$__f_GameEndDurationMs = new $c_RTLong(30000, 0);
   var requirement = (this.Lapps_emojionary_Rules$__f_MaxHints > 0);
   if ((!requirement)) {
     throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: MaxHints must be positive");
@@ -10680,32 +10680,22 @@ function $asArrayOf_Lupickle_core_Visitor(obj, depth) {
   return (($isArrayOf_Lupickle_core_Visitor(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lupickle.core.Visitor;", depth));
 }
 function $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_Phase($thiz, json) {
-  var requirement = (json !== null);
-  if ((!requirement)) {
-    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Phase JSON cannot be null");
-  }
-  var this$2 = $n($f_Lujson_Value__strOpt__s_Option($n(json)));
-  var requirement$1 = (!this$2.isEmpty__Z());
-  if ((!requirement$1)) {
-    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Phase must be a string");
-  }
-  var phase;
   var x16 = $f_Lujson_Value__str__T($n(json));
   switch (x16) {
     case "WaitingToStart": {
-      var phase = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
+      return $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
       break;
     }
     case "WaitingForHint": {
-      var phase = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
+      return $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
       break;
     }
     case "Guessing": {
-      var phase = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+      return $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
       break;
     }
     case "GameEnd": {
-      var phase = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
+      return $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
       break;
     }
     default: {
@@ -10713,11 +10703,6 @@ function $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_
       throw new $c_Lcs214_webapp_DecodingException(msg);
     }
   }
-  var assertion = (phase !== null);
-  if ((!assertion)) {
-    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Decoded phase must not be null");
-  }
-  return phase;
 }
 /** @constructor */
 function $c_Lapps_emojionary_Wire$() {
@@ -10729,70 +10714,47 @@ function $h_Lapps_emojionary_Wire$() {
 }
 $h_Lapps_emojionary_Wire$.prototype = $c_Lapps_emojionary_Wire$.prototype;
 $c_Lapps_emojionary_Wire$.prototype.apps$emojionary$Wire$$$encodePhase__Lapps_emojionary_Phase__Lujson_Value = (function(phase) {
-  var requirement = (phase !== null);
-  if ((!requirement)) {
-    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Phase cannot be null");
-  }
-  matchResult5: {
-    var result;
-    var x = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
-    if ((x === null)) {
-      var $x_1 = (phase === null);
-    } else {
-      var this$2 = $n(x);
-      var $x_1 = (this$2 === phase);
-    }
-    if ($x_1) {
-      var result = new $c_Lujson_Str("WaitingToStart");
-      break matchResult5;
-    }
-    var x$3 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
-    if ((x$3 === null)) {
-      var $x_2 = (phase === null);
-    } else {
-      var this$4 = $n(x$3);
-      var $x_2 = (this$4 === phase);
-    }
-    if ($x_2) {
-      var result = new $c_Lujson_Str("WaitingForHint");
-      break matchResult5;
-    }
-    var x$5 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
-    if ((x$5 === null)) {
-      var $x_3 = (phase === null);
-    } else {
-      var this$6 = $n(x$5);
-      var $x_3 = (this$6 === phase);
-    }
-    if ($x_3) {
-      var result = new $c_Lujson_Str("Guessing");
-      break matchResult5;
-    }
-    var x$7 = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
-    if ((x$7 === null)) {
-      var $x_4 = (phase === null);
-    } else {
-      var this$8 = $n(x$7);
-      var $x_4 = (this$8 === phase);
-    }
-    if ($x_4) {
-      var result = new $c_Lujson_Str("GameEnd");
-      break matchResult5;
-    }
-    throw new $c_s_MatchError(phase);
-  }
-  var this$12 = $n($f_Lujson_Value__strOpt__s_Option(result));
-  if ((!this$12.isEmpty__Z())) {
-    var x$1 = $f_Lujson_Value__str__T(result);
-    var this$15 = $n(x$1);
-    var assertion = (!(this$15 === ""));
+  var x = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
+  if ((x === null)) {
+    var $x_1 = (phase === null);
   } else {
-    var assertion = false;
+    var this$1 = $n(x);
+    var $x_1 = (this$1 === phase);
   }
-  if ((!assertion)) {
-    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Encoded phase must be a non-empty string");
+  if ($x_1) {
+    return new $c_Lujson_Str("WaitingToStart");
   }
-  return result;
+  var x$3 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
+  if ((x$3 === null)) {
+    var $x_2 = (phase === null);
+  } else {
+    var this$3 = $n(x$3);
+    var $x_2 = (this$3 === phase);
+  }
+  if ($x_2) {
+    return new $c_Lujson_Str("WaitingForHint");
+  }
+  var x$5 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+  if ((x$5 === null)) {
+    var $x_3 = (phase === null);
+  } else {
+    var this$5 = $n(x$5);
+    var $x_3 = (this$5 === phase);
+  }
+  if ($x_3) {
+    return new $c_Lujson_Str("Guessing");
+  }
+  var x$7 = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
+  if ((x$7 === null)) {
+    var $x_4 = (phase === null);
+  } else {
+    var this$7 = $n(x$7);
+    var $x_4 = (this$7 === phase);
+  }
+  if ($x_4) {
+    return new $c_Lujson_Str("GameEnd");
+  }
+  throw new $c_s_MatchError(phase);
 });
 var $d_Lapps_emojionary_Wire$ = new $TypeData().initClass($c_Lapps_emojionary_Wire$, "apps.emojionary.Wire$", ({
   Lapps_emojionary_Wire$: 1,
@@ -11004,12 +10966,9 @@ $c_Lcs214_webapp_client_WSClientApp.prototype.init__T__T__T__Lorg_scalajs_dom_El
   return client;
 });
 function $f_Lcs214_webapp_client_graphics_DOMClientUI__$init$__V($thiz) {
-  var this$1 = $n($thiz.css__T());
-  if ((!(this$1 === ""))) {
-    var styleTag = document.createElement("style");
-    styleTag.textContent = $thiz.css__T();
-    document.head.appendChild(styleTag);
-  }
+  var styleTag = document.createElement("style");
+  styleTag.textContent = "\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n\n    body {\n      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n      min-height: 100vh;\n      padding: 20px;\n      font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;\n    }\n\n    .emo-app {\n      max-width: 900px;\n      margin: 0 auto;\n      background: #fff;\n      border-radius: 24px;\n      padding: 24px;\n      box-shadow: 0 20px 60px rgba(0,0,0,0.3);\n    }\n\n    /* ===== START SCREEN ===== */\n    .emo-start {\n      text-align: center;\n      padding: 20px 0;\n    }\n\n    .start-logo {\n      font-size: 80px;\n      margin-bottom: 10px;\n      animation: bounce 2s infinite;\n    }\n\n    @keyframes bounce {\n      0%, 100% { transform: translateY(0); }\n      50% { transform: translateY(-15px); }\n    }\n\n    .start-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 3.5rem;\n      background: linear-gradient(135deg, #667eea, #764ba2);\n      -webkit-background-clip: text;\n      -webkit-text-fill-color: transparent;\n      background-clip: text;\n      margin-bottom: 8px;\n    }\n\n    .start-subtitle {\n      color: #666;\n      font-size: 1.2rem;\n      margin-bottom: 30px;\n    }\n\n    .start-rules {\n      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);\n      border-radius: 16px;\n      padding: 24px 32px;\n      display: inline-block;\n      text-align: left;\n      margin-bottom: 30px;\n    }\n\n    .rule {\n      padding: 8px 0;\n      font-size: 1.1rem;\n      color: #444;\n    }\n\n    .rule span { margin-left: 8px; }\n\n    .btn-play {\n      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n      color: #fff;\n      border: none;\n      padding: 18px 50px;\n      font-size: 1.4rem;\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 600;\n      border-radius: 50px;\n      cursor: pointer;\n      box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);\n      transition: all 0.3s ease;\n    }\n\n    .btn-play:hover {\n      transform: translateY(-4px) scale(1.05);\n      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);\n    }\n\n    .btn-play:active {\n      transform: translateY(0) scale(0.98);\n    }\n\n    /* ===== GAME LAYOUT ===== */\n    .emo-game {\n      display: grid;\n      grid-template-columns: 220px 1fr;\n      gap: 20px;\n    }\n\n    .game-side {\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n      min-width: 0;\n    }\n\n    .game-main {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      gap: 12px;\n      min-width: 0;\n      overflow: visible;\n    }\n\n    /* ===== TIMER ===== */\n    .emo-timer {\n      position: relative;\n      width: 140px;\n      height: 40px;\n      background: #f0f0f0;\n      border-radius: 20px;\n      overflow: hidden;\n      border: 3px solid #667eea;\n      flex-shrink: 0;\n    }\n\n    .timer-bar {\n      position: absolute;\n      left: 0;\n      top: 0;\n      bottom: 0;\n      background: linear-gradient(90deg, #4ade80, #fbbf24);\n      transition: width 1s linear;\n    }\n\n    .timer-text {\n      position: absolute;\n      inset: 0;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-weight: 700;\n      font-size: 1rem;\n      color: #333;\n      z-index: 1;\n    }\n\n    .emo-timer.danger {\n      border-color: #ef4444;\n      animation: shake 0.5s ease-in-out infinite;\n    }\n\n    .emo-timer.danger .timer-bar {\n      background: #ef4444;\n    }\n\n    .emo-timer.danger .timer-text {\n      color: #ef4444;\n    }\n\n    @keyframes shake {\n      0%, 100% { transform: translateX(0); }\n      25% { transform: translateX(-4px); }\n      75% { transform: translateX(4px); }\n    }\n\n    /* ===== ROLE BOX ===== */\n    .role-box {\n      width: 100%;\n      max-width: 400px;\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n    }\n\n    .role-badge {\n      display: inline-block;\n      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n      color: #fff;\n      padding: 10px 20px;\n      border-radius: 50px;\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 1rem;\n      font-weight: 600;\n      margin-bottom: 16px;\n      text-align: center;\n    }\n\n    /* ===== DESCRIBER ===== */\n    .describer-panel {\n      display: flex;\n      flex-direction: column;\n      gap: 20px;\n    }\n\n    .secret-section {\n      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);\n      border-radius: 16px;\n      padding: 20px;\n      border: 2px solid #f59e0b;\n    }\n\n    .section-label {\n      font-weight: 700;\n      font-size: 1.1rem;\n      margin-bottom: 12px;\n      color: #92400e;\n    }\n\n    .section-hint {\n      font-size: 0.9rem;\n      color: #a16207;\n      margin-top: 8px;\n    }\n\n    #secret-word-input, #guess-input {\n      width: 100%;\n      padding: 14px 18px;\n      font-size: 1.1rem;\n      border: 2px solid #ddd;\n      border-radius: 12px;\n      font-family: inherit;\n      transition: all 0.2s;\n    }\n\n    #secret-word-input:focus, #guess-input:focus {\n      outline: none;\n      border-color: #667eea;\n      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);\n    }\n\n    .secret-display {\n      background: #fef3c7;\n      padding: 12px 20px;\n      border-radius: 50px;\n      display: inline-block;\n      color: #92400e;\n      font-size: 1.1rem;\n    }\n\n    .secret-display strong {\n      color: #78350f;\n      margin-left: 4px;\n    }\n\n    /* ===== STATUS BOX ===== */\n    .status-box {\n      display: flex;\n      align-items: center;\n      gap: 12px;\n      padding: 16px 24px;\n      border-radius: 12px;\n      font-size: 1.1rem;\n    }\n\n    .status-box.waiting {\n      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);\n      color: #1e40af;\n    }\n\n    .status-box.ready {\n      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);\n      color: #065f46;\n    }\n\n    .status-box.blocked {\n      background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);\n      color: #9a3412;\n    }\n\n    .status-icon { font-size: 1.5rem; }\n\n    .status-text { font-weight: 600; }\n\n    /* ===== EMOJI BOARD ===== */\n    .emoji-board {\n      display: grid;\n      grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));\n      gap: 6px;\n      background: #f8fafc;\n      padding: 12px;\n      border-radius: 16px;\n      max-height: 260px;\n      overflow-y: auto;\n      border: 1px solid #e2e8f0;\n    }\n\n    .emoji-btn {\n      font-size: 1.5rem;\n      background: #fff;\n      border: 1px solid #e2e8f0;\n      border-radius: 8px;\n      padding: 6px;\n      cursor: pointer;\n      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);\n    }\n\n    .emoji-btn:hover {\n      transform: scale(1.25);\n      border-color: #667eea;\n      background: #f0f4ff;\n      z-index: 10;\n      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);\n    }\n\n    /* ===== GUESSER ===== */\n    .guesser-panel {\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n      width: 100%;\n      align-items: center;\n    }\n\n    .hints-section {\n      text-align: center;\n      width: 100%;\n    }\n\n    .hints-label {\n      font-weight: 700;\n      color: #64748b;\n      margin-bottom: 12px;\n      font-size: 1rem;\n    }\n\n    .hints-box {\n      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);\n      border: 3px solid #e2e8f0;\n      border-radius: 16px;\n      padding: 16px;\n      min-height: 70px;\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: center;\n      align-items: center;\n      gap: 4px;\n      max-width: 320px;\n      margin: 0 auto;\n    }\n\n    .hints-wait {\n      color: #94a3b8;\n      font-style: italic;\n      font-size: 1rem;\n      text-align: center;\n      width: 100%;\n    }\n\n    .hint-emoji {\n      font-size: 2rem;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      width: 52px;\n      height: 52px;\n      flex-shrink: 0;\n    }\n\n    .hint-emoji.animate {\n      animation: dropIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;\n    }\n\n    @keyframes dropIn {\n      from {\n        opacity: 0;\n        transform: translateY(-20px) scale(1.3) rotate(10deg);\n      }\n      to {\n        opacity: 1;\n        transform: translateY(0) scale(1) rotate(0);\n      }\n    }\n\n    .guess-form {\n      display: flex;\n      flex-direction: row;\n      gap: 8px;\n      justify-content: center;\n      align-items: center;\n      margin-top: 8px;\n      width: 100%;\n      max-width: 320px;\n    }\n\n    .guess-form #guess-input {\n      flex: 1;\n      min-width: 0;\n      padding: 10px 14px;\n      font-size: 1rem;\n    }\n\n    .btn-guess {\n      background: linear-gradient(135deg, #10b981 0%, #059669 100%);\n      color: #fff;\n      border: none;\n      padding: 10px 16px;\n      font-size: 0.95rem;\n      font-weight: 700;\n      border-radius: 50px;\n      cursor: pointer;\n      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);\n      transition: all 0.2s;\n      white-space: nowrap;\n      flex-shrink: 0;\n    }\n\n    .btn-guess:hover {\n      transform: translateY(-2px);\n      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);\n    }\n\n    /* ===== SCORES ===== */\n    .emo-scores {\n      background: #fff;\n      border-radius: 16px;\n      padding: 16px;\n      border: 2px solid #e2e8f0;\n    }\n\n    .scores-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 600;\n      font-size: 1.1rem;\n      padding-bottom: 12px;\n      border-bottom: 2px solid #f1f5f9;\n      margin-bottom: 12px;\n    }\n\n    .scores-empty {\n      color: #94a3b8;\n      text-align: center;\n      font-size: 0.9rem;\n      padding: 8px 0;\n    }\n\n    .scores-list {\n      display: flex;\n      flex-direction: column;\n      gap: 8px;\n    }\n\n    .score-row {\n      display: flex;\n      align-items: center;\n      gap: 10px;\n      padding: 10px 12px;\n      background: #f8fafc;\n      border-radius: 10px;\n    }\n\n    .score-row.me {\n      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);\n      font-weight: 700;\n    }\n\n    .score-medal { font-size: 1.1rem; width: 24px; }\n\n    .score-name { flex: 1; color: #334155; }\n\n    .score-pts {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 700;\n      font-size: 1.2rem;\n      color: #667eea;\n    }\n\n    /* ===== HISTORY ===== */\n    .emo-history {\n      background: #fff;\n      border-radius: 16px;\n      padding: 16px;\n      border: 2px solid #e2e8f0;\n    }\n\n    .history-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 600;\n      font-size: 1rem;\n      padding-bottom: 10px;\n      border-bottom: 2px solid #f1f5f9;\n      margin-bottom: 10px;\n    }\n\n    .history-empty {\n      color: #94a3b8;\n      font-size: 0.85rem;\n    }\n\n    .history-list {\n      display: flex;\n      flex-direction: column;\n      gap: 6px;\n      max-height: 120px;\n      overflow-y: auto;\n    }\n\n    .history-item {\n      display: flex;\n      align-items: center;\n      gap: 8px;\n      padding: 8px 10px;\n      background: #fef2f2;\n      border-radius: 8px;\n      font-size: 0.9rem;\n    }\n\n    .history-x {\n      color: #ef4444;\n      font-weight: 700;\n    }\n\n    /* ===== END SCREEN ===== */\n    .emo-end {\n      text-align: center;\n      padding: 20px 0;\n    }\n\n    .end-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 2.5rem;\n      color: #1e293b;\n      margin-bottom: 24px;\n    }\n\n    .winner-box {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: center;\n      gap: 8px;\n      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);\n      padding: 28px 48px;\n      border-radius: 20px;\n      box-shadow: 0 8px 30px rgba(253, 224, 71, 0.5);\n      margin-bottom: 24px;\n    }\n\n    .winner-box.animate {\n      animation: pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);\n    }\n\n    @keyframes pop {\n      0% { transform: scale(0) rotate(-10deg); }\n      100% { transform: scale(1) rotate(0); }\n    }\n\n    .trophy { font-size: 3.5rem; }\n\n    .winner-label {\n      font-size: 0.9rem;\n      color: #a16207;\n      text-transform: uppercase;\n      letter-spacing: 2px;\n      font-weight: 600;\n    }\n\n    .winner-name {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 1.8rem;\n      font-weight: 700;\n      color: #78350f;\n    }\n\n    .no-winner {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      gap: 8px;\n      color: #64748b;\n      font-size: 1.2rem;\n      margin-bottom: 24px;\n    }\n\n    .no-winner span:first-child { font-size: 3rem; }\n\n    .reveal-box {\n      background: #f1f5f9;\n      padding: 12px 24px;\n      border-radius: 50px;\n      display: inline-block;\n      font-size: 1.1rem;\n      color: #475569;\n      margin-bottom: 24px;\n    }\n\n    .reveal-box strong {\n      color: #667eea;\n      font-size: 1.3rem;\n      margin-left: 6px;\n    }\n\n    .emo-end .emo-scores {\n      display: inline-block;\n      min-width: 280px;\n      margin-bottom: 24px;\n    }\n\n    /* ===== RESPONSIVE ===== */\n    @media (max-width: 700px) {\n      body { padding: 0; }\n\n      .emo-app {\n        border-radius: 0;\n        padding: 20px 16px;\n        min-height: 100vh;\n      }\n\n      .emo-game {\n        grid-template-columns: 1fr;\n      }\n\n      .game-side {\n        order: 2;\n        display: grid;\n        grid-template-columns: 1fr 1fr;\n        gap: 12px;\n      }\n\n      .game-main { order: 1; }\n\n      .start-title { font-size: 2.5rem; }\n      .start-logo { font-size: 60px; }\n\n      .hints-box {\n        max-width: 280px;\n      }\n\n      .hint-emoji { \n        font-size: 1.6rem; \n        width: 44px;\n        height: 44px;\n      }\n\n      .guess-form {\n        flex-direction: column;\n        max-width: 280px;\n      }\n\n      .guess-form #guess-input {\n        width: 100%;\n      }\n\n      .btn-guess { \n        width: 100%; \n      }\n\n      .emoji-board {\n        grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));\n      }\n   }\n  ";
+  document.head.appendChild(styleTag);
 }
 function $f_Lcs214_webapp_client_graphics_DOMClientUI__displayAlert__T__V($thiz, msg) {
   window.alert(msg);
@@ -16881,11 +16840,6 @@ $c_sc_ClassTagIterableFactory$AnyIterableDelegate.prototype.newBuilder__scm_Buil
   var x0 = $m_s_reflect_ManifestFactory$AnyManifest$();
   return this$1.newBuilder__s_reflect_ClassTag__scm_Builder(x0);
 });
-$c_sc_ClassTagIterableFactory$AnyIterableDelegate.prototype.apply__sci_Seq__O = (function(elems) {
-  var this$1 = $n(this.sc_ClassTagIterableFactory$AnyIterableDelegate__f_delegate);
-  var evidence$7 = $m_s_reflect_ManifestFactory$AnyManifest$();
-  return this$1.from__sc_IterableOnce__O__O(elems, evidence$7);
-});
 function $ct_sc_IterableFactory$Delegate__sc_IterableFactory__($thiz, delegate) {
   $thiz.sc_IterableFactory$Delegate__f_delegate = delegate;
   return $thiz;
@@ -19619,16 +19573,6 @@ function $f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($thiz) {
   }
   throw new $c_Lujson_Value$InvalidData($thiz, "Expected ujson.Obj");
 }
-function $f_Lujson_Value__objOpt__s_Option($thiz) {
-  if (($thiz instanceof $c_Lujson_Obj)) {
-    var x$1 = $as_Lujson_Obj($thiz);
-    var this$2 = $n(x$1);
-    var x16 = this$2.Lujson_Obj__f_value;
-    return new $c_s_Some(x16);
-  } else {
-    return $m_s_None$();
-  }
-}
 function $f_Lujson_Value__arr__scm_ArrayBuffer($thiz) {
   if (($thiz instanceof $c_Lujson_Arr)) {
     var x$1 = $as_Lujson_Arr($thiz);
@@ -20245,204 +20189,113 @@ function $h_Lapps_emojionary_Wire$eventFormat$() {
 }
 $h_Lapps_emojionary_Wire$eventFormat$.prototype = $c_Lapps_emojionary_Wire$eventFormat$.prototype;
 $c_Lapps_emojionary_Wire$eventFormat$.prototype.encode__Lapps_emojionary_Event__Lujson_Value = (function(e) {
-  var requirement = (e !== null);
-  if ((!requirement)) {
-    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Event cannot be null");
+  var x = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
+  if (((x === null) ? (e === null) : $n(x).equals__O__Z(e))) {
+    var items = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([]));
+    var map = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+    map.put__O__O__s_Option("type", new $c_Lujson_Str("StartGame"));
+    var this$7 = $n(items);
+    var it = this$7.iterator__sc_Iterator();
+    while ($n(it).hasNext__Z()) {
+      var x0 = $n(it).next__O();
+      var i = $as_T2(x0);
+      map.put__O__O__s_Option($n(i).T2__f__1, $n(i).T2__f__2);
+    }
+    return new $c_Lujson_Obj(map);
   }
-  matchResult1: {
-    var result;
-    var x = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
-    if (((x === null) ? (e === null) : $n(x).equals__O__Z(e))) {
-      var items = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([]));
-      var map = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-      map.put__O__O__s_Option("type", new $c_Lujson_Str("StartGame"));
-      var this$8 = $n(items);
-      var it = this$8.iterator__sc_Iterator();
-      while ($n(it).hasNext__Z()) {
-        var x0 = $n(it).next__O();
-        var i = $as_T2(x0);
-        map.put__O__O__s_Option($n(i).T2__f__1, $n(i).T2__f__2);
-      }
-      var result = new $c_Lujson_Obj(map);
-      break matchResult1;
+  if ((e instanceof $c_Lapps_emojionary_Event$SendFirstHint)) {
+    var x$1 = $as_Lapps_emojionary_Event$SendFirstHint(e);
+    var this$10 = $n(x$1);
+    var x10 = this$10.Lapps_emojionary_Event$SendFirstHint__f_secretWord;
+    var this$11 = $n(x$1);
+    var x11 = this$11.Lapps_emojionary_Event$SendFirstHint__f_emoji;
+    var $x_2 = $m_sr_ScalaRunTime$();
+    var this$16 = $n(x10);
+    var y = new $c_Lujson_Str(this$16);
+    var $x_1 = new $c_T2("secretWord", y);
+    var this$21 = $n(x11);
+    var y$1 = new $c_Lujson_Str(this$21);
+    var items$1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_1, new $c_T2("emoji", y$1)]));
+    var map$1 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+    map$1.put__O__O__s_Option("type", new $c_Lujson_Str("SendFirstHint"));
+    var this$28 = $n(items$1);
+    var it$1 = this$28.iterator__sc_Iterator();
+    while ($n(it$1).hasNext__Z()) {
+      var x0$1 = $n(it$1).next__O();
+      var i$1 = $as_T2(x0$1);
+      map$1.put__O__O__s_Option($n(i$1).T2__f__1, $n(i$1).T2__f__2);
     }
-    if ((e instanceof $c_Lapps_emojionary_Event$SendFirstHint)) {
-      var x$1 = $as_Lapps_emojionary_Event$SendFirstHint(e);
-      var this$11 = $n(x$1);
-      var x10 = this$11.Lapps_emojionary_Event$SendFirstHint__f_secretWord;
-      var this$12 = $n(x$1);
-      var x11 = this$12.Lapps_emojionary_Event$SendFirstHint__f_emoji;
-      var this$15 = $n(x10);
-      var requirement$1 = (!(this$15 === ""));
-      if ((!requirement$1)) {
-        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Secret word cannot be empty");
-      }
-      var this$19 = $n(x11);
-      var requirement$2 = (!(this$19 === ""));
-      if ((!requirement$2)) {
-        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
-      }
-      var $x_2 = $m_sr_ScalaRunTime$();
-      var this$25 = $n(x10);
-      var y = new $c_Lujson_Str(this$25);
-      var $x_1 = new $c_T2("secretWord", y);
-      var this$30 = $n(x11);
-      var y$1 = new $c_Lujson_Str(this$30);
-      var items$1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_1, new $c_T2("emoji", y$1)]));
-      var map$1 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-      map$1.put__O__O__s_Option("type", new $c_Lujson_Str("SendFirstHint"));
-      var this$37 = $n(items$1);
-      var it$1 = this$37.iterator__sc_Iterator();
-      while ($n(it$1).hasNext__Z()) {
-        var x0$1 = $n(it$1).next__O();
-        var i$1 = $as_T2(x0$1);
-        map$1.put__O__O__s_Option($n(i$1).T2__f__1, $n(i$1).T2__f__2);
-      }
-      var result = new $c_Lujson_Obj(map$1);
-      break matchResult1;
-    }
-    if ((e instanceof $c_Lapps_emojionary_Event$SendHint)) {
-      var x$1$1 = $as_Lapps_emojionary_Event$SendHint(e);
-      var this$40 = $n(x$1$1);
-      var x7 = this$40.Lapps_emojionary_Event$SendHint__f_emoji;
-      var this$43 = $n(x7);
-      var requirement$3 = (!(this$43 === ""));
-      if ((!requirement$3)) {
-        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
-      }
-      var $x_3 = $m_sr_ScalaRunTime$();
-      var this$49 = $n(x7);
-      var y$2 = new $c_Lujson_Str(this$49);
-      var items$2 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("emoji", y$2)]));
-      var map$2 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-      map$2.put__O__O__s_Option("type", new $c_Lujson_Str("SendHint"));
-      var this$56 = $n(items$2);
-      var it$2 = this$56.iterator__sc_Iterator();
-      while ($n(it$2).hasNext__Z()) {
-        var x0$2 = $n(it$2).next__O();
-        var i$2 = $as_T2(x0$2);
-        map$2.put__O__O__s_Option($n(i$2).T2__f__1, $n(i$2).T2__f__2);
-      }
-      var result = new $c_Lujson_Obj(map$2);
-      break matchResult1;
-    }
-    if ((e instanceof $c_Lapps_emojionary_Event$SubmitGuess)) {
-      var x$1$2 = $as_Lapps_emojionary_Event$SubmitGuess(e);
-      var this$59 = $n(x$1$2);
-      var x4 = this$59.Lapps_emojionary_Event$SubmitGuess__f_text;
-      var this$62 = $n(x4);
-      var requirement$4 = (!(this$62 === ""));
-      if ((!requirement$4)) {
-        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Guess text cannot be empty");
-      }
-      var $x_4 = $m_sr_ScalaRunTime$();
-      var this$68 = $n(x4);
-      var y$3 = new $c_Lujson_Str(this$68);
-      var items$3 = $x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("text", y$3)]));
-      var map$3 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-      map$3.put__O__O__s_Option("type", new $c_Lujson_Str("SubmitGuess"));
-      var this$75 = $n(items$3);
-      var it$3 = this$75.iterator__sc_Iterator();
-      while ($n(it$3).hasNext__Z()) {
-        var x0$3 = $n(it$3).next__O();
-        var i$3 = $as_T2(x0$3);
-        map$3.put__O__O__s_Option($n(i$3).T2__f__1, $n(i$3).T2__f__2);
-      }
-      var result = new $c_Lujson_Obj(map$3);
-      break matchResult1;
-    }
-    throw new $c_s_MatchError(e);
+    return new $c_Lujson_Obj(map$1);
   }
-  var this$79 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
-  var assertion = $f_sc_MapOps__contains__O__Z(this$79, "type");
-  if ((!assertion)) {
-    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Encoded event must contain type field");
+  if ((e instanceof $c_Lapps_emojionary_Event$SendHint)) {
+    var x$1$1 = $as_Lapps_emojionary_Event$SendHint(e);
+    var this$31 = $n(x$1$1);
+    var x7 = this$31.Lapps_emojionary_Event$SendHint__f_emoji;
+    var $x_3 = $m_sr_ScalaRunTime$();
+    var this$36 = $n(x7);
+    var y$2 = new $c_Lujson_Str(this$36);
+    var items$2 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("emoji", y$2)]));
+    var map$2 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+    map$2.put__O__O__s_Option("type", new $c_Lujson_Str("SendHint"));
+    var this$43 = $n(items$2);
+    var it$2 = this$43.iterator__sc_Iterator();
+    while ($n(it$2).hasNext__Z()) {
+      var x0$2 = $n(it$2).next__O();
+      var i$2 = $as_T2(x0$2);
+      map$2.put__O__O__s_Option($n(i$2).T2__f__1, $n(i$2).T2__f__2);
+    }
+    return new $c_Lujson_Obj(map$2);
   }
-  return result;
+  if ((e instanceof $c_Lapps_emojionary_Event$SubmitGuess)) {
+    var x$1$2 = $as_Lapps_emojionary_Event$SubmitGuess(e);
+    var this$46 = $n(x$1$2);
+    var x4 = this$46.Lapps_emojionary_Event$SubmitGuess__f_text;
+    var $x_4 = $m_sr_ScalaRunTime$();
+    var this$51 = $n(x4);
+    var y$3 = new $c_Lujson_Str(this$51);
+    var items$3 = $x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("text", y$3)]));
+    var map$3 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+    map$3.put__O__O__s_Option("type", new $c_Lujson_Str("SubmitGuess"));
+    var this$58 = $n(items$3);
+    var it$3 = this$58.iterator__sc_Iterator();
+    while ($n(it$3).hasNext__Z()) {
+      var x0$3 = $n(it$3).next__O();
+      var i$3 = $as_T2(x0$3);
+      map$3.put__O__O__s_Option($n(i$3).T2__f__1, $n(i$3).T2__f__2);
+    }
+    return new $c_Lujson_Obj(map$3);
+  }
+  throw new $c_s_MatchError(e);
 });
 $c_Lapps_emojionary_Wire$eventFormat$.prototype.decode__Lujson_Value__s_util_Try = (function(json) {
   try {
-    var requirement = (json !== null);
-    if ((!requirement)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON cannot be null");
-    }
-    var this$3 = $n($f_Lujson_Value__objOpt__s_Option($n(json)));
-    var requirement$1 = (!this$3.isEmpty__Z());
-    if ((!requirement$1)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON must be an object");
-    }
     var obj = $f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n(json));
-    var this$5 = $n(obj);
-    var requirement$2 = $f_sc_MapOps__contains__O__Z(this$5, "type");
-    if ((!requirement$2)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Event JSON must contain 'type' field");
-    }
-    var event;
-    var this$7 = $n(obj);
-    var x12 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$7, "type"))));
+    var r1;
+    var this$2 = $n(obj);
+    var x12 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$2, "type"))));
     switch (x12) {
       case "StartGame": {
-        var event = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
+        var r1 = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
         break;
       }
       case "SendFirstHint": {
-        var this$8 = $n(obj);
-        var requirement$3 = $f_sc_MapOps__contains__O__Z(this$8, "secretWord");
-        if ((!requirement$3)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SendFirstHint must contain 'secretWord'");
-        }
-        var this$10 = $n(obj);
-        var requirement$4 = $f_sc_MapOps__contains__O__Z(this$10, "emoji");
-        if ((!requirement$4)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SendFirstHint must contain 'emoji'");
-        }
-        var this$12 = $n(obj);
-        var secretWord = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$12, "secretWord"))));
-        var this$13 = $n(obj);
-        var emoji = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$13, "emoji"))));
-        var this$16 = $n(secretWord);
-        var requirement$5 = (!(this$16 === ""));
-        if ((!requirement$5)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Secret word cannot be empty");
-        }
-        var this$20 = $n(emoji);
-        var requirement$6 = (!(this$20 === ""));
-        if ((!requirement$6)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
-        }
-        var event = new $c_Lapps_emojionary_Event$SendFirstHint(secretWord, emoji);
+        var this$3 = $n(obj);
+        var secretWord = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$3, "secretWord"))));
+        var this$4 = $n(obj);
+        var emoji = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$4, "emoji"))));
+        var r1 = new $c_Lapps_emojionary_Event$SendFirstHint(secretWord, emoji);
         break;
       }
       case "SendHint": {
-        var this$23 = $n(obj);
-        var requirement$7 = $f_sc_MapOps__contains__O__Z(this$23, "emoji");
-        if ((!requirement$7)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SendHint must contain 'emoji'");
-        }
-        var this$25 = $n(obj);
-        var emoji$2 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$25, "emoji"))));
-        var this$28 = $n(emoji$2);
-        var requirement$8 = (!(this$28 === ""));
-        if ((!requirement$8)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
-        }
-        var event = new $c_Lapps_emojionary_Event$SendHint(emoji$2);
+        var this$6 = $n(obj);
+        var emoji$1 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$6, "emoji"))));
+        var r1 = new $c_Lapps_emojionary_Event$SendHint(emoji$1);
         break;
       }
       case "SubmitGuess": {
-        var this$31 = $n(obj);
-        var requirement$9 = $f_sc_MapOps__contains__O__Z(this$31, "text");
-        if ((!requirement$9)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SubmitGuess must contain 'text'");
-        }
-        var this$33 = $n(obj);
-        var text = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$33, "text"))));
-        var this$36 = $n(text);
-        var requirement$10 = (!(this$36 === ""));
-        if ((!requirement$10)) {
-          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Guess text cannot be empty");
-        }
-        var event = new $c_Lapps_emojionary_Event$SubmitGuess(text);
+        var this$8 = $n(obj);
+        var text = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$8, "text"))));
+        var r1 = new $c_Lapps_emojionary_Event$SubmitGuess(text);
         break;
       }
       default: {
@@ -20450,24 +20303,14 @@ $c_Lapps_emojionary_Wire$eventFormat$.prototype.decode__Lujson_Value__s_util_Try
         throw new $c_Lcs214_webapp_DecodingException(msg);
       }
     }
-    var self = new $c_s_util_Success(event);
+    return new $c_s_util_Success(r1);
   } catch (e) {
     var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
-    matchEnd8: {
-      var self;
-      if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
-        var self = new $c_s_util_Failure(e$2);
-        break matchEnd8;
-      }
-      throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
+    if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
+      return new $c_s_util_Failure(e$2);
     }
+    throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
   }
-  self.isSuccess__Z();
-  var assertion = true;
-  if ((!assertion)) {
-    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Decode must return valid Try");
-  }
-  return self;
 });
 $c_Lapps_emojionary_Wire$eventFormat$.prototype.encode__O__Lujson_Value = (function(t) {
   return this.encode__Lapps_emojionary_Event__Lujson_Value($as_Lapps_emojionary_Event(t));
@@ -20495,29 +20338,6 @@ function $h_Lapps_emojionary_Wire$viewFormat$() {
 }
 $h_Lapps_emojionary_Wire$viewFormat$.prototype = $c_Lapps_emojionary_Wire$viewFormat$.prototype;
 $c_Lapps_emojionary_Wire$viewFormat$.prototype.encode__Lapps_emojionary_View__Lujson_Value = (function(v) {
-  var requirement = (v !== null);
-  if ((!requirement)) {
-    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: View cannot be null");
-  }
-  var a = $n(v).Lapps_emojionary_View__f_remainingTimeMs;
-  var ahi = a.RTLong__f_hi;
-  var requirement$1 = (ahi >= 0);
-  if ((!requirement$1)) {
-    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Remaining time cannot be negative");
-  }
-  var this$4 = $n($n(v).Lapps_emojionary_View__f_allScores);
-  var this$5 = new $c_sc_MapOps$$anon$1(this$4);
-  var res = true;
-  var it = this$5.iterator__sc_Iterator();
-  while ((res && $n(it).hasNext__Z())) {
-    var x0 = $n(it).next__O();
-    var _$2 = $uI(x0);
-    res = (_$2 >= 0);
-  }
-  var requirement$2 = res;
-  if ((!requirement$2)) {
-    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: All scores must be non-negative");
-  }
   var y = $m_Lapps_emojionary_Wire$().apps$emojionary$Wire$$$encodePhase__Lapps_emojionary_Phase__Lujson_Value($n(v).Lapps_emojionary_View__f_phase);
   var $x_17 = $m_sr_ScalaRunTime$();
   var y$1 = $m_Lujson_Value$().JsonableBoolean__Z__Lujson_Bool($n(v).Lapps_emojionary_View__f_amIDescriber);
@@ -20532,207 +20352,154 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.encode__Lapps_emojionary_View__Lu
   }))));
   var $x_15 = new $c_T2("allScores", y$3);
   var $x_13 = $m_Lujson_Arr$();
-  var this$18 = $n($n(v).Lapps_emojionary_View__f_hints);
-  var f = ((_$3) => {
-    var _$3$1 = $as_T(_$3);
-    return new $c_Lujson_Str(_$3$1);
+  var this$12 = $n($n(v).Lapps_emojionary_View__f_hints);
+  var f = ((_$1) => {
+    var _$1$1 = $as_T(_$1);
+    return new $c_Lujson_Str(_$1$1);
   });
-  if ((this$18 === $m_sci_Nil$())) {
+  if ((this$12 === $m_sci_Nil$())) {
     var $x_12 = $m_sci_Nil$();
   } else {
-    var x0$1 = this$18.head__O();
-    var h = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+    var x0 = this$12.head__O();
+    var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
     var t = h;
-    var rest = $as_sci_List(this$18.tail__O());
+    var rest = $as_sci_List(this$12.tail__O());
     while ((rest !== $m_sci_Nil$())) {
-      var x0$2 = $n(rest).head__O();
-      var nx = new $c_sci_$colon$colon(f(x0$2), $m_sci_Nil$());
+      var x0$1 = $n(rest).head__O();
+      var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
       $n(t).sci_$colon$colon__f_next = nx;
       t = nx;
       rest = $as_sci_List($n(rest).tail__O());
     }
     var $x_12 = h;
   }
-  var this$20 = $m_s_$less$colon$less$();
-  var y$4 = $x_13.from__sc_IterableOnce__F1__Lujson_Arr($x_12, this$20.s_$less$colon$less$__f_singleton);
+  var this$14 = $m_s_$less$colon$less$();
+  var y$4 = $x_13.from__sc_IterableOnce__F1__Lujson_Arr($x_12, this$14.s_$less$colon$less$__f_singleton);
   var $x_14 = new $c_T2("hints", y$4);
   var $x_10 = $m_Lujson_Arr$();
-  var this$24 = $n($n(v).Lapps_emojionary_View__f_guesses);
-  var f$1 = ((_$4) => {
-    var _$4$1 = $as_T(_$4);
-    return new $c_Lujson_Str(_$4$1);
+  var this$18 = $n($n(v).Lapps_emojionary_View__f_guesses);
+  var f$1 = ((_$2) => {
+    var _$2$1 = $as_T(_$2);
+    return new $c_Lujson_Str(_$2$1);
   });
-  if ((this$24 === $m_sci_Nil$())) {
+  if ((this$18 === $m_sci_Nil$())) {
     var $x_9 = $m_sci_Nil$();
   } else {
-    var x0$3 = this$24.head__O();
-    var h$1 = new $c_sci_$colon$colon(f$1(x0$3), $m_sci_Nil$());
+    var x0$2 = this$18.head__O();
+    var h$1 = new $c_sci_$colon$colon(f$1(x0$2), $m_sci_Nil$());
     var t$1 = h$1;
-    var rest$1 = $as_sci_List(this$24.tail__O());
+    var rest$1 = $as_sci_List(this$18.tail__O());
     while ((rest$1 !== $m_sci_Nil$())) {
-      var x0$4 = $n(rest$1).head__O();
-      var nx$1 = new $c_sci_$colon$colon(f$1(x0$4), $m_sci_Nil$());
+      var x0$3 = $n(rest$1).head__O();
+      var nx$1 = new $c_sci_$colon$colon(f$1(x0$3), $m_sci_Nil$());
       $n(t$1).sci_$colon$colon__f_next = nx$1;
       t$1 = nx$1;
       rest$1 = $as_sci_List($n(rest$1).tail__O());
     }
     var $x_9 = h$1;
   }
-  var this$26 = $m_s_$less$colon$less$();
-  var y$5 = $x_10.from__sc_IterableOnce__F1__Lujson_Arr($x_9, this$26.s_$less$colon$less$__f_singleton);
+  var this$20 = $m_s_$less$colon$less$();
+  var y$5 = $x_10.from__sc_IterableOnce__F1__Lujson_Arr($x_9, this$20.s_$less$colon$less$__f_singleton);
   var $x_11 = new $c_T2("guesses", y$5);
-  var a$1 = $n(v).Lapps_emojionary_View__f_remainingTimeMs;
-  var lo = a$1.RTLong__f_lo;
-  var hi = a$1.RTLong__f_hi;
+  var a = $n(v).Lapps_emojionary_View__f_remainingTimeMs;
+  var lo = a.RTLong__f_lo;
+  var hi = a.RTLong__f_hi;
   var value$1 = ((4.294967296E9 * hi) + (lo >>> 0.0));
   var y$6 = new $c_Lujson_Num(value$1);
   var $x_8 = new $c_T2("remainingTimeMs", y$6);
-  var this$33 = $n($n(v).Lapps_emojionary_View__f_secretWord);
-  if (this$33.isEmpty__Z()) {
-    var this$35 = $m_s_None$();
+  var this$27 = $n($n(v).Lapps_emojionary_View__f_secretWord);
+  if (this$27.isEmpty__Z()) {
+    var this$29 = $m_s_None$();
   } else {
-    var x0$5 = this$33.get__O();
-    var _$5 = $as_T(x0$5);
-    var this$35 = new $c_s_Some(new $c_Lujson_Str(_$5));
+    var x0$4 = this$27.get__O();
+    var _$3 = $as_T(x0$4);
+    var this$29 = new $c_s_Some(new $c_Lujson_Str(_$3));
   }
-  var y$7 = (this$35.isEmpty__Z() ? $m_Lujson_Null$() : this$35.get__O());
+  var y$7 = (this$29.isEmpty__Z() ? $m_Lujson_Null$() : this$29.get__O());
   var $x_7 = new $c_T2("secretWord", y$7);
-  var this$38 = $n($n(v).Lapps_emojionary_View__f_winner);
-  if (this$38.isEmpty__Z()) {
-    var this$40 = $m_s_None$();
+  var this$32 = $n($n(v).Lapps_emojionary_View__f_winner);
+  if (this$32.isEmpty__Z()) {
+    var this$34 = $m_s_None$();
   } else {
-    var x0$6 = this$38.get__O();
-    var _$6 = $as_T(x0$6);
-    var this$40 = new $c_s_Some(new $c_Lujson_Str(_$6));
+    var x0$5 = this$32.get__O();
+    var _$4 = $as_T(x0$5);
+    var this$34 = new $c_s_Some(new $c_Lujson_Str(_$4));
   }
-  var y$8 = (this$40.isEmpty__Z() ? $m_Lujson_Null$() : this$40.get__O());
+  var y$8 = (this$34.isEmpty__Z() ? $m_Lujson_Null$() : this$34.get__O());
   var $x_6 = new $c_T2("winner", y$8);
   var $x_4 = $m_Lujson_Arr$();
-  var this$44 = $n($n(v).Lapps_emojionary_View__f_availableEmojis);
-  var f$2 = ((_$7) => {
-    var _$7$1 = $as_T(_$7);
-    return new $c_Lujson_Str(_$7$1);
+  var this$38 = $n($n(v).Lapps_emojionary_View__f_availableEmojis);
+  var f$2 = ((_$5) => {
+    var _$5$1 = $as_T(_$5);
+    return new $c_Lujson_Str(_$5$1);
   });
-  if ((this$44 === $m_sci_Nil$())) {
+  if ((this$38 === $m_sci_Nil$())) {
     var $x_3 = $m_sci_Nil$();
   } else {
-    var x0$7 = this$44.head__O();
-    var h$2 = new $c_sci_$colon$colon(f$2(x0$7), $m_sci_Nil$());
+    var x0$6 = this$38.head__O();
+    var h$2 = new $c_sci_$colon$colon(f$2(x0$6), $m_sci_Nil$());
     var t$2 = h$2;
-    var rest$2 = $as_sci_List(this$44.tail__O());
+    var rest$2 = $as_sci_List(this$38.tail__O());
     while ((rest$2 !== $m_sci_Nil$())) {
-      var x0$8 = $n(rest$2).head__O();
-      var nx$2 = new $c_sci_$colon$colon(f$2(x0$8), $m_sci_Nil$());
+      var x0$7 = $n(rest$2).head__O();
+      var nx$2 = new $c_sci_$colon$colon(f$2(x0$7), $m_sci_Nil$());
       $n(t$2).sci_$colon$colon__f_next = nx$2;
       t$2 = nx$2;
       rest$2 = $as_sci_List($n(rest$2).tail__O());
     }
     var $x_3 = h$2;
   }
-  var this$46 = $m_s_$less$colon$less$();
-  var y$9 = $x_4.from__sc_IterableOnce__F1__Lujson_Arr($x_3, this$46.s_$less$colon$less$__f_singleton);
+  var this$40 = $m_s_$less$colon$less$();
+  var y$9 = $x_4.from__sc_IterableOnce__F1__Lujson_Arr($x_3, this$40.s_$less$colon$less$__f_singleton);
   var $x_5 = new $c_T2("availableEmojis", y$9);
   var $x_2 = $m_Lujson_Arr$();
-  var this$50 = $n($n(v).Lapps_emojionary_View__f_myWrongGuesses);
-  var f$3 = ((_$8) => {
-    var _$8$1 = $as_T(_$8);
-    return new $c_Lujson_Str(_$8$1);
+  var this$44 = $n($n(v).Lapps_emojionary_View__f_myWrongGuesses);
+  var f$3 = ((_$6) => {
+    var _$6$1 = $as_T(_$6);
+    return new $c_Lujson_Str(_$6$1);
   });
-  if ((this$50 === $m_sci_Nil$())) {
+  if ((this$44 === $m_sci_Nil$())) {
     var $x_1 = $m_sci_Nil$();
   } else {
-    var x0$9 = this$50.head__O();
-    var h$3 = new $c_sci_$colon$colon(f$3(x0$9), $m_sci_Nil$());
+    var x0$8 = this$44.head__O();
+    var h$3 = new $c_sci_$colon$colon(f$3(x0$8), $m_sci_Nil$());
     var t$3 = h$3;
-    var rest$3 = $as_sci_List(this$50.tail__O());
+    var rest$3 = $as_sci_List(this$44.tail__O());
     while ((rest$3 !== $m_sci_Nil$())) {
-      var x0$10 = $n(rest$3).head__O();
-      var nx$3 = new $c_sci_$colon$colon(f$3(x0$10), $m_sci_Nil$());
+      var x0$9 = $n(rest$3).head__O();
+      var nx$3 = new $c_sci_$colon$colon(f$3(x0$9), $m_sci_Nil$());
       $n(t$3).sci_$colon$colon__f_next = nx$3;
       t$3 = nx$3;
       rest$3 = $as_sci_List($n(rest$3).tail__O());
     }
     var $x_1 = h$3;
   }
-  var this$52 = $m_s_$less$colon$less$();
-  var y$10 = $x_2.from__sc_IterableOnce__F1__Lujson_Arr($x_1, this$52.s_$less$colon$less$__f_singleton);
+  var this$46 = $m_s_$less$colon$less$();
+  var y$10 = $x_2.from__sc_IterableOnce__F1__Lujson_Arr($x_1, this$46.s_$less$colon$less$__f_singleton);
   var items = $x_17.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_16, $x_15, $x_14, $x_11, $x_8, $x_7, $x_6, $x_5, new $c_T2("myWrongGuesses", y$10)]));
-  var this$55 = $m_s_$less$colon$less$();
-  var conv = this$55.s_$less$colon$less$__f_singleton;
+  var this$49 = $m_s_$less$colon$less$();
+  var conv = this$49.s_$less$colon$less$__f_singleton;
   var map = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
   map.put__O__O__s_Option("phase", ($n(conv), y));
-  var this$59 = $n(items);
-  var it$1 = this$59.iterator__sc_Iterator();
-  while ($n(it$1).hasNext__Z()) {
-    var x0$11 = $n(it$1).next__O();
-    var i = $as_T2(x0$11);
+  var this$53 = $n(items);
+  var it = this$53.iterator__sc_Iterator();
+  while ($n(it).hasNext__Z()) {
+    var x0$10 = $n(it).next__O();
+    var i = $as_T2(x0$10);
     map.put__O__O__s_Option($n(i).T2__f__1, $n(i).T2__f__2);
   }
-  var result = new $c_Lujson_Obj(map);
-  var this$63 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
-  if ($f_sc_MapOps__contains__O__Z(this$63, "phase")) {
-    var this$64 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
-    var $x_21 = $f_sc_MapOps__contains__O__Z(this$64, "amIDescriber");
-  } else {
-    var $x_21 = false;
-  }
-  if ($x_21) {
-    var this$65 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
-    var $x_20 = $f_sc_MapOps__contains__O__Z(this$65, "allScores");
-  } else {
-    var $x_20 = false;
-  }
-  if ($x_20) {
-    var this$66 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
-    var $x_19 = $f_sc_MapOps__contains__O__Z(this$66, "hints");
-  } else {
-    var $x_19 = false;
-  }
-  if ($x_19) {
-    var this$67 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
-    var $x_18 = $f_sc_MapOps__contains__O__Z(this$67, "guesses");
-  } else {
-    var $x_18 = false;
-  }
-  if ($x_18) {
-    var this$68 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
-    var assertion = $f_sc_MapOps__contains__O__Z(this$68, "remainingTimeMs");
-  } else {
-    var assertion = false;
-  }
-  if ((!assertion)) {
-    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Encoded view must contain all required fields");
-  }
-  return result;
+  return new $c_Lujson_Obj(map);
 });
 $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try = (function(json) {
   try {
-    var requirement = (json !== null);
-    if ((!requirement)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON cannot be null");
-    }
-    var this$3 = $n($f_Lujson_Value__objOpt__s_Option($n(json)));
-    var requirement$1 = (!this$3.isEmpty__Z());
-    if ((!requirement$1)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON must be an object");
-    }
     var obj = $f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n(json));
-    var requiredFields = $as_sci_Seq($m_sci_Seq$().apply__sci_Seq__sc_SeqOps($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["phase", "amIDescriber", "allScores", "hints", "guesses", "remainingTimeMs", "secretWord", "winner", "availableEmojis", "myWrongGuesses"]))));
-    $n(requiredFields).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((field) => {
-      var field$1 = $as_T(field);
-      var this$5 = $n(obj);
-      var requirement$2 = $f_sc_MapOps__contains__O__Z(this$5, field$1);
-      if ((!requirement$2)) {
-        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), (("requirement failed: " + ("View JSON must contain '" + field$1)) + "' field"));
-      }
-    })));
     var $x_1 = $m_Lapps_emojionary_Wire$();
-    var this$7 = $n(obj);
-    var phase = $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_Phase($x_1, $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$7, "phase")));
-    var this$8 = $n(obj);
-    var amIDescriber = $f_Lujson_Value__bool__Z($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$8, "amIDescriber"))));
-    var this$9 = $n(obj);
-    var this$12 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$9, "allScores")))));
+    var this$2 = $n(obj);
+    var phase = $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_Phase($x_1, $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$2, "phase")));
+    var this$3 = $n(obj);
+    var amIDescriber = $f_Lujson_Value__bool__Z($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$3, "amIDescriber"))));
+    var this$4 = $n(obj);
+    var this$7 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$4, "allScores")))));
     var f = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$1) => {
       var x$1$1 = $as_T2(x$1);
       var k = $as_T($n(x$1$1).T2__f__1);
@@ -20740,42 +20507,42 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try 
       var y = $doubleToInt($f_Lujson_Value__num__D($n(v)));
       return new $c_T2(k, y);
     }));
-    var $x_2 = $n($f_sc_MapOps__map__F1__sc_IterableOps(this$12, f));
-    var this$13 = $m_s_$less$colon$less$();
-    var allScores = $x_2.toMap__s_$less$colon$less__sci_Map(this$13.s_$less$colon$less$__f_singleton);
-    var this$14 = $n(obj);
-    var this$15 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$14, "hints")))));
+    var $x_2 = $n($f_sc_MapOps__map__F1__sc_IterableOps(this$7, f));
+    var this$8 = $m_s_$less$colon$less$();
+    var allScores = $x_2.toMap__s_$less$colon$less__sci_Map(this$8.s_$less$colon$less$__f_singleton);
+    var this$9 = $n(obj);
+    var this$10 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$9, "hints")))));
     $m_scm_ArrayBuffer$();
     var b = new $c_scm_ArrayBuffer$$anon$1();
-    var it = $n(this$15.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it = $n(this$10.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it).hasNext__Z()) {
       var x0 = $n(it).next__O();
-      var _$9 = $as_Lujson_Value(x0);
-      var elem = $f_Lujson_Value__str__T($n(_$9));
+      var _$7 = $as_Lujson_Value(x0);
+      var elem = $f_Lujson_Value__str__T($n(_$7));
       b.addOne__O__scm_GrowableBuilder(elem);
     }
     var hints = $n($as_sc_IterableOnceOps(b.scm_GrowableBuilder__f_elems)).toList__sci_List();
-    var this$17 = $n(obj);
-    var this$18 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$17, "guesses")))));
+    var this$12 = $n(obj);
+    var this$13 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$12, "guesses")))));
     $m_scm_ArrayBuffer$();
     var b$1 = new $c_scm_ArrayBuffer$$anon$1();
-    var it$1 = $n(this$18.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it$1 = $n(this$13.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it$1).hasNext__Z()) {
       var x0$1 = $n(it$1).next__O();
-      var _$10 = $as_Lujson_Value(x0$1);
-      var elem$1 = $f_Lujson_Value__str__T($n(_$10));
+      var _$8 = $as_Lujson_Value(x0$1);
+      var elem$1 = $f_Lujson_Value__str__T($n(_$8));
       b$1.addOne__O__scm_GrowableBuilder(elem$1);
     }
     var guesses = $n($as_sc_IterableOnceOps(b$1.scm_GrowableBuilder__f_elems)).toList__sci_List();
-    var this$20 = $n(obj);
-    var value = $f_Lujson_Value__num__D($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$20, "remainingTimeMs"))));
-    var this$21 = $m_RTLong$();
-    var lo = this$21.org$scalajs$linker$runtime$RuntimeLong$$fromDoubleImpl__D__I(value);
-    var hi = this$21.RTLong$__f_org$scalajs$linker$runtime$RuntimeLong$$hiReturn;
+    var this$15 = $n(obj);
+    var value = $f_Lujson_Value__num__D($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$15, "remainingTimeMs"))));
+    var this$16 = $m_RTLong$();
+    var lo = this$16.org$scalajs$linker$runtime$RuntimeLong$$fromDoubleImpl__D__I(value);
+    var hi = this$16.RTLong$__f_org$scalajs$linker$runtime$RuntimeLong$$hiReturn;
     matchResult3: {
       var secretWord;
-      var this$22 = $n(obj);
-      var x13 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$22, "secretWord"));
+      var this$17 = $n(obj);
+      var x13 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$17, "secretWord"));
       var x = $m_Lujson_Null$();
       if ((x === x13)) {
         var secretWord = $m_s_None$();
@@ -20786,8 +20553,8 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try 
     }
     matchResult4: {
       var winner;
-      var this$24 = $n(obj);
-      var x14 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$24, "winner"));
+      var this$19 = $n(obj);
+      var x14 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$19, "winner"));
       var x$3 = $m_Lujson_Null$();
       if ((x$3 === x14)) {
         var winner = $m_s_None$();
@@ -20796,71 +20563,39 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try 
       var value$2 = $f_Lujson_Value__str__T($n(x14));
       var winner = new $c_s_Some(value$2);
     }
-    var this$26 = $n(obj);
-    var this$27 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$26, "availableEmojis")))));
+    var this$21 = $n(obj);
+    var this$22 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$21, "availableEmojis")))));
     $m_scm_ArrayBuffer$();
     var b$2 = new $c_scm_ArrayBuffer$$anon$1();
-    var it$2 = $n(this$27.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it$2 = $n(this$22.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it$2).hasNext__Z()) {
       var x0$2 = $n(it$2).next__O();
-      var _$11 = $as_Lujson_Value(x0$2);
-      var elem$2 = $f_Lujson_Value__str__T($n(_$11));
+      var _$9 = $as_Lujson_Value(x0$2);
+      var elem$2 = $f_Lujson_Value__str__T($n(_$9));
       b$2.addOne__O__scm_GrowableBuilder(elem$2);
     }
     var availableEmojis = $n($as_sc_IterableOnceOps(b$2.scm_GrowableBuilder__f_elems)).toList__sci_List();
-    var this$29 = $n(obj);
-    var this$30 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$29, "myWrongGuesses")))));
+    var this$24 = $n(obj);
+    var this$25 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$24, "myWrongGuesses")))));
     $m_scm_ArrayBuffer$();
     var b$3 = new $c_scm_ArrayBuffer$$anon$1();
-    var it$3 = $n(this$30.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it$3 = $n(this$25.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it$3).hasNext__Z()) {
       var x0$3 = $n(it$3).next__O();
-      var _$12 = $as_Lujson_Value(x0$3);
-      var elem$3 = $f_Lujson_Value__str__T($n(_$12));
+      var _$10 = $as_Lujson_Value(x0$3);
+      var elem$3 = $f_Lujson_Value__str__T($n(_$10));
       b$3.addOne__O__scm_GrowableBuilder(elem$3);
     }
     var myWrongGuesses = $n($as_sc_IterableOnceOps(b$3.scm_GrowableBuilder__f_elems)).toList__sci_List();
-    var requirement$3 = (hi >= 0);
-    if ((!requirement$3)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Remaining time cannot be negative");
-    }
-    var this$34 = $n(allScores);
-    var this$35 = new $c_sc_MapOps$$anon$1(this$34);
-    var res = true;
-    var it$4 = this$35.iterator__sc_Iterator();
-    while ((res && $n(it$4).hasNext__Z())) {
-      var x0$4 = $n(it$4).next__O();
-      var _$13 = $uI(x0$4);
-      res = (_$13 >= 0);
-    }
-    var requirement$4 = res;
-    if ((!requirement$4)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: All scores must be non-negative");
-    }
-    var this$37 = $n(hints);
-    var requirement$5 = (this$37.length__I() <= $m_Lapps_emojionary_Rules$().Lapps_emojionary_Rules$__f_MaxHints);
-    if ((!requirement$5)) {
-      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Too many hints");
-    }
     var r1 = new $c_Lapps_emojionary_View(phase, amIDescriber, allScores, hints, guesses, new $c_RTLong(lo, hi), secretWord, winner, availableEmojis, myWrongGuesses);
-    var self = new $c_s_util_Success(r1);
+    return new $c_s_util_Success(r1);
   } catch (e) {
     var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
-    matchEnd8: {
-      var self;
-      if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
-        var self = new $c_s_util_Failure(e$2);
-        break matchEnd8;
-      }
-      throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
+    if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
+      return new $c_s_util_Failure(e$2);
     }
+    throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
   }
-  self.isSuccess__Z();
-  var assertion = true;
-  if ((!assertion)) {
-    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Decode must return valid Try");
-  }
-  return self;
 });
 $c_Lapps_emojionary_Wire$viewFormat$.prototype.encode__O__Lujson_Value = (function(t) {
   return this.encode__Lapps_emojionary_View__Lujson_Value($as_Lapps_emojionary_View(t));
@@ -23622,9 +23357,6 @@ $c_sc_SeqFactory$Delegate.prototype.constructor = $c_sc_SeqFactory$Delegate;
 function $h_sc_SeqFactory$Delegate() {
 }
 $h_sc_SeqFactory$Delegate.prototype = $c_sc_SeqFactory$Delegate.prototype;
-$c_sc_SeqFactory$Delegate.prototype.apply__sci_Seq__sc_SeqOps = (function(elems) {
-  return $as_sc_SeqOps($n(this.sc_SeqFactory$Delegate__f_delegate).apply__sci_Seq__O(elems));
-});
 $c_sc_SeqFactory$Delegate.prototype.empty__sc_SeqOps = (function() {
   return $as_sc_SeqOps($n(this.sc_SeqFactory$Delegate__f_delegate).empty__O());
 });
@@ -23639,9 +23371,6 @@ $c_sc_SeqFactory$Delegate.prototype.from__sc_IterableOnce__O = (function(source)
 });
 $c_sc_SeqFactory$Delegate.prototype.empty__O = (function() {
   return this.empty__sc_SeqOps();
-});
-$c_sc_SeqFactory$Delegate.prototype.apply__sci_Seq__O = (function(elems) {
-  return this.apply__sci_Seq__sc_SeqOps(elems);
 });
 function $f_sc_SeqOps__distinct__O($thiz) {
   return $thiz.distinctBy__F1__O(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$2$2) => x$2$2)));
@@ -23899,9 +23628,6 @@ $c_sci_LazyList$.prototype.constructor = $c_sci_LazyList$;
 function $h_sci_LazyList$() {
 }
 $h_sci_LazyList$.prototype = $c_sci_LazyList$.prototype;
-$c_sci_LazyList$.prototype.apply__sci_Seq__O = (function(elems) {
-  return this.from__sc_IterableOnce__sci_LazyList(elems);
-});
 $c_sci_LazyList$.prototype.scala$collection$immutable$LazyList$$dropImpl__sci_LazyList__I__sci_LazyList = (function(ll, n) {
   var restRef = new $c_sr_ObjectRef(ll);
   var iRef = new $c_sr_IntRef(n);
@@ -28548,9 +28274,6 @@ $c_sci_List$.prototype.constructor = $c_sci_List$;
 function $h_sci_List$() {
 }
 $h_sci_List$.prototype = $c_sci_List$.prototype;
-$c_sci_List$.prototype.apply__sci_Seq__O = (function(elems) {
-  return $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
-});
 $c_sci_List$.prototype.newBuilder__scm_Builder = (function() {
   return new $c_scm_ListBuffer();
 });
@@ -29334,9 +29057,6 @@ $c_sci_Vector$.prototype.constructor = $c_sci_Vector$;
 function $h_sci_Vector$() {
 }
 $h_sci_Vector$.prototype = $c_sci_Vector$.prototype;
-$c_sci_Vector$.prototype.apply__sci_Seq__O = (function(elems) {
-  return this.from__sc_IterableOnce__sci_Vector(elems);
-});
 $c_sci_Vector$.prototype.from__sc_IterableOnce__sci_Vector = (function(it) {
   if ((it instanceof $c_sci_Vector)) {
     var x2 = $as_sci_Vector(it);
@@ -30448,9 +30168,6 @@ $c_scm_ArrayBuffer$.prototype.constructor = $c_scm_ArrayBuffer$;
 function $h_scm_ArrayBuffer$() {
 }
 $h_scm_ArrayBuffer$.prototype = $c_scm_ArrayBuffer$.prototype;
-$c_scm_ArrayBuffer$.prototype.apply__sci_Seq__O = (function(elems) {
-  return this.from__sc_IterableOnce__scm_ArrayBuffer(elems);
-});
 $c_scm_ArrayBuffer$.prototype.from__sc_IterableOnce__scm_ArrayBuffer = (function(coll) {
   var k = $n(coll).knownSize__I();
   if ((k >= 0)) {
@@ -30548,9 +30265,6 @@ $c_scm_ArrayDeque$.prototype.constructor = $c_scm_ArrayDeque$;
 function $h_scm_ArrayDeque$() {
 }
 $h_scm_ArrayDeque$.prototype = $c_scm_ArrayDeque$.prototype;
-$c_scm_ArrayDeque$.prototype.apply__sci_Seq__O = (function(elems) {
-  return this.from__sc_IterableOnce__scm_ArrayDeque(elems);
-});
 $c_scm_ArrayDeque$.prototype.from__sc_IterableOnce__scm_ArrayDeque = (function(coll) {
   var s = $n(coll).knownSize__I();
   if ((s >= 0)) {
@@ -30843,9 +30557,6 @@ $c_scm_ListBuffer$.prototype.constructor = $c_scm_ListBuffer$;
 function $h_scm_ListBuffer$() {
 }
 $h_scm_ListBuffer$.prototype = $c_scm_ListBuffer$.prototype;
-$c_scm_ListBuffer$.prototype.apply__sci_Seq__O = (function(elems) {
-  return new $c_scm_ListBuffer().scala$collection$mutable$ListBuffer$$freshFrom__sc_IterableOnce__scm_ListBuffer(elems);
-});
 $c_scm_ListBuffer$.prototype.newBuilder__scm_Builder = (function() {
   return $ct_scm_GrowableBuilder__scm_Growable__(new $c_scm_GrowableBuilder(), new $c_scm_ListBuffer());
 });
@@ -30912,10 +30623,6 @@ $c_scm_Queue$.prototype.constructor = $c_scm_Queue$;
 function $h_scm_Queue$() {
 }
 $h_scm_Queue$.prototype = $c_scm_Queue$.prototype;
-$c_scm_Queue$.prototype.apply__sci_Seq__O = (function(elems) {
-  var this$1 = new $c_scm_Queue(16);
-  return $as_scm_Queue(this$1.addAll__sc_IterableOnce__scm_ArrayDeque(elems));
-});
 $c_scm_Queue$.prototype.newBuilder__scm_Builder = (function() {
   return $ct_scm_GrowableBuilder__scm_Growable__(new $c_scm_GrowableBuilder(), new $c_scm_Queue(16));
 });
@@ -31056,9 +30763,6 @@ $c_sjs_js_WrappedArray$.prototype.constructor = $c_sjs_js_WrappedArray$;
 function $h_sjs_js_WrappedArray$() {
 }
 $h_sjs_js_WrappedArray$.prototype = $c_sjs_js_WrappedArray$.prototype;
-$c_sjs_js_WrappedArray$.prototype.apply__sci_Seq__O = (function(elems) {
-  return this.from__sc_IterableOnce__sjs_js_WrappedArray(elems);
-});
 $c_sjs_js_WrappedArray$.prototype.newBuilder__scm_Builder = (function() {
   return $ct_sjs_js_WrappedArray__(new $c_sjs_js_WrappedArray());
 });
@@ -31095,9 +30799,6 @@ $c_sjsr_WrappedVarArgs$.prototype.constructor = $c_sjsr_WrappedVarArgs$;
 function $h_sjsr_WrappedVarArgs$() {
 }
 $h_sjsr_WrappedVarArgs$.prototype = $c_sjsr_WrappedVarArgs$.prototype;
-$c_sjsr_WrappedVarArgs$.prototype.apply__sci_Seq__O = (function(elems) {
-  return this.from__sc_IterableOnce__sjsr_WrappedVarArgs(elems);
-});
 $c_sjsr_WrappedVarArgs$.prototype.from__sc_IterableOnce__sjsr_WrappedVarArgs = (function(source) {
   var this$1 = $n(this.newBuilder__scm_Builder());
   return $as_sjsr_WrappedVarArgs($n($as_scm_Builder(this$1.addAll__sc_IterableOnce__scm_Growable(source))).result__O());
@@ -31142,9 +30843,6 @@ $c_s_util_Failure.prototype.constructor = $c_s_util_Failure;
 function $h_s_util_Failure() {
 }
 $h_s_util_Failure.prototype = $c_s_util_Failure.prototype;
-$c_s_util_Failure.prototype.isSuccess__Z = (function() {
-  return false;
-});
 $c_s_util_Failure.prototype.get__O = (function() {
   var $x_1 = $n(this.s_util_Failure__f_exception);
   throw (($x_1 instanceof $c_sjs_js_JavaScriptException) ? $x_1.sjs_js_JavaScriptException__f_exception : $x_1);
@@ -31231,9 +30929,6 @@ $c_s_util_Success.prototype.constructor = $c_s_util_Success;
 function $h_s_util_Success() {
 }
 $h_s_util_Success.prototype = $c_s_util_Success.prototype;
-$c_s_util_Success.prototype.isSuccess__Z = (function() {
-  return true;
-});
 $c_s_util_Success.prototype.get__O = (function() {
   return this.s_util_Success__f_value;
 });
@@ -36748,10 +36443,10 @@ var $d_Lupickle_core_AbortException = new $TypeData().initClass($c_Lupickle_core
 }));
 function $p_Lapps_EmojionaryUIInstance__shortId__T__T($thiz, uid) {
   var this$1 = $n(uid);
-  if ((this$1.length <= 6)) {
+  if ((this$1.length <= 8)) {
     return uid;
   } else {
-    return ($m_sc_StringOps$().take$extension__T__I__T(uid, 6) + "\u2026");
+    return ($m_sc_StringOps$().take$extension__T__I__T(uid, 8) + "\u2026");
   }
 }
 /** @constructor */
@@ -36770,10 +36465,18 @@ function $c_Lapps_EmojionaryUIInstance(userId, sendMessage, target) {
   this.Lapps_EmojionaryUIInstance__f_guessInputbitmap$1 = false;
   this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
   this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = false;
   $ct_Lcs214_webapp_client_graphics_WebClientAppInstance__T__F1__Lorg_scalajs_dom_Element__(this, userId, sendMessage, target);
   this.Lapps_EmojionaryUIInstance__f_wire = $m_Lapps_emojionary_Wire$();
+  var link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap";
+  document.head.appendChild(link);
   this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
   this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = false;
 }
 $c_Lapps_EmojionaryUIInstance.prototype = new $h_Lcs214_webapp_client_graphics_WebClientAppInstance();
 $c_Lapps_EmojionaryUIInstance.prototype.constructor = $c_Lapps_EmojionaryUIInstance;
@@ -36783,14 +36486,14 @@ function $h_Lapps_EmojionaryUIInstance() {
 $h_Lapps_EmojionaryUIInstance.prototype = $c_Lapps_EmojionaryUIInstance.prototype;
 $c_Lapps_EmojionaryUIInstance.prototype.secretInput__Lorg_scalajs_dom_HTMLInputElement = (function() {
   if ((!this.Lapps_EmojionaryUIInstance__f_secretInputbitmap$1)) {
-    this.Lapps_EmojionaryUIInstance__f_secretInput$lzy1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("Ex: Pizza...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
+    this.Lapps_EmojionaryUIInstance__f_secretInput$lzy1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("Ton mot secret...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
     this.Lapps_EmojionaryUIInstance__f_secretInputbitmap$1 = true;
   }
   return this.Lapps_EmojionaryUIInstance__f_secretInput$lzy1;
 });
 $c_Lapps_EmojionaryUIInstance.prototype.guessInput__Lorg_scalajs_dom_HTMLInputElement = (function() {
   if ((!this.Lapps_EmojionaryUIInstance__f_guessInputbitmap$1)) {
-    var el = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("R\u00e9ponse...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
+    var el = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("Ta r\u00e9ponse...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
     el.onkeydown = ((e) => (($as_T(e.key) === "Enter") ? (this.submitGuess__V(), (void 0)) : (void 0)));
     this.Lapps_EmojionaryUIInstance__f_guessInput$lzy1 = el;
     this.Lapps_EmojionaryUIInstance__f_guessInputbitmap$1 = true;
@@ -36809,9 +36512,8 @@ $c_Lapps_EmojionaryUIInstance.prototype.maintainFocus__Lorg_scalajs_dom_HTMLInpu
   }
 });
 $c_Lapps_EmojionaryUIInstance.prototype.render__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(userId, view) {
-  var $x_6 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_5 = $m_sr_ScalaRunTime$();
-  var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("app-container", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_5 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-app", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_4 = $m_sr_ScalaRunTime$();
   var x = $n(view).Lapps_emojionary_View__f_phase;
   var x$2 = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
   if ((x === null)) {
@@ -36821,7 +36523,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.render__T__Lapps_emojionary_View__Lscala
     var $x_2 = (this$1 === x$2);
   }
   if ($x_2) {
-    var $x_1 = this.renderStartButton__Lscalatags_generic_Frag();
+    var $x_1 = this.renderStartScreen__Lscalatags_generic_Frag();
   } else {
     var x$3 = $n(view).Lapps_emojionary_View__f_phase;
     var x$4 = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
@@ -36837,58 +36539,60 @@ $c_Lapps_EmojionaryUIInstance.prototype.render__T__Lapps_emojionary_View__Lscala
       var $x_1 = this.renderActiveGame__T__Lapps_emojionary_View__Lscalatags_generic_Frag(userId, view);
     }
   }
-  return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $x_1])));
+  return $x_5.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_1])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderTimer__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   var a = $n(view).Lapps_emojionary_View__f_remainingTimeMs;
   var this$1 = $m_RTLong$();
   var lo = this$1.divideImpl__I__I__I__I__I(a.RTLong__f_lo, a.RTLong__f_hi, 1000, 0);
   var seconds = ((lo < 0) ? 0 : lo);
-  var x = $n(view).Lapps_emojionary_View__f_phase;
-  var x$2 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
-  if ((x === null)) {
-    var $x_1 = (x$2 === null);
+  var a$1 = $n(view).Lapps_emojionary_View__f_remainingTimeMs;
+  var lo$1 = a$1.RTLong__f_lo;
+  var hi$1 = a$1.RTLong__f_hi;
+  var x = $doubleToInt((100.0 * (((4.294967296E9 * hi$1) + (lo$1 >>> 0.0)) / 30000.0)));
+  var x$1 = ((x > 0) ? x : 0);
+  var progressPercent = ((x$1 < 100) ? x$1 : 100);
+  var isDanger = (seconds <= 5);
+  var x$2 = $n(view).Lapps_emojionary_View__f_phase;
+  var x$2$1 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+  if ((x$2 === null)) {
+    var $x_1 = (x$2$1 === null);
   } else {
-    var this$3 = $n(x);
-    var $x_1 = (this$3 === x$2);
+    var this$12 = $n(x$2);
+    var $x_1 = (this$12 === x$2$1);
   }
   if ($x_1) {
-    var $x_8 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_7 = $m_sr_ScalaRunTime$();
-    var $x_6 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var $x_5 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Temps restant : "))])));
-    var $x_4 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag());
-    var $x_3 = $m_sr_ScalaRunTime$();
-    var $x_2 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(((seconds <= 5) ? "timer-value danger" : "timer-value"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+    var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((isDanger ? "emo-timer danger" : "emo-timer"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var $x_5 = $m_sr_ScalaRunTime$();
+    var $x_4 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer-bar", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((("width: " + progressPercent) + "%"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+    var $x_3 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+    var $x_2 = $m_sr_ScalaRunTime$();
     $m_Lscalatags_JsDom$all$();
-    var v = (seconds + "s");
-    return $x_8.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_7.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_6, $x_5, $n($x_4).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_2, new $c_Lscalatags_JsDom$StringFrag(v)])))])));
+    var v = (("\u23f1 " + seconds) + "s");
+    return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)])))])));
   } else {
-    var this$6 = $m_Lscalatags_JsDom$all$();
+    var this$14 = $m_Lscalatags_JsDom$all$();
     var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
-    var this$8 = $m_s_$less$colon$less$();
-    var ev = this$8.s_$less$colon$less$__f_singleton;
-    return new $c_Lscalatags_JsDom$Cap$SeqFrag(this$6, frags, ev);
+    var this$16 = $m_s_$less$colon$less$();
+    var ev = this$16.s_$less$colon$less$__f_singleton;
+    return new $c_Lscalatags_JsDom$Cap$SeqFrag(this$14, frags, ev);
   }
 });
-$c_Lapps_EmojionaryUIInstance.prototype.renderStartButton__Lscalatags_generic_Frag = (function() {
+$c_Lapps_EmojionaryUIInstance.prototype.renderStartScreen__Lscalatags_generic_Frag = (function() {
   this.resetLocalState__V();
-  var $x_14 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_13 = $m_sr_ScalaRunTime$();
-  var $x_12 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-screen", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_11 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-start", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_10 = $m_sr_ScalaRunTime$();
+  var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-logo", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfad"))])));
   var this$2 = $n($m_Lscalatags_JsDom$all$().h1__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("app-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Emojionary"))]));
-  var $x_11 = this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
-  var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("app-subtitle", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Fais deviner un mot en n'utilisant que des emojis \u2728"))])));
-  var $x_9 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_8 = $m_sr_ScalaRunTime$();
-  var $x_7 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rules-card", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var this$5 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-  var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("R\u00e8gles du jeu"))]));
-  var $x_6 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, this$5.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().ul__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rules-list", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Un joueur choisit un mot secret."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Il envoie une suite d'emojis comme indices."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Les autres joueurs essaient de deviner le mot."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Plus tu trouves vite, plus tu marques de points !"))])))])))])));
+  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]));
+  var this$4 = $n(this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs));
+  var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Emojionary"))]));
+  var $x_8 = this$4.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1);
+  var $x_7 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-subtitle", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Fais deviner un mot avec des emojis !"))])));
+  var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-rules", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("1\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis un mot secret"))])))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("2\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Envoie des emojis comme indices"))])))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("3\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Les autres devinent"))])))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("4\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Moins d'indices = plus de points !"))])))])))])));
   var $x_5 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
   var $x_4 = $m_sr_ScalaRunTime$();
-  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-start", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-play", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
   var $x_2 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
   var $x_1 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
     this.sendEvent__O__V($s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event());
@@ -36898,46 +36602,60 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderStartButton__Lscalatags_generic_Fr
     var f$1 = $as_F0(f);
     return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
   }));
-  return $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_11, $x_10, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("D\u00e9marrer la partie \ud83d\ude80"))])))])));
+  return $x_11.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_10.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_9, $x_8, $x_7, $x_6, $n($n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Jouer \ud83d\ude80"))])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderEndScreen__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
-  var $x_14 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_13 = $m_sr_ScalaRunTime$();
-  var this$2 = $n($m_Lscalatags_JsDom$all$().h2__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Partie Termin\u00e9e !"))]));
-  var $x_12 = this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
+  var shouldAnimate = (!this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed);
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = true;
+  var $x_23 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-end", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_22 = $m_sr_ScalaRunTime$();
+  var this$1 = $n($m_Lscalatags_JsDom$all$().h1__Lscalatags_generic_TypedTag());
+  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("end-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]));
+  var this$3 = $n(this$1.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs));
+  var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Partie Termin\u00e9e !"))]));
+  var $x_21 = this$3.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1);
   matchResult1: {
-    var $x_10;
+    var $x_13;
     var x1 = $n(view).Lapps_emojionary_View__f_winner;
     if ((x1 instanceof $c_s_Some)) {
       var w = $as_T($n($as_s_Some(x1)).s_Some__f_value);
-      var this$4 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-      var $x_11 = $m_sr_ScalaRunTime$();
-      $m_Lscalatags_JsDom$all$();
-      var v = ("\ud83c\udfc6 Le gagnant est : " + w);
-      var xs$1 = $x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)]));
-      var $x_10 = this$4.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1);
+      var $x_20 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((shouldAnimate ? "winner-box animate" : "winner-box"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+      var $x_19 = $m_sr_ScalaRunTime$();
+      var $x_18 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("trophy", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfc6"))])));
+      var $x_17 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("winner-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Gagnant"))])));
+      var $x_16 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("winner-name", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+      var $x_15 = $m_sr_ScalaRunTime$();
+      if ((w === currentUser)) {
+        $m_Lscalatags_JsDom$all$();
+        var $x_14 = new $c_Lscalatags_JsDom$StringFrag("TOI !");
+      } else {
+        $m_Lscalatags_JsDom$all$();
+        var v = $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, w);
+        var $x_14 = new $c_Lscalatags_JsDom$StringFrag(v);
+      }
+      var $x_13 = $x_20.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_19.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_18, $x_17, $n($x_16).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14])))])));
       break matchResult1;
     }
     var x = $m_s_None$();
     if ((x === x1)) {
-      var this$6 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-      var xs$2 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Personne n'a trouv\u00e9..."))]));
-      var $x_10 = this$6.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$2);
+      var $x_13 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("no-winner", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\ude05"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Personne n'a trouv\u00e9..."))])))])));
       break matchResult1;
     }
     throw new $c_s_MatchError(x1);
   }
-  var $x_9 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag()));
+  var $x_12 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("reveal-box", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_11 = $m_sr_ScalaRunTime$();
+  var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Le mot \u00e9tait : "))])));
+  var $x_9 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
   var $x_8 = $m_sr_ScalaRunTime$();
   $m_Lscalatags_JsDom$all$();
-  var this$7 = $n($n(view).Lapps_emojionary_View__f_secretWord);
-  var v$1 = ("Le mot \u00e9tait : " + (this$7.isEmpty__Z() ? "???" : this$7.get__O()));
-  var $x_7 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$1)])));
+  var this$11 = $n($n(view).Lapps_emojionary_View__f_secretWord);
+  var v$1 = $as_T((this$11.isEmpty__Z() ? "???" : this$11.get__O()));
+  var $x_7 = $x_12.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_10, $n($x_9).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$1)])))])));
   var $x_6 = this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view);
   var $x_5 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
   var $x_4 = $m_sr_ScalaRunTime$();
-  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-start", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-play", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
   var $x_2 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
   var $x_1 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
     this.sendEvent__O__V($s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event());
@@ -36947,7 +36665,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderEndScreen__T__Lapps_emojionary_Vie
     var f$1 = $as_F0(f);
     return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
   }));
-  return $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_10, $x_7, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Rejouer tout de suite"))])))])));
+  return $x_23.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_22.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_21, $x_13, $x_7, $x_6, $n($n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Rejouer \ud83d\udd04"))])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
   var this$1 = $n($n(view).Lapps_emojionary_View__f_allScores);
@@ -36959,83 +36677,73 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderScoreBoard__T__Lapps_emojionary_Vi
     }
     throw new $c_s_MatchError(x$1$1);
   })), $m_s_math_Ordering$Int$()));
-  var $x_3 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_2 = $m_sr_ScalaRunTime$();
-  var $x_1 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scoreboard", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var this$3 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Scores"))]));
-  return $x_3.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_1, this$3.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs), ($n(ordered).isEmpty__Z() ? $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("empty-scores", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Aucun point pour l'instant."))]))) : $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().table__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().thead__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().tr__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().th__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Joueur"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().th__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Points"))])))])))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().tbody__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($as_sci_Seq($n(ordered).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$1$2) => {
+  return $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-scores", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scores-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udcca Scores"))]))), ($n(ordered).isEmpty__Z() ? $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scores-empty", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Aucun point"))]))) : $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scores-list", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($as_sci_Seq($n($as_sc_IterableOps($n(ordered).zipWithIndex__O())).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$1$2) => {
     var x$1$3 = $as_T2(x$1$2);
     if ((x$1$3 !== null)) {
-      var uid = $as_T($n(x$1$3).T2__f__1);
-      var score$1 = $uI($n(x$1$3).T2__f__2);
-      var isYou = (uid === currentUser);
-      var $x_12 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().tr__Lscalatags_generic_TypedTag()));
-      var $x_11 = $m_sr_ScalaRunTime$();
-      var $x_10 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((isYou ? "score-row you" : "score-row"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-      var $x_9 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().td__Lscalatags_generic_TypedTag()));
-      var $x_8 = $m_sr_ScalaRunTime$();
-      if (isYou) {
+      var x9 = $as_T2($n(x$1$3).T2__f__1);
+      if ((x9 !== null)) {
+        var uid = $as_T($n(x9).T2__f__1);
+        var score$1 = $uI($n(x9).T2__f__2);
+        var idx = $uI($n(x$1$3).T2__f__2);
+        var isYou = (uid === currentUser);
+        var medal;
+        switch (idx) {
+          case 0: {
+            var medal = "\ud83e\udd47";
+            break;
+          }
+          case 1: {
+            var medal = "\ud83e\udd48";
+            break;
+          }
+          case 2: {
+            var medal = "\ud83e\udd49";
+            break;
+          }
+          default: {
+            var medal = "  ";
+          }
+        }
+        var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((isYou ? "score-row me" : "score-row"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+        var $x_8 = $m_sr_ScalaRunTime$();
+        var $x_7 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("score-medal", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(medal))])));
+        var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("score-name", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+        var $x_5 = $m_sr_ScalaRunTime$();
+        if (isYou) {
+          $m_Lscalatags_JsDom$all$();
+          var $x_4 = new $c_Lscalatags_JsDom$StringFrag("Toi");
+        } else {
+          $m_Lscalatags_JsDom$all$();
+          var v = $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, uid);
+          var $x_4 = new $c_Lscalatags_JsDom$StringFrag(v);
+        }
+        var $x_3 = $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4])));
+        var $x_2 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("score-pts", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+        var $x_1 = $m_sr_ScalaRunTime$();
         $m_Lscalatags_JsDom$all$();
-        var v = (("Toi (" + $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, uid)) + ")");
-        var $x_7 = new $c_Lscalatags_JsDom$StringFrag(v);
-      } else {
-        $m_Lscalatags_JsDom$all$();
-        var v$1 = $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, uid);
-        var $x_7 = new $c_Lscalatags_JsDom$StringFrag(v$1);
+        var v$1 = ("" + score$1);
+        return $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, $x_3, $n($x_2).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_1.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$1)])))])));
       }
-      var $x_6 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7])));
-      var $x_5 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().td__Lscalatags_generic_TypedTag());
-      var $x_4 = $m_sr_ScalaRunTime$();
-      $m_Lscalatags_JsDom$all$();
-      var v$2 = ("" + score$1);
-      return $x_12.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_10, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$2)])))])));
     }
     throw new $c_s_MatchError(x$1$3);
-  })))))]))))])));
+  }))))))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderActiveGame__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
-  var $x_16 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_15 = $m_sr_ScalaRunTime$();
-  var $x_14 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-layout", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_12 = $m_sr_ScalaRunTime$();
-  var $x_11 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("sidebar", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_10 = this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view);
+  var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-game", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_5 = $m_sr_ScalaRunTime$();
+  var $x_4 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-side", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+  var $x_3 = $m_sr_ScalaRunTime$();
+  var $x_2 = this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view);
   if ((!$n(view).Lapps_emojionary_View__f_amIDescriber)) {
-    var $x_9 = this.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
+    var $x_1 = this.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
   } else {
     var this$1 = $m_Lscalatags_JsDom$all$();
     var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
     var this$3 = $m_s_$less$colon$less$();
     var ev = this$3.s_$less$colon$less$__f_singleton;
-    var $x_9 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$1, frags, ev);
+    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$1, frags, ev);
   }
-  var $x_8 = $x_13.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_12.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11, $x_10, $x_9])));
-  var $x_7 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-  var $x_6 = $m_sr_ScalaRunTime$();
-  var $x_5 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("main-panel", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_4 = this.renderTimer__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
-  if ($n(view).Lapps_emojionary_View__f_amIDescriber) {
-    var this$6 = $m_Lscalatags_JsDom$all$();
-    var $x_2 = $m_sr_ScalaRunTime$();
-    var this$5 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-    var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu fais deviner ! \ud83e\udd2b"))]));
-    var frags$1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$5.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs), this.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
-    var this$8 = $m_s_$less$colon$less$();
-    var ev$1 = this$8.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$6, frags$1, ev$1);
-  } else {
-    var this$11 = $m_Lscalatags_JsDom$all$();
-    var $x_3 = $m_sr_ScalaRunTime$();
-    var this$10 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-    var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu dois deviner ! \ud83e\udd14"))]));
-    var frags$2 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$10.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1), this.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
-    var this$13 = $m_s_$less$colon$less$();
-    var ev$2 = this$13.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$11, frags$2, ev$2);
-  }
-  return $x_16.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14, $x_8, $n($x_7).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_5, $x_4, $x_1])))])));
+  return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($x_4).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_2, $x_1]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-main", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([this.renderTimer__Lapps_emojionary_View__Lscalatags_generic_Frag(view), ($n(view).Lapps_emojionary_View__f_amIDescriber ? $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-box describer", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-badge", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfa8 Tu fais deviner !"))]))), this.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]))) : $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-box guesser", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-badge", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udd0d \u00c0 toi de deviner !"))]))), this.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]))))])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   if (($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z() && (this.Lapps_EmojionaryUIInstance__f_lastHintCount > 0))) {
@@ -37050,58 +36758,49 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionar
     var this$1 = $n(x);
     var isWaitingForGuessers = (this$1 === x$2);
   }
-  var $x_25 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_24 = $m_sr_ScalaRunTime$();
+  var $x_21 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("describer-panel", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_20 = $m_sr_ScalaRunTime$();
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
     this.maintainFocus__Lorg_scalajs_dom_HTMLInputElement__V(this.secretInput__Lorg_scalajs_dom_HTMLInputElement());
-    var $x_17 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_16 = $m_sr_ScalaRunTime$();
-    var $x_15 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var this$3 = $n($m_Lscalatags_JsDom$all$().h4__Lscalatags_generic_TypedTag());
-    var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("margin-bottom: 10px; color: #2c3e50;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfaf \u00c0 toi de faire deviner !"))]));
-    var $x_14 = this$3.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
-    var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis le mot secret + 1er Emoji :"))])));
-    var this$5 = $m_Lscalatags_JsDom$all$();
+    var $x_14 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var $x_13 = $m_sr_ScalaRunTime$();
+    var $x_12 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("section-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfaf Choisis ton mot secret"))])));
+    var this$3 = $m_Lscalatags_JsDom$all$();
     var e = this.secretInput__Lorg_scalajs_dom_HTMLInputElement();
-    var $x_12 = $x_17.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_16.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_15, $x_14, $x_13, new $c_Lscalatags_LowPriorityImplicits$bindNode(this$5, e)])));
+    var $x_11 = $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, new $c_Lscalatags_LowPriorityImplicits$bindNode(this$3, e), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("section-hint", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Puis clique sur un emoji"))])))])));
   } else {
-    var $x_23 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_22 = $m_sr_ScalaRunTime$();
-    var $x_21 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-reminder", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    $m_Lscalatags_JsDom$all$();
-    var $x_20 = new $c_Lscalatags_JsDom$StringFrag("Mot secret : ");
-    var $x_19 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
+    var $x_19 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-display", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
     var $x_18 = $m_sr_ScalaRunTime$();
+    var $x_17 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Mot : "))])));
+    var $x_16 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
+    var $x_15 = $m_sr_ScalaRunTime$();
     $m_Lscalatags_JsDom$all$();
-    var this$7 = $n($n(view).Lapps_emojionary_View__f_secretWord);
-    var this$8 = $n($as_T((this$7.isEmpty__Z() ? "???" : this$7.get__O())));
-    var $x_12 = $x_23.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_22.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_21, $x_20, $n($x_19).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(this$8)])))])));
+    var this$6 = $n($n(view).Lapps_emojionary_View__f_secretWord);
+    var v = $as_T((this$6.isEmpty__Z() ? "???" : this$6.get__O()));
+    var $x_11 = $x_19.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_17, $n($x_16).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)])))])));
   }
   if (isWaitingForGuessers) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("color: #3498db; font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3 Les joueurs r\u00e9fl\u00e9chissent..."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu ne peux pas envoyer d'indice pour le moment."))])))])));
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box waiting", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Les joueurs r\u00e9fl\u00e9chissent..."))])))])));
   } else {
-    var this$25 = $m_Lscalatags_JsDom$all$();
-    var $x_11 = $m_sr_ScalaRunTime$();
-    var this$12 = $n($n(view).Lapps_emojionary_View__f_hints);
-    if ((!this$12.isEmpty__Z())) {
-      var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("background: #eafaf1; color: #27ae60;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udc49 C'est \u00e0 toi !"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis un nouvel emoji pour les aider."))])))])));
+    var this$20 = $m_Lscalatags_JsDom$all$();
+    var $x_10 = $m_sr_ScalaRunTime$();
+    var this$10 = $n($n(view).Lapps_emojionary_View__f_hints);
+    if ((!this$10.isEmpty__Z())) {
+      var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box ready", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udc49"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Envoie un nouvel emoji !"))])))])));
     } else {
-      var this$15 = $m_Lscalatags_JsDom$all$();
+      var this$13 = $m_Lscalatags_JsDom$all$();
       var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
-      var this$17 = $m_s_$less$colon$less$();
-      var ev = this$17.s_$less$colon$less$__f_singleton;
-      var $x_10 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$15, frags, ev);
+      var this$15 = $m_s_$less$colon$less$();
+      var ev = this$15.s_$less$colon$less$__f_singleton;
+      var $x_9 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$13, frags, ev);
     }
-    var $x_9 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-    var $x_8 = $m_sr_ScalaRunTime$();
-    var $x_7 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-keyboard", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var this$24 = $m_Lscalatags_JsDom$all$();
-    var this$21 = $n($n(view).Lapps_emojionary_View__f_availableEmojis);
+    var $x_8 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-board", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+    var this$19 = $n($n(view).Lapps_emojionary_View__f_availableEmojis);
     var f$2 = ((emoji) => {
       var emoji$1 = $as_T(emoji);
-      var $x_6 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag()));
+      var $x_6 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
       var $x_5 = $m_sr_ScalaRunTime$();
-      var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-key", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+      var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-btn", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
       var $x_3 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
       var $x_2 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
         this.onEmojiClicked__Lapps_emojionary_View__T__V(view, emoji$1);
@@ -37111,15 +36810,15 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionar
         var f$1 = $as_F0(f);
         return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
       }));
-      return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev$1)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji$1))])));
+      return $n($n($x_6).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev$1))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji$1))])));
     });
-    if ((this$21 === $m_sci_Nil$())) {
-      var xs$1 = $m_sci_Nil$();
+    if ((this$19 === $m_sci_Nil$())) {
+      var $x_7 = $m_sci_Nil$();
     } else {
-      var x0 = this$21.head__O();
+      var x0 = this$19.head__O();
       var h = new $c_sci_$colon$colon(f$2(x0), $m_sci_Nil$());
       var t = h;
-      var rest = $as_sci_List(this$21.tail__O());
+      var rest = $as_sci_List(this$19.tail__O());
       while ((rest !== $m_sci_Nil$())) {
         var x0$1 = $n(rest).head__O();
         var nx = new $c_sci_$colon$colon(f$2(x0$1), $m_sci_Nil$());
@@ -37127,16 +36826,14 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionar
         t = nx;
         rest = $as_sci_List($n(rest).tail__O());
       }
-      var xs$1 = h;
+      var $x_7 = h;
     }
-    var this$23 = $m_s_$less$colon$less$();
-    var ev$2 = this$23.s_$less$colon$less$__f_singleton;
-    var frags$1 = $x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([$x_10, $n($x_9).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, new $c_Lscalatags_JsDom$Cap$SeqFrag(this$24, xs$1, ev$2)])))]));
-    var this$27 = $m_s_$less$colon$less$();
-    var ev$3 = this$27.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$25, frags$1, ev$3);
+    var frags$1 = $x_10.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([$x_9, $n($x_8).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_7)]));
+    var this$22 = $m_s_$less$colon$less$();
+    var ev$2 = this$22.s_$less$colon$less$__f_singleton;
+    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$20, frags$1, ev$2);
   }
-  return $x_25.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_24.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_1])));
+  return $x_21.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_20.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11, $x_1])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.onEmojiClicked__Lapps_emojionary_View__T__V = (function(view, emoji) {
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
@@ -37145,7 +36842,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.onEmojiClicked__Lapps_emojionary_View__T
     if ((!(this$3 === ""))) {
       this.sendEvent__O__V(new $c_Lapps_emojionary_Event$SendFirstHint(word, emoji));
     } else {
-      window.alert("Mot secret obligatoire !");
+      window.alert("Entre d'abord un mot secret !");
     }
   } else {
     this.sendEvent__O__V(new $c_Lapps_emojionary_Event$SendHint(emoji));
@@ -37156,6 +36853,8 @@ $c_Lapps_EmojionaryUIInstance.prototype.resetLocalState__V = (function() {
   this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
   this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
   this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = false;
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   var currentHintCount = $n($n(view).Lapps_emojionary_View__f_hints).length__I();
@@ -37163,6 +36862,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_
     this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
     this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
+    this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
   }
   if ((currentHintCount > this.Lapps_EmojionaryUIInstance__f_lastHintCount)) {
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
@@ -37172,6 +36872,10 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_
       this.guessInput__Lorg_scalajs_dom_HTMLInputElement().focus();
     }), 0.0);
   }
+  var hintsToAnimate = this.Lapps_EmojionaryUIInstance__f_animatedHintCount;
+  if ((currentHintCount > this.Lapps_EmojionaryUIInstance__f_animatedHintCount)) {
+    this.Lapps_EmojionaryUIInstance__f_animatedHintCount = currentHintCount;
+  }
   var x = $n(view).Lapps_emojionary_View__f_phase;
   var x$2 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
   if ((x === null)) {
@@ -37180,70 +36884,35 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_
     var this$2 = $n(x);
     var isWaitingForHintPhase = (this$2 === x$2);
   }
-  var $x_19 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_18 = $m_sr_ScalaRunTime$();
-  var $x_17 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guesser-controls", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_16 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Regarde les indices :"))])));
-  var $x_15 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_14 = $m_sr_ScalaRunTime$();
-  var $x_13 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-display", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_20 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guesser-panel", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_19 = $m_sr_ScalaRunTime$();
+  var $x_18 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_17 = $m_sr_ScalaRunTime$();
+  var $x_16 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_15 = $m_sr_ScalaRunTime$();
+  $m_Lscalatags_JsDom$all$();
+  var v = (("\ud83d\udca1 Indices (" + $n($n(view).Lapps_emojionary_View__f_hints).length__I()) + "/5)");
+  var $x_14 = $x_16.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)])));
+  var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-box", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+  var $x_12 = $m_sr_ScalaRunTime$();
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
-    var $x_12 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("En attente..."))])));
+    var $x_11 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-wait", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("En attente..."))])));
   } else {
-    $m_Lscalatags_JsDom$all$();
+    var this$8 = $m_Lscalatags_JsDom$all$();
     var this$5 = $n($n(view).Lapps_emojionary_View__f_hints);
-    var v = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$5, "", " ", "");
-    var $x_12 = new $c_Lscalatags_JsDom$StringFrag(v);
-  }
-  var $x_11 = $x_15.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_14.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_13, $as_Lscalatags_generic_Modifier($x_12)])));
-  if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3 Le d\u00e9crypteur choisit le premier indice..."))])));
-  } else if ((isWaitingForHintPhase || this.Lapps_EmojionaryUIInstance__f_waitingForNextHint)) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("color: #e67e22; font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3 En attente du prochain indice..."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu ne peux plus proposer pour l'indice actuel."))])))])));
-  } else {
-    this.maintainFocus__Lorg_scalajs_dom_HTMLInputElement__V(this.guessInput__Lorg_scalajs_dom_HTMLInputElement());
-    var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_9 = $m_sr_ScalaRunTime$();
-    var $x_8 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("input-group", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var this$10 = $m_Lscalatags_JsDom$all$();
-    var e = this.guessInput__Lorg_scalajs_dom_HTMLInputElement();
-    var $x_7 = new $c_Lscalatags_LowPriorityImplicits$bindNode(this$10, e);
-    var $x_6 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
-    var $x_5 = $m_sr_ScalaRunTime$();
-    var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-guess", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var $x_3 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
-    var $x_2 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
-      this.submitGuess__V();
-    }));
-    $m_Lscalatags_JsDom$all$();
-    var ev = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((f) => {
-      var f$1 = $as_F0(f);
-      return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
-    }));
-    var $x_1 = $x_10.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_9.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_8, $x_7, $n($x_6).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Deviner"))])))])));
-  }
-  return $x_19.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_17, $x_16, $x_11, $x_1])));
-});
-$c_Lapps_EmojionaryUIInstance.prototype.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
-  var errors = $n(view).Lapps_emojionary_View__f_myWrongGuesses;
-  var $x_7 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_6 = $m_sr_ScalaRunTime$();
-  var $x_5 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-history", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var this$2 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tes erreurs"))]));
-  var $x_4 = this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
-  if ($n(errors).isEmpty__Z()) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("empty-history", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu n'as encore fait aucune erreur \ud83d\udc4c"))])));
-  } else {
-    var $x_3 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().ul__Lscalatags_generic_TypedTag()));
-    var this$4 = $n(errors);
-    var this$7 = $n($as_sci_List($f_sc_SeqOps__distinct__O(this$4)));
-    var f = ((g) => {
-      var g$1 = $as_T(g);
-      return $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u274c ")), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(g$1))])));
+    var this$7 = $n($as_sci_List($f_sc_StrictOptimizedIterableOps__zipWithIndex__O(this$5)));
+    var f = ((x$1) => {
+      var x$1$1 = $as_T2(x$1);
+      if ((x$1$1 !== null)) {
+        var emoji = $as_T($n(x$1$1).T2__f__1);
+        var idx = $uI($n(x$1$1).T2__f__2);
+        var shouldAnimate = (idx >= hintsToAnimate);
+        return $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((shouldAnimate ? "hint-emoji animate" : "hint-emoji"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji))])));
+      }
+      throw new $c_s_MatchError(x$1$1);
     });
     if ((this$7 === $m_sci_Nil$())) {
-      var $x_2 = $m_sci_Nil$();
+      var frags = $m_sci_Nil$();
     } else {
       var x0 = this$7.head__O();
       var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
@@ -37256,11 +36925,74 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuessHistory__Lapps_emojionary_Vie
         t = nx;
         rest = $as_sci_List($n(rest).tail__O());
       }
+      var frags = h;
+    }
+    var this$10 = $m_s_$less$colon$less$();
+    var ev = this$10.s_$less$colon$less$__f_singleton;
+    var $x_11 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$8, frags, ev);
+  }
+  var $x_10 = $x_18.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_17.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14, $n($x_13).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_12.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11])))])));
+  if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box waiting", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Le d\u00e9crypteur choisit..."))])))])));
+  } else if ((isWaitingForHintPhase || this.Lapps_EmojionaryUIInstance__f_waitingForNextHint)) {
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box blocked", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udd12"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Attends le prochain indice..."))])))])));
+  } else {
+    this.maintainFocus__Lorg_scalajs_dom_HTMLInputElement__V(this.guessInput__Lorg_scalajs_dom_HTMLInputElement());
+    var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-form", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var $x_8 = $m_sr_ScalaRunTime$();
+    var this$15 = $m_Lscalatags_JsDom$all$();
+    var e = this.guessInput__Lorg_scalajs_dom_HTMLInputElement();
+    var $x_7 = new $c_Lscalatags_LowPriorityImplicits$bindNode(this$15, e);
+    var $x_6 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
+    var $x_5 = $m_sr_ScalaRunTime$();
+    var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-guess", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+    var $x_3 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
+    var $x_2 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
+      this.submitGuess__V();
+    }));
+    $m_Lscalatags_JsDom$all$();
+    var ev$1 = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((f$1) => {
+      var f$2 = $as_F0(f$1);
+      return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$2);
+    }));
+    var $x_1 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, $n($n($x_6).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev$1))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Deviner \u2192"))])))])));
+  }
+  return $x_20.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_19.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_10, $x_1])));
+});
+$c_Lapps_EmojionaryUIInstance.prototype.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
+  var errors = $n(view).Lapps_emojionary_View__f_myWrongGuesses;
+  var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-history", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_5 = $m_sr_ScalaRunTime$();
+  var $x_4 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udcdd Tes essais"))])));
+  if ($n(errors).isEmpty__Z()) {
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-empty", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Aucune erreur \ud83d\udc4c"))])));
+  } else {
+    var $x_3 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-list", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var this$3 = $n(errors);
+    var this$6 = $n($as_sci_List($f_sc_SeqOps__distinct__O(this$3)));
+    var f = ((g) => {
+      var g$1 = $as_T(g);
+      return $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-item", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-x", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u2717"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(g$1))])))])));
+    });
+    if ((this$6 === $m_sci_Nil$())) {
+      var $x_2 = $m_sci_Nil$();
+    } else {
+      var x0 = this$6.head__O();
+      var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+      var t = h;
+      var rest = $as_sci_List(this$6.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var x0$1 = $n(rest).head__O();
+        var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+        $n(t).sci_$colon$colon__f_next = nx;
+        t = nx;
+        rest = $as_sci_List($n(rest).tail__O());
+      }
       var $x_2 = h;
     }
     var $x_1 = $x_3.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_2);
   }
-  return $x_7.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_5, $x_4, $x_1])));
+  return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $x_1])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.submitGuess__V = (function() {
   var text = $f_T__trim__T($n($as_T(this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value)));
@@ -37270,9 +37002,6 @@ $c_Lapps_EmojionaryUIInstance.prototype.submitGuess__V = (function() {
     this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = true;
   }
-});
-$c_Lapps_EmojionaryUIInstance.prototype.css__T = (function() {
-  return "\n    body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; height: 100vh; }\n    .app-container {\n      background: white;\n      width: 900px;              \n      padding: 24px;\n      border-radius: 20px;\n      text-align: left;\n      box-shadow: 0 4px 18px rgba(0,0,0,0.08);\n      margin-top: 20px;\n    }    \n    .role-title { color: #333; margin-bottom: 20px; }\n    .emoji-keyboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 5px; margin-top: 15px; max-height: 300px; overflow-y: auto; padding: 10px; background: #fafafa; border-radius: 8px; }\n    .emoji-key { font-size: 1.5em; background: white; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; padding: 5px; }\n    .emoji-key:hover { background: #e3f2fd; transform: scale(1.1); }\n    .hints-display { font-size: 3em; margin: 20px 0; background: #ecf0f1; padding: 10px; border-radius: 10px; letter-spacing: 5px; min-height: 60px; }\n    #secret-word-input, #guess-input { padding: 10px; font-size: 1.1em; width: 60%; border: 2px solid #ddd; border-radius: 6px; }\n    .btn-start { background: #27ae60; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 1.2em; cursor: pointer; margin-top: 20px;}\n    .btn-guess { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 1.1em; margin-left: 5px; cursor: pointer; transition: background 0.3s; }\n    .secret-reminder { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }\n    .status-message { padding: 20px; background: #f8f9fa; border-radius: 8px; color: #7f8c8d; font-size: 1.1em; animation: fadeIn 0.3s; }\n    \n    .game-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: flex-start; }\n    .sidebar { display: flex; flex-direction: column; gap: 12px; }\n    .main-panel { text-align: center; }\n    .scoreboard { background: #f7f9fb; border-radius: 12px; padding: 10px 14px; font-size: 0.9em; border: 1px solid #e3e9f0; }\n    .scoreboard h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }\n    .scoreboard table { width: 100%; border-collapse: collapse; }\n    .scoreboard th, .scoreboard td { padding: 4px 6px; border-bottom: 1px solid #edf1f5; }\n    .score-row.you { background: #eafaf1; font-weight: 600; }\n    .guess-history { background: #fdfefe; border-radius: 12px; padding: 8px 10px; font-size: 0.9em; text-align: left; border: 1px solid #e3e9f0; }\n    .guess-history h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }\n    .guess-history ul { list-style: none; padding-left: 0; margin: 4px 0 0 0; max-height: 120px; overflow-y: auto; }\n    .guess-history li { padding: 2px 0; }\n    .empty-history { font-size: 0.85em; color: #7f8c8d; margin: 4px 0 0 0; font-style: italic; }\n    .start-screen { display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; padding: 10px 20px; }\n    .app-title { font-size: 2rem; margin: 0; color: #2c3e50; }\n    .app-subtitle { margin: 4px 0 8px 0; color: #7f8c8d; }\n    .rules-card { background: #f7f9fb; border-radius: 14px; padding: 14px 18px; border: 1px solid #e3e9f0; text-align: left; max-width: 520px; }\n    .rules-list { margin: 0; padding-left: 18px; font-size: 0.95em; color: #555; }\n    .timer { margin: 10px auto 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #fdf6e3; border: 1px solid #f1c40f33; font-size: 0.95em; color: #7d6608; }\n    .timer-label { font-weight: 500; }\n    .timer-value { font-weight: 600; }\n    .timer-value.danger { color: #c0392b; }\n    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }\n  ";
 });
 var $d_Lapps_EmojionaryUIInstance = new $TypeData().initClass($c_Lapps_EmojionaryUIInstance, "apps.EmojionaryUIInstance", ({
   Lapps_EmojionaryUIInstance: 1,
@@ -46180,18 +45909,12 @@ function $c_Lscalatags_JsDom$all$() {
   this.Lscalatags_JsDom$all$__f_h1bitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_h2$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_h2bitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_h3$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_h3bitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_h4$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_h4bitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_header$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_headerbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_p$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_pbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_ul$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_ulbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_li$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_libitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_figure$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_figurebitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_figcaption$lzy2 = null;
@@ -46208,18 +45931,6 @@ function $c_Lscalatags_JsDom$all$() {
   this.Lscalatags_JsDom$all$__f_spanbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_img$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_imgbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_table$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_tablebitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_tbody$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_tbodybitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_thead$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_theadbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_tr$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_trbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_td$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_tdbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_th$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_thbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_form$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_formbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_fieldset$lzy2 = null;
@@ -46382,14 +46093,6 @@ $c_Lscalatags_JsDom$all$.prototype.h2__Lscalatags_generic_TypedTag = (function()
   }
   return this.Lscalatags_JsDom$all$__f_h2$lzy2;
 });
-$c_Lscalatags_JsDom$all$.prototype.h3__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_h3bitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_h3$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "h3", false, ns);
-    this.Lscalatags_JsDom$all$__f_h3bitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_h3$lzy2;
-});
 $c_Lscalatags_JsDom$all$.prototype.h4__Lscalatags_generic_TypedTag = (function() {
   if ((!this.Lscalatags_JsDom$all$__f_h4bitmap$2)) {
     var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
@@ -46413,22 +46116,6 @@ $c_Lscalatags_JsDom$all$.prototype.p__Lscalatags_generic_TypedTag = (function() 
     this.Lscalatags_JsDom$all$__f_pbitmap$2 = true;
   }
   return this.Lscalatags_JsDom$all$__f_p$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.ul__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_ulbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_ul$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "ul", false, ns);
-    this.Lscalatags_JsDom$all$__f_ulbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_ul$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.li__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_libitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_li$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "li", false, ns);
-    this.Lscalatags_JsDom$all$__f_libitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_li$lzy2;
 });
 $c_Lscalatags_JsDom$all$.prototype.figure__Lscalatags_generic_TypedTag = (function() {
   if ((!this.Lscalatags_JsDom$all$__f_figurebitmap$2)) {
@@ -46493,54 +46180,6 @@ $c_Lscalatags_JsDom$all$.prototype.img__Lscalatags_generic_TypedTag = (function(
     this.Lscalatags_JsDom$all$__f_imgbitmap$2 = true;
   }
   return this.Lscalatags_JsDom$all$__f_img$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.table__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_tablebitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_table$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "table", false, ns);
-    this.Lscalatags_JsDom$all$__f_tablebitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_table$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.tbody__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_tbodybitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_tbody$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "tbody", false, ns);
-    this.Lscalatags_JsDom$all$__f_tbodybitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_tbody$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.thead__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_theadbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_thead$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "thead", false, ns);
-    this.Lscalatags_JsDom$all$__f_theadbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_thead$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.tr__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_trbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_tr$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "tr", false, ns);
-    this.Lscalatags_JsDom$all$__f_trbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_tr$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.td__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_tdbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_td$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "td", false, ns);
-    this.Lscalatags_JsDom$all$__f_tdbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_td$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.th__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_thbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_th$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "th", false, ns);
-    this.Lscalatags_JsDom$all$__f_thbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_th$lzy2;
 });
 $c_Lscalatags_JsDom$all$.prototype.form__Lscalatags_generic_TypedTag = (function() {
   if ((!this.Lscalatags_JsDom$all$__f_formbitmap$2)) {
