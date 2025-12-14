@@ -126,7 +126,7 @@ sbt run
 
 2. Open in browser:
 ```
-http://localhost:9000
+http://localhost:8080
 ```
 
 3. Create a game room and share the link with friends!
