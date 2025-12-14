@@ -321,7 +321,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
   // ============ HELPERS ============
   
   private def availableEmojis(state: State): List[Emoji] =
-    AllEmojis.filterNot(state.hints.contains).toList
+    AllEmojis.filterNot(state.hints.contains).distinct.toList
   
   private def nextDescriberIndex(state: State, winner: Option[UserId]): Int =
     winner match

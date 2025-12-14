@@ -7,29 +7,64 @@ import cs214.webapp.client.*
 import cs214.webapp.client.graphics.WebClientAppInstance
 import apps.emojionary.{Wire, Event, View, Phase}
 
+/** Entry point for the Emojionary Scala.js web client.
+  *
+  * Registers the application in the CS214 WebClient runtime and starts the
+  * websocket-based client so users can join and interact with the game.
+  */
 object MainJS extends WSClientApp {
+
+  /** Unique application identifier (must match the server-side app id). */
   def appId: String = "emojionary"
+
+  /** UI implementation identifier (HTML/ScalaTags UI). */
   def uiId: String = "html"
 
+  /** Main method invoked by Scala.js.
+    *
+    * Registers this app with the framework and starts the web client runtime.
+    */
   def main(args: Array[String]): Unit = {
     WebClient.register(this)
     WebClient.start()
   }
 
+  /** Creates a new client instance for a connected user.
+    *
+    * @param userId       the id assigned by the framework for the current user
+    * @param sendMessage  function used to send JSON events to the server
+    * @param target       DOM mount point provided by the framework
+    * @return a running client application instance that can render the UI
+    */
   def init(userId: UserId, sendMessage: ujson.Value => Unit, target: Target): ClientAppInstance = {
     new EmojionaryUIInstance(userId, sendMessage, target)
   }
 }
 
+/** Scala.js UI implementation for the Emojionary game.
+  *
+  * Responsibilities:
+  *  - Render the correct screen depending on the game phase (start, in-game, end).
+  *  - Collect user inputs (secret word, guesses, emoji clicks) and send events to the server.
+  *  - Maintain small local UI state (focus handling, per-hint waiting state, animations).
+  *
+  * @param userId       the id of the current user
+  * @param sendMessage  function used to send JSON messages to the server
+  * @param target       DOM target where the UI is rendered
+  */
 class EmojionaryUIInstance(
     userId: UserId,
     sendMessage: ujson.Value => Unit,
     target: Target
 ) extends WebClientAppInstance[Event, View](userId, sendMessage, target) {
 
+  /** Wire protocol used to encode/decode events and views. */
   override val wire = apps.emojionary.Wire
 
-  // Inject Google Fonts into document head on initialization
+  /** Loads Google Fonts at runtime by injecting a `<link>` tag into the document head.
+    *
+    * Fonts are used by the CSS theme to improve typography.
+    */
   locally {
     val link = dom.document.createElement("link").asInstanceOf[dom.html.Link]
     link.rel = "stylesheet"
@@ -37,32 +72,51 @@ class EmojionaryUIInstance(
     dom.document.head.appendChild(link)
   }
 
+  /** Input field for the describer to type the secret word.
+    *
+    * This element is created once and reused across renders to keep cursor/focus state.
+    */
   lazy val secretInput: dom.html.Input = {
     input(
-      id := "secret-word-input", 
-      tpe := "text", 
+      id := "secret-word-input",
+      tpe := "text",
       placeholder := "Ton mot secret...",
       autofocus := true
     ).render
   }
 
+  /** Input field for guessers to submit guesses.
+    *
+    * Pressing Enter triggers submission (same as clicking the button).
+    * This element is created once and reused across renders.
+    */
   lazy val guessInput: dom.html.Input = {
     val el = input(
-      id := "guess-input", 
-      tpe := "text", 
+      id := "guess-input",
+      tpe := "text",
       placeholder := "Ta réponse...",
       autofocus := true
     ).render
-    
+
     el.onkeydown = (e: dom.KeyboardEvent) => {
       if (e.key == "Enter") submitGuess()
     }
     el
   }
 
+  /** Tracks the last observed hint count to detect when a new hint appears. */
   private var lastHintCount: Int = 0
+
+  /** When true, the UI blocks further guesses until the next hint arrives. */
   private var waitingForNextHint: Boolean = false
 
+  /** Keeps focus on an input while preserving cursor selection.
+    *
+    * This is useful because the UI is re-rendered frequently and we want typing
+    * to remain smooth (no cursor jumps) while the user is actively focused.
+    *
+    * @param el input element to preserve focus and selection for
+    */
   def maintainFocus(el: dom.html.Input): Unit = {
     if (dom.document.activeElement == el) {
       val start = el.selectionStart
@@ -74,9 +128,17 @@ class EmojionaryUIInstance(
     }
   }
 
+  /** Root render function called by the framework.
+    *
+    * Chooses which screen to display based on the current `view.phase`.
+    *
+    * @param userId current user id (provided by the framework)
+    * @param view   latest projected view from the server
+    * @return a ScalaTags fragment representing the UI
+    */
   override def render(userId: UserId, view: View): Frag = {
     div(cls := "emo-app")(
-      if (view.phase == Phase.WaitingToStart) 
+      if (view.phase == Phase.WaitingToStart)
         renderStartScreen()
       else if (view.phase == Phase.GameEnd)
         renderEndScreen(userId, view)
@@ -85,6 +147,13 @@ class EmojionaryUIInstance(
     )
   }
 
+  /** Renders the countdown timer during the guessing phase.
+    *
+    * Displays a progress bar and remaining seconds. Turns into a "danger" state
+    * when time is almost over.
+    *
+    * @param view current projected view
+    */
   def renderTimer(view: View): Frag = {
     val totalMs = 30000L
     val rawSeconds = (view.remainingTimeMs / 1000L).toInt
@@ -101,9 +170,14 @@ class EmojionaryUIInstance(
       frag()
   }
 
+  /** Start screen UI (pre-game).
+    *
+    * Resets local UI state and displays game rules + a button to start.
+    * Clicking the start button sends `Event.StartGame`.
+    */
   def renderStartScreen(): Frag = {
     resetLocalState()
-    
+
     div(cls := "emo-start")(
       div(cls := "start-logo")("🎭"),
       h1(cls := "start-title")("Emojionary"),
@@ -122,43 +196,63 @@ class EmojionaryUIInstance(
     )
   }
 
+  /** End screen UI shown when the round finishes.
+    *
+    * Displays the winner (if any), reveals the secret word, shows the scoreboard,
+    * and allows restarting immediately.
+    *
+    * @param currentUser current user id
+    * @param view        current projected view
+    */
   def renderEndScreen(currentUser: UserId, view: View): Frag = {
     val shouldAnimate = !endAnimationPlayed
     endAnimationPlayed = true
-    
+
     div(cls := "emo-end")(
       h1(cls := "end-title")("Partie Terminée !"),
-      
+
       view.winner match {
-        case Some(w) => 
+        case Some(w) =>
           div(cls := (if (shouldAnimate) "winner-box animate" else "winner-box"))(
             div(cls := "trophy")("🏆"),
             div(cls := "winner-label")("Gagnant"),
             div(cls := "winner-name")(if (w == currentUser) "TOI !" else shortId(w))
           )
-        case None => 
+        case None =>
           div(cls := "no-winner")(
             span("😅"),
             span("Personne n'a trouvé...")
           )
       },
-      
+
       div(cls := "reveal-box")(
         span("Le mot était : "),
         strong(view.secretWord.getOrElse("???"))
       ),
-      
+
       renderScoreBoard(currentUser, view),
-      
+
       button(cls := "btn-play", onclick := { () => sendEvent(Event.StartGame) })(
         "Rejouer 🔄"
       )
     )
   }
 
+  /** Shortens a user id for compact display in the UI.
+    *
+    * @param uid raw user id
+    * @return truncated id with an ellipsis when needed
+    */
   private def shortId(uid: UserId): String =
     if (uid.length <= 8) uid else uid.take(8) + "…"
 
+  /** Renders the scoreboard card.
+    *
+    * Sorts scores descending and highlights the current user.
+    *
+    * @param currentUser current user id
+    * @param view        current projected view containing `allScores`
+    */
   def renderScoreBoard(currentUser: UserId, view: View): Frag = {
     val ordered = view.allScores.toSeq.sortBy { case (_, score) => -score }
 
@@ -186,6 +280,13 @@ class EmojionaryUIInstance(
     )
   }
 
+  /** Main in-game layout.
+    *
+    * Shows a sidebar (scores + error history) and the main panel (timer + role controls).
+    *
+    * @param currentUser current user id
+    * @param view        current projected view
+    */
   def renderActiveGame(currentUser: UserId, view: View): Frag = {
     div(cls := "emo-game")(
       div(cls := "game-side")(
@@ -210,6 +311,16 @@ class EmojionaryUIInstance(
     )
   }
 
+  /** Controls for the describer (word setter + emoji sender).
+    *
+    * Shows:
+    *  - Secret word input on the first hint,
+    *  - A secret word reminder afterwards,
+    *  - An emoji grid to send hints when allowed,
+    *  - A waiting message while guessers are playing.
+    *
+    * @param view current projected view
+    */
   def renderDescriberControls(view: View): Frag = {
     if (view.hints.isEmpty && lastHintCount > 0) {
       secretInput.value = ""
@@ -257,6 +368,14 @@ class EmojionaryUIInstance(
     )
   }
 
+  /** Handles emoji button clicks and sends the appropriate event to the server.
+    *
+    * - If it is the first hint, sends `SendFirstHint(secretWord, emoji)` (requires a non-empty word).
+    * - Otherwise, sends `SendHint(emoji)`.
+    *
+    * @param view  current projected view
+    * @param emoji clicked emoji
+    */
   def onEmojiClicked(view: View, emoji: String): Unit = {
     if (view.hints.isEmpty) {
       val word = secretInput.value.trim
@@ -270,6 +389,7 @@ class EmojionaryUIInstance(
     }
   }
 
+  /** Resets client-side UI state between rounds/screens. */
   def resetLocalState(): Unit = {
     secretInput.value = ""
     guessInput.value = ""
@@ -279,12 +399,21 @@ class EmojionaryUIInstance(
     endAnimationPlayed = false
   }
 
-  /** Track how many hints have been animated to avoid re-animating on timer ticks */
+  /** Tracks how many hints have been animated to avoid re-animating on timer ticks. */
   private var animatedHintCount: Int = 0
-  
-  /** Track if end screen animation has played */
+
+  /** Tracks whether the end-screen animation has already played. */
   private var endAnimationPlayed: Boolean = false
 
+  /** Controls for guessers (hint display + guess submission).
+    *
+    * Handles:
+    *  - Waiting states (no hints yet / waiting for next hint),
+    *  - Rendering and animating newly received hints,
+    *  - Allowing text submission and sending `SubmitGuess`.
+    *
+    * @param view current projected view
+    */
   def renderGuesserControls(view: View): Frag = {
     val currentHintCount = view.hints.length
 
@@ -302,7 +431,6 @@ class EmojionaryUIInstance(
       dom.window.setTimeout(() => guessInput.focus(), 0)
     }
 
-    // Update animated count after rendering
     val hintsToAnimate = animatedHintCount
     if (currentHintCount > animatedHintCount) {
       animatedHintCount = currentHintCount
@@ -318,7 +446,6 @@ class EmojionaryUIInstance(
             span(cls := "hints-wait")("En attente...")
           else
             frag(view.hints.zipWithIndex.map { case (emoji, idx) =>
-              // Only animate if this hint is new (idx >= hintsToAnimate)
               val shouldAnimate = idx >= hintsToAnimate
               span(
                 cls := (if (shouldAnimate) "hint-emoji animate" else "hint-emoji")
@@ -347,6 +474,10 @@ class EmojionaryUIInstance(
     )
   }
 
+  /** Renders a list of the current player's wrong guesses (error history).
+    *
+    * @param view current projected view
+    */
   def renderGuessHistory(view: View): Frag = {
     val errors = view.myWrongGuesses
 
@@ -366,6 +497,11 @@ class EmojionaryUIInstance(
     )
   }
 
+  /** Sends the current guess input as a `SubmitGuess` event (if non-empty).
+    *
+    * Also clears the input and sets the local waiting flag so the player cannot
+    * spam multiple guesses for the same hint.
+    */
   def submitGuess(): Unit = {
     val text = guessInput.value.trim
     if (text.nonEmpty) {
@@ -375,6 +511,17 @@ class EmojionaryUIInstance(
     }
   }
 
+  /** CSS theme for the UI.
+    *
+    * Defines:
+    *  - Global layout and main "card" container
+    *  - Start screen styling
+    *  - In-game layout (sidebar + main panel)
+    *  - Timer visuals
+    *  - Role panels (describer/guesser), emoji grid, score/history cards
+    *  - End screen styling
+    *  - Responsive behavior on small screens
+    */
   override def css: String = """
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1016,8 +1163,8 @@ class EmojionaryUIInstance(
       max-width: 280px;
     }
 
-    .hint-emoji { 
-      font-size: 1.6rem; 
+    .hint-emoji {
+      font-size: 1.6rem;
       width: 44px;
       height: 44px;
     }
@@ -1031,8 +1178,8 @@ class EmojionaryUIInstance(
       width: 100%;
     }
 
-    .btn-guess { 
-      width: 100%; 
+    .btn-guess {
+      width: 100%;
     }
 
     .emoji-board {
