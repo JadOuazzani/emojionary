@@ -1125,8 +1125,8 @@ function $c_Lapps_emojionary_Rules$() {
   this.Lapps_emojionary_Rules$__f_GameEndDurationMs = $L0;
   $n_Lapps_emojionary_Rules$ = this;
   this.Lapps_emojionary_Rules$__f_MaxHints = 5;
-  this.Lapps_emojionary_Rules$__f_HintDurationMs = new $c_RTLong(30000, 0);
-  this.Lapps_emojionary_Rules$__f_GameEndDurationMs = new $c_RTLong(30000, 0);
+  this.Lapps_emojionary_Rules$__f_HintDurationMs = new $c_RTLong(25000, 0);
+  this.Lapps_emojionary_Rules$__f_GameEndDurationMs = new $c_RTLong(20000, 0);
   var requirement = (this.Lapps_emojionary_Rules$__f_MaxHints > 0);
   if ((!requirement)) {
     throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: MaxHints must be positive");
@@ -10680,22 +10680,32 @@ function $asArrayOf_Lupickle_core_Visitor(obj, depth) {
   return (($isArrayOf_Lupickle_core_Visitor(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lupickle.core.Visitor;", depth));
 }
 function $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_Phase($thiz, json) {
+  var requirement = (json !== null);
+  if ((!requirement)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Phase JSON cannot be null");
+  }
+  var this$2 = $n($f_Lujson_Value__strOpt__s_Option($n(json)));
+  var requirement$1 = (!this$2.isEmpty__Z());
+  if ((!requirement$1)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Phase must be a string");
+  }
+  var phase;
   var x16 = $f_Lujson_Value__str__T($n(json));
   switch (x16) {
     case "WaitingToStart": {
-      return $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
+      var phase = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
       break;
     }
     case "WaitingForHint": {
-      return $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
+      var phase = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
       break;
     }
     case "Guessing": {
-      return $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+      var phase = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
       break;
     }
     case "GameEnd": {
-      return $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
+      var phase = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
       break;
     }
     default: {
@@ -10703,6 +10713,11 @@ function $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_
       throw new $c_Lcs214_webapp_DecodingException(msg);
     }
   }
+  var assertion = (phase !== null);
+  if ((!assertion)) {
+    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Decoded phase must not be null");
+  }
+  return phase;
 }
 /** @constructor */
 function $c_Lapps_emojionary_Wire$() {
@@ -10714,47 +10729,70 @@ function $h_Lapps_emojionary_Wire$() {
 }
 $h_Lapps_emojionary_Wire$.prototype = $c_Lapps_emojionary_Wire$.prototype;
 $c_Lapps_emojionary_Wire$.prototype.apps$emojionary$Wire$$$encodePhase__Lapps_emojionary_Phase__Lujson_Value = (function(phase) {
-  var x = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
-  if ((x === null)) {
-    var $x_1 = (phase === null);
+  var requirement = (phase !== null);
+  if ((!requirement)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Phase cannot be null");
+  }
+  matchResult5: {
+    var result;
+    var x = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
+    if ((x === null)) {
+      var $x_1 = (phase === null);
+    } else {
+      var this$2 = $n(x);
+      var $x_1 = (this$2 === phase);
+    }
+    if ($x_1) {
+      var result = new $c_Lujson_Str("WaitingToStart");
+      break matchResult5;
+    }
+    var x$3 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
+    if ((x$3 === null)) {
+      var $x_2 = (phase === null);
+    } else {
+      var this$4 = $n(x$3);
+      var $x_2 = (this$4 === phase);
+    }
+    if ($x_2) {
+      var result = new $c_Lujson_Str("WaitingForHint");
+      break matchResult5;
+    }
+    var x$5 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+    if ((x$5 === null)) {
+      var $x_3 = (phase === null);
+    } else {
+      var this$6 = $n(x$5);
+      var $x_3 = (this$6 === phase);
+    }
+    if ($x_3) {
+      var result = new $c_Lujson_Str("Guessing");
+      break matchResult5;
+    }
+    var x$7 = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
+    if ((x$7 === null)) {
+      var $x_4 = (phase === null);
+    } else {
+      var this$8 = $n(x$7);
+      var $x_4 = (this$8 === phase);
+    }
+    if ($x_4) {
+      var result = new $c_Lujson_Str("GameEnd");
+      break matchResult5;
+    }
+    throw new $c_s_MatchError(phase);
+  }
+  var this$12 = $n($f_Lujson_Value__strOpt__s_Option(result));
+  if ((!this$12.isEmpty__Z())) {
+    var x$1 = $f_Lujson_Value__str__T(result);
+    var this$15 = $n(x$1);
+    var assertion = (!(this$15 === ""));
   } else {
-    var this$1 = $n(x);
-    var $x_1 = (this$1 === phase);
+    var assertion = false;
   }
-  if ($x_1) {
-    return new $c_Lujson_Str("WaitingToStart");
+  if ((!assertion)) {
+    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Encoded phase must be a non-empty string");
   }
-  var x$3 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
-  if ((x$3 === null)) {
-    var $x_2 = (phase === null);
-  } else {
-    var this$3 = $n(x$3);
-    var $x_2 = (this$3 === phase);
-  }
-  if ($x_2) {
-    return new $c_Lujson_Str("WaitingForHint");
-  }
-  var x$5 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
-  if ((x$5 === null)) {
-    var $x_3 = (phase === null);
-  } else {
-    var this$5 = $n(x$5);
-    var $x_3 = (this$5 === phase);
-  }
-  if ($x_3) {
-    return new $c_Lujson_Str("Guessing");
-  }
-  var x$7 = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
-  if ((x$7 === null)) {
-    var $x_4 = (phase === null);
-  } else {
-    var this$7 = $n(x$7);
-    var $x_4 = (this$7 === phase);
-  }
-  if ($x_4) {
-    return new $c_Lujson_Str("GameEnd");
-  }
-  throw new $c_s_MatchError(phase);
+  return result;
 });
 var $d_Lapps_emojionary_Wire$ = new $TypeData().initClass($c_Lapps_emojionary_Wire$, "apps.emojionary.Wire$", ({
   Lapps_emojionary_Wire$: 1,
@@ -16840,6 +16878,11 @@ $c_sc_ClassTagIterableFactory$AnyIterableDelegate.prototype.newBuilder__scm_Buil
   var x0 = $m_s_reflect_ManifestFactory$AnyManifest$();
   return this$1.newBuilder__s_reflect_ClassTag__scm_Builder(x0);
 });
+$c_sc_ClassTagIterableFactory$AnyIterableDelegate.prototype.apply__sci_Seq__O = (function(elems) {
+  var this$1 = $n(this.sc_ClassTagIterableFactory$AnyIterableDelegate__f_delegate);
+  var evidence$7 = $m_s_reflect_ManifestFactory$AnyManifest$();
+  return this$1.from__sc_IterableOnce__O__O(elems, evidence$7);
+});
 function $ct_sc_IterableFactory$Delegate__sc_IterableFactory__($thiz, delegate) {
   $thiz.sc_IterableFactory$Delegate__f_delegate = delegate;
   return $thiz;
@@ -19573,6 +19616,16 @@ function $f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($thiz) {
   }
   throw new $c_Lujson_Value$InvalidData($thiz, "Expected ujson.Obj");
 }
+function $f_Lujson_Value__objOpt__s_Option($thiz) {
+  if (($thiz instanceof $c_Lujson_Obj)) {
+    var x$1 = $as_Lujson_Obj($thiz);
+    var this$2 = $n(x$1);
+    var x16 = this$2.Lujson_Obj__f_value;
+    return new $c_s_Some(x16);
+  } else {
+    return $m_s_None$();
+  }
+}
 function $f_Lujson_Value__arr__scm_ArrayBuffer($thiz) {
   if (($thiz instanceof $c_Lujson_Arr)) {
     var x$1 = $as_Lujson_Arr($thiz);
@@ -20189,113 +20242,204 @@ function $h_Lapps_emojionary_Wire$eventFormat$() {
 }
 $h_Lapps_emojionary_Wire$eventFormat$.prototype = $c_Lapps_emojionary_Wire$eventFormat$.prototype;
 $c_Lapps_emojionary_Wire$eventFormat$.prototype.encode__Lapps_emojionary_Event__Lujson_Value = (function(e) {
-  var x = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
-  if (((x === null) ? (e === null) : $n(x).equals__O__Z(e))) {
-    var items = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([]));
-    var map = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-    map.put__O__O__s_Option("type", new $c_Lujson_Str("StartGame"));
-    var this$7 = $n(items);
-    var it = this$7.iterator__sc_Iterator();
-    while ($n(it).hasNext__Z()) {
-      var x0 = $n(it).next__O();
-      var i = $as_T2(x0);
-      map.put__O__O__s_Option($n(i).T2__f__1, $n(i).T2__f__2);
-    }
-    return new $c_Lujson_Obj(map);
+  var requirement = (e !== null);
+  if ((!requirement)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Event cannot be null");
   }
-  if ((e instanceof $c_Lapps_emojionary_Event$SendFirstHint)) {
-    var x$1 = $as_Lapps_emojionary_Event$SendFirstHint(e);
-    var this$10 = $n(x$1);
-    var x10 = this$10.Lapps_emojionary_Event$SendFirstHint__f_secretWord;
-    var this$11 = $n(x$1);
-    var x11 = this$11.Lapps_emojionary_Event$SendFirstHint__f_emoji;
-    var $x_2 = $m_sr_ScalaRunTime$();
-    var this$16 = $n(x10);
-    var y = new $c_Lujson_Str(this$16);
-    var $x_1 = new $c_T2("secretWord", y);
-    var this$21 = $n(x11);
-    var y$1 = new $c_Lujson_Str(this$21);
-    var items$1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_1, new $c_T2("emoji", y$1)]));
-    var map$1 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-    map$1.put__O__O__s_Option("type", new $c_Lujson_Str("SendFirstHint"));
-    var this$28 = $n(items$1);
-    var it$1 = this$28.iterator__sc_Iterator();
-    while ($n(it$1).hasNext__Z()) {
-      var x0$1 = $n(it$1).next__O();
-      var i$1 = $as_T2(x0$1);
-      map$1.put__O__O__s_Option($n(i$1).T2__f__1, $n(i$1).T2__f__2);
+  matchResult1: {
+    var result;
+    var x = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
+    if (((x === null) ? (e === null) : $n(x).equals__O__Z(e))) {
+      var items = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([]));
+      var map = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+      map.put__O__O__s_Option("type", new $c_Lujson_Str("StartGame"));
+      var this$8 = $n(items);
+      var it = this$8.iterator__sc_Iterator();
+      while ($n(it).hasNext__Z()) {
+        var x0 = $n(it).next__O();
+        var i = $as_T2(x0);
+        map.put__O__O__s_Option($n(i).T2__f__1, $n(i).T2__f__2);
+      }
+      var result = new $c_Lujson_Obj(map);
+      break matchResult1;
     }
-    return new $c_Lujson_Obj(map$1);
-  }
-  if ((e instanceof $c_Lapps_emojionary_Event$SendHint)) {
-    var x$1$1 = $as_Lapps_emojionary_Event$SendHint(e);
-    var this$31 = $n(x$1$1);
-    var x7 = this$31.Lapps_emojionary_Event$SendHint__f_emoji;
-    var $x_3 = $m_sr_ScalaRunTime$();
-    var this$36 = $n(x7);
-    var y$2 = new $c_Lujson_Str(this$36);
-    var items$2 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("emoji", y$2)]));
-    var map$2 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-    map$2.put__O__O__s_Option("type", new $c_Lujson_Str("SendHint"));
-    var this$43 = $n(items$2);
-    var it$2 = this$43.iterator__sc_Iterator();
-    while ($n(it$2).hasNext__Z()) {
-      var x0$2 = $n(it$2).next__O();
-      var i$2 = $as_T2(x0$2);
-      map$2.put__O__O__s_Option($n(i$2).T2__f__1, $n(i$2).T2__f__2);
+    if ((e instanceof $c_Lapps_emojionary_Event$SendFirstHint)) {
+      var x$1 = $as_Lapps_emojionary_Event$SendFirstHint(e);
+      var this$11 = $n(x$1);
+      var x10 = this$11.Lapps_emojionary_Event$SendFirstHint__f_secretWord;
+      var this$12 = $n(x$1);
+      var x11 = this$12.Lapps_emojionary_Event$SendFirstHint__f_emoji;
+      var this$15 = $n(x10);
+      var requirement$1 = (!(this$15 === ""));
+      if ((!requirement$1)) {
+        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Secret word cannot be empty");
+      }
+      var this$19 = $n(x11);
+      var requirement$2 = (!(this$19 === ""));
+      if ((!requirement$2)) {
+        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
+      }
+      var $x_2 = $m_sr_ScalaRunTime$();
+      var this$25 = $n(x10);
+      var y = new $c_Lujson_Str(this$25);
+      var $x_1 = new $c_T2("secretWord", y);
+      var this$30 = $n(x11);
+      var y$1 = new $c_Lujson_Str(this$30);
+      var items$1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_1, new $c_T2("emoji", y$1)]));
+      var map$1 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+      map$1.put__O__O__s_Option("type", new $c_Lujson_Str("SendFirstHint"));
+      var this$37 = $n(items$1);
+      var it$1 = this$37.iterator__sc_Iterator();
+      while ($n(it$1).hasNext__Z()) {
+        var x0$1 = $n(it$1).next__O();
+        var i$1 = $as_T2(x0$1);
+        map$1.put__O__O__s_Option($n(i$1).T2__f__1, $n(i$1).T2__f__2);
+      }
+      var result = new $c_Lujson_Obj(map$1);
+      break matchResult1;
     }
-    return new $c_Lujson_Obj(map$2);
-  }
-  if ((e instanceof $c_Lapps_emojionary_Event$SubmitGuess)) {
-    var x$1$2 = $as_Lapps_emojionary_Event$SubmitGuess(e);
-    var this$46 = $n(x$1$2);
-    var x4 = this$46.Lapps_emojionary_Event$SubmitGuess__f_text;
-    var $x_4 = $m_sr_ScalaRunTime$();
-    var this$51 = $n(x4);
-    var y$3 = new $c_Lujson_Str(this$51);
-    var items$3 = $x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("text", y$3)]));
-    var map$3 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
-    map$3.put__O__O__s_Option("type", new $c_Lujson_Str("SubmitGuess"));
-    var this$58 = $n(items$3);
-    var it$3 = this$58.iterator__sc_Iterator();
-    while ($n(it$3).hasNext__Z()) {
-      var x0$3 = $n(it$3).next__O();
-      var i$3 = $as_T2(x0$3);
-      map$3.put__O__O__s_Option($n(i$3).T2__f__1, $n(i$3).T2__f__2);
+    if ((e instanceof $c_Lapps_emojionary_Event$SendHint)) {
+      var x$1$1 = $as_Lapps_emojionary_Event$SendHint(e);
+      var this$40 = $n(x$1$1);
+      var x7 = this$40.Lapps_emojionary_Event$SendHint__f_emoji;
+      var this$43 = $n(x7);
+      var requirement$3 = (!(this$43 === ""));
+      if ((!requirement$3)) {
+        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
+      }
+      var $x_3 = $m_sr_ScalaRunTime$();
+      var this$49 = $n(x7);
+      var y$2 = new $c_Lujson_Str(this$49);
+      var items$2 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("emoji", y$2)]));
+      var map$2 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+      map$2.put__O__O__s_Option("type", new $c_Lujson_Str("SendHint"));
+      var this$56 = $n(items$2);
+      var it$2 = this$56.iterator__sc_Iterator();
+      while ($n(it$2).hasNext__Z()) {
+        var x0$2 = $n(it$2).next__O();
+        var i$2 = $as_T2(x0$2);
+        map$2.put__O__O__s_Option($n(i$2).T2__f__1, $n(i$2).T2__f__2);
+      }
+      var result = new $c_Lujson_Obj(map$2);
+      break matchResult1;
     }
-    return new $c_Lujson_Obj(map$3);
+    if ((e instanceof $c_Lapps_emojionary_Event$SubmitGuess)) {
+      var x$1$2 = $as_Lapps_emojionary_Event$SubmitGuess(e);
+      var this$59 = $n(x$1$2);
+      var x4 = this$59.Lapps_emojionary_Event$SubmitGuess__f_text;
+      var this$62 = $n(x4);
+      var requirement$4 = (!(this$62 === ""));
+      if ((!requirement$4)) {
+        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Guess text cannot be empty");
+      }
+      var $x_4 = $m_sr_ScalaRunTime$();
+      var this$68 = $n(x4);
+      var y$3 = new $c_Lujson_Str(this$68);
+      var items$3 = $x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("text", y$3)]));
+      var map$3 = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
+      map$3.put__O__O__s_Option("type", new $c_Lujson_Str("SubmitGuess"));
+      var this$75 = $n(items$3);
+      var it$3 = this$75.iterator__sc_Iterator();
+      while ($n(it$3).hasNext__Z()) {
+        var x0$3 = $n(it$3).next__O();
+        var i$3 = $as_T2(x0$3);
+        map$3.put__O__O__s_Option($n(i$3).T2__f__1, $n(i$3).T2__f__2);
+      }
+      var result = new $c_Lujson_Obj(map$3);
+      break matchResult1;
+    }
+    throw new $c_s_MatchError(e);
   }
-  throw new $c_s_MatchError(e);
+  var this$79 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
+  var assertion = $f_sc_MapOps__contains__O__Z(this$79, "type");
+  if ((!assertion)) {
+    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Encoded event must contain type field");
+  }
+  return result;
 });
 $c_Lapps_emojionary_Wire$eventFormat$.prototype.decode__Lujson_Value__s_util_Try = (function(json) {
   try {
+    var requirement = (json !== null);
+    if ((!requirement)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON cannot be null");
+    }
+    var this$3 = $n($f_Lujson_Value__objOpt__s_Option($n(json)));
+    var requirement$1 = (!this$3.isEmpty__Z());
+    if ((!requirement$1)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON must be an object");
+    }
     var obj = $f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n(json));
-    var r1;
-    var this$2 = $n(obj);
-    var x12 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$2, "type"))));
+    var this$5 = $n(obj);
+    var requirement$2 = $f_sc_MapOps__contains__O__Z(this$5, "type");
+    if ((!requirement$2)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Event JSON must contain 'type' field");
+    }
+    var event;
+    var this$7 = $n(obj);
+    var x12 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$7, "type"))));
     switch (x12) {
       case "StartGame": {
-        var r1 = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
+        var event = $s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event();
         break;
       }
       case "SendFirstHint": {
-        var this$3 = $n(obj);
-        var secretWord = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$3, "secretWord"))));
-        var this$4 = $n(obj);
-        var emoji = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$4, "emoji"))));
-        var r1 = new $c_Lapps_emojionary_Event$SendFirstHint(secretWord, emoji);
+        var this$8 = $n(obj);
+        var requirement$3 = $f_sc_MapOps__contains__O__Z(this$8, "secretWord");
+        if ((!requirement$3)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SendFirstHint must contain 'secretWord'");
+        }
+        var this$10 = $n(obj);
+        var requirement$4 = $f_sc_MapOps__contains__O__Z(this$10, "emoji");
+        if ((!requirement$4)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SendFirstHint must contain 'emoji'");
+        }
+        var this$12 = $n(obj);
+        var secretWord = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$12, "secretWord"))));
+        var this$13 = $n(obj);
+        var emoji = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$13, "emoji"))));
+        var this$16 = $n(secretWord);
+        var requirement$5 = (!(this$16 === ""));
+        if ((!requirement$5)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Secret word cannot be empty");
+        }
+        var this$20 = $n(emoji);
+        var requirement$6 = (!(this$20 === ""));
+        if ((!requirement$6)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
+        }
+        var event = new $c_Lapps_emojionary_Event$SendFirstHint(secretWord, emoji);
         break;
       }
       case "SendHint": {
-        var this$6 = $n(obj);
-        var emoji$1 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$6, "emoji"))));
-        var r1 = new $c_Lapps_emojionary_Event$SendHint(emoji$1);
+        var this$23 = $n(obj);
+        var requirement$7 = $f_sc_MapOps__contains__O__Z(this$23, "emoji");
+        if ((!requirement$7)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SendHint must contain 'emoji'");
+        }
+        var this$25 = $n(obj);
+        var emoji$2 = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$25, "emoji"))));
+        var this$28 = $n(emoji$2);
+        var requirement$8 = (!(this$28 === ""));
+        if ((!requirement$8)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Emoji cannot be empty");
+        }
+        var event = new $c_Lapps_emojionary_Event$SendHint(emoji$2);
         break;
       }
       case "SubmitGuess": {
-        var this$8 = $n(obj);
-        var text = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$8, "text"))));
-        var r1 = new $c_Lapps_emojionary_Event$SubmitGuess(text);
+        var this$31 = $n(obj);
+        var requirement$9 = $f_sc_MapOps__contains__O__Z(this$31, "text");
+        if ((!requirement$9)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: SubmitGuess must contain 'text'");
+        }
+        var this$33 = $n(obj);
+        var text = $f_Lujson_Value__str__T($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$33, "text"))));
+        var this$36 = $n(text);
+        var requirement$10 = (!(this$36 === ""));
+        if ((!requirement$10)) {
+          throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Guess text cannot be empty");
+        }
+        var event = new $c_Lapps_emojionary_Event$SubmitGuess(text);
         break;
       }
       default: {
@@ -20303,14 +20447,24 @@ $c_Lapps_emojionary_Wire$eventFormat$.prototype.decode__Lujson_Value__s_util_Try
         throw new $c_Lcs214_webapp_DecodingException(msg);
       }
     }
-    return new $c_s_util_Success(r1);
+    var self = new $c_s_util_Success(event);
   } catch (e) {
     var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
-    if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
-      return new $c_s_util_Failure(e$2);
+    matchEnd8: {
+      var self;
+      if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
+        var self = new $c_s_util_Failure(e$2);
+        break matchEnd8;
+      }
+      throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
     }
-    throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
   }
+  self.isSuccess__Z();
+  var assertion = true;
+  if ((!assertion)) {
+    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Decode must return valid Try");
+  }
+  return self;
 });
 $c_Lapps_emojionary_Wire$eventFormat$.prototype.encode__O__Lujson_Value = (function(t) {
   return this.encode__Lapps_emojionary_Event__Lujson_Value($as_Lapps_emojionary_Event(t));
@@ -20338,6 +20492,29 @@ function $h_Lapps_emojionary_Wire$viewFormat$() {
 }
 $h_Lapps_emojionary_Wire$viewFormat$.prototype = $c_Lapps_emojionary_Wire$viewFormat$.prototype;
 $c_Lapps_emojionary_Wire$viewFormat$.prototype.encode__Lapps_emojionary_View__Lujson_Value = (function(v) {
+  var requirement = (v !== null);
+  if ((!requirement)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: View cannot be null");
+  }
+  var a = $n(v).Lapps_emojionary_View__f_remainingTimeMs;
+  var ahi = a.RTLong__f_hi;
+  var requirement$1 = (ahi >= 0);
+  if ((!requirement$1)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Remaining time cannot be negative");
+  }
+  var this$4 = $n($n(v).Lapps_emojionary_View__f_allScores);
+  var this$5 = new $c_sc_MapOps$$anon$1(this$4);
+  var res = true;
+  var it = this$5.iterator__sc_Iterator();
+  while ((res && $n(it).hasNext__Z())) {
+    var x0 = $n(it).next__O();
+    var _$2 = $uI(x0);
+    res = (_$2 >= 0);
+  }
+  var requirement$2 = res;
+  if ((!requirement$2)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: All scores must be non-negative");
+  }
   var y = $m_Lapps_emojionary_Wire$().apps$emojionary$Wire$$$encodePhase__Lapps_emojionary_Phase__Lujson_Value($n(v).Lapps_emojionary_View__f_phase);
   var $x_17 = $m_sr_ScalaRunTime$();
   var y$1 = $m_Lujson_Value$().JsonableBoolean__Z__Lujson_Bool($n(v).Lapps_emojionary_View__f_amIDescriber);
@@ -20352,154 +20529,207 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.encode__Lapps_emojionary_View__Lu
   }))));
   var $x_15 = new $c_T2("allScores", y$3);
   var $x_13 = $m_Lujson_Arr$();
-  var this$12 = $n($n(v).Lapps_emojionary_View__f_hints);
-  var f = ((_$1) => {
-    var _$1$1 = $as_T(_$1);
-    return new $c_Lujson_Str(_$1$1);
+  var this$18 = $n($n(v).Lapps_emojionary_View__f_hints);
+  var f = ((_$3) => {
+    var _$3$1 = $as_T(_$3);
+    return new $c_Lujson_Str(_$3$1);
   });
-  if ((this$12 === $m_sci_Nil$())) {
+  if ((this$18 === $m_sci_Nil$())) {
     var $x_12 = $m_sci_Nil$();
   } else {
-    var x0 = this$12.head__O();
-    var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+    var x0$1 = this$18.head__O();
+    var h = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
     var t = h;
-    var rest = $as_sci_List(this$12.tail__O());
+    var rest = $as_sci_List(this$18.tail__O());
     while ((rest !== $m_sci_Nil$())) {
-      var x0$1 = $n(rest).head__O();
-      var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+      var x0$2 = $n(rest).head__O();
+      var nx = new $c_sci_$colon$colon(f(x0$2), $m_sci_Nil$());
       $n(t).sci_$colon$colon__f_next = nx;
       t = nx;
       rest = $as_sci_List($n(rest).tail__O());
     }
     var $x_12 = h;
   }
-  var this$14 = $m_s_$less$colon$less$();
-  var y$4 = $x_13.from__sc_IterableOnce__F1__Lujson_Arr($x_12, this$14.s_$less$colon$less$__f_singleton);
+  var this$20 = $m_s_$less$colon$less$();
+  var y$4 = $x_13.from__sc_IterableOnce__F1__Lujson_Arr($x_12, this$20.s_$less$colon$less$__f_singleton);
   var $x_14 = new $c_T2("hints", y$4);
   var $x_10 = $m_Lujson_Arr$();
-  var this$18 = $n($n(v).Lapps_emojionary_View__f_guesses);
-  var f$1 = ((_$2) => {
-    var _$2$1 = $as_T(_$2);
-    return new $c_Lujson_Str(_$2$1);
+  var this$24 = $n($n(v).Lapps_emojionary_View__f_guesses);
+  var f$1 = ((_$4) => {
+    var _$4$1 = $as_T(_$4);
+    return new $c_Lujson_Str(_$4$1);
   });
-  if ((this$18 === $m_sci_Nil$())) {
+  if ((this$24 === $m_sci_Nil$())) {
     var $x_9 = $m_sci_Nil$();
   } else {
-    var x0$2 = this$18.head__O();
-    var h$1 = new $c_sci_$colon$colon(f$1(x0$2), $m_sci_Nil$());
+    var x0$3 = this$24.head__O();
+    var h$1 = new $c_sci_$colon$colon(f$1(x0$3), $m_sci_Nil$());
     var t$1 = h$1;
-    var rest$1 = $as_sci_List(this$18.tail__O());
+    var rest$1 = $as_sci_List(this$24.tail__O());
     while ((rest$1 !== $m_sci_Nil$())) {
-      var x0$3 = $n(rest$1).head__O();
-      var nx$1 = new $c_sci_$colon$colon(f$1(x0$3), $m_sci_Nil$());
+      var x0$4 = $n(rest$1).head__O();
+      var nx$1 = new $c_sci_$colon$colon(f$1(x0$4), $m_sci_Nil$());
       $n(t$1).sci_$colon$colon__f_next = nx$1;
       t$1 = nx$1;
       rest$1 = $as_sci_List($n(rest$1).tail__O());
     }
     var $x_9 = h$1;
   }
-  var this$20 = $m_s_$less$colon$less$();
-  var y$5 = $x_10.from__sc_IterableOnce__F1__Lujson_Arr($x_9, this$20.s_$less$colon$less$__f_singleton);
+  var this$26 = $m_s_$less$colon$less$();
+  var y$5 = $x_10.from__sc_IterableOnce__F1__Lujson_Arr($x_9, this$26.s_$less$colon$less$__f_singleton);
   var $x_11 = new $c_T2("guesses", y$5);
-  var a = $n(v).Lapps_emojionary_View__f_remainingTimeMs;
-  var lo = a.RTLong__f_lo;
-  var hi = a.RTLong__f_hi;
+  var a$1 = $n(v).Lapps_emojionary_View__f_remainingTimeMs;
+  var lo = a$1.RTLong__f_lo;
+  var hi = a$1.RTLong__f_hi;
   var value$1 = ((4.294967296E9 * hi) + (lo >>> 0.0));
   var y$6 = new $c_Lujson_Num(value$1);
   var $x_8 = new $c_T2("remainingTimeMs", y$6);
-  var this$27 = $n($n(v).Lapps_emojionary_View__f_secretWord);
-  if (this$27.isEmpty__Z()) {
-    var this$29 = $m_s_None$();
+  var this$33 = $n($n(v).Lapps_emojionary_View__f_secretWord);
+  if (this$33.isEmpty__Z()) {
+    var this$35 = $m_s_None$();
   } else {
-    var x0$4 = this$27.get__O();
-    var _$3 = $as_T(x0$4);
-    var this$29 = new $c_s_Some(new $c_Lujson_Str(_$3));
+    var x0$5 = this$33.get__O();
+    var _$5 = $as_T(x0$5);
+    var this$35 = new $c_s_Some(new $c_Lujson_Str(_$5));
   }
-  var y$7 = (this$29.isEmpty__Z() ? $m_Lujson_Null$() : this$29.get__O());
+  var y$7 = (this$35.isEmpty__Z() ? $m_Lujson_Null$() : this$35.get__O());
   var $x_7 = new $c_T2("secretWord", y$7);
-  var this$32 = $n($n(v).Lapps_emojionary_View__f_winner);
-  if (this$32.isEmpty__Z()) {
-    var this$34 = $m_s_None$();
+  var this$38 = $n($n(v).Lapps_emojionary_View__f_winner);
+  if (this$38.isEmpty__Z()) {
+    var this$40 = $m_s_None$();
   } else {
-    var x0$5 = this$32.get__O();
-    var _$4 = $as_T(x0$5);
-    var this$34 = new $c_s_Some(new $c_Lujson_Str(_$4));
+    var x0$6 = this$38.get__O();
+    var _$6 = $as_T(x0$6);
+    var this$40 = new $c_s_Some(new $c_Lujson_Str(_$6));
   }
-  var y$8 = (this$34.isEmpty__Z() ? $m_Lujson_Null$() : this$34.get__O());
+  var y$8 = (this$40.isEmpty__Z() ? $m_Lujson_Null$() : this$40.get__O());
   var $x_6 = new $c_T2("winner", y$8);
   var $x_4 = $m_Lujson_Arr$();
-  var this$38 = $n($n(v).Lapps_emojionary_View__f_availableEmojis);
-  var f$2 = ((_$5) => {
-    var _$5$1 = $as_T(_$5);
-    return new $c_Lujson_Str(_$5$1);
+  var this$44 = $n($n(v).Lapps_emojionary_View__f_availableEmojis);
+  var f$2 = ((_$7) => {
+    var _$7$1 = $as_T(_$7);
+    return new $c_Lujson_Str(_$7$1);
   });
-  if ((this$38 === $m_sci_Nil$())) {
+  if ((this$44 === $m_sci_Nil$())) {
     var $x_3 = $m_sci_Nil$();
   } else {
-    var x0$6 = this$38.head__O();
-    var h$2 = new $c_sci_$colon$colon(f$2(x0$6), $m_sci_Nil$());
+    var x0$7 = this$44.head__O();
+    var h$2 = new $c_sci_$colon$colon(f$2(x0$7), $m_sci_Nil$());
     var t$2 = h$2;
-    var rest$2 = $as_sci_List(this$38.tail__O());
+    var rest$2 = $as_sci_List(this$44.tail__O());
     while ((rest$2 !== $m_sci_Nil$())) {
-      var x0$7 = $n(rest$2).head__O();
-      var nx$2 = new $c_sci_$colon$colon(f$2(x0$7), $m_sci_Nil$());
+      var x0$8 = $n(rest$2).head__O();
+      var nx$2 = new $c_sci_$colon$colon(f$2(x0$8), $m_sci_Nil$());
       $n(t$2).sci_$colon$colon__f_next = nx$2;
       t$2 = nx$2;
       rest$2 = $as_sci_List($n(rest$2).tail__O());
     }
     var $x_3 = h$2;
   }
-  var this$40 = $m_s_$less$colon$less$();
-  var y$9 = $x_4.from__sc_IterableOnce__F1__Lujson_Arr($x_3, this$40.s_$less$colon$less$__f_singleton);
+  var this$46 = $m_s_$less$colon$less$();
+  var y$9 = $x_4.from__sc_IterableOnce__F1__Lujson_Arr($x_3, this$46.s_$less$colon$less$__f_singleton);
   var $x_5 = new $c_T2("availableEmojis", y$9);
   var $x_2 = $m_Lujson_Arr$();
-  var this$44 = $n($n(v).Lapps_emojionary_View__f_myWrongGuesses);
-  var f$3 = ((_$6) => {
-    var _$6$1 = $as_T(_$6);
-    return new $c_Lujson_Str(_$6$1);
+  var this$50 = $n($n(v).Lapps_emojionary_View__f_myWrongGuesses);
+  var f$3 = ((_$8) => {
+    var _$8$1 = $as_T(_$8);
+    return new $c_Lujson_Str(_$8$1);
   });
-  if ((this$44 === $m_sci_Nil$())) {
+  if ((this$50 === $m_sci_Nil$())) {
     var $x_1 = $m_sci_Nil$();
   } else {
-    var x0$8 = this$44.head__O();
-    var h$3 = new $c_sci_$colon$colon(f$3(x0$8), $m_sci_Nil$());
+    var x0$9 = this$50.head__O();
+    var h$3 = new $c_sci_$colon$colon(f$3(x0$9), $m_sci_Nil$());
     var t$3 = h$3;
-    var rest$3 = $as_sci_List(this$44.tail__O());
+    var rest$3 = $as_sci_List(this$50.tail__O());
     while ((rest$3 !== $m_sci_Nil$())) {
-      var x0$9 = $n(rest$3).head__O();
-      var nx$3 = new $c_sci_$colon$colon(f$3(x0$9), $m_sci_Nil$());
+      var x0$10 = $n(rest$3).head__O();
+      var nx$3 = new $c_sci_$colon$colon(f$3(x0$10), $m_sci_Nil$());
       $n(t$3).sci_$colon$colon__f_next = nx$3;
       t$3 = nx$3;
       rest$3 = $as_sci_List($n(rest$3).tail__O());
     }
     var $x_1 = h$3;
   }
-  var this$46 = $m_s_$less$colon$less$();
-  var y$10 = $x_2.from__sc_IterableOnce__F1__Lujson_Arr($x_1, this$46.s_$less$colon$less$__f_singleton);
+  var this$52 = $m_s_$less$colon$less$();
+  var y$10 = $x_2.from__sc_IterableOnce__F1__Lujson_Arr($x_1, this$52.s_$less$colon$less$__f_singleton);
   var items = $x_17.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_16, $x_15, $x_14, $x_11, $x_8, $x_7, $x_6, $x_5, new $c_T2("myWrongGuesses", y$10)]));
-  var this$49 = $m_s_$less$colon$less$();
-  var conv = this$49.s_$less$colon$less$__f_singleton;
+  var this$55 = $m_s_$less$colon$less$();
+  var conv = this$55.s_$less$colon$less$__f_singleton;
   var map = new $c_Lupickle_core_LinkedHashMap($ct_ju_LinkedHashMap__(new $c_ju_LinkedHashMap()));
   map.put__O__O__s_Option("phase", ($n(conv), y));
-  var this$53 = $n(items);
-  var it = this$53.iterator__sc_Iterator();
-  while ($n(it).hasNext__Z()) {
-    var x0$10 = $n(it).next__O();
-    var i = $as_T2(x0$10);
+  var this$59 = $n(items);
+  var it$1 = this$59.iterator__sc_Iterator();
+  while ($n(it$1).hasNext__Z()) {
+    var x0$11 = $n(it$1).next__O();
+    var i = $as_T2(x0$11);
     map.put__O__O__s_Option($n(i).T2__f__1, $n(i).T2__f__2);
   }
-  return new $c_Lujson_Obj(map);
+  var result = new $c_Lujson_Obj(map);
+  var this$63 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
+  if ($f_sc_MapOps__contains__O__Z(this$63, "phase")) {
+    var this$64 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
+    var $x_21 = $f_sc_MapOps__contains__O__Z(this$64, "amIDescriber");
+  } else {
+    var $x_21 = false;
+  }
+  if ($x_21) {
+    var this$65 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
+    var $x_20 = $f_sc_MapOps__contains__O__Z(this$65, "allScores");
+  } else {
+    var $x_20 = false;
+  }
+  if ($x_20) {
+    var this$66 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
+    var $x_19 = $f_sc_MapOps__contains__O__Z(this$66, "hints");
+  } else {
+    var $x_19 = false;
+  }
+  if ($x_19) {
+    var this$67 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
+    var $x_18 = $f_sc_MapOps__contains__O__Z(this$67, "guesses");
+  } else {
+    var $x_18 = false;
+  }
+  if ($x_18) {
+    var this$68 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap(result));
+    var assertion = $f_sc_MapOps__contains__O__Z(this$68, "remainingTimeMs");
+  } else {
+    var assertion = false;
+  }
+  if ((!assertion)) {
+    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Encoded view must contain all required fields");
+  }
+  return result;
 });
 $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try = (function(json) {
   try {
+    var requirement = (json !== null);
+    if ((!requirement)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON cannot be null");
+    }
+    var this$3 = $n($f_Lujson_Value__objOpt__s_Option($n(json)));
+    var requirement$1 = (!this$3.isEmpty__Z());
+    if ((!requirement$1)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: JSON must be an object");
+    }
     var obj = $f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n(json));
+    var requiredFields = $as_sci_Seq($m_sci_Seq$().apply__sci_Seq__sc_SeqOps($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["phase", "amIDescriber", "allScores", "hints", "guesses", "remainingTimeMs", "secretWord", "winner", "availableEmojis", "myWrongGuesses"]))));
+    $n(requiredFields).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((field) => {
+      var field$1 = $as_T(field);
+      var this$5 = $n(obj);
+      var requirement$2 = $f_sc_MapOps__contains__O__Z(this$5, field$1);
+      if ((!requirement$2)) {
+        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), (("requirement failed: " + ("View JSON must contain '" + field$1)) + "' field"));
+      }
+    })));
     var $x_1 = $m_Lapps_emojionary_Wire$();
-    var this$2 = $n(obj);
-    var phase = $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_Phase($x_1, $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$2, "phase")));
-    var this$3 = $n(obj);
-    var amIDescriber = $f_Lujson_Value__bool__Z($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$3, "amIDescriber"))));
-    var this$4 = $n(obj);
-    var this$7 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$4, "allScores")))));
+    var this$7 = $n(obj);
+    var phase = $p_Lapps_emojionary_Wire$__decodePhase__Lujson_Value__Lapps_emojionary_Phase($x_1, $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$7, "phase")));
+    var this$8 = $n(obj);
+    var amIDescriber = $f_Lujson_Value__bool__Z($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$8, "amIDescriber"))));
+    var this$9 = $n(obj);
+    var this$12 = $n($f_Lujson_Value__obj__Lupickle_core_LinkedHashMap($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$9, "allScores")))));
     var f = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$1) => {
       var x$1$1 = $as_T2(x$1);
       var k = $as_T($n(x$1$1).T2__f__1);
@@ -20507,42 +20737,42 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try 
       var y = $doubleToInt($f_Lujson_Value__num__D($n(v)));
       return new $c_T2(k, y);
     }));
-    var $x_2 = $n($f_sc_MapOps__map__F1__sc_IterableOps(this$7, f));
-    var this$8 = $m_s_$less$colon$less$();
-    var allScores = $x_2.toMap__s_$less$colon$less__sci_Map(this$8.s_$less$colon$less$__f_singleton);
-    var this$9 = $n(obj);
-    var this$10 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$9, "hints")))));
+    var $x_2 = $n($f_sc_MapOps__map__F1__sc_IterableOps(this$12, f));
+    var this$13 = $m_s_$less$colon$less$();
+    var allScores = $x_2.toMap__s_$less$colon$less__sci_Map(this$13.s_$less$colon$less$__f_singleton);
+    var this$14 = $n(obj);
+    var this$15 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$14, "hints")))));
     $m_scm_ArrayBuffer$();
     var b = new $c_scm_ArrayBuffer$$anon$1();
-    var it = $n(this$10.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it = $n(this$15.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it).hasNext__Z()) {
       var x0 = $n(it).next__O();
-      var _$7 = $as_Lujson_Value(x0);
-      var elem = $f_Lujson_Value__str__T($n(_$7));
+      var _$9 = $as_Lujson_Value(x0);
+      var elem = $f_Lujson_Value__str__T($n(_$9));
       b.addOne__O__scm_GrowableBuilder(elem);
     }
     var hints = $n($as_sc_IterableOnceOps(b.scm_GrowableBuilder__f_elems)).toList__sci_List();
-    var this$12 = $n(obj);
-    var this$13 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$12, "guesses")))));
+    var this$17 = $n(obj);
+    var this$18 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$17, "guesses")))));
     $m_scm_ArrayBuffer$();
     var b$1 = new $c_scm_ArrayBuffer$$anon$1();
-    var it$1 = $n(this$13.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it$1 = $n(this$18.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it$1).hasNext__Z()) {
       var x0$1 = $n(it$1).next__O();
-      var _$8 = $as_Lujson_Value(x0$1);
-      var elem$1 = $f_Lujson_Value__str__T($n(_$8));
+      var _$10 = $as_Lujson_Value(x0$1);
+      var elem$1 = $f_Lujson_Value__str__T($n(_$10));
       b$1.addOne__O__scm_GrowableBuilder(elem$1);
     }
     var guesses = $n($as_sc_IterableOnceOps(b$1.scm_GrowableBuilder__f_elems)).toList__sci_List();
-    var this$15 = $n(obj);
-    var value = $f_Lujson_Value__num__D($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$15, "remainingTimeMs"))));
-    var this$16 = $m_RTLong$();
-    var lo = this$16.org$scalajs$linker$runtime$RuntimeLong$$fromDoubleImpl__D__I(value);
-    var hi = this$16.RTLong$__f_org$scalajs$linker$runtime$RuntimeLong$$hiReturn;
+    var this$20 = $n(obj);
+    var value = $f_Lujson_Value__num__D($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$20, "remainingTimeMs"))));
+    var this$21 = $m_RTLong$();
+    var lo = this$21.org$scalajs$linker$runtime$RuntimeLong$$fromDoubleImpl__D__I(value);
+    var hi = this$21.RTLong$__f_org$scalajs$linker$runtime$RuntimeLong$$hiReturn;
     matchResult3: {
       var secretWord;
-      var this$17 = $n(obj);
-      var x13 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$17, "secretWord"));
+      var this$22 = $n(obj);
+      var x13 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$22, "secretWord"));
       var x = $m_Lujson_Null$();
       if ((x === x13)) {
         var secretWord = $m_s_None$();
@@ -20553,8 +20783,8 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try 
     }
     matchResult4: {
       var winner;
-      var this$19 = $n(obj);
-      var x14 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$19, "winner"));
+      var this$24 = $n(obj);
+      var x14 = $as_Lujson_Value($f_sc_MapOps__apply__O__O(this$24, "winner"));
       var x$3 = $m_Lujson_Null$();
       if ((x$3 === x14)) {
         var winner = $m_s_None$();
@@ -20563,39 +20793,71 @@ $c_Lapps_emojionary_Wire$viewFormat$.prototype.decode__Lujson_Value__s_util_Try 
       var value$2 = $f_Lujson_Value__str__T($n(x14));
       var winner = new $c_s_Some(value$2);
     }
-    var this$21 = $n(obj);
-    var this$22 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$21, "availableEmojis")))));
+    var this$26 = $n(obj);
+    var this$27 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$26, "availableEmojis")))));
     $m_scm_ArrayBuffer$();
     var b$2 = new $c_scm_ArrayBuffer$$anon$1();
-    var it$2 = $n(this$22.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it$2 = $n(this$27.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it$2).hasNext__Z()) {
       var x0$2 = $n(it$2).next__O();
-      var _$9 = $as_Lujson_Value(x0$2);
-      var elem$2 = $f_Lujson_Value__str__T($n(_$9));
+      var _$11 = $as_Lujson_Value(x0$2);
+      var elem$2 = $f_Lujson_Value__str__T($n(_$11));
       b$2.addOne__O__scm_GrowableBuilder(elem$2);
     }
     var availableEmojis = $n($as_sc_IterableOnceOps(b$2.scm_GrowableBuilder__f_elems)).toList__sci_List();
-    var this$24 = $n(obj);
-    var this$25 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$24, "myWrongGuesses")))));
+    var this$29 = $n(obj);
+    var this$30 = $n($f_Lujson_Value__arr__scm_ArrayBuffer($n($as_Lujson_Value($f_sc_MapOps__apply__O__O(this$29, "myWrongGuesses")))));
     $m_scm_ArrayBuffer$();
     var b$3 = new $c_scm_ArrayBuffer$$anon$1();
-    var it$3 = $n(this$25.view__scm_ArrayBufferView()).iterator__sc_Iterator();
+    var it$3 = $n(this$30.view__scm_ArrayBufferView()).iterator__sc_Iterator();
     while ($n(it$3).hasNext__Z()) {
       var x0$3 = $n(it$3).next__O();
-      var _$10 = $as_Lujson_Value(x0$3);
-      var elem$3 = $f_Lujson_Value__str__T($n(_$10));
+      var _$12 = $as_Lujson_Value(x0$3);
+      var elem$3 = $f_Lujson_Value__str__T($n(_$12));
       b$3.addOne__O__scm_GrowableBuilder(elem$3);
     }
     var myWrongGuesses = $n($as_sc_IterableOnceOps(b$3.scm_GrowableBuilder__f_elems)).toList__sci_List();
+    var requirement$3 = (hi >= 0);
+    if ((!requirement$3)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Remaining time cannot be negative");
+    }
+    var this$34 = $n(allScores);
+    var this$35 = new $c_sc_MapOps$$anon$1(this$34);
+    var res = true;
+    var it$4 = this$35.iterator__sc_Iterator();
+    while ((res && $n(it$4).hasNext__Z())) {
+      var x0$4 = $n(it$4).next__O();
+      var _$13 = $uI(x0$4);
+      res = (_$13 >= 0);
+    }
+    var requirement$4 = res;
+    if ((!requirement$4)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: All scores must be non-negative");
+    }
+    var this$37 = $n(hints);
+    var requirement$5 = (this$37.length__I() <= $m_Lapps_emojionary_Rules$().Lapps_emojionary_Rules$__f_MaxHints);
+    if ((!requirement$5)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Too many hints");
+    }
     var r1 = new $c_Lapps_emojionary_View(phase, amIDescriber, allScores, hints, guesses, new $c_RTLong(lo, hi), secretWord, winner, availableEmojis, myWrongGuesses);
-    return new $c_s_util_Success(r1);
+    var self = new $c_s_util_Success(r1);
   } catch (e) {
     var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
-    if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
-      return new $c_s_util_Failure(e$2);
+    matchEnd8: {
+      var self;
+      if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2)) {
+        var self = new $c_s_util_Failure(e$2);
+        break matchEnd8;
+      }
+      throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
     }
-    throw ((e$2 instanceof $c_sjs_js_JavaScriptException) ? e$2.sjs_js_JavaScriptException__f_exception : e$2);
   }
+  self.isSuccess__Z();
+  var assertion = true;
+  if ((!assertion)) {
+    throw $ct_jl_AssertionError__O__(new $c_jl_AssertionError(), "assertion failed: Decode must return valid Try");
+  }
+  return self;
 });
 $c_Lapps_emojionary_Wire$viewFormat$.prototype.encode__O__Lujson_Value = (function(t) {
   return this.encode__Lapps_emojionary_View__Lujson_Value($as_Lapps_emojionary_View(t));
@@ -23357,6 +23619,9 @@ $c_sc_SeqFactory$Delegate.prototype.constructor = $c_sc_SeqFactory$Delegate;
 function $h_sc_SeqFactory$Delegate() {
 }
 $h_sc_SeqFactory$Delegate.prototype = $c_sc_SeqFactory$Delegate.prototype;
+$c_sc_SeqFactory$Delegate.prototype.apply__sci_Seq__sc_SeqOps = (function(elems) {
+  return $as_sc_SeqOps($n(this.sc_SeqFactory$Delegate__f_delegate).apply__sci_Seq__O(elems));
+});
 $c_sc_SeqFactory$Delegate.prototype.empty__sc_SeqOps = (function() {
   return $as_sc_SeqOps($n(this.sc_SeqFactory$Delegate__f_delegate).empty__O());
 });
@@ -23371,6 +23636,9 @@ $c_sc_SeqFactory$Delegate.prototype.from__sc_IterableOnce__O = (function(source)
 });
 $c_sc_SeqFactory$Delegate.prototype.empty__O = (function() {
   return this.empty__sc_SeqOps();
+});
+$c_sc_SeqFactory$Delegate.prototype.apply__sci_Seq__O = (function(elems) {
+  return this.apply__sci_Seq__sc_SeqOps(elems);
 });
 function $f_sc_SeqOps__distinct__O($thiz) {
   return $thiz.distinctBy__F1__O(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$2$2) => x$2$2)));
@@ -23628,6 +23896,9 @@ $c_sci_LazyList$.prototype.constructor = $c_sci_LazyList$;
 function $h_sci_LazyList$() {
 }
 $h_sci_LazyList$.prototype = $c_sci_LazyList$.prototype;
+$c_sci_LazyList$.prototype.apply__sci_Seq__O = (function(elems) {
+  return this.from__sc_IterableOnce__sci_LazyList(elems);
+});
 $c_sci_LazyList$.prototype.scala$collection$immutable$LazyList$$dropImpl__sci_LazyList__I__sci_LazyList = (function(ll, n) {
   var restRef = new $c_sr_ObjectRef(ll);
   var iRef = new $c_sr_IntRef(n);
@@ -28274,6 +28545,9 @@ $c_sci_List$.prototype.constructor = $c_sci_List$;
 function $h_sci_List$() {
 }
 $h_sci_List$.prototype = $c_sci_List$.prototype;
+$c_sci_List$.prototype.apply__sci_Seq__O = (function(elems) {
+  return $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
+});
 $c_sci_List$.prototype.newBuilder__scm_Builder = (function() {
   return new $c_scm_ListBuffer();
 });
@@ -29057,6 +29331,9 @@ $c_sci_Vector$.prototype.constructor = $c_sci_Vector$;
 function $h_sci_Vector$() {
 }
 $h_sci_Vector$.prototype = $c_sci_Vector$.prototype;
+$c_sci_Vector$.prototype.apply__sci_Seq__O = (function(elems) {
+  return this.from__sc_IterableOnce__sci_Vector(elems);
+});
 $c_sci_Vector$.prototype.from__sc_IterableOnce__sci_Vector = (function(it) {
   if ((it instanceof $c_sci_Vector)) {
     var x2 = $as_sci_Vector(it);
@@ -30168,6 +30445,9 @@ $c_scm_ArrayBuffer$.prototype.constructor = $c_scm_ArrayBuffer$;
 function $h_scm_ArrayBuffer$() {
 }
 $h_scm_ArrayBuffer$.prototype = $c_scm_ArrayBuffer$.prototype;
+$c_scm_ArrayBuffer$.prototype.apply__sci_Seq__O = (function(elems) {
+  return this.from__sc_IterableOnce__scm_ArrayBuffer(elems);
+});
 $c_scm_ArrayBuffer$.prototype.from__sc_IterableOnce__scm_ArrayBuffer = (function(coll) {
   var k = $n(coll).knownSize__I();
   if ((k >= 0)) {
@@ -30265,6 +30545,9 @@ $c_scm_ArrayDeque$.prototype.constructor = $c_scm_ArrayDeque$;
 function $h_scm_ArrayDeque$() {
 }
 $h_scm_ArrayDeque$.prototype = $c_scm_ArrayDeque$.prototype;
+$c_scm_ArrayDeque$.prototype.apply__sci_Seq__O = (function(elems) {
+  return this.from__sc_IterableOnce__scm_ArrayDeque(elems);
+});
 $c_scm_ArrayDeque$.prototype.from__sc_IterableOnce__scm_ArrayDeque = (function(coll) {
   var s = $n(coll).knownSize__I();
   if ((s >= 0)) {
@@ -30557,6 +30840,9 @@ $c_scm_ListBuffer$.prototype.constructor = $c_scm_ListBuffer$;
 function $h_scm_ListBuffer$() {
 }
 $h_scm_ListBuffer$.prototype = $c_scm_ListBuffer$.prototype;
+$c_scm_ListBuffer$.prototype.apply__sci_Seq__O = (function(elems) {
+  return new $c_scm_ListBuffer().scala$collection$mutable$ListBuffer$$freshFrom__sc_IterableOnce__scm_ListBuffer(elems);
+});
 $c_scm_ListBuffer$.prototype.newBuilder__scm_Builder = (function() {
   return $ct_scm_GrowableBuilder__scm_Growable__(new $c_scm_GrowableBuilder(), new $c_scm_ListBuffer());
 });
@@ -30623,6 +30909,10 @@ $c_scm_Queue$.prototype.constructor = $c_scm_Queue$;
 function $h_scm_Queue$() {
 }
 $h_scm_Queue$.prototype = $c_scm_Queue$.prototype;
+$c_scm_Queue$.prototype.apply__sci_Seq__O = (function(elems) {
+  var this$1 = new $c_scm_Queue(16);
+  return $as_scm_Queue(this$1.addAll__sc_IterableOnce__scm_ArrayDeque(elems));
+});
 $c_scm_Queue$.prototype.newBuilder__scm_Builder = (function() {
   return $ct_scm_GrowableBuilder__scm_Growable__(new $c_scm_GrowableBuilder(), new $c_scm_Queue(16));
 });
@@ -30763,6 +31053,9 @@ $c_sjs_js_WrappedArray$.prototype.constructor = $c_sjs_js_WrappedArray$;
 function $h_sjs_js_WrappedArray$() {
 }
 $h_sjs_js_WrappedArray$.prototype = $c_sjs_js_WrappedArray$.prototype;
+$c_sjs_js_WrappedArray$.prototype.apply__sci_Seq__O = (function(elems) {
+  return this.from__sc_IterableOnce__sjs_js_WrappedArray(elems);
+});
 $c_sjs_js_WrappedArray$.prototype.newBuilder__scm_Builder = (function() {
   return $ct_sjs_js_WrappedArray__(new $c_sjs_js_WrappedArray());
 });
@@ -30799,6 +31092,9 @@ $c_sjsr_WrappedVarArgs$.prototype.constructor = $c_sjsr_WrappedVarArgs$;
 function $h_sjsr_WrappedVarArgs$() {
 }
 $h_sjsr_WrappedVarArgs$.prototype = $c_sjsr_WrappedVarArgs$.prototype;
+$c_sjsr_WrappedVarArgs$.prototype.apply__sci_Seq__O = (function(elems) {
+  return this.from__sc_IterableOnce__sjsr_WrappedVarArgs(elems);
+});
 $c_sjsr_WrappedVarArgs$.prototype.from__sc_IterableOnce__sjsr_WrappedVarArgs = (function(source) {
   var this$1 = $n(this.newBuilder__scm_Builder());
   return $as_sjsr_WrappedVarArgs($n($as_scm_Builder(this$1.addAll__sc_IterableOnce__scm_Growable(source))).result__O());
@@ -30843,6 +31139,9 @@ $c_s_util_Failure.prototype.constructor = $c_s_util_Failure;
 function $h_s_util_Failure() {
 }
 $h_s_util_Failure.prototype = $c_s_util_Failure.prototype;
+$c_s_util_Failure.prototype.isSuccess__Z = (function() {
+  return false;
+});
 $c_s_util_Failure.prototype.get__O = (function() {
   var $x_1 = $n(this.s_util_Failure__f_exception);
   throw (($x_1 instanceof $c_sjs_js_JavaScriptException) ? $x_1.sjs_js_JavaScriptException__f_exception : $x_1);
@@ -30929,6 +31228,9 @@ $c_s_util_Success.prototype.constructor = $c_s_util_Success;
 function $h_s_util_Success() {
 }
 $h_s_util_Success.prototype = $c_s_util_Success.prototype;
+$c_s_util_Success.prototype.isSuccess__Z = (function() {
+  return true;
+});
 $c_s_util_Success.prototype.get__O = (function() {
   return this.s_util_Success__f_value;
 });
