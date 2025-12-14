@@ -1119,6 +1119,48 @@ function $s_Lapps_MainJS__main__AT__V(args) {
   $m_Lapps_MainJS$().main__AT__V(args);
 }
 /** @constructor */
+function $c_Lapps_emojionary_Rules$() {
+  this.Lapps_emojionary_Rules$__f_MaxHints = 0;
+  this.Lapps_emojionary_Rules$__f_HintDurationMs = $L0;
+  this.Lapps_emojionary_Rules$__f_GameEndDurationMs = $L0;
+  $n_Lapps_emojionary_Rules$ = this;
+  this.Lapps_emojionary_Rules$__f_MaxHints = 5;
+  this.Lapps_emojionary_Rules$__f_HintDurationMs = new $c_RTLong(30000, 0);
+  this.Lapps_emojionary_Rules$__f_GameEndDurationMs = new $c_RTLong(30000, 0);
+  var requirement = (this.Lapps_emojionary_Rules$__f_MaxHints > 0);
+  if ((!requirement)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: MaxHints must be positive");
+  }
+  var a = this.Lapps_emojionary_Rules$__f_HintDurationMs;
+  var ahi = a.RTLong__f_hi;
+  var requirement$1 = ((ahi === 0) ? (a.RTLong__f_lo !== 0) : (ahi > 0));
+  if ((!requirement$1)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: HintDurationMs must be positive");
+  }
+  var a$1 = this.Lapps_emojionary_Rules$__f_GameEndDurationMs;
+  var ahi$1 = a$1.RTLong__f_hi;
+  var requirement$2 = ((ahi$1 === 0) ? (a$1.RTLong__f_lo !== 0) : (ahi$1 > 0));
+  if ((!requirement$2)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: GameEndDurationMs must be positive");
+  }
+}
+$c_Lapps_emojionary_Rules$.prototype = new $h_O();
+$c_Lapps_emojionary_Rules$.prototype.constructor = $c_Lapps_emojionary_Rules$;
+/** @constructor */
+function $h_Lapps_emojionary_Rules$() {
+}
+$h_Lapps_emojionary_Rules$.prototype = $c_Lapps_emojionary_Rules$.prototype;
+var $d_Lapps_emojionary_Rules$ = new $TypeData().initClass($c_Lapps_emojionary_Rules$, "apps.emojionary.Rules$", ({
+  Lapps_emojionary_Rules$: 1
+}));
+var $n_Lapps_emojionary_Rules$;
+function $m_Lapps_emojionary_Rules$() {
+  if ((!$n_Lapps_emojionary_Rules$)) {
+    $n_Lapps_emojionary_Rules$ = new $c_Lapps_emojionary_Rules$();
+  }
+  return $n_Lapps_emojionary_Rules$;
+}
+/** @constructor */
 function $c_Lcs214_webapp_Messages$package$() {
   this.Lcs214_webapp_Messages$package$__f_SocketResponseWire = null;
   $n_Lcs214_webapp_Messages$package$ = this;
@@ -6814,6 +6856,19 @@ function $m_sc_StringOps$() {
   }
   return $n_sc_StringOps$;
 }
+function $f_scg_BitOperations$Int__zero__I__I__Z($thiz, i, mask) {
+  return ((i & mask) === 0);
+}
+function $f_scg_BitOperations$Int__mask__I__I__I($thiz, i, mask) {
+  var i$1 = (((-1) + mask) | 0);
+  return (i & ($f_scg_BitOperations$Int__complement__I__I($thiz, i$1) ^ mask));
+}
+function $f_scg_BitOperations$Int__hasMatch__I__I__I__Z($thiz, key, prefix, m) {
+  return ($f_scg_BitOperations$Int__mask__I__I__I($thiz, key, m) === prefix);
+}
+function $f_scg_BitOperations$Int__complement__I__I($thiz, i) {
+  return (~i);
+}
 /** @constructor */
 function $c_scg_CommonErrors$() {
 }
@@ -7019,6 +7074,340 @@ function $m_sci_SetNode$() {
     $n_sci_SetNode$ = new $c_sci_SetNode$();
   }
   return $n_sci_SetNode$;
+}
+/** @constructor */
+function $c_sci_TreeSeqMap$Ordering() {
+}
+$c_sci_TreeSeqMap$Ordering.prototype = new $h_O();
+$c_sci_TreeSeqMap$Ordering.prototype.constructor = $c_sci_TreeSeqMap$Ordering;
+/** @constructor */
+function $h_sci_TreeSeqMap$Ordering() {
+}
+$h_sci_TreeSeqMap$Ordering.prototype = $c_sci_TreeSeqMap$Ordering.prototype;
+$c_sci_TreeSeqMap$Ordering.prototype.toString__T = (function() {
+  return this.format__T();
+});
+$c_sci_TreeSeqMap$Ordering.prototype.format__T = (function() {
+  var sb = $ct_scm_StringBuilder__(new $c_scm_StringBuilder());
+  this.format__scm_StringBuilder__T__T__V(sb, "", "");
+  return $n(sb.scm_StringBuilder__f_underlying).jl_StringBuilder__f_java$lang$StringBuilder$$content;
+});
+$c_sci_TreeSeqMap$Ordering.prototype.ordinal__I = (function() {
+  var _$this = this;
+  while (true) {
+    var x1 = _$this;
+    var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+    if (x.equals__O__Z(x1)) {
+      return 0;
+    } else if ((x1 instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+      var x3 = $as_sci_TreeSeqMap$Ordering$Tip(x1);
+      var o = $n(x3).sci_TreeSeqMap$Ordering$Tip__f_ord;
+      return o;
+    } else if ((x1 instanceof $c_sci_TreeSeqMap$Ordering$Bin)) {
+      var x5 = $as_sci_TreeSeqMap$Ordering$Bin(x1);
+      var r = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_right;
+      _$this = r;
+    } else {
+      throw new $c_s_MatchError(x1);
+    }
+  }
+});
+$c_sci_TreeSeqMap$Ordering.prototype.iterator__sci_TreeSeqMap$Ordering$Iterator = (function() {
+  var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+  if (x.equals__O__Z(this)) {
+    var this$1 = $m_sci_TreeSeqMap$Ordering$Iterator$();
+    return this$1.sci_TreeSeqMap$Ordering$Iterator$__f_Empty;
+  } else {
+    return new $c_sci_TreeSeqMap$Ordering$Iterator(this);
+  }
+});
+$c_sci_TreeSeqMap$Ordering.prototype.include__I__O__sci_TreeSeqMap$Ordering = (function(ordinal, value) {
+  var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+  if (x.equals__O__Z(this)) {
+    return new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value);
+  } else if ((this instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+    var x3 = $as_sci_TreeSeqMap$Ordering$Tip(this);
+    var o = $n(x3).sci_TreeSeqMap$Ordering$Tip__f_ord;
+    return ((ordinal === o) ? new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value) : $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(ordinal, new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value), o, this));
+  } else if ((this instanceof $c_sci_TreeSeqMap$Ordering$Bin)) {
+    var x5 = $as_sci_TreeSeqMap$Ordering$Bin(this);
+    var p = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_prefix;
+    var m = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_mask;
+    var l = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_left;
+    var r = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_right;
+    var this$1 = $m_scg_BitOperations$Int$();
+    if ((!$f_scg_BitOperations$Int__hasMatch__I__I__I__Z(this$1, ordinal, p, m))) {
+      return $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(ordinal, new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value), p, this);
+    } else {
+      var this$2 = $m_scg_BitOperations$Int$();
+      if ($f_scg_BitOperations$Int__zero__I__I__Z(this$2, ordinal, m)) {
+        return new $c_sci_TreeSeqMap$Ordering$Bin(p, m, $n(l).include__I__O__sci_TreeSeqMap$Ordering(ordinal, value), r);
+      } else {
+        return new $c_sci_TreeSeqMap$Ordering$Bin(p, m, l, $n(r).include__I__O__sci_TreeSeqMap$Ordering(ordinal, value));
+      }
+    }
+  } else {
+    throw new $c_s_MatchError(this);
+  }
+});
+$c_sci_TreeSeqMap$Ordering.prototype.append__I__O__sci_TreeSeqMap$Ordering = (function(ordinal, value) {
+  var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+  if (x.equals__O__Z(this)) {
+    return new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value);
+  } else if ((this instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+    var x3 = $as_sci_TreeSeqMap$Ordering$Tip(this);
+    var o = $n(x3).sci_TreeSeqMap$Ordering$Tip__f_ord;
+    return ((ordinal === o) ? new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value) : $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(ordinal, new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value), o, this));
+  } else if ((this instanceof $c_sci_TreeSeqMap$Ordering$Bin)) {
+    var x5 = $as_sci_TreeSeqMap$Ordering$Bin(this);
+    var p = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_prefix;
+    var m = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_mask;
+    var l = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_left;
+    var r = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_right;
+    var this$1 = $m_scg_BitOperations$Int$();
+    if ((!$f_scg_BitOperations$Int__hasMatch__I__I__I__Z(this$1, ordinal, p, m))) {
+      return $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(ordinal, new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value), p, this);
+    } else {
+      var this$2 = $m_scg_BitOperations$Int$();
+      if ($f_scg_BitOperations$Int__zero__I__I__Z(this$2, ordinal, m)) {
+        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), ((("Append called with ordinal out of range: " + ordinal) + " is not greater than current max ordinal ") + this.ordinal__I()));
+      } else {
+        return new $c_sci_TreeSeqMap$Ordering$Bin(p, m, l, $n(r).append__I__O__sci_TreeSeqMap$Ordering(ordinal, value));
+      }
+    }
+  } else {
+    throw new $c_s_MatchError(this);
+  }
+});
+$c_sci_TreeSeqMap$Ordering.prototype.appendInPlace1__sci_TreeSeqMap$Ordering$Bin__I__O__sci_TreeSeqMap$Ordering = (function(parent, ordinal, value) {
+  var rc12 = false;
+  var x3 = null;
+  var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+  if (x.equals__O__Z(this)) {
+    return new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value);
+  }
+  if ((this instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+    rc12 = true;
+    x3 = $as_sci_TreeSeqMap$Ordering$Tip(this);
+    var o = $n(x3).sci_TreeSeqMap$Ordering$Tip__f_ord;
+    if ((o >= ordinal)) {
+      throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), ((("Append called with ordinal out of range: " + o) + " is not greater than current max ordinal ") + this.ordinal__I()));
+    }
+  }
+  if (rc12) {
+    var o$2 = $n(x3).sci_TreeSeqMap$Ordering$Tip__f_ord;
+    if ((parent === null)) {
+      return $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(ordinal, new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value), o$2, this);
+    }
+  }
+  if (rc12) {
+    var o$3 = $n(x3).sci_TreeSeqMap$Ordering$Tip__f_ord;
+    $n(parent).sci_TreeSeqMap$Ordering$Bin__f_right = $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(ordinal, new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value), o$3, this);
+    return parent;
+  }
+  if ((this instanceof $c_sci_TreeSeqMap$Ordering$Bin)) {
+    var x9 = $as_sci_TreeSeqMap$Ordering$Bin(this);
+    var p = $n(x9).sci_TreeSeqMap$Ordering$Bin__f_prefix;
+    var m = $n(x9).sci_TreeSeqMap$Ordering$Bin__f_mask;
+    var r = $n(x9).sci_TreeSeqMap$Ordering$Bin__f_right;
+    var this$1 = $m_scg_BitOperations$Int$();
+    if ((!$f_scg_BitOperations$Int__hasMatch__I__I__I__Z(this$1, ordinal, p, m))) {
+      var b2 = $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(ordinal, new $c_sci_TreeSeqMap$Ordering$Tip(ordinal, value), p, this);
+      if ((parent !== null)) {
+        $n(parent).sci_TreeSeqMap$Ordering$Bin__f_right = b2;
+        return parent;
+      } else {
+        return b2;
+      }
+    } else {
+      var this$2 = $m_scg_BitOperations$Int$();
+      if ($f_scg_BitOperations$Int__zero__I__I__Z(this$2, ordinal, m)) {
+        throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), ((("Append called with ordinal out of range: " + ordinal) + " is not greater than current max ordinal ") + this.ordinal__I()));
+      } else {
+        $n(r).appendInPlace1__sci_TreeSeqMap$Ordering$Bin__I__O__sci_TreeSeqMap$Ordering(x9, ordinal, value);
+        return this;
+      }
+    }
+  }
+  throw new $c_s_MatchError(this);
+});
+$c_sci_TreeSeqMap$Ordering.prototype.exclude__I__sci_TreeSeqMap$Ordering = (function(ordinal) {
+  var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+  if (x.equals__O__Z(this)) {
+    return $m_sci_TreeSeqMap$Ordering$Zero$();
+  } else if ((this instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+    var x3 = $as_sci_TreeSeqMap$Ordering$Tip(this);
+    var o = $n(x3).sci_TreeSeqMap$Ordering$Tip__f_ord;
+    return ((ordinal === o) ? $m_sci_TreeSeqMap$Ordering$Zero$() : this);
+  } else if ((this instanceof $c_sci_TreeSeqMap$Ordering$Bin)) {
+    var x5 = $as_sci_TreeSeqMap$Ordering$Bin(this);
+    var p = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_prefix;
+    var m = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_mask;
+    var l = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_left;
+    var r = $n(x5).sci_TreeSeqMap$Ordering$Bin__f_right;
+    var this$1 = $m_scg_BitOperations$Int$();
+    if ((!$f_scg_BitOperations$Int__hasMatch__I__I__I__Z(this$1, ordinal, p, m))) {
+      return this;
+    } else {
+      var this$2 = $m_scg_BitOperations$Int$();
+      if ($f_scg_BitOperations$Int__zero__I__I__Z(this$2, ordinal, m)) {
+        return $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$bin__I__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(p, m, $n(l).exclude__I__sci_TreeSeqMap$Ordering(ordinal), r);
+      } else {
+        return $m_sci_TreeSeqMap$Ordering$().scala$collection$immutable$TreeSeqMap$Ordering$$bin__I__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering(p, m, l, $n(r).exclude__I__sci_TreeSeqMap$Ordering(ordinal));
+      }
+    }
+  } else {
+    throw new $c_s_MatchError(this);
+  }
+});
+function $as_sci_TreeSeqMap$Ordering(obj) {
+  return (((obj instanceof $c_sci_TreeSeqMap$Ordering) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.TreeSeqMap$Ordering"));
+}
+function $isArrayOf_sci_TreeSeqMap$Ordering(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sci_TreeSeqMap$Ordering)));
+}
+function $asArrayOf_sci_TreeSeqMap$Ordering(obj, depth) {
+  return (($isArrayOf_sci_TreeSeqMap$Ordering(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.immutable.TreeSeqMap$Ordering;", depth));
+}
+function $p_sci_TreeSeqMap$Ordering$__branchMask__I__I__I($thiz, i, j) {
+  var j$1 = (i ^ j);
+  return (((-2147483648) >> Math.clz32(j$1)) & j$1);
+}
+/** @constructor */
+function $c_sci_TreeSeqMap$Ordering$() {
+}
+$c_sci_TreeSeqMap$Ordering$.prototype = new $h_O();
+$c_sci_TreeSeqMap$Ordering$.prototype.constructor = $c_sci_TreeSeqMap$Ordering$;
+/** @constructor */
+function $h_sci_TreeSeqMap$Ordering$() {
+}
+$h_sci_TreeSeqMap$Ordering$.prototype = $c_sci_TreeSeqMap$Ordering$.prototype;
+$c_sci_TreeSeqMap$Ordering$.prototype.scala$collection$immutable$TreeSeqMap$Ordering$$join__I__sci_TreeSeqMap$Ordering__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering = (function(p1, t1, p2, t2) {
+  var m = $p_sci_TreeSeqMap$Ordering$__branchMask__I__I__I(this, p1, p2);
+  var this$1 = $m_scg_BitOperations$Int$();
+  var p = $f_scg_BitOperations$Int__mask__I__I__I(this$1, p1, m);
+  var this$2 = $m_scg_BitOperations$Int$();
+  if ($f_scg_BitOperations$Int__zero__I__I__Z(this$2, p1, m)) {
+    return new $c_sci_TreeSeqMap$Ordering$Bin(p, m, t1, t2);
+  } else {
+    return new $c_sci_TreeSeqMap$Ordering$Bin(p, m, t2, t1);
+  }
+});
+$c_sci_TreeSeqMap$Ordering$.prototype.scala$collection$immutable$TreeSeqMap$Ordering$$bin__I__I__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering__sci_TreeSeqMap$Ordering = (function(prefix, mask, left, right) {
+  var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+  if (x.equals__O__Z(right)) {
+    return left;
+  } else {
+    var x$3 = $m_sci_TreeSeqMap$Ordering$Zero$();
+    if (x$3.equals__O__Z(left)) {
+      return right;
+    } else {
+      return new $c_sci_TreeSeqMap$Ordering$Bin(prefix, mask, left, right);
+    }
+  }
+});
+var $d_sci_TreeSeqMap$Ordering$ = new $TypeData().initClass($c_sci_TreeSeqMap$Ordering$, "scala.collection.immutable.TreeSeqMap$Ordering$", ({
+  sci_TreeSeqMap$Ordering$: 1
+}));
+var $n_sci_TreeSeqMap$Ordering$;
+function $m_sci_TreeSeqMap$Ordering$() {
+  if ((!$n_sci_TreeSeqMap$Ordering$)) {
+    $n_sci_TreeSeqMap$Ordering$ = new $c_sci_TreeSeqMap$Ordering$();
+  }
+  return $n_sci_TreeSeqMap$Ordering$;
+}
+function $p_sci_TreeSeqMap$Ordering$Iterator__pop__sci_TreeSeqMap$Ordering($thiz) {
+  $thiz.sci_TreeSeqMap$Ordering$Iterator__f_index = (((-1) + $thiz.sci_TreeSeqMap$Ordering$Iterator__f_index) | 0);
+  return $as_sci_TreeSeqMap$Ordering($n($thiz.sci_TreeSeqMap$Ordering$Iterator__f_buffer).get($thiz.sci_TreeSeqMap$Ordering$Iterator__f_index));
+}
+function $p_sci_TreeSeqMap$Ordering$Iterator__push__sci_TreeSeqMap$Ordering__V($thiz, x) {
+  $n($thiz.sci_TreeSeqMap$Ordering$Iterator__f_buffer).set($thiz.sci_TreeSeqMap$Ordering$Iterator__f_index, x);
+  $thiz.sci_TreeSeqMap$Ordering$Iterator__f_index = ((1 + $thiz.sci_TreeSeqMap$Ordering$Iterator__f_index) | 0);
+}
+/** @constructor */
+function $c_sci_TreeSeqMap$Ordering$Iterator(it) {
+  this.sci_TreeSeqMap$Ordering$Iterator__f_index = 0;
+  this.sci_TreeSeqMap$Ordering$Iterator__f_buffer = null;
+  this.sci_TreeSeqMap$Ordering$Iterator__f_index = 0;
+  this.sci_TreeSeqMap$Ordering$Iterator__f_buffer = new $ac_O(33);
+  var x$2 = $m_sci_TreeSeqMap$Ordering$Zero$();
+  if ((!((it !== null) && $n(it).equals__O__Z(x$2)))) {
+    $p_sci_TreeSeqMap$Ordering$Iterator__push__sci_TreeSeqMap$Ordering__V(this, it);
+  }
+}
+$c_sci_TreeSeqMap$Ordering$Iterator.prototype = new $h_O();
+$c_sci_TreeSeqMap$Ordering$Iterator.prototype.constructor = $c_sci_TreeSeqMap$Ordering$Iterator;
+/** @constructor */
+function $h_sci_TreeSeqMap$Ordering$Iterator() {
+}
+$h_sci_TreeSeqMap$Ordering$Iterator.prototype = $c_sci_TreeSeqMap$Ordering$Iterator.prototype;
+$c_sci_TreeSeqMap$Ordering$Iterator.prototype.hasNext__Z = (function() {
+  return (this.sci_TreeSeqMap$Ordering$Iterator__f_index > 0);
+});
+$c_sci_TreeSeqMap$Ordering$Iterator.prototype.next__O = (function() {
+  while (true) {
+    if ((!this.hasNext__Z())) {
+      return $n($m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty).next__O();
+    } else {
+      var rc15 = false;
+      var x2 = null;
+      var x1 = $p_sci_TreeSeqMap$Ordering$Iterator__pop__sci_TreeSeqMap$Ordering(this);
+      if ((x1 instanceof $c_sci_TreeSeqMap$Ordering$Bin)) {
+        rc15 = true;
+        x2 = $as_sci_TreeSeqMap$Ordering$Bin(x1);
+        var p5 = $n(x2).sci_TreeSeqMap$Ordering$Bin__f_left;
+        var right = $n(x2).sci_TreeSeqMap$Ordering$Bin__f_right;
+        if ((p5 instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+          var x6 = $as_sci_TreeSeqMap$Ordering$Tip(p5);
+          var v = $n(x6).sci_TreeSeqMap$Ordering$Tip__f_value;
+          $p_sci_TreeSeqMap$Ordering$Iterator__push__sci_TreeSeqMap$Ordering__V(this, right);
+          return v;
+        }
+      }
+      if (rc15) {
+        var left = $n(x2).sci_TreeSeqMap$Ordering$Bin__f_left;
+        var right$2 = $n(x2).sci_TreeSeqMap$Ordering$Bin__f_right;
+        $p_sci_TreeSeqMap$Ordering$Iterator__push__sci_TreeSeqMap$Ordering__V(this, right$2);
+        $p_sci_TreeSeqMap$Ordering$Iterator__push__sci_TreeSeqMap$Ordering__V(this, left);
+        continue;
+      }
+      if ((x1 instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+        var x11 = $as_sci_TreeSeqMap$Ordering$Tip(x1);
+        var v$2 = $n(x11).sci_TreeSeqMap$Ordering$Tip__f_value;
+        return v$2;
+      }
+      var x = $m_sci_TreeSeqMap$Ordering$Zero$();
+      if (x.equals__O__Z(x1)) {
+        throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), "empty subtree not allowed");
+      }
+      throw new $c_s_MatchError(x1);
+    }
+  }
+});
+var $d_sci_TreeSeqMap$Ordering$Iterator = new $TypeData().initClass($c_sci_TreeSeqMap$Ordering$Iterator, "scala.collection.immutable.TreeSeqMap$Ordering$Iterator", ({
+  sci_TreeSeqMap$Ordering$Iterator: 1
+}));
+/** @constructor */
+function $c_sci_TreeSeqMap$Ordering$Iterator$() {
+  this.sci_TreeSeqMap$Ordering$Iterator$__f_Empty = null;
+  $n_sci_TreeSeqMap$Ordering$Iterator$ = this;
+  this.sci_TreeSeqMap$Ordering$Iterator$__f_Empty = new $c_sci_TreeSeqMap$Ordering$Iterator($m_sci_TreeSeqMap$Ordering$Zero$());
+}
+$c_sci_TreeSeqMap$Ordering$Iterator$.prototype = new $h_O();
+$c_sci_TreeSeqMap$Ordering$Iterator$.prototype.constructor = $c_sci_TreeSeqMap$Ordering$Iterator$;
+/** @constructor */
+function $h_sci_TreeSeqMap$Ordering$Iterator$() {
+}
+$h_sci_TreeSeqMap$Ordering$Iterator$.prototype = $c_sci_TreeSeqMap$Ordering$Iterator$.prototype;
+var $d_sci_TreeSeqMap$Ordering$Iterator$ = new $TypeData().initClass($c_sci_TreeSeqMap$Ordering$Iterator$, "scala.collection.immutable.TreeSeqMap$Ordering$Iterator$", ({
+  sci_TreeSeqMap$Ordering$Iterator$: 1
+}));
+var $n_sci_TreeSeqMap$Ordering$Iterator$;
+function $m_sci_TreeSeqMap$Ordering$Iterator$() {
+  if ((!$n_sci_TreeSeqMap$Ordering$Iterator$)) {
+    $n_sci_TreeSeqMap$Ordering$Iterator$ = new $c_sci_TreeSeqMap$Ordering$Iterator$();
+  }
+  return $n_sci_TreeSeqMap$Ordering$Iterator$;
 }
 /** @constructor */
 function $c_sci_VectorStatics$() {
@@ -10577,12 +10966,9 @@ $c_Lcs214_webapp_client_WSClientApp.prototype.init__T__T__T__Lorg_scalajs_dom_El
   return client;
 });
 function $f_Lcs214_webapp_client_graphics_DOMClientUI__$init$__V($thiz) {
-  var this$1 = $n($thiz.css__T());
-  if ((!(this$1 === ""))) {
-    var styleTag = document.createElement("style");
-    styleTag.textContent = $thiz.css__T();
-    document.head.appendChild(styleTag);
-  }
+  var styleTag = document.createElement("style");
+  styleTag.textContent = "\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n\n    body {\n      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n      min-height: 100vh;\n      padding: 20px;\n      font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;\n    }\n\n    .emo-app {\n      max-width: 900px;\n      margin: 0 auto;\n      background: #fff;\n      border-radius: 24px;\n      padding: 24px;\n      box-shadow: 0 20px 60px rgba(0,0,0,0.3);\n    }\n\n    /* ===== START SCREEN ===== */\n    .emo-start {\n      text-align: center;\n      padding: 20px 0;\n    }\n\n    .start-logo {\n      font-size: 80px;\n      margin-bottom: 10px;\n      animation: bounce 2s infinite;\n    }\n\n    @keyframes bounce {\n      0%, 100% { transform: translateY(0); }\n      50% { transform: translateY(-15px); }\n    }\n\n    .start-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 3.5rem;\n      background: linear-gradient(135deg, #667eea, #764ba2);\n      -webkit-background-clip: text;\n      -webkit-text-fill-color: transparent;\n      background-clip: text;\n      margin-bottom: 8px;\n    }\n\n    .start-subtitle {\n      color: #666;\n      font-size: 1.2rem;\n      margin-bottom: 30px;\n    }\n\n    .start-rules {\n      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);\n      border-radius: 16px;\n      padding: 24px 32px;\n      display: inline-block;\n      text-align: left;\n      margin-bottom: 30px;\n    }\n\n    .rule {\n      padding: 8px 0;\n      font-size: 1.1rem;\n      color: #444;\n    }\n\n    .rule span { margin-left: 8px; }\n\n    .btn-play {\n      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n      color: #fff;\n      border: none;\n      padding: 18px 50px;\n      font-size: 1.4rem;\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 600;\n      border-radius: 50px;\n      cursor: pointer;\n      box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);\n      transition: all 0.3s ease;\n    }\n\n    .btn-play:hover {\n      transform: translateY(-4px) scale(1.05);\n      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);\n    }\n\n    .btn-play:active {\n      transform: translateY(0) scale(0.98);\n    }\n\n    /* ===== GAME LAYOUT ===== */\n    .emo-game {\n      display: grid;\n      grid-template-columns: 220px 1fr;\n      gap: 20px;\n    }\n\n    .game-side {\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n      min-width: 0;\n    }\n\n    .game-main {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      gap: 12px;\n      min-width: 0;\n      overflow: visible;\n    }\n\n    /* ===== TIMER ===== */\n    .emo-timer {\n      position: relative;\n      width: 140px;\n      height: 40px;\n      background: #f0f0f0;\n      border-radius: 20px;\n      overflow: hidden;\n      border: 3px solid #667eea;\n      flex-shrink: 0;\n    }\n\n    .timer-bar {\n      position: absolute;\n      left: 0;\n      top: 0;\n      bottom: 0;\n      background: linear-gradient(90deg, #4ade80, #fbbf24);\n      transition: width 1s linear;\n    }\n\n    .timer-text {\n      position: absolute;\n      inset: 0;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-weight: 700;\n      font-size: 1rem;\n      color: #333;\n      z-index: 1;\n    }\n\n    .emo-timer.danger {\n      border-color: #ef4444;\n      animation: shake 0.5s ease-in-out infinite;\n    }\n\n    .emo-timer.danger .timer-bar {\n      background: #ef4444;\n    }\n\n    .emo-timer.danger .timer-text {\n      color: #ef4444;\n    }\n\n    @keyframes shake {\n      0%, 100% { transform: translateX(0); }\n      25% { transform: translateX(-4px); }\n      75% { transform: translateX(4px); }\n    }\n\n    /* ===== ROLE BOX ===== */\n    .role-box {\n      width: 100%;\n      max-width: 400px;\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n    }\n\n    .role-badge {\n      display: inline-block;\n      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);\n      color: #fff;\n      padding: 10px 20px;\n      border-radius: 50px;\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 1rem;\n      font-weight: 600;\n      margin-bottom: 16px;\n      text-align: center;\n    }\n\n    /* ===== DESCRIBER ===== */\n    .describer-panel {\n      display: flex;\n      flex-direction: column;\n      gap: 20px;\n    }\n\n    .secret-section {\n      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);\n      border-radius: 16px;\n      padding: 20px;\n      border: 2px solid #f59e0b;\n    }\n\n    .section-label {\n      font-weight: 700;\n      font-size: 1.1rem;\n      margin-bottom: 12px;\n      color: #92400e;\n    }\n\n    .section-hint {\n      font-size: 0.9rem;\n      color: #a16207;\n      margin-top: 8px;\n    }\n\n    #secret-word-input, #guess-input {\n      width: 100%;\n      padding: 14px 18px;\n      font-size: 1.1rem;\n      border: 2px solid #ddd;\n      border-radius: 12px;\n      font-family: inherit;\n      transition: all 0.2s;\n    }\n\n    #secret-word-input:focus, #guess-input:focus {\n      outline: none;\n      border-color: #667eea;\n      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);\n    }\n\n    .secret-display {\n      background: #fef3c7;\n      padding: 12px 20px;\n      border-radius: 50px;\n      display: inline-block;\n      color: #92400e;\n      font-size: 1.1rem;\n    }\n\n    .secret-display strong {\n      color: #78350f;\n      margin-left: 4px;\n    }\n\n    /* ===== STATUS BOX ===== */\n    .status-box {\n      display: flex;\n      align-items: center;\n      gap: 12px;\n      padding: 16px 24px;\n      border-radius: 12px;\n      font-size: 1.1rem;\n    }\n\n    .status-box.waiting {\n      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);\n      color: #1e40af;\n    }\n\n    .status-box.ready {\n      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);\n      color: #065f46;\n    }\n\n    .status-box.blocked {\n      background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);\n      color: #9a3412;\n    }\n\n    .status-icon { font-size: 1.5rem; }\n\n    .status-text { font-weight: 600; }\n\n    /* ===== EMOJI BOARD ===== */\n    .emoji-board {\n      display: grid;\n      grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));\n      gap: 6px;\n      background: #f8fafc;\n      padding: 12px;\n      border-radius: 16px;\n      max-height: 260px;\n      overflow-y: auto;\n      border: 1px solid #e2e8f0;\n    }\n\n    .emoji-btn {\n      font-size: 1.5rem;\n      background: #fff;\n      border: 1px solid #e2e8f0;\n      border-radius: 8px;\n      padding: 6px;\n      cursor: pointer;\n      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);\n    }\n\n    .emoji-btn:hover {\n      transform: scale(1.25);\n      border-color: #667eea;\n      background: #f0f4ff;\n      z-index: 10;\n      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);\n    }\n\n    /* ===== GUESSER ===== */\n    .guesser-panel {\n      display: flex;\n      flex-direction: column;\n      gap: 16px;\n      width: 100%;\n      align-items: center;\n    }\n\n    .hints-section {\n      text-align: center;\n      width: 100%;\n    }\n\n    .hints-label {\n      font-weight: 700;\n      color: #64748b;\n      margin-bottom: 12px;\n      font-size: 1rem;\n    }\n\n    .hints-box {\n      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);\n      border: 3px solid #e2e8f0;\n      border-radius: 16px;\n      padding: 16px;\n      min-height: 70px;\n      display: flex;\n      flex-wrap: wrap;\n      justify-content: center;\n      align-items: center;\n      gap: 4px;\n      max-width: 320px;\n      margin: 0 auto;\n    }\n\n    .hints-wait {\n      color: #94a3b8;\n      font-style: italic;\n      font-size: 1rem;\n      text-align: center;\n      width: 100%;\n    }\n\n    .hint-emoji {\n      font-size: 2rem;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      width: 52px;\n      height: 52px;\n      flex-shrink: 0;\n    }\n\n    .hint-emoji.animate {\n      animation: dropIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;\n    }\n\n    @keyframes dropIn {\n      from {\n        opacity: 0;\n        transform: translateY(-20px) scale(1.3) rotate(10deg);\n      }\n      to {\n        opacity: 1;\n        transform: translateY(0) scale(1) rotate(0);\n      }\n    }\n\n    .guess-form {\n      display: flex;\n      flex-direction: row;\n      gap: 8px;\n      justify-content: center;\n      align-items: center;\n      margin-top: 8px;\n      width: 100%;\n      max-width: 320px;\n    }\n\n    .guess-form #guess-input {\n      flex: 1;\n      min-width: 0;\n      padding: 10px 14px;\n      font-size: 1rem;\n    }\n\n    .btn-guess {\n      background: linear-gradient(135deg, #10b981 0%, #059669 100%);\n      color: #fff;\n      border: none;\n      padding: 10px 16px;\n      font-size: 0.95rem;\n      font-weight: 700;\n      border-radius: 50px;\n      cursor: pointer;\n      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);\n      transition: all 0.2s;\n      white-space: nowrap;\n      flex-shrink: 0;\n    }\n\n    .btn-guess:hover {\n      transform: translateY(-2px);\n      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);\n    }\n\n    /* ===== SCORES ===== */\n    .emo-scores {\n      background: #fff;\n      border-radius: 16px;\n      padding: 16px;\n      border: 2px solid #e2e8f0;\n    }\n\n    .scores-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 600;\n      font-size: 1.1rem;\n      padding-bottom: 12px;\n      border-bottom: 2px solid #f1f5f9;\n      margin-bottom: 12px;\n    }\n\n    .scores-empty {\n      color: #94a3b8;\n      text-align: center;\n      font-size: 0.9rem;\n      padding: 8px 0;\n    }\n\n    .scores-list {\n      display: flex;\n      flex-direction: column;\n      gap: 8px;\n    }\n\n    .score-row {\n      display: flex;\n      align-items: center;\n      gap: 10px;\n      padding: 10px 12px;\n      background: #f8fafc;\n      border-radius: 10px;\n    }\n\n    .score-row.me {\n      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);\n      font-weight: 700;\n    }\n\n    .score-medal { font-size: 1.1rem; width: 24px; }\n\n    .score-name { flex: 1; color: #334155; }\n\n    .score-pts {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 700;\n      font-size: 1.2rem;\n      color: #667eea;\n    }\n\n    /* ===== HISTORY ===== */\n    .emo-history {\n      background: #fff;\n      border-radius: 16px;\n      padding: 16px;\n      border: 2px solid #e2e8f0;\n    }\n\n    .history-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-weight: 600;\n      font-size: 1rem;\n      padding-bottom: 10px;\n      border-bottom: 2px solid #f1f5f9;\n      margin-bottom: 10px;\n    }\n\n    .history-empty {\n      color: #94a3b8;\n      font-size: 0.85rem;\n    }\n\n    .history-list {\n      display: flex;\n      flex-direction: column;\n      gap: 6px;\n      max-height: 120px;\n      overflow-y: auto;\n    }\n\n    .history-item {\n      display: flex;\n      align-items: center;\n      gap: 8px;\n      padding: 8px 10px;\n      background: #fef2f2;\n      border-radius: 8px;\n      font-size: 0.9rem;\n    }\n\n    .history-x {\n      color: #ef4444;\n      font-weight: 700;\n    }\n\n    /* ===== END SCREEN ===== */\n    .emo-end {\n      text-align: center;\n      padding: 20px 0;\n    }\n\n    .end-title {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 2.5rem;\n      color: #1e293b;\n      margin-bottom: 24px;\n    }\n\n    .winner-box {\n      display: inline-flex;\n      flex-direction: column;\n      align-items: center;\n      gap: 8px;\n      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);\n      padding: 28px 48px;\n      border-radius: 20px;\n      box-shadow: 0 8px 30px rgba(253, 224, 71, 0.5);\n      margin-bottom: 24px;\n    }\n\n    .winner-box.animate {\n      animation: pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);\n    }\n\n    @keyframes pop {\n      0% { transform: scale(0) rotate(-10deg); }\n      100% { transform: scale(1) rotate(0); }\n    }\n\n    .trophy { font-size: 3.5rem; }\n\n    .winner-label {\n      font-size: 0.9rem;\n      color: #a16207;\n      text-transform: uppercase;\n      letter-spacing: 2px;\n      font-weight: 600;\n    }\n\n    .winner-name {\n      font-family: 'Fredoka', 'Comic Sans MS', cursive;\n      font-size: 1.8rem;\n      font-weight: 700;\n      color: #78350f;\n    }\n\n    .no-winner {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      gap: 8px;\n      color: #64748b;\n      font-size: 1.2rem;\n      margin-bottom: 24px;\n    }\n\n    .no-winner span:first-child { font-size: 3rem; }\n\n    .reveal-box {\n      background: #f1f5f9;\n      padding: 12px 24px;\n      border-radius: 50px;\n      display: inline-block;\n      font-size: 1.1rem;\n      color: #475569;\n      margin-bottom: 24px;\n    }\n\n    .reveal-box strong {\n      color: #667eea;\n      font-size: 1.3rem;\n      margin-left: 6px;\n    }\n\n    .emo-end .emo-scores {\n      display: inline-block;\n      min-width: 280px;\n      margin-bottom: 24px;\n    }\n\n    /* ===== RESPONSIVE ===== */\n    @media (max-width: 700px) {\n      body { padding: 0; }\n\n      .emo-app {\n        border-radius: 0;\n        padding: 20px 16px;\n        min-height: 100vh;\n      }\n\n      .emo-game {\n        grid-template-columns: 1fr;\n      }\n\n      .game-side {\n        order: 2;\n        display: grid;\n        grid-template-columns: 1fr 1fr;\n        gap: 12px;\n      }\n\n      .game-main { order: 1; }\n\n      .start-title { font-size: 2.5rem; }\n      .start-logo { font-size: 60px; }\n\n      .hints-box {\n        max-width: 280px;\n      }\n\n      .hint-emoji { \n        font-size: 1.6rem; \n        width: 44px;\n        height: 44px;\n      }\n\n      .guess-form {\n        flex-direction: column;\n        max-width: 280px;\n      }\n\n      .guess-form #guess-input {\n        width: 100%;\n      }\n\n      .btn-guess { \n        width: 100%; \n      }\n\n      .emoji-board {\n        grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));\n      }\n   }\n  ";
+  document.head.appendChild(styleTag);
 }
 function $f_Lcs214_webapp_client_graphics_DOMClientUI__displayAlert__T__V($thiz, msg) {
   window.alert(msg);
@@ -13527,6 +13913,26 @@ $c_sc_WithFilter.prototype.constructor = $c_sc_WithFilter;
 function $h_sc_WithFilter() {
 }
 $h_sc_WithFilter.prototype = $c_sc_WithFilter.prototype;
+/** @constructor */
+function $c_scg_BitOperations$Int$() {
+}
+$c_scg_BitOperations$Int$.prototype = new $h_O();
+$c_scg_BitOperations$Int$.prototype.constructor = $c_scg_BitOperations$Int$;
+/** @constructor */
+function $h_scg_BitOperations$Int$() {
+}
+$h_scg_BitOperations$Int$.prototype = $c_scg_BitOperations$Int$.prototype;
+var $d_scg_BitOperations$Int$ = new $TypeData().initClass($c_scg_BitOperations$Int$, "scala.collection.generic.BitOperations$Int$", ({
+  scg_BitOperations$Int$: 1,
+  scg_BitOperations$Int: 1
+}));
+var $n_scg_BitOperations$Int$;
+function $m_scg_BitOperations$Int$() {
+  if ((!$n_scg_BitOperations$Int$)) {
+    $n_scg_BitOperations$Int$ = new $c_scg_BitOperations$Int$();
+  }
+  return $n_scg_BitOperations$Int$;
+}
 function $is_sci_LazyList$State(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sci_LazyList$State)));
 }
@@ -16448,6 +16854,9 @@ $c_sc_IterableFactory$Delegate.prototype.constructor = $c_sc_IterableFactory$Del
 function $h_sc_IterableFactory$Delegate() {
 }
 $h_sc_IterableFactory$Delegate.prototype = $c_sc_IterableFactory$Delegate.prototype;
+$c_sc_IterableFactory$Delegate.prototype.empty__O = (function() {
+  return $n(this.sc_IterableFactory$Delegate__f_delegate).empty__O();
+});
 $c_sc_IterableFactory$Delegate.prototype.from__sc_IterableOnce__O = (function(it) {
   return $n(this.sc_IterableFactory$Delegate__f_delegate).from__sc_IterableOnce__O(it);
 });
@@ -16588,6 +16997,9 @@ $h_sc_Iterator$.prototype = $c_sc_Iterator$.prototype;
 $c_sc_Iterator$.prototype.newBuilder__scm_Builder = (function() {
   return new $c_sc_Iterator$$anon$21();
 });
+$c_sc_Iterator$.prototype.empty__O = (function() {
+  return this.sc_Iterator$__f_scala$collection$Iterator$$_empty;
+});
 $c_sc_Iterator$.prototype.from__sc_IterableOnce__O = (function(source) {
   return $n(source).iterator__sc_Iterator();
 });
@@ -16656,6 +17068,9 @@ $c_sc_View$.prototype.newBuilder__scm_Builder = (function() {
     return $m_sc_View$().from__sc_IterableOnce__sc_View(it$2);
   }));
   return new $c_scm_Builder$$anon$1(this$2, f);
+});
+$c_sc_View$.prototype.empty__O = (function() {
+  return $m_sc_View$Empty$();
 });
 $c_sc_View$.prototype.from__sc_IterableOnce__O = (function(source) {
   return this.from__sc_IterableOnce__sc_View(source);
@@ -17772,6 +18187,9 @@ $c_sci_HashSet$.prototype.newBuilder__scm_Builder = (function() {
 $c_sci_HashSet$.prototype.from__sc_IterableOnce__O = (function(source) {
   return this.from__sc_IterableOnce__sci_HashSet(source);
 });
+$c_sci_HashSet$.prototype.empty__O = (function() {
+  return this.sci_HashSet$__f_EmptySet;
+});
 var $d_sci_HashSet$ = new $TypeData().initClass($c_sci_HashSet$, "scala.collection.immutable.HashSet$", ({
   sci_HashSet$: 1,
   sc_IterableFactory: 1,
@@ -17878,7 +18296,7 @@ $c_sci_Map$.prototype.from__sc_IterableOnce__sci_Map = (function(it) {
     var x8 = $as_sci_ListMap(it);
     return x8;
   }
-  if (false) {
+  if ((it instanceof $c_sci_TreeSeqMap)) {
     var x9 = $as_sci_TreeSeqMap(it);
     return x9;
   }
@@ -17975,6 +18393,9 @@ $c_sci_Set$.prototype.newBuilder__scm_Builder = (function() {
 $c_sci_Set$.prototype.from__sc_IterableOnce__O = (function(source) {
   return this.from__sc_IterableOnce__sci_Set(source);
 });
+$c_sci_Set$.prototype.empty__O = (function() {
+  return $m_sci_Set$EmptySet$();
+});
 var $d_sci_Set$ = new $TypeData().initClass($c_sci_Set$, "scala.collection.immutable.Set$", ({
   sci_Set$: 1,
   sc_IterableFactory: 1,
@@ -17986,6 +18407,70 @@ function $m_sci_Set$() {
     $n_sci_Set$ = new $c_sci_Set$();
   }
   return $n_sci_Set$;
+}
+/** @constructor */
+function $c_sci_TreeSeqMap$() {
+  this.sci_TreeSeqMap$__f_EmptyByInsertion = null;
+  this.sci_TreeSeqMap$__f_EmptyByModification = null;
+  $n_sci_TreeSeqMap$ = this;
+  var $x_1 = $m_sci_TreeSeqMap$Ordering$Zero$();
+  var this$2 = $m_sci_HashMap$();
+  this.sci_TreeSeqMap$__f_EmptyByInsertion = new $c_sci_TreeSeqMap($x_1, this$2.sci_HashMap$__f_EmptyMap, 0, $m_sci_TreeSeqMap$OrderBy$Insertion$());
+  var $x_2 = $m_sci_TreeSeqMap$Ordering$Zero$();
+  var this$4 = $m_sci_HashMap$();
+  this.sci_TreeSeqMap$__f_EmptyByModification = new $c_sci_TreeSeqMap($x_2, this$4.sci_HashMap$__f_EmptyMap, 0, $m_sci_TreeSeqMap$OrderBy$Modification$());
+}
+$c_sci_TreeSeqMap$.prototype = new $h_O();
+$c_sci_TreeSeqMap$.prototype.constructor = $c_sci_TreeSeqMap$;
+/** @constructor */
+function $h_sci_TreeSeqMap$() {
+}
+$h_sci_TreeSeqMap$.prototype = $c_sci_TreeSeqMap$.prototype;
+$c_sci_TreeSeqMap$.prototype.empty__sci_TreeSeqMap$OrderBy__sci_TreeSeqMap = (function(orderBy) {
+  var x$2 = $m_sci_TreeSeqMap$OrderBy$Modification$();
+  if ((orderBy !== null)) {
+    var this$1 = $n(orderBy);
+    var $x_1 = (this$1 === x$2);
+  } else {
+    var $x_1 = false;
+  }
+  if ($x_1) {
+    return this.sci_TreeSeqMap$__f_EmptyByModification;
+  } else {
+    return this.sci_TreeSeqMap$__f_EmptyByInsertion;
+  }
+});
+$c_sci_TreeSeqMap$.prototype.from__sc_IterableOnce__sci_TreeSeqMap = (function(it) {
+  if ((it instanceof $c_sci_TreeSeqMap)) {
+    var x2 = $as_sci_TreeSeqMap(it);
+    return x2;
+  } else {
+    var orderedBy = $m_sci_TreeSeqMap$OrderBy$Insertion$();
+    var this$1 = new $c_sci_TreeSeqMap$Builder(orderedBy);
+    return $as_sci_TreeSeqMap($n($as_scm_Builder($f_scm_Growable__addAll__sc_IterableOnce__scm_Growable(this$1, it))).result__O());
+  }
+});
+$c_sci_TreeSeqMap$.prototype.newBuilder__scm_Builder = (function() {
+  var orderedBy = $m_sci_TreeSeqMap$OrderBy$Insertion$();
+  return new $c_sci_TreeSeqMap$Builder(orderedBy);
+});
+$c_sci_TreeSeqMap$.prototype.from__sc_IterableOnce__O = (function(it) {
+  return this.from__sc_IterableOnce__sci_TreeSeqMap(it);
+});
+$c_sci_TreeSeqMap$.prototype.empty__O = (function() {
+  return this.empty__sci_TreeSeqMap$OrderBy__sci_TreeSeqMap($m_sci_TreeSeqMap$OrderBy$Insertion$());
+});
+var $d_sci_TreeSeqMap$ = new $TypeData().initClass($c_sci_TreeSeqMap$, "scala.collection.immutable.TreeSeqMap$", ({
+  sci_TreeSeqMap$: 1,
+  sc_MapFactory: 1,
+  Ljava_io_Serializable: 1
+}));
+var $n_sci_TreeSeqMap$;
+function $m_sci_TreeSeqMap$() {
+  if ((!$n_sci_TreeSeqMap$)) {
+    $n_sci_TreeSeqMap$ = new $c_sci_TreeSeqMap$();
+  }
+  return $n_sci_TreeSeqMap$;
 }
 function $f_scm_Builder__sizeHint__sc_IterableOnce__I__V($thiz, coll, delta) {
   var x1 = $n(coll).knownSize__I();
@@ -18058,6 +18543,9 @@ $c_scm_HashSet$.prototype.from__sc_IterableOnce__scm_HashSet = (function(it) {
 });
 $c_scm_HashSet$.prototype.newBuilder__scm_Builder = (function() {
   return new $c_scm_HashSet$$anon$4(16, 0.75);
+});
+$c_scm_HashSet$.prototype.empty__O = (function() {
+  return $ct_scm_HashSet__(new $c_scm_HashSet());
 });
 $c_scm_HashSet$.prototype.from__sc_IterableOnce__O = (function(source) {
   return this.from__sc_IterableOnce__scm_HashSet(source);
@@ -19358,6 +19846,127 @@ function $c_Lapps_emojionary_View(phase, amIDescriber, allScores, hints, guesses
   this.Lapps_emojionary_View__f_winner = winner;
   this.Lapps_emojionary_View__f_availableEmojis = availableEmojis;
   this.Lapps_emojionary_View__f_myWrongGuesses = myWrongGuesses;
+  var this$1 = $n(allScores);
+  var this$2 = new $c_sc_MapOps$$anon$1(this$1);
+  var res = true;
+  var it = this$2.iterator__sc_Iterator();
+  while ((res && $n(it).hasNext__Z())) {
+    var x0 = $n(it).next__O();
+    var _$4 = $uI(x0);
+    res = (_$4 >= 0);
+  }
+  var requirement = res;
+  if ((!requirement)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: All scores must be non-negative");
+  }
+  var this$4 = $n(hints);
+  var requirement$1 = (this$4.length__I() <= $m_Lapps_emojionary_Rules$().Lapps_emojionary_Rules$__f_MaxHints);
+  if ((!requirement$1)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), (("requirement failed: " + "Hints count exceeds maximum ") + $m_Lapps_emojionary_Rules$().Lapps_emojionary_Rules$__f_MaxHints));
+  }
+  var ahi = remainingTimeMs.RTLong__f_hi;
+  var requirement$2 = (ahi >= 0);
+  if ((!requirement$2)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Remaining time cannot be negative");
+  }
+  var this$8 = $n(secretWord);
+  if (this$8.isEmpty__Z()) {
+    var requirement$3 = true;
+  } else {
+    var x0$1 = this$8.get__O();
+    var _$5 = $as_T(x0$1);
+    var this$11 = $n(_$5);
+    var requirement$3 = (!(this$11 === ""));
+  }
+  if ((!requirement$3)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Secret word cannot be empty if present");
+  }
+  var this$13 = $n(availableEmojis);
+  var x = $f_sc_SeqOps__distinct__O(this$13);
+  var requirement$4 = ((x === null) ? (availableEmojis === null) : $dp_equals__O__Z($n(x), availableEmojis));
+  if ((!requirement$4)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Available emojis must be unique");
+  }
+  var this$15 = $n(hints);
+  var requirement$5 = $n($as_sci_List($f_sc_StrictOptimizedSeqOps__intersect__sc_Seq__O(this$15, availableEmojis))).isEmpty__Z();
+  if ((!requirement$5)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Used hints must not appear in available emojis");
+  }
+  matchResult22: {
+    var requirement$6;
+    matchAlts1: {
+      matchAlts2: {
+        var x$3 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
+        if ((x$3 === null)) {
+          var $x_1 = (phase === null);
+        } else {
+          var this$17 = $n(x$3);
+          var $x_1 = (this$17 === phase);
+        }
+        if ($x_1) {
+          break matchAlts2;
+        }
+        var x$5 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+        if ((x$5 === null)) {
+          var $x_2 = (phase === null);
+        } else {
+          var this$18 = $n(x$5);
+          var $x_2 = (this$18 === phase);
+        }
+        if ($x_2) {
+          break matchAlts2;
+        }
+        break matchAlts1;
+      }
+      var requirement$6 = ($n(secretWord).isEmpty__Z() || amIDescriber);
+      break matchResult22;
+    }
+    var x$7 = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
+    if ((x$7 === null)) {
+      var $x_3 = (phase === null);
+    } else {
+      var this$19 = $n(x$7);
+      var $x_3 = (this$19 === phase);
+    }
+    if ($x_3) {
+      var requirement$6 = true;
+      break matchResult22;
+    }
+    var x$9 = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
+    if ((x$9 === null)) {
+      var $x_4 = (phase === null);
+    } else {
+      var this$20 = $n(x$9);
+      var $x_4 = (this$20 === phase);
+    }
+    if ($x_4) {
+      var requirement$6 = $n(secretWord).isEmpty__Z();
+      break matchResult22;
+    }
+    throw new $c_s_MatchError(phase);
+  }
+  if ((!requirement$6)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Secret word visibility violated");
+  }
+  if ($n(availableEmojis).isEmpty__Z()) {
+    var requirement$7 = true;
+  } else {
+    var x$12 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
+    if ((phase === null)) {
+      var $x_5 = (x$12 === null);
+    } else {
+      var this$22 = $n(phase);
+      var $x_5 = (this$22 === x$12);
+    }
+    if ($x_5) {
+      var requirement$7 = amIDescriber;
+    } else {
+      var requirement$7 = false;
+    }
+  }
+  if ((!requirement$7)) {
+    throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "requirement failed: Available emojis should only be visible to describer during WaitingForHint");
+  }
 }
 $c_Lapps_emojionary_View.prototype = new $h_O();
 $c_Lapps_emojionary_View.prototype.constructor = $c_Lapps_emojionary_View;
@@ -22682,6 +23291,30 @@ $c_sc_AbstractIterator.prototype.knownSize__I = (function() {
   return (-1);
 });
 /** @constructor */
+function $c_sc_Iterable$() {
+  this.sc_IterableFactory$Delegate__f_delegate = null;
+  $ct_sc_IterableFactory$Delegate__sc_IterableFactory__(this, $m_sci_Iterable$());
+}
+$c_sc_Iterable$.prototype = new $h_sc_IterableFactory$Delegate();
+$c_sc_Iterable$.prototype.constructor = $c_sc_Iterable$;
+/** @constructor */
+function $h_sc_Iterable$() {
+}
+$h_sc_Iterable$.prototype = $c_sc_Iterable$.prototype;
+var $d_sc_Iterable$ = new $TypeData().initClass($c_sc_Iterable$, "scala.collection.Iterable$", ({
+  sc_Iterable$: 1,
+  sc_IterableFactory$Delegate: 1,
+  sc_IterableFactory: 1,
+  Ljava_io_Serializable: 1
+}));
+var $n_sc_Iterable$;
+function $m_sc_Iterable$() {
+  if ((!$n_sc_Iterable$)) {
+    $n_sc_Iterable$ = new $c_sc_Iterable$();
+  }
+  return $n_sc_Iterable$;
+}
+/** @constructor */
 function $c_sc_Map$() {
   this.sc_MapFactory$Delegate__f_delegate = null;
   this.sc_Map$__f_DefaultSentinel = null;
@@ -22792,6 +23425,102 @@ function $f_sc_SeqOps__sameElements__sc_IterableOnce__Z($thiz, that) {
     var knownSizeDifference = false;
   }
   return ((!knownSizeDifference) && $f_sc_Iterator__sameElements__sc_IterableOnce__Z($n($thiz.iterator__sc_Iterator()), that));
+}
+function $f_sc_SeqOps__occCounts__sc_Seq__scm_Map($thiz, sq) {
+  var occ = $ct_scm_HashMap__(new $c_scm_HashMap());
+  $n(sq).foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((y$2$2) => {
+    var originalHash = $m_sr_Statics$().anyHash__O__I(y$2$2);
+    var hash = (originalHash ^ ((originalHash >>> 16) | 0));
+    var indexedHash = (hash & (((-1) + $n(occ.scm_HashMap__f_scala$collection$mutable$HashMap$$table).u.length) | 0));
+    var elem = null;
+    elem = null;
+    var elem$1 = null;
+    elem$1 = null;
+    var x1 = $n(occ.scm_HashMap__f_scala$collection$mutable$HashMap$$table).get(indexedHash);
+    if ((x1 !== null)) {
+      var prev = null;
+      var nd = x1;
+      while (true) {
+        if (((hash === $n(nd).scm_HashMap$Node__f__hash) && $m_sr_BoxesRunTime$().equals__O__O__Z(y$2$2, $n(nd).scm_HashMap$Node__f__key))) {
+          elem$1 = prev;
+          elem = nd;
+        } else if ((!(($n(nd).scm_HashMap$Node__f__next === null) || ($n(nd).scm_HashMap$Node__f__hash > hash)))) {
+          var temp$prev = nd;
+          var temp$nd = $n(nd).scm_HashMap$Node__f__next;
+          prev = temp$prev;
+          nd = temp$nd;
+          continue;
+        }
+        break;
+      }
+    }
+    var x1$2 = $as_scm_HashMap$Node(elem);
+    var previousValue = ((x1$2 === null) ? $m_s_None$() : new $c_s_Some($n(x1$2).scm_HashMap$Node__f__value));
+    var x = $m_s_None$();
+    if ((x === previousValue)) {
+      var nextValue = new $c_s_Some(1);
+    } else {
+      if ((!(previousValue instanceof $c_s_Some))) {
+        throw new $c_s_MatchError(previousValue);
+      }
+      var x3 = $as_s_Some(previousValue);
+      var n = $uI($n(x3).s_Some__f_value);
+      var nextValue = new $c_s_Some(((1 + n) | 0));
+    }
+    var x1$3 = new $c_T2(previousValue, nextValue);
+    matchEnd21: {
+      var p2 = $as_s_Option(x1$3.T2__f__1);
+      var p3 = $as_s_Option(x1$3.T2__f__2);
+      var x$3 = $m_s_None$();
+      if ((x$3 === p2)) {
+        var x$5 = $m_s_None$();
+        var $x_1 = (x$5 === p3);
+      } else {
+        var $x_1 = false;
+      }
+      if ($x_1) {
+        break matchEnd21;
+      }
+      var p6 = $as_s_Option(x1$3.T2__f__1);
+      var p7 = $as_s_Option(x1$3.T2__f__2);
+      if ((p6 instanceof $c_s_Some)) {
+        var x$7 = $m_s_None$();
+        var $x_2 = (x$7 === p7);
+      } else {
+        var $x_2 = false;
+      }
+      if ($x_2) {
+        if (($as_scm_HashMap$Node(elem$1) !== null)) {
+          $n($as_scm_HashMap$Node(elem$1)).scm_HashMap$Node__f__next = $n($as_scm_HashMap$Node(elem)).scm_HashMap$Node__f__next;
+        } else {
+          $n(occ.scm_HashMap__f_scala$collection$mutable$HashMap$$table).set(indexedHash, $n($as_scm_HashMap$Node(elem)).scm_HashMap$Node__f__next);
+        }
+        occ.scm_HashMap__f_contentSize = (((-1) + occ.scm_HashMap__f_contentSize) | 0);
+        break matchEnd21;
+      }
+      var p11 = $as_s_Option(x1$3.T2__f__1);
+      var p12 = $as_s_Option(x1$3.T2__f__2);
+      var x$9 = $m_s_None$();
+      if (((x$9 === p11) && (p12 instanceof $c_s_Some))) {
+        var x13 = $as_s_Some(p12);
+        var value = $n(x13).s_Some__f_value;
+        var newIndexedHash = ((((1 + occ.scm_HashMap__f_contentSize) | 0) >= occ.scm_HashMap__f_threshold) ? ($p_scm_HashMap__growTable__I__V(occ, ($n(occ.scm_HashMap__f_scala$collection$mutable$HashMap$$table).u.length << 1)), (hash & (((-1) + $n(occ.scm_HashMap__f_scala$collection$mutable$HashMap$$table).u.length) | 0))) : indexedHash);
+        $p_scm_HashMap__put0__O__O__Z__I__I__s_Some(occ, y$2$2, value, false, hash, newIndexedHash);
+        break matchEnd21;
+      }
+      var p15 = $as_s_Option(x1$3.T2__f__1);
+      var p16 = $as_s_Option(x1$3.T2__f__2);
+      if (((p15 instanceof $c_s_Some) && (p16 instanceof $c_s_Some))) {
+        var x19 = $as_s_Some(p16);
+        var newValue = $n(x19).s_Some__f_value;
+        $n($as_scm_HashMap$Node(elem)).scm_HashMap$Node__f__value = newValue;
+        break matchEnd21;
+      }
+      throw new $c_s_MatchError(x1$3);
+    }
+    return nextValue;
+  })));
+  return occ;
 }
 function $is_sc_SeqOps(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sc_SeqOps)));
@@ -22977,6 +23706,100 @@ function $m_sci_LazyList$() {
   }
   return $n_sci_LazyList$;
 }
+/** @constructor */
+function $c_sci_TreeSeqMap$Builder(orderedBy) {
+  this.sci_TreeSeqMap$Builder__f_orderedBy = null;
+  this.sci_TreeSeqMap$Builder__f_bdr = null;
+  this.sci_TreeSeqMap$Builder__f_ong = null;
+  this.sci_TreeSeqMap$Builder__f_ord = 0;
+  this.sci_TreeSeqMap$Builder__f_aliased = null;
+  this.sci_TreeSeqMap$Builder__f_orderedBy = orderedBy;
+  this.sci_TreeSeqMap$Builder__f_bdr = new $c_sci_MapBuilderImpl();
+  this.sci_TreeSeqMap$Builder__f_ong = $m_sci_TreeSeqMap$Ordering$Zero$();
+  this.sci_TreeSeqMap$Builder__f_ord = 0;
+}
+$c_sci_TreeSeqMap$Builder.prototype = new $h_O();
+$c_sci_TreeSeqMap$Builder.prototype.constructor = $c_sci_TreeSeqMap$Builder;
+/** @constructor */
+function $h_sci_TreeSeqMap$Builder() {
+}
+$h_sci_TreeSeqMap$Builder.prototype = $c_sci_TreeSeqMap$Builder.prototype;
+$c_sci_TreeSeqMap$Builder.prototype.sizeHint__I__V = (function(size) {
+});
+$c_sci_TreeSeqMap$Builder.prototype.addAll__sc_IterableOnce__scm_Growable = (function(elems) {
+  return $f_scm_Growable__addAll__sc_IterableOnce__scm_Growable(this, elems);
+});
+$c_sci_TreeSeqMap$Builder.prototype.addOne__O__O__sci_TreeSeqMap$Builder = (function(key, value) {
+  if ((this.sci_TreeSeqMap$Builder__f_aliased !== null)) {
+    this.sci_TreeSeqMap$Builder__f_aliased = $n(this.sci_TreeSeqMap$Builder__f_aliased).updated__O__O__sci_TreeSeqMap(key, value);
+  } else {
+    var x1 = $as_T2($n(this.sci_TreeSeqMap$Builder__f_bdr).getOrElse__O__O__O(key, null));
+    if ((x1 !== null)) {
+      var this$1 = $n(x1);
+      var o = $uI(this$1.T2__f__1);
+      var v = $n(x1).T2__f__2;
+      var x = this.sci_TreeSeqMap$Builder__f_orderedBy;
+      var x$2 = $m_sci_TreeSeqMap$OrderBy$Insertion$();
+      if ((x !== null)) {
+        var this$2 = $n(x);
+        var $x_1 = (this$2 === x$2);
+      } else {
+        var $x_1 = false;
+      }
+      if (($x_1 && (!$m_sr_BoxesRunTime$().equals__O__O__Z(v, value)))) {
+        $n(this.sci_TreeSeqMap$Builder__f_bdr).addOne__O__O__sci_MapBuilderImpl(key, new $c_T2(o, value));
+      } else {
+        var x$3 = this.sci_TreeSeqMap$Builder__f_orderedBy;
+        var x$4 = $m_sci_TreeSeqMap$OrderBy$Modification$();
+        if ((x$3 !== null)) {
+          var this$3 = $n(x$3);
+          var $x_2 = (this$3 === x$4);
+        } else {
+          var $x_2 = false;
+        }
+        if ($x_2) {
+          $n(this.sci_TreeSeqMap$Builder__f_bdr).addOne__O__O__sci_MapBuilderImpl(key, new $c_T2(this.sci_TreeSeqMap$Builder__f_ord, value));
+          var this$4 = $n($n(this.sci_TreeSeqMap$Builder__f_ong).exclude__I__sci_TreeSeqMap$Ordering(o));
+          var ordinal = this.sci_TreeSeqMap$Builder__f_ord;
+          this.sci_TreeSeqMap$Builder__f_ong = this$4.appendInPlace1__sci_TreeSeqMap$Ordering$Bin__I__O__sci_TreeSeqMap$Ordering(null, ordinal, key);
+          $m_sci_TreeSeqMap$();
+          var ord = this.sci_TreeSeqMap$Builder__f_ord;
+          this.sci_TreeSeqMap$Builder__f_ord = ((ord === 2147483647) ? (-2147483648) : ((1 + ord) | 0));
+        }
+      }
+    } else if ((x1 === null)) {
+      $n(this.sci_TreeSeqMap$Builder__f_bdr).addOne__O__O__sci_MapBuilderImpl(key, new $c_T2(this.sci_TreeSeqMap$Builder__f_ord, value));
+      var this$6 = $n(this.sci_TreeSeqMap$Builder__f_ong);
+      var ordinal$1 = this.sci_TreeSeqMap$Builder__f_ord;
+      this.sci_TreeSeqMap$Builder__f_ong = this$6.appendInPlace1__sci_TreeSeqMap$Ordering$Bin__I__O__sci_TreeSeqMap$Ordering(null, ordinal$1, key);
+      $m_sci_TreeSeqMap$();
+      var ord$1 = this.sci_TreeSeqMap$Builder__f_ord;
+      this.sci_TreeSeqMap$Builder__f_ord = ((ord$1 === 2147483647) ? (-2147483648) : ((1 + ord$1) | 0));
+    } else {
+      throw new $c_s_MatchError(x1);
+    }
+  }
+  return this;
+});
+$c_sci_TreeSeqMap$Builder.prototype.result__sci_TreeSeqMap = (function() {
+  if ((this.sci_TreeSeqMap$Builder__f_aliased === null)) {
+    this.sci_TreeSeqMap$Builder__f_aliased = new $c_sci_TreeSeqMap(this.sci_TreeSeqMap$Builder__f_ong, $n(this.sci_TreeSeqMap$Builder__f_bdr).result__sci_Map(), this.sci_TreeSeqMap$Builder__f_ord, this.sci_TreeSeqMap$Builder__f_orderedBy);
+  }
+  return this.sci_TreeSeqMap$Builder__f_aliased;
+});
+$c_sci_TreeSeqMap$Builder.prototype.result__O = (function() {
+  return this.result__sci_TreeSeqMap();
+});
+$c_sci_TreeSeqMap$Builder.prototype.addOne__O__scm_Growable = (function(elem) {
+  var elem$1 = $as_T2(elem);
+  return this.addOne__O__O__sci_TreeSeqMap$Builder($n(elem$1).T2__f__1, $n(elem$1).T2__f__2);
+});
+var $d_sci_TreeSeqMap$Builder = new $TypeData().initClass($c_sci_TreeSeqMap$Builder, "scala.collection.immutable.TreeSeqMap$Builder", ({
+  sci_TreeSeqMap$Builder: 1,
+  scm_Builder: 1,
+  scm_Growable: 1,
+  scm_Clearable: 1
+}));
 /** @constructor */
 function $c_scm_Builder$$anon$1(outer, f$1) {
   this.scm_Builder$$anon$1__f_$outer = null;
@@ -25824,6 +26647,10 @@ $c_ju_HashMap.prototype.containsKey__O__Z = (function(key) {
   }
   return (this.java$util$HashMap$$findNode0__O__I__I__ju_HashMap$Node(key, hash, (hash & (((-1) + $n(this.ju_HashMap__f_java$util$HashMap$$table).u.length) | 0))) !== null);
 });
+$c_ju_HashMap.prototype.remove__O__O = (function(key) {
+  var node = this.java$util$HashMap$$remove0__O__ju_HashMap$Node(key);
+  return ((node === null) ? null : $n(node).ju_HashMap$Node__f_value);
+});
 $c_ju_HashMap.prototype.java$util$HashMap$$findNode0__O__I__I__ju_HashMap$Node = (function(key, hash, idx) {
   var node = $n(this.ju_HashMap__f_java$util$HashMap$$table).get(idx);
   while (true) {
@@ -25894,6 +26721,34 @@ $c_ju_HashMap.prototype.java$util$HashMap$$put0__O__O__I__Z__O = (function(key, 
   this.ju_HashMap__f_contentSize = newContentSize;
   this.nodeWasAdded__ju_HashMap$Node__V(newNode$3);
   return null;
+});
+$c_ju_HashMap.prototype.java$util$HashMap$$remove0__O__ju_HashMap$Node = (function(key) {
+  if ((key === null)) {
+    var hash = 0;
+  } else {
+    var originalHash = $dp_hashCode__I($n(key));
+    var hash = (originalHash ^ ((originalHash >>> 16) | 0));
+  }
+  var idx = (hash & (((-1) + $n(this.ju_HashMap__f_java$util$HashMap$$table).u.length) | 0));
+  var node = this.java$util$HashMap$$findNode0__O__I__I__ju_HashMap$Node(key, hash, idx);
+  if ((node !== null)) {
+    this.java$util$HashMap$$remove0__ju_HashMap$Node__I__V(node, idx);
+  }
+  return node;
+});
+$c_ju_HashMap.prototype.java$util$HashMap$$remove0__ju_HashMap$Node__I__V = (function(node, idx) {
+  var previous = $n(node).ju_HashMap$Node__f_previous;
+  var next = $n(node).ju_HashMap$Node__f_next;
+  if ((previous === null)) {
+    $n(this.ju_HashMap__f_java$util$HashMap$$table).set(idx, next);
+  } else {
+    $n(previous).ju_HashMap$Node__f_next = next;
+  }
+  if ((next !== null)) {
+    $n(next).ju_HashMap$Node__f_previous = previous;
+  }
+  this.ju_HashMap__f_contentSize = (((-1) + this.ju_HashMap__f_contentSize) | 0);
+  this.nodeWasRemoved__ju_HashMap$Node__V(node);
 });
 function $ct_ju_NoSuchElementException__T__($thiz, s) {
   $ct_jl_Throwable__T__jl_Throwable__Z__Z__($thiz, s, null, true, true);
@@ -26008,6 +26863,15 @@ $c_s_Option.prototype.iterator__sc_Iterator = (function() {
     return new $c_sc_Iterator$$anon$20(a);
   }
 });
+function $as_s_Option(obj) {
+  return (((obj instanceof $c_s_Option) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.Option"));
+}
+function $isArrayOf_s_Option(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.s_Option)));
+}
+function $asArrayOf_s_Option(obj, depth) {
+  return (($isArrayOf_s_Option(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.Option;", depth));
+}
 /** @constructor */
 function $c_s_Product$$anon$1(outer) {
   this.s_Product$$anon$1__f_c = 0;
@@ -26787,6 +27651,30 @@ var $d_sc_MapOps$$anon$2 = new $TypeData().initClass($c_sc_MapOps$$anon$2, "scal
   sc_IterableOnceOps: 1
 }));
 /** @constructor */
+function $c_sc_MapOps$$anon$3(outer) {
+  this.sc_MapOps$$anon$3__f_iter = null;
+  this.sc_MapOps$$anon$3__f_iter = $n(outer).iterator__sc_Iterator();
+}
+$c_sc_MapOps$$anon$3.prototype = new $h_sc_AbstractIterator();
+$c_sc_MapOps$$anon$3.prototype.constructor = $c_sc_MapOps$$anon$3;
+/** @constructor */
+function $h_sc_MapOps$$anon$3() {
+}
+$h_sc_MapOps$$anon$3.prototype = $c_sc_MapOps$$anon$3.prototype;
+$c_sc_MapOps$$anon$3.prototype.hasNext__Z = (function() {
+  return $n(this.sc_MapOps$$anon$3__f_iter).hasNext__Z();
+});
+$c_sc_MapOps$$anon$3.prototype.next__O = (function() {
+  return $n($as_T2($n(this.sc_MapOps$$anon$3__f_iter).next__O())).T2__f__2;
+});
+var $d_sc_MapOps$$anon$3 = new $TypeData().initClass($c_sc_MapOps$$anon$3, "scala.collection.MapOps$$anon$3", ({
+  sc_MapOps$$anon$3: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
 function $c_sc_StrictOptimizedLinearSeqOps$$anon$1(outer) {
   this.sc_StrictOptimizedLinearSeqOps$$anon$1__f_current = null;
   this.sc_StrictOptimizedLinearSeqOps$$anon$1__f_current = outer;
@@ -27010,6 +27898,14 @@ function $h_sci_HashMapBuilder() {
 }
 $h_sci_HashMapBuilder.prototype = $c_sci_HashMapBuilder.prototype;
 $c_sci_HashMapBuilder.prototype.sizeHint__I__V = (function(size) {
+});
+$c_sci_HashMapBuilder.prototype.getOrElse__O__O__O = (function(key, value) {
+  if (($n(this.sci_HashMapBuilder__f_scala$collection$immutable$HashMapBuilder$$rootNode).sci_BitmapIndexedMapNode__f_size === 0)) {
+    return value;
+  } else {
+    var originalHash = $m_sr_Statics$().anyHash__O__I(key);
+    return $n(this.sci_HashMapBuilder__f_scala$collection$immutable$HashMapBuilder$$rootNode).getOrElse__O__I__I__I__F0__O(key, originalHash, $m_sc_Hashing$().improve__I__I(originalHash), 0, new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => value)));
+  }
 });
 $c_sci_HashMapBuilder.prototype.update__sci_MapNode__O__O__I__I__I__V = (function(mapNode, key, value, originalHash, keyHash, shift) {
   if ((mapNode instanceof $c_sci_BitmapIndexedMapNode)) {
@@ -27555,6 +28451,9 @@ function $h_sci_MapBuilderImpl() {
 $h_sci_MapBuilderImpl.prototype = $c_sci_MapBuilderImpl.prototype;
 $c_sci_MapBuilderImpl.prototype.sizeHint__I__V = (function(size) {
 });
+$c_sci_MapBuilderImpl.prototype.getOrElse__O__O__O = (function(key, value) {
+  return ((this.sci_MapBuilderImpl__f_hashMapBuilder !== null) ? $n(this.sci_MapBuilderImpl__f_hashMapBuilder).getOrElse__O__O__O(key, value) : $n(this.sci_MapBuilderImpl__f_elems).getOrElse__O__F0__O(key, new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => value))));
+});
 $c_sci_MapBuilderImpl.prototype.result__sci_Map = (function() {
   return (this.sci_MapBuilderImpl__f_switchedToHashMapBuilder ? $n(this.sci_MapBuilderImpl__f_hashMapBuilder).result__sci_HashMap() : this.sci_MapBuilderImpl__f_elems);
 });
@@ -27706,6 +28605,431 @@ var $d_sci_SetBuilderImpl = new $TypeData().initClass($c_sci_SetBuilderImpl, "sc
   scm_Growable: 1,
   scm_Clearable: 1
 }));
+/** @constructor */
+function $c_sci_TreeSeqMap$$anon$1(outer) {
+  this.sci_TreeSeqMap$$anon$1__f_iter = null;
+  this.sci_TreeSeqMap$$anon$1__f_$outer = null;
+  $n(outer);
+  this.sci_TreeSeqMap$$anon$1__f_$outer = outer;
+  this.sci_TreeSeqMap$$anon$1__f_iter = $n($n(outer).sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering).iterator__sci_TreeSeqMap$Ordering$Iterator();
+}
+$c_sci_TreeSeqMap$$anon$1.prototype = new $h_sc_AbstractIterator();
+$c_sci_TreeSeqMap$$anon$1.prototype.constructor = $c_sci_TreeSeqMap$$anon$1;
+/** @constructor */
+function $h_sci_TreeSeqMap$$anon$1() {
+}
+$h_sci_TreeSeqMap$$anon$1.prototype = $c_sci_TreeSeqMap$$anon$1.prototype;
+$c_sci_TreeSeqMap$$anon$1.prototype.hasNext__Z = (function() {
+  return $n(this.sci_TreeSeqMap$$anon$1__f_iter).hasNext__Z();
+});
+$c_sci_TreeSeqMap$$anon$1.prototype.next__T2 = (function() {
+  var this$1 = $n(this.sci_TreeSeqMap$$anon$1__f_$outer);
+  var k = $n(this.sci_TreeSeqMap$$anon$1__f_iter).next__O();
+  var qual$1 = $as_T2($n(this$1.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).apply__O__O(k));
+  var this$2 = $n(qual$1);
+  var x$2 = this$2.T2__f__2;
+  $n(qual$1);
+  return new $c_T2(k, x$2);
+});
+$c_sci_TreeSeqMap$$anon$1.prototype.next__O = (function() {
+  return this.next__T2();
+});
+var $d_sci_TreeSeqMap$$anon$1 = new $TypeData().initClass($c_sci_TreeSeqMap$$anon$1, "scala.collection.immutable.TreeSeqMap$$anon$1", ({
+  sci_TreeSeqMap$$anon$1: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
+function $c_sci_TreeSeqMap$$anon$2(outer) {
+  this.sci_TreeSeqMap$$anon$2__f_iter = null;
+  this.sci_TreeSeqMap$$anon$2__f_iter = $n($n(outer).sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering).iterator__sci_TreeSeqMap$Ordering$Iterator();
+}
+$c_sci_TreeSeqMap$$anon$2.prototype = new $h_sc_AbstractIterator();
+$c_sci_TreeSeqMap$$anon$2.prototype.constructor = $c_sci_TreeSeqMap$$anon$2;
+/** @constructor */
+function $h_sci_TreeSeqMap$$anon$2() {
+}
+$h_sci_TreeSeqMap$$anon$2.prototype = $c_sci_TreeSeqMap$$anon$2.prototype;
+$c_sci_TreeSeqMap$$anon$2.prototype.hasNext__Z = (function() {
+  return $n(this.sci_TreeSeqMap$$anon$2__f_iter).hasNext__Z();
+});
+$c_sci_TreeSeqMap$$anon$2.prototype.next__O = (function() {
+  return $n(this.sci_TreeSeqMap$$anon$2__f_iter).next__O();
+});
+var $d_sci_TreeSeqMap$$anon$2 = new $TypeData().initClass($c_sci_TreeSeqMap$$anon$2, "scala.collection.immutable.TreeSeqMap$$anon$2", ({
+  sci_TreeSeqMap$$anon$2: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
+function $c_sci_TreeSeqMap$$anon$3(outer) {
+  this.sci_TreeSeqMap$$anon$3__f_iter = null;
+  this.sci_TreeSeqMap$$anon$3__f_$outer = null;
+  $n(outer);
+  this.sci_TreeSeqMap$$anon$3__f_$outer = outer;
+  this.sci_TreeSeqMap$$anon$3__f_iter = $n($n(outer).sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering).iterator__sci_TreeSeqMap$Ordering$Iterator();
+}
+$c_sci_TreeSeqMap$$anon$3.prototype = new $h_sc_AbstractIterator();
+$c_sci_TreeSeqMap$$anon$3.prototype.constructor = $c_sci_TreeSeqMap$$anon$3;
+/** @constructor */
+function $h_sci_TreeSeqMap$$anon$3() {
+}
+$h_sci_TreeSeqMap$$anon$3.prototype = $c_sci_TreeSeqMap$$anon$3.prototype;
+$c_sci_TreeSeqMap$$anon$3.prototype.hasNext__Z = (function() {
+  return $n(this.sci_TreeSeqMap$$anon$3__f_iter).hasNext__Z();
+});
+$c_sci_TreeSeqMap$$anon$3.prototype.next__O = (function() {
+  $n(this.sci_TreeSeqMap$$anon$3__f_$outer);
+  var this$1 = $n(this.sci_TreeSeqMap$$anon$3__f_$outer);
+  var k = $n(this.sci_TreeSeqMap$$anon$3__f_iter).next__O();
+  var qual$1 = $as_T2($n(this$1.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).apply__O__O(k));
+  var this$2 = $n(qual$1);
+  var x$2 = this$2.T2__f__2;
+  $n(qual$1);
+  return x$2;
+});
+var $d_sci_TreeSeqMap$$anon$3 = new $TypeData().initClass($c_sci_TreeSeqMap$$anon$3, "scala.collection.immutable.TreeSeqMap$$anon$3", ({
+  sci_TreeSeqMap$$anon$3: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
+function $c_sci_TreeSeqMap$OrderBy$Insertion$() {
+}
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype = new $h_O();
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype.constructor = $c_sci_TreeSeqMap$OrderBy$Insertion$;
+/** @constructor */
+function $h_sci_TreeSeqMap$OrderBy$Insertion$() {
+}
+$h_sci_TreeSeqMap$OrderBy$Insertion$.prototype = $c_sci_TreeSeqMap$OrderBy$Insertion$.prototype;
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype.productPrefix__T = (function() {
+  return "Insertion";
+});
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype.productElement__I__O = (function(x$1) {
+  return $m_sr_Statics$().ioobe__I__O(x$1);
+});
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this);
+});
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype.hashCode__I = (function() {
+  return 1619512975;
+});
+$c_sci_TreeSeqMap$OrderBy$Insertion$.prototype.toString__T = (function() {
+  return "Insertion";
+});
+var $d_sci_TreeSeqMap$OrderBy$Insertion$ = new $TypeData().initClass($c_sci_TreeSeqMap$OrderBy$Insertion$, "scala.collection.immutable.TreeSeqMap$OrderBy$Insertion$", ({
+  sci_TreeSeqMap$OrderBy$Insertion$: 1,
+  sci_TreeSeqMap$OrderBy: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  Ljava_io_Serializable: 1
+}));
+var $n_sci_TreeSeqMap$OrderBy$Insertion$;
+function $m_sci_TreeSeqMap$OrderBy$Insertion$() {
+  if ((!$n_sci_TreeSeqMap$OrderBy$Insertion$)) {
+    $n_sci_TreeSeqMap$OrderBy$Insertion$ = new $c_sci_TreeSeqMap$OrderBy$Insertion$();
+  }
+  return $n_sci_TreeSeqMap$OrderBy$Insertion$;
+}
+/** @constructor */
+function $c_sci_TreeSeqMap$OrderBy$Modification$() {
+}
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype = new $h_O();
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype.constructor = $c_sci_TreeSeqMap$OrderBy$Modification$;
+/** @constructor */
+function $h_sci_TreeSeqMap$OrderBy$Modification$() {
+}
+$h_sci_TreeSeqMap$OrderBy$Modification$.prototype = $c_sci_TreeSeqMap$OrderBy$Modification$.prototype;
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype.productPrefix__T = (function() {
+  return "Modification";
+});
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype.productElement__I__O = (function(x$1) {
+  return $m_sr_Statics$().ioobe__I__O(x$1);
+});
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this);
+});
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype.hashCode__I = (function() {
+  return (-520280644);
+});
+$c_sci_TreeSeqMap$OrderBy$Modification$.prototype.toString__T = (function() {
+  return "Modification";
+});
+var $d_sci_TreeSeqMap$OrderBy$Modification$ = new $TypeData().initClass($c_sci_TreeSeqMap$OrderBy$Modification$, "scala.collection.immutable.TreeSeqMap$OrderBy$Modification$", ({
+  sci_TreeSeqMap$OrderBy$Modification$: 1,
+  sci_TreeSeqMap$OrderBy: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  Ljava_io_Serializable: 1
+}));
+var $n_sci_TreeSeqMap$OrderBy$Modification$;
+function $m_sci_TreeSeqMap$OrderBy$Modification$() {
+  if ((!$n_sci_TreeSeqMap$OrderBy$Modification$)) {
+    $n_sci_TreeSeqMap$OrderBy$Modification$ = new $c_sci_TreeSeqMap$OrderBy$Modification$();
+  }
+  return $n_sci_TreeSeqMap$OrderBy$Modification$;
+}
+/** @constructor */
+function $c_sci_TreeSeqMap$Ordering$Bin(prefix, mask, left, right) {
+  this.sci_TreeSeqMap$Ordering$Bin__f_prefix = 0;
+  this.sci_TreeSeqMap$Ordering$Bin__f_mask = 0;
+  this.sci_TreeSeqMap$Ordering$Bin__f_left = null;
+  this.sci_TreeSeqMap$Ordering$Bin__f_right = null;
+  this.sci_TreeSeqMap$Ordering$Bin__f_prefix = prefix;
+  this.sci_TreeSeqMap$Ordering$Bin__f_mask = mask;
+  this.sci_TreeSeqMap$Ordering$Bin__f_left = left;
+  this.sci_TreeSeqMap$Ordering$Bin__f_right = right;
+}
+$c_sci_TreeSeqMap$Ordering$Bin.prototype = new $h_sci_TreeSeqMap$Ordering();
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.constructor = $c_sci_TreeSeqMap$Ordering$Bin;
+/** @constructor */
+function $h_sci_TreeSeqMap$Ordering$Bin() {
+}
+$h_sci_TreeSeqMap$Ordering$Bin.prototype = $c_sci_TreeSeqMap$Ordering$Bin.prototype;
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.format__scm_StringBuilder__T__T__V = (function(sb, prefix, subPrefix) {
+  var this$13 = $n(sb);
+  var i = this.sci_TreeSeqMap$Ordering$Bin__f_prefix;
+  var $x_1 = $as_T((i >>> 0.0).toString(2));
+  var i$1 = this.sci_TreeSeqMap$Ordering$Bin__f_mask;
+  var s = (((((prefix + "Bin(") + ((i + "/") + $x_1)) + ":") + ((i$1 + "/") + $as_T((i$1 >>> 0.0).toString(2)))) + ")\n");
+  this$13.addAll__T__scm_StringBuilder(s);
+  $n(this.sci_TreeSeqMap$Ordering$Bin__f_left).format__scm_StringBuilder__T__T__V(sb, (subPrefix + "\u251c\u2500\u2500 "), (subPrefix + "\u2502   "));
+  $n(this.sci_TreeSeqMap$Ordering$Bin__f_right).format__scm_StringBuilder__T__T__V(sb, (subPrefix + "\u2514\u2500\u2500 "), (subPrefix + "    "));
+});
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.productPrefix__T = (function() {
+  return "Bin";
+});
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.productArity__I = (function() {
+  return 4;
+});
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.productElement__I__O = (function(x$1) {
+  switch (x$1) {
+    case 0: {
+      return this.sci_TreeSeqMap$Ordering$Bin__f_prefix;
+      break;
+    }
+    case 1: {
+      return this.sci_TreeSeqMap$Ordering$Bin__f_mask;
+      break;
+    }
+    case 2: {
+      return this.sci_TreeSeqMap$Ordering$Bin__f_left;
+      break;
+    }
+    case 3: {
+      return this.sci_TreeSeqMap$Ordering$Bin__f_right;
+      break;
+    }
+    default: {
+      return $m_sr_Statics$().ioobe__I__O(x$1);
+    }
+  }
+});
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this);
+});
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  var data = $f_T__hashCode__I("Bin");
+  acc = $m_sr_Statics$().mix__I__I__I(hash, data);
+  var hash$1 = acc;
+  var data$1 = this.sci_TreeSeqMap$Ordering$Bin__f_prefix;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data$1);
+  var hash$2 = acc;
+  var data$2 = this.sci_TreeSeqMap$Ordering$Bin__f_mask;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$2);
+  var hash$3 = acc;
+  var x = this.sci_TreeSeqMap$Ordering$Bin__f_left;
+  var data$3 = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$3);
+  var hash$4 = acc;
+  var x$1 = this.sci_TreeSeqMap$Ordering$Bin__f_right;
+  var data$4 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$4, data$4);
+  var hash$5 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$5, 4);
+});
+$c_sci_TreeSeqMap$Ordering$Bin.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true;
+  } else if ((x$1 instanceof $c_sci_TreeSeqMap$Ordering$Bin)) {
+    var Bin$1 = $as_sci_TreeSeqMap$Ordering$Bin(x$1);
+    if (((this.sci_TreeSeqMap$Ordering$Bin__f_prefix === $n(Bin$1).sci_TreeSeqMap$Ordering$Bin__f_prefix) && (this.sci_TreeSeqMap$Ordering$Bin__f_mask === $n(Bin$1).sci_TreeSeqMap$Ordering$Bin__f_mask))) {
+      var x = this.sci_TreeSeqMap$Ordering$Bin__f_left;
+      var x$2 = $n(Bin$1).sci_TreeSeqMap$Ordering$Bin__f_left;
+      if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+        var x$3 = this.sci_TreeSeqMap$Ordering$Bin__f_right;
+        var x$4 = $n(Bin$1).sci_TreeSeqMap$Ordering$Bin__f_right;
+        return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+function $as_sci_TreeSeqMap$Ordering$Bin(obj) {
+  return (((obj instanceof $c_sci_TreeSeqMap$Ordering$Bin) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.TreeSeqMap$Ordering$Bin"));
+}
+function $isArrayOf_sci_TreeSeqMap$Ordering$Bin(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sci_TreeSeqMap$Ordering$Bin)));
+}
+function $asArrayOf_sci_TreeSeqMap$Ordering$Bin(obj, depth) {
+  return (($isArrayOf_sci_TreeSeqMap$Ordering$Bin(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.immutable.TreeSeqMap$Ordering$Bin;", depth));
+}
+var $d_sci_TreeSeqMap$Ordering$Bin = new $TypeData().initClass($c_sci_TreeSeqMap$Ordering$Bin, "scala.collection.immutable.TreeSeqMap$Ordering$Bin", ({
+  sci_TreeSeqMap$Ordering$Bin: 1,
+  sci_TreeSeqMap$Ordering: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_sci_TreeSeqMap$Ordering$Tip(ord, value) {
+  this.sci_TreeSeqMap$Ordering$Tip__f_ord = 0;
+  this.sci_TreeSeqMap$Ordering$Tip__f_value = null;
+  this.sci_TreeSeqMap$Ordering$Tip__f_ord = ord;
+  this.sci_TreeSeqMap$Ordering$Tip__f_value = value;
+}
+$c_sci_TreeSeqMap$Ordering$Tip.prototype = new $h_sci_TreeSeqMap$Ordering();
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.constructor = $c_sci_TreeSeqMap$Ordering$Tip;
+/** @constructor */
+function $h_sci_TreeSeqMap$Ordering$Tip() {
+}
+$h_sci_TreeSeqMap$Ordering$Tip.prototype = $c_sci_TreeSeqMap$Ordering$Tip.prototype;
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.format__scm_StringBuilder__T__T__V = (function(sb, prefix, subPrefix) {
+  var this$7 = $n(sb);
+  var i = this.sci_TreeSeqMap$Ordering$Tip__f_ord;
+  var s = (((((prefix + "Tip(") + ((i + "/") + $as_T((i >>> 0.0).toString(2)))) + " -> ") + this.sci_TreeSeqMap$Ordering$Tip__f_value) + ")\n");
+  this$7.addAll__T__scm_StringBuilder(s);
+});
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.productPrefix__T = (function() {
+  return "Tip";
+});
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.productElement__I__O = (function(x$1) {
+  switch (x$1) {
+    case 0: {
+      return this.sci_TreeSeqMap$Ordering$Tip__f_ord;
+      break;
+    }
+    case 1: {
+      return this.sci_TreeSeqMap$Ordering$Tip__f_value;
+      break;
+    }
+    default: {
+      return $m_sr_Statics$().ioobe__I__O(x$1);
+    }
+  }
+});
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this);
+});
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  var data = $f_T__hashCode__I("Tip");
+  acc = $m_sr_Statics$().mix__I__I__I(hash, data);
+  var hash$1 = acc;
+  var data$1 = this.sci_TreeSeqMap$Ordering$Tip__f_ord;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data$1);
+  var hash$2 = acc;
+  var x = this.sci_TreeSeqMap$Ordering$Tip__f_value;
+  var data$2 = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$2);
+  var hash$3 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$3, 2);
+});
+$c_sci_TreeSeqMap$Ordering$Tip.prototype.equals__O__Z = (function(x$1) {
+  if ((this === x$1)) {
+    return true;
+  } else if ((x$1 instanceof $c_sci_TreeSeqMap$Ordering$Tip)) {
+    var Tip$1 = $as_sci_TreeSeqMap$Ordering$Tip(x$1);
+    return ((this.sci_TreeSeqMap$Ordering$Tip__f_ord === $n(Tip$1).sci_TreeSeqMap$Ordering$Tip__f_ord) && $m_sr_BoxesRunTime$().equals__O__O__Z(this.sci_TreeSeqMap$Ordering$Tip__f_value, $n(Tip$1).sci_TreeSeqMap$Ordering$Tip__f_value));
+  } else {
+    return false;
+  }
+});
+function $as_sci_TreeSeqMap$Ordering$Tip(obj) {
+  return (((obj instanceof $c_sci_TreeSeqMap$Ordering$Tip) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.TreeSeqMap$Ordering$Tip"));
+}
+function $isArrayOf_sci_TreeSeqMap$Ordering$Tip(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sci_TreeSeqMap$Ordering$Tip)));
+}
+function $asArrayOf_sci_TreeSeqMap$Ordering$Tip(obj, depth) {
+  return (($isArrayOf_sci_TreeSeqMap$Ordering$Tip(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.immutable.TreeSeqMap$Ordering$Tip;", depth));
+}
+var $d_sci_TreeSeqMap$Ordering$Tip = new $TypeData().initClass($c_sci_TreeSeqMap$Ordering$Tip, "scala.collection.immutable.TreeSeqMap$Ordering$Tip", ({
+  sci_TreeSeqMap$Ordering$Tip: 1,
+  sci_TreeSeqMap$Ordering: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_sci_TreeSeqMap$Ordering$Zero$() {
+}
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype = new $h_sci_TreeSeqMap$Ordering();
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.constructor = $c_sci_TreeSeqMap$Ordering$Zero$;
+/** @constructor */
+function $h_sci_TreeSeqMap$Ordering$Zero$() {
+}
+$h_sci_TreeSeqMap$Ordering$Zero$.prototype = $c_sci_TreeSeqMap$Ordering$Zero$.prototype;
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.equals__O__Z = (function(that) {
+  return ((that === this) || ((!(that instanceof $c_sci_TreeSeqMap$Ordering)) && (this === that)));
+});
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.format__scm_StringBuilder__T__T__V = (function(sb, prefix, subPrefix) {
+  var this$1 = $n(sb);
+  var s = (prefix + "\u00d8");
+  this$1.addAll__T__scm_StringBuilder(s);
+});
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.productPrefix__T = (function() {
+  return "Zero";
+});
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.productElement__I__O = (function(x$1) {
+  return $m_sr_Statics$().ioobe__I__O(x$1);
+});
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this);
+});
+$c_sci_TreeSeqMap$Ordering$Zero$.prototype.hashCode__I = (function() {
+  return 2781896;
+});
+var $d_sci_TreeSeqMap$Ordering$Zero$ = new $TypeData().initClass($c_sci_TreeSeqMap$Ordering$Zero$, "scala.collection.immutable.TreeSeqMap$Ordering$Zero$", ({
+  sci_TreeSeqMap$Ordering$Zero$: 1,
+  sci_TreeSeqMap$Ordering: 1,
+  s_Product: 1,
+  s_Equals: 1,
+  Ljava_io_Serializable: 1
+}));
+var $n_sci_TreeSeqMap$Ordering$Zero$;
+function $m_sci_TreeSeqMap$Ordering$Zero$() {
+  if ((!$n_sci_TreeSeqMap$Ordering$Zero$)) {
+    $n_sci_TreeSeqMap$Ordering$Zero$ = new $c_sci_TreeSeqMap$Ordering$Zero$();
+  }
+  return $n_sci_TreeSeqMap$Ordering$Zero$;
+}
 function $ps_sci_Vector$__liftedTree1$1__I() {
   try {
     var this$ = $m_jl_System$SystemProperties$().getProperty__T__T__T("scala.collection.immutable.Vector.defaultApplyPreferredMaxLength", "250");
@@ -33159,14 +34483,26 @@ $c_sc_AbstractIterable.prototype.constructor = $c_sc_AbstractIterable;
 function $h_sc_AbstractIterable() {
 }
 $h_sc_AbstractIterable.prototype = $c_sc_AbstractIterable.prototype;
+$c_sc_AbstractIterable.prototype.iterableFactory__sc_IterableFactory = (function() {
+  return $m_sc_Iterable$();
+});
 $c_sc_AbstractIterable.prototype.className__T = (function() {
   return this.stringPrefix__T();
+});
+$c_sc_AbstractIterable.prototype.stringPrefix__T = (function() {
+  return "Iterable";
+});
+$c_sc_AbstractIterable.prototype.toString__T = (function() {
+  return $f_sc_Iterable__toString__T(this);
 });
 $c_sc_AbstractIterable.prototype.fromSpecific__sc_IterableOnce__sc_IterableOps = (function(coll) {
   return $as_sc_IterableOps($n(this.iterableFactory__sc_IterableFactory()).from__sc_IterableOnce__O(coll));
 });
 $c_sc_AbstractIterable.prototype.newSpecificBuilder__scm_Builder = (function() {
   return $n(this.iterableFactory__sc_IterableFactory()).newBuilder__scm_Builder();
+});
+$c_sc_AbstractIterable.prototype.empty__sc_IterableOps = (function() {
+  return $as_sc_IterableOps($n(this.iterableFactory__sc_IterableFactory()).empty__O());
 });
 $c_sc_AbstractIterable.prototype.head__O = (function() {
   return $n(this.iterator__sc_Iterator()).next__O();
@@ -33218,6 +34554,9 @@ $c_sc_AbstractIterable.prototype.reversed__sc_Iterable = (function() {
 });
 $c_sc_AbstractIterable.prototype.knownSize__I = (function() {
   return (-1);
+});
+$c_sc_AbstractIterable.prototype.empty__O = (function() {
+  return this.empty__sc_IterableOps();
 });
 $c_sc_AbstractIterable.prototype.fromSpecific__sc_IterableOnce__O = (function(coll) {
   return this.fromSpecific__sc_IterableOnce__sc_IterableOps(coll);
@@ -33514,6 +34853,29 @@ function $f_sc_StrictOptimizedSeqOps__appended__O__O($thiz, elem) {
   this$2.addOne__O__scm_Growable(elem);
   return $n(b).result__O();
 }
+function $f_sc_StrictOptimizedSeqOps__intersect__sc_Seq__O($thiz, that) {
+  if (($thiz.isEmpty__Z() || $n(that).isEmpty__Z())) {
+    return $thiz.empty__O();
+  } else {
+    var occ = $f_sc_SeqOps__occCounts__sc_Seq__scm_Map($thiz, that);
+    var b = $thiz.newSpecificBuilder__scm_Builder();
+    $thiz.foreach__F1__V(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$2$2) => $n(occ).updateWith__O__F1__s_Option(x$2$2, new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x0$1$2$2) => {
+      var x0$1$2 = $as_s_Option(x0$1$2$2);
+      var x$3 = $m_s_None$();
+      if ((x$3 === x0$1$2)) {
+        return $m_s_None$();
+      } else if ((x0$1$2 instanceof $c_s_Some)) {
+        var x3 = $as_s_Some(x0$1$2);
+        var n = $uI($n(x3).s_Some__f_value);
+        $n(b).addOne__O__scm_Growable(x$2$2);
+        return ((n === 1) ? $m_s_None$() : new $c_s_Some((((-1) + n) | 0)));
+      } else {
+        throw new $c_s_MatchError(x0$1$2);
+      }
+    }))))));
+    return $n(b).result__O();
+  }
+}
 function $p_sci_ArraySeq$__emptyImpl$lzycompute__sci_ArraySeq$ofRef($thiz) {
   if ((!$thiz.sci_ArraySeq$__f_bitmap$0)) {
     $thiz.sci_ArraySeq$__f_emptyImpl = new $c_sci_ArraySeq$ofRef(new $ac_O(0));
@@ -33747,6 +35109,29 @@ var $d_sci_Map$Map2$$anon$2 = new $TypeData().initClass($c_sci_Map$Map2$$anon$2,
   sc_IterableOnceOps: 1
 }));
 /** @constructor */
+function $c_sci_Map$Map2$$anon$3(outer) {
+  this.sci_Map$Map2$Map2Iterator__f_i = 0;
+  this.sci_Map$Map2$Map2Iterator__f_$outer = null;
+  $ct_sci_Map$Map2$Map2Iterator__sci_Map$Map2__(this, outer);
+}
+$c_sci_Map$Map2$$anon$3.prototype = new $h_sci_Map$Map2$Map2Iterator();
+$c_sci_Map$Map2$$anon$3.prototype.constructor = $c_sci_Map$Map2$$anon$3;
+/** @constructor */
+function $h_sci_Map$Map2$$anon$3() {
+}
+$h_sci_Map$Map2$$anon$3.prototype = $c_sci_Map$Map2$$anon$3.prototype;
+$c_sci_Map$Map2$$anon$3.prototype.nextResult__O__O__O = (function(k, v) {
+  return v;
+});
+var $d_sci_Map$Map2$$anon$3 = new $TypeData().initClass($c_sci_Map$Map2$$anon$3, "scala.collection.immutable.Map$Map2$$anon$3", ({
+  sci_Map$Map2$$anon$3: 1,
+  sci_Map$Map2$Map2Iterator: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
 function $c_sci_Map$Map3$$anon$4(outer) {
   this.sci_Map$Map3$Map3Iterator__f_i = 0;
   this.sci_Map$Map3$Map3Iterator__f_$outer = null;
@@ -33793,6 +35178,29 @@ var $d_sci_Map$Map3$$anon$5 = new $TypeData().initClass($c_sci_Map$Map3$$anon$5,
   sc_IterableOnceOps: 1
 }));
 /** @constructor */
+function $c_sci_Map$Map3$$anon$6(outer) {
+  this.sci_Map$Map3$Map3Iterator__f_i = 0;
+  this.sci_Map$Map3$Map3Iterator__f_$outer = null;
+  $ct_sci_Map$Map3$Map3Iterator__sci_Map$Map3__(this, outer);
+}
+$c_sci_Map$Map3$$anon$6.prototype = new $h_sci_Map$Map3$Map3Iterator();
+$c_sci_Map$Map3$$anon$6.prototype.constructor = $c_sci_Map$Map3$$anon$6;
+/** @constructor */
+function $h_sci_Map$Map3$$anon$6() {
+}
+$h_sci_Map$Map3$$anon$6.prototype = $c_sci_Map$Map3$$anon$6.prototype;
+$c_sci_Map$Map3$$anon$6.prototype.nextResult__O__O__O = (function(k, v) {
+  return v;
+});
+var $d_sci_Map$Map3$$anon$6 = new $TypeData().initClass($c_sci_Map$Map3$$anon$6, "scala.collection.immutable.Map$Map3$$anon$6", ({
+  sci_Map$Map3$$anon$6: 1,
+  sci_Map$Map3$Map3Iterator: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
 function $c_sci_Map$Map4$$anon$7(outer) {
   this.sci_Map$Map4$Map4Iterator__f_i = 0;
   this.sci_Map$Map4$Map4Iterator__f_$outer = null;
@@ -33832,6 +35240,29 @@ $c_sci_Map$Map4$$anon$8.prototype.nextResult__O__O__O = (function(k, v) {
 });
 var $d_sci_Map$Map4$$anon$8 = new $TypeData().initClass($c_sci_Map$Map4$$anon$8, "scala.collection.immutable.Map$Map4$$anon$8", ({
   sci_Map$Map4$$anon$8: 1,
+  sci_Map$Map4$Map4Iterator: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
+function $c_sci_Map$Map4$$anon$9(outer) {
+  this.sci_Map$Map4$Map4Iterator__f_i = 0;
+  this.sci_Map$Map4$Map4Iterator__f_$outer = null;
+  $ct_sci_Map$Map4$Map4Iterator__sci_Map$Map4__(this, outer);
+}
+$c_sci_Map$Map4$$anon$9.prototype = new $h_sci_Map$Map4$Map4Iterator();
+$c_sci_Map$Map4$$anon$9.prototype.constructor = $c_sci_Map$Map4$$anon$9;
+/** @constructor */
+function $h_sci_Map$Map4$$anon$9() {
+}
+$h_sci_Map$Map4$$anon$9.prototype = $c_sci_Map$Map4$$anon$9.prototype;
+$c_sci_Map$Map4$$anon$9.prototype.nextResult__O__O__O = (function(k, v) {
+  return v;
+});
+var $d_sci_Map$Map4$$anon$9 = new $TypeData().initClass($c_sci_Map$Map4$$anon$9, "scala.collection.immutable.Map$Map4$$anon$9", ({
+  sci_Map$Map4$$anon$9: 1,
   sci_Map$Map4$Map4Iterator: 1,
   sc_AbstractIterator: 1,
   sc_Iterator: 1,
@@ -33943,6 +35374,38 @@ $c_sci_MapKeyValueTupleIterator.prototype.next__O = (function() {
 });
 var $d_sci_MapKeyValueTupleIterator = new $TypeData().initClass($c_sci_MapKeyValueTupleIterator, "scala.collection.immutable.MapKeyValueTupleIterator", ({
   sci_MapKeyValueTupleIterator: 1,
+  sci_ChampBaseIterator: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
+function $c_sci_MapValueIterator(rootNode) {
+  this.sci_ChampBaseIterator__f_currentValueCursor = 0;
+  this.sci_ChampBaseIterator__f_currentValueLength = 0;
+  this.sci_ChampBaseIterator__f_currentValueNode = null;
+  this.sci_ChampBaseIterator__f_currentStackLevel = 0;
+  this.sci_ChampBaseIterator__f_nodeCursorsAndLengths = null;
+  this.sci_ChampBaseIterator__f_nodes = null;
+  $ct_sci_ChampBaseIterator__sci_Node__(this, rootNode);
+}
+$c_sci_MapValueIterator.prototype = new $h_sci_ChampBaseIterator();
+$c_sci_MapValueIterator.prototype.constructor = $c_sci_MapValueIterator;
+/** @constructor */
+function $h_sci_MapValueIterator() {
+}
+$h_sci_MapValueIterator.prototype = $c_sci_MapValueIterator.prototype;
+$c_sci_MapValueIterator.prototype.next__O = (function() {
+  if ((!this.hasNext__Z())) {
+    $n($m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty).next__O();
+  }
+  var value = $n($as_sci_MapNode(this.sci_ChampBaseIterator__f_currentValueNode)).getValue__I__O(this.sci_ChampBaseIterator__f_currentValueCursor);
+  this.sci_ChampBaseIterator__f_currentValueCursor = ((1 + this.sci_ChampBaseIterator__f_currentValueCursor) | 0);
+  return value;
+});
+var $d_sci_MapValueIterator = new $TypeData().initClass($c_sci_MapValueIterator, "scala.collection.immutable.MapValueIterator", ({
+  sci_MapValueIterator: 1,
   sci_ChampBaseIterator: 1,
   sc_AbstractIterator: 1,
   sc_Iterator: 1,
@@ -34441,6 +35904,31 @@ $c_scm_HashMap$$anon$2.prototype.extract__scm_HashMap$Node__O = (function(nd) {
 });
 var $d_scm_HashMap$$anon$2 = new $TypeData().initClass($c_scm_HashMap$$anon$2, "scala.collection.mutable.HashMap$$anon$2", ({
   scm_HashMap$$anon$2: 1,
+  scm_HashMap$HashMapIterator: 1,
+  sc_AbstractIterator: 1,
+  sc_Iterator: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOnceOps: 1
+}));
+/** @constructor */
+function $c_scm_HashMap$$anon$3(outer) {
+  this.scm_HashMap$HashMapIterator__f_i = 0;
+  this.scm_HashMap$HashMapIterator__f_node = null;
+  this.scm_HashMap$HashMapIterator__f_len = 0;
+  this.scm_HashMap$HashMapIterator__f_$outer = null;
+  $ct_scm_HashMap$HashMapIterator__scm_HashMap__(this, outer);
+}
+$c_scm_HashMap$$anon$3.prototype = new $h_scm_HashMap$HashMapIterator();
+$c_scm_HashMap$$anon$3.prototype.constructor = $c_scm_HashMap$$anon$3;
+/** @constructor */
+function $h_scm_HashMap$$anon$3() {
+}
+$h_scm_HashMap$$anon$3.prototype = $c_scm_HashMap$$anon$3.prototype;
+$c_scm_HashMap$$anon$3.prototype.extract__scm_HashMap$Node__O = (function(nd) {
+  return $n(nd).scm_HashMap$Node__f__value;
+});
+var $d_scm_HashMap$$anon$3 = new $TypeData().initClass($c_scm_HashMap$$anon$3, "scala.collection.mutable.HashMap$$anon$3", ({
+  scm_HashMap$$anon$3: 1,
   scm_HashMap$HashMapIterator: 1,
   sc_AbstractIterator: 1,
   sc_Iterator: 1,
@@ -34955,10 +36443,10 @@ var $d_Lupickle_core_AbortException = new $TypeData().initClass($c_Lupickle_core
 }));
 function $p_Lapps_EmojionaryUIInstance__shortId__T__T($thiz, uid) {
   var this$1 = $n(uid);
-  if ((this$1.length <= 6)) {
+  if ((this$1.length <= 8)) {
     return uid;
   } else {
-    return ($m_sc_StringOps$().take$extension__T__I__T(uid, 6) + "\u2026");
+    return ($m_sc_StringOps$().take$extension__T__I__T(uid, 8) + "\u2026");
   }
 }
 /** @constructor */
@@ -34977,10 +36465,18 @@ function $c_Lapps_EmojionaryUIInstance(userId, sendMessage, target) {
   this.Lapps_EmojionaryUIInstance__f_guessInputbitmap$1 = false;
   this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
   this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = false;
   $ct_Lcs214_webapp_client_graphics_WebClientAppInstance__T__F1__Lorg_scalajs_dom_Element__(this, userId, sendMessage, target);
   this.Lapps_EmojionaryUIInstance__f_wire = $m_Lapps_emojionary_Wire$();
+  var link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap";
+  document.head.appendChild(link);
   this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
   this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = false;
 }
 $c_Lapps_EmojionaryUIInstance.prototype = new $h_Lcs214_webapp_client_graphics_WebClientAppInstance();
 $c_Lapps_EmojionaryUIInstance.prototype.constructor = $c_Lapps_EmojionaryUIInstance;
@@ -34990,14 +36486,14 @@ function $h_Lapps_EmojionaryUIInstance() {
 $h_Lapps_EmojionaryUIInstance.prototype = $c_Lapps_EmojionaryUIInstance.prototype;
 $c_Lapps_EmojionaryUIInstance.prototype.secretInput__Lorg_scalajs_dom_HTMLInputElement = (function() {
   if ((!this.Lapps_EmojionaryUIInstance__f_secretInputbitmap$1)) {
-    this.Lapps_EmojionaryUIInstance__f_secretInput$lzy1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("Ex: Pizza...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
+    this.Lapps_EmojionaryUIInstance__f_secretInput$lzy1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("Ton mot secret...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
     this.Lapps_EmojionaryUIInstance__f_secretInputbitmap$1 = true;
   }
   return this.Lapps_EmojionaryUIInstance__f_secretInput$lzy1;
 });
 $c_Lapps_EmojionaryUIInstance.prototype.guessInput__Lorg_scalajs_dom_HTMLInputElement = (function() {
   if ((!this.Lapps_EmojionaryUIInstance__f_guessInputbitmap$1)) {
-    var el = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("R\u00e9ponse...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
+    var el = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().input__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().id__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-input", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().tpe__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().placeholder__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("Ta r\u00e9ponse...", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().autofocus__Lscalatags_generic_AttrPair()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(true, $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_booleanAttr)])))).render__Lorg_scalajs_dom_Element();
     el.onkeydown = ((e) => (($as_T(e.key) === "Enter") ? (this.submitGuess__V(), (void 0)) : (void 0)));
     this.Lapps_EmojionaryUIInstance__f_guessInput$lzy1 = el;
     this.Lapps_EmojionaryUIInstance__f_guessInputbitmap$1 = true;
@@ -35016,9 +36512,8 @@ $c_Lapps_EmojionaryUIInstance.prototype.maintainFocus__Lorg_scalajs_dom_HTMLInpu
   }
 });
 $c_Lapps_EmojionaryUIInstance.prototype.render__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(userId, view) {
-  var $x_6 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_5 = $m_sr_ScalaRunTime$();
-  var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("app-container", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_5 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-app", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_4 = $m_sr_ScalaRunTime$();
   var x = $n(view).Lapps_emojionary_View__f_phase;
   var x$2 = $s_Lapps_emojionary_Phase$__WaitingToStart__Lapps_emojionary_Phase();
   if ((x === null)) {
@@ -35028,7 +36523,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.render__T__Lapps_emojionary_View__Lscala
     var $x_2 = (this$1 === x$2);
   }
   if ($x_2) {
-    var $x_1 = this.renderStartButton__Lscalatags_generic_Frag();
+    var $x_1 = this.renderStartScreen__Lscalatags_generic_Frag();
   } else {
     var x$3 = $n(view).Lapps_emojionary_View__f_phase;
     var x$4 = $s_Lapps_emojionary_Phase$__GameEnd__Lapps_emojionary_Phase();
@@ -35044,58 +36539,60 @@ $c_Lapps_EmojionaryUIInstance.prototype.render__T__Lapps_emojionary_View__Lscala
       var $x_1 = this.renderActiveGame__T__Lapps_emojionary_View__Lscalatags_generic_Frag(userId, view);
     }
   }
-  return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $x_1])));
+  return $x_5.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_1])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderTimer__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   var a = $n(view).Lapps_emojionary_View__f_remainingTimeMs;
   var this$1 = $m_RTLong$();
   var lo = this$1.divideImpl__I__I__I__I__I(a.RTLong__f_lo, a.RTLong__f_hi, 1000, 0);
   var seconds = ((lo < 0) ? 0 : lo);
-  var x = $n(view).Lapps_emojionary_View__f_phase;
-  var x$2 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
-  if ((x === null)) {
-    var $x_1 = (x$2 === null);
+  var a$1 = $n(view).Lapps_emojionary_View__f_remainingTimeMs;
+  var lo$1 = a$1.RTLong__f_lo;
+  var hi$1 = a$1.RTLong__f_hi;
+  var x = $doubleToInt((100.0 * (((4.294967296E9 * hi$1) + (lo$1 >>> 0.0)) / 30000.0)));
+  var x$1 = ((x > 0) ? x : 0);
+  var progressPercent = ((x$1 < 100) ? x$1 : 100);
+  var isDanger = (seconds <= 5);
+  var x$2 = $n(view).Lapps_emojionary_View__f_phase;
+  var x$2$1 = $s_Lapps_emojionary_Phase$__Guessing__Lapps_emojionary_Phase();
+  if ((x$2 === null)) {
+    var $x_1 = (x$2$1 === null);
   } else {
-    var this$3 = $n(x);
-    var $x_1 = (this$3 === x$2);
+    var this$12 = $n(x$2);
+    var $x_1 = (this$12 === x$2$1);
   }
   if ($x_1) {
-    var $x_8 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_7 = $m_sr_ScalaRunTime$();
-    var $x_6 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var $x_5 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Temps restant : "))])));
-    var $x_4 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag());
-    var $x_3 = $m_sr_ScalaRunTime$();
-    var $x_2 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair(((seconds <= 5) ? "timer-value danger" : "timer-value"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+    var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((isDanger ? "emo-timer danger" : "emo-timer"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var $x_5 = $m_sr_ScalaRunTime$();
+    var $x_4 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer-bar", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((("width: " + progressPercent) + "%"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+    var $x_3 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("timer-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+    var $x_2 = $m_sr_ScalaRunTime$();
     $m_Lscalatags_JsDom$all$();
-    var v = (seconds + "s");
-    return $x_8.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_7.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_6, $x_5, $n($x_4).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_2, new $c_Lscalatags_JsDom$StringFrag(v)])))])));
+    var v = (("\u23f1 " + seconds) + "s");
+    return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)])))])));
   } else {
-    var this$6 = $m_Lscalatags_JsDom$all$();
+    var this$14 = $m_Lscalatags_JsDom$all$();
     var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
-    var this$8 = $m_s_$less$colon$less$();
-    var ev = this$8.s_$less$colon$less$__f_singleton;
-    return new $c_Lscalatags_JsDom$Cap$SeqFrag(this$6, frags, ev);
+    var this$16 = $m_s_$less$colon$less$();
+    var ev = this$16.s_$less$colon$less$__f_singleton;
+    return new $c_Lscalatags_JsDom$Cap$SeqFrag(this$14, frags, ev);
   }
 });
-$c_Lapps_EmojionaryUIInstance.prototype.renderStartButton__Lscalatags_generic_Frag = (function() {
+$c_Lapps_EmojionaryUIInstance.prototype.renderStartScreen__Lscalatags_generic_Frag = (function() {
   this.resetLocalState__V();
-  var $x_14 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_13 = $m_sr_ScalaRunTime$();
-  var $x_12 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-screen", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_11 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-start", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_10 = $m_sr_ScalaRunTime$();
+  var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-logo", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfad"))])));
   var this$2 = $n($m_Lscalatags_JsDom$all$().h1__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("app-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Emojionary"))]));
-  var $x_11 = this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
-  var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("app-subtitle", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Fais deviner un mot en n'utilisant que des emojis \u2728"))])));
-  var $x_9 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_8 = $m_sr_ScalaRunTime$();
-  var $x_7 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rules-card", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var this$5 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-  var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("R\u00e8gles du jeu"))]));
-  var $x_6 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, this$5.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().ul__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rules-list", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Un joueur choisit un mot secret."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Il envoie une suite d'emojis comme indices."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Les autres joueurs essaient de deviner le mot."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Plus tu trouves vite, plus tu marques de points !"))])))])))])));
+  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]));
+  var this$4 = $n(this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs));
+  var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Emojionary"))]));
+  var $x_8 = this$4.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1);
+  var $x_7 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-subtitle", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Fais deviner un mot avec des emojis !"))])));
+  var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("start-rules", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("1\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis un mot secret"))])))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("2\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Envoie des emojis comme indices"))])))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("3\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Les autres devinent"))])))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("rule", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("4\ufe0f\u20e3 ")), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Moins d'indices = plus de points !"))])))])))])));
   var $x_5 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
   var $x_4 = $m_sr_ScalaRunTime$();
-  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-start", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-play", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
   var $x_2 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
   var $x_1 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
     this.sendEvent__O__V($s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event());
@@ -35105,46 +36602,60 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderStartButton__Lscalatags_generic_Fr
     var f$1 = $as_F0(f);
     return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
   }));
-  return $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_11, $x_10, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("D\u00e9marrer la partie \ud83d\ude80"))])))])));
+  return $x_11.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_10.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_9, $x_8, $x_7, $x_6, $n($n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Jouer \ud83d\ude80"))])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderEndScreen__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
-  var $x_14 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_13 = $m_sr_ScalaRunTime$();
-  var this$2 = $n($m_Lscalatags_JsDom$all$().h2__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Partie Termin\u00e9e !"))]));
-  var $x_12 = this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
+  var shouldAnimate = (!this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed);
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = true;
+  var $x_23 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-end", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_22 = $m_sr_ScalaRunTime$();
+  var this$1 = $n($m_Lscalatags_JsDom$all$().h1__Lscalatags_generic_TypedTag());
+  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("end-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]));
+  var this$3 = $n(this$1.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs));
+  var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Partie Termin\u00e9e !"))]));
+  var $x_21 = this$3.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1);
   matchResult1: {
-    var $x_10;
+    var $x_13;
     var x1 = $n(view).Lapps_emojionary_View__f_winner;
     if ((x1 instanceof $c_s_Some)) {
       var w = $as_T($n($as_s_Some(x1)).s_Some__f_value);
-      var this$4 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-      var $x_11 = $m_sr_ScalaRunTime$();
-      $m_Lscalatags_JsDom$all$();
-      var v = ("\ud83c\udfc6 Le gagnant est : " + w);
-      var xs$1 = $x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)]));
-      var $x_10 = this$4.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1);
+      var $x_20 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((shouldAnimate ? "winner-box animate" : "winner-box"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+      var $x_19 = $m_sr_ScalaRunTime$();
+      var $x_18 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("trophy", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfc6"))])));
+      var $x_17 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("winner-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Gagnant"))])));
+      var $x_16 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("winner-name", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+      var $x_15 = $m_sr_ScalaRunTime$();
+      if ((w === currentUser)) {
+        $m_Lscalatags_JsDom$all$();
+        var $x_14 = new $c_Lscalatags_JsDom$StringFrag("TOI !");
+      } else {
+        $m_Lscalatags_JsDom$all$();
+        var v = $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, w);
+        var $x_14 = new $c_Lscalatags_JsDom$StringFrag(v);
+      }
+      var $x_13 = $x_20.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_19.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_18, $x_17, $n($x_16).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14])))])));
       break matchResult1;
     }
     var x = $m_s_None$();
     if ((x === x1)) {
-      var this$6 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-      var xs$2 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Personne n'a trouv\u00e9..."))]));
-      var $x_10 = this$6.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$2);
+      var $x_13 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("no-winner", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\ude05"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Personne n'a trouv\u00e9..."))])))])));
       break matchResult1;
     }
     throw new $c_s_MatchError(x1);
   }
-  var $x_9 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag()));
+  var $x_12 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("reveal-box", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_11 = $m_sr_ScalaRunTime$();
+  var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Le mot \u00e9tait : "))])));
+  var $x_9 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
   var $x_8 = $m_sr_ScalaRunTime$();
   $m_Lscalatags_JsDom$all$();
-  var this$7 = $n($n(view).Lapps_emojionary_View__f_secretWord);
-  var v$1 = ("Le mot \u00e9tait : " + (this$7.isEmpty__Z() ? "???" : this$7.get__O()));
-  var $x_7 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$1)])));
+  var this$11 = $n($n(view).Lapps_emojionary_View__f_secretWord);
+  var v$1 = $as_T((this$11.isEmpty__Z() ? "???" : this$11.get__O()));
+  var $x_7 = $x_12.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_10, $n($x_9).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$1)])))])));
   var $x_6 = this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view);
   var $x_5 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
   var $x_4 = $m_sr_ScalaRunTime$();
-  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-start", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_3 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-play", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
   var $x_2 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
   var $x_1 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
     this.sendEvent__O__V($s_Lapps_emojionary_Event$__StartGame__Lapps_emojionary_Event());
@@ -35154,7 +36665,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderEndScreen__T__Lapps_emojionary_Vie
     var f$1 = $as_F0(f);
     return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
   }));
-  return $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_10, $x_7, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Rejouer tout de suite"))])))])));
+  return $x_23.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_22.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_21, $x_13, $x_7, $x_6, $n($n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_3, $n($x_2).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_1, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Rejouer \ud83d\udd04"))])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
   var this$1 = $n($n(view).Lapps_emojionary_View__f_allScores);
@@ -35166,83 +36677,73 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderScoreBoard__T__Lapps_emojionary_Vi
     }
     throw new $c_s_MatchError(x$1$1);
   })), $m_s_math_Ordering$Int$()));
-  var $x_3 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_2 = $m_sr_ScalaRunTime$();
-  var $x_1 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scoreboard", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var this$3 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Scores"))]));
-  return $x_3.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_1, this$3.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs), ($n(ordered).isEmpty__Z() ? $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("empty-scores", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Aucun point pour l'instant."))]))) : $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().table__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().thead__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().tr__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().th__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Joueur"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().th__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Points"))])))])))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().tbody__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($as_sci_Seq($n(ordered).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$1$2) => {
+  return $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-scores", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scores-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udcca Scores"))]))), ($n(ordered).isEmpty__Z() ? $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scores-empty", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Aucun point"))]))) : $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("scores-list", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($as_sci_Seq($n($as_sc_IterableOps($n(ordered).zipWithIndex__O())).map__F1__O(new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((x$1$2) => {
     var x$1$3 = $as_T2(x$1$2);
     if ((x$1$3 !== null)) {
-      var uid = $as_T($n(x$1$3).T2__f__1);
-      var score$1 = $uI($n(x$1$3).T2__f__2);
-      var isYou = (uid === currentUser);
-      var $x_12 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().tr__Lscalatags_generic_TypedTag()));
-      var $x_11 = $m_sr_ScalaRunTime$();
-      var $x_10 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((isYou ? "score-row you" : "score-row"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-      var $x_9 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().td__Lscalatags_generic_TypedTag()));
-      var $x_8 = $m_sr_ScalaRunTime$();
-      if (isYou) {
+      var x9 = $as_T2($n(x$1$3).T2__f__1);
+      if ((x9 !== null)) {
+        var uid = $as_T($n(x9).T2__f__1);
+        var score$1 = $uI($n(x9).T2__f__2);
+        var idx = $uI($n(x$1$3).T2__f__2);
+        var isYou = (uid === currentUser);
+        var medal;
+        switch (idx) {
+          case 0: {
+            var medal = "\ud83e\udd47";
+            break;
+          }
+          case 1: {
+            var medal = "\ud83e\udd48";
+            break;
+          }
+          case 2: {
+            var medal = "\ud83e\udd49";
+            break;
+          }
+          default: {
+            var medal = "  ";
+          }
+        }
+        var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((isYou ? "score-row me" : "score-row"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+        var $x_8 = $m_sr_ScalaRunTime$();
+        var $x_7 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("score-medal", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(medal))])));
+        var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("score-name", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+        var $x_5 = $m_sr_ScalaRunTime$();
+        if (isYou) {
+          $m_Lscalatags_JsDom$all$();
+          var $x_4 = new $c_Lscalatags_JsDom$StringFrag("Toi");
+        } else {
+          $m_Lscalatags_JsDom$all$();
+          var v = $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, uid);
+          var $x_4 = new $c_Lscalatags_JsDom$StringFrag(v);
+        }
+        var $x_3 = $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4])));
+        var $x_2 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("score-pts", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+        var $x_1 = $m_sr_ScalaRunTime$();
         $m_Lscalatags_JsDom$all$();
-        var v = (("Toi (" + $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, uid)) + ")");
-        var $x_7 = new $c_Lscalatags_JsDom$StringFrag(v);
-      } else {
-        $m_Lscalatags_JsDom$all$();
-        var v$1 = $p_Lapps_EmojionaryUIInstance__shortId__T__T(this, uid);
-        var $x_7 = new $c_Lscalatags_JsDom$StringFrag(v$1);
+        var v$1 = ("" + score$1);
+        return $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, $x_3, $n($x_2).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_1.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$1)])))])));
       }
-      var $x_6 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7])));
-      var $x_5 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().td__Lscalatags_generic_TypedTag());
-      var $x_4 = $m_sr_ScalaRunTime$();
-      $m_Lscalatags_JsDom$all$();
-      var v$2 = ("" + score$1);
-      return $x_12.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_10, $x_6, $n($x_5).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v$2)])))])));
     }
     throw new $c_s_MatchError(x$1$3);
-  })))))]))))])));
+  }))))))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderActiveGame__T__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(currentUser, view) {
-  var $x_16 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_15 = $m_sr_ScalaRunTime$();
-  var $x_14 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-layout", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_12 = $m_sr_ScalaRunTime$();
-  var $x_11 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("sidebar", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_10 = this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view);
+  var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-game", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_5 = $m_sr_ScalaRunTime$();
+  var $x_4 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-side", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+  var $x_3 = $m_sr_ScalaRunTime$();
+  var $x_2 = this.renderScoreBoard__T__Lapps_emojionary_View__Lscalatags_generic_Frag(currentUser, view);
   if ((!$n(view).Lapps_emojionary_View__f_amIDescriber)) {
-    var $x_9 = this.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
+    var $x_1 = this.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
   } else {
     var this$1 = $m_Lscalatags_JsDom$all$();
     var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
     var this$3 = $m_s_$less$colon$less$();
     var ev = this$3.s_$less$colon$less$__f_singleton;
-    var $x_9 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$1, frags, ev);
+    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$1, frags, ev);
   }
-  var $x_8 = $x_13.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_12.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11, $x_10, $x_9])));
-  var $x_7 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-  var $x_6 = $m_sr_ScalaRunTime$();
-  var $x_5 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("main-panel", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_4 = this.renderTimer__Lapps_emojionary_View__Lscalatags_generic_Frag(view);
-  if ($n(view).Lapps_emojionary_View__f_amIDescriber) {
-    var this$6 = $m_Lscalatags_JsDom$all$();
-    var $x_2 = $m_sr_ScalaRunTime$();
-    var this$5 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-    var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu fais deviner ! \ud83e\udd2b"))]));
-    var frags$1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$5.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs), this.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
-    var this$8 = $m_s_$less$colon$less$();
-    var ev$1 = this$8.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$6, frags$1, ev$1);
-  } else {
-    var this$11 = $m_Lscalatags_JsDom$all$();
-    var $x_3 = $m_sr_ScalaRunTime$();
-    var this$10 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-    var xs$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu dois deviner ! \ud83e\udd14"))]));
-    var frags$2 = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([this$10.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs$1), this.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]));
-    var this$13 = $m_s_$less$colon$less$();
-    var ev$2 = this$13.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$11, frags$2, ev$2);
-  }
-  return $x_16.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14, $x_8, $n($x_7).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_5, $x_4, $x_1])))])));
+  return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($x_4).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_2, $x_1]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("game-main", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([this.renderTimer__Lapps_emojionary_View__Lscalatags_generic_Frag(view), ($n(view).Lapps_emojionary_View__f_amIDescriber ? $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-box describer", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-badge", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfa8 Tu fais deviner !"))]))), this.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]))) : $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-box guesser", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("role-badge", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udd0d \u00c0 toi de deviner !"))]))), this.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag(view)]))))])))])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   if (($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z() && (this.Lapps_EmojionaryUIInstance__f_lastHintCount > 0))) {
@@ -35257,58 +36758,49 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionar
     var this$1 = $n(x);
     var isWaitingForGuessers = (this$1 === x$2);
   }
-  var $x_25 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_24 = $m_sr_ScalaRunTime$();
+  var $x_21 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("describer-panel", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_20 = $m_sr_ScalaRunTime$();
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
     this.maintainFocus__Lorg_scalajs_dom_HTMLInputElement__V(this.secretInput__Lorg_scalajs_dom_HTMLInputElement());
-    var $x_17 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_16 = $m_sr_ScalaRunTime$();
-    var $x_15 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-word-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var this$3 = $n($m_Lscalatags_JsDom$all$().h4__Lscalatags_generic_TypedTag());
-    var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("margin-bottom: 10px; color: #2c3e50;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfaf \u00c0 toi de faire deviner !"))]));
-    var $x_14 = this$3.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
-    var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis le mot secret + 1er Emoji :"))])));
-    var this$5 = $m_Lscalatags_JsDom$all$();
+    var $x_14 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var $x_13 = $m_sr_ScalaRunTime$();
+    var $x_12 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("section-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83c\udfaf Choisis ton mot secret"))])));
+    var this$3 = $m_Lscalatags_JsDom$all$();
     var e = this.secretInput__Lorg_scalajs_dom_HTMLInputElement();
-    var $x_12 = $x_17.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_16.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_15, $x_14, $x_13, new $c_Lscalatags_LowPriorityImplicits$bindNode(this$5, e)])));
+    var $x_11 = $x_14.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_13.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, new $c_Lscalatags_LowPriorityImplicits$bindNode(this$3, e), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("section-hint", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Puis clique sur un emoji"))])))])));
   } else {
-    var $x_23 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_22 = $m_sr_ScalaRunTime$();
-    var $x_21 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-reminder", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    $m_Lscalatags_JsDom$all$();
-    var $x_20 = new $c_Lscalatags_JsDom$StringFrag("Mot secret : ");
-    var $x_19 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
+    var $x_19 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("secret-display", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
     var $x_18 = $m_sr_ScalaRunTime$();
+    var $x_17 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Mot : "))])));
+    var $x_16 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().strong__Lscalatags_generic_TypedTag());
+    var $x_15 = $m_sr_ScalaRunTime$();
     $m_Lscalatags_JsDom$all$();
-    var this$7 = $n($n(view).Lapps_emojionary_View__f_secretWord);
-    var this$8 = $n($as_T((this$7.isEmpty__Z() ? "???" : this$7.get__O())));
-    var $x_12 = $x_23.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_22.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_21, $x_20, $n($x_19).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(this$8)])))])));
+    var this$6 = $n($n(view).Lapps_emojionary_View__f_secretWord);
+    var v = $as_T((this$6.isEmpty__Z() ? "???" : this$6.get__O()));
+    var $x_11 = $x_19.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_17, $n($x_16).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)])))])));
   }
   if (isWaitingForGuessers) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("color: #3498db; font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3 Les joueurs r\u00e9fl\u00e9chissent..."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu ne peux pas envoyer d'indice pour le moment."))])))])));
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box waiting", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Les joueurs r\u00e9fl\u00e9chissent..."))])))])));
   } else {
-    var this$25 = $m_Lscalatags_JsDom$all$();
-    var $x_11 = $m_sr_ScalaRunTime$();
-    var this$12 = $n($n(view).Lapps_emojionary_View__f_hints);
-    if ((!this$12.isEmpty__Z())) {
-      var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("background: #eafaf1; color: #27ae60;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udc49 C'est \u00e0 toi !"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Choisis un nouvel emoji pour les aider."))])))])));
+    var this$20 = $m_Lscalatags_JsDom$all$();
+    var $x_10 = $m_sr_ScalaRunTime$();
+    var this$10 = $n($n(view).Lapps_emojionary_View__f_hints);
+    if ((!this$10.isEmpty__Z())) {
+      var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box ready", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udc49"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Envoie un nouvel emoji !"))])))])));
     } else {
-      var this$15 = $m_Lscalatags_JsDom$all$();
+      var this$13 = $m_Lscalatags_JsDom$all$();
       var frags = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([]));
-      var this$17 = $m_s_$less$colon$less$();
-      var ev = this$17.s_$less$colon$less$__f_singleton;
-      var $x_10 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$15, frags, ev);
+      var this$15 = $m_s_$less$colon$less$();
+      var ev = this$15.s_$less$colon$less$__f_singleton;
+      var $x_9 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$13, frags, ev);
     }
-    var $x_9 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag());
-    var $x_8 = $m_sr_ScalaRunTime$();
-    var $x_7 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-keyboard", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var this$24 = $m_Lscalatags_JsDom$all$();
-    var this$21 = $n($n(view).Lapps_emojionary_View__f_availableEmojis);
+    var $x_8 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-board", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+    var this$19 = $n($n(view).Lapps_emojionary_View__f_availableEmojis);
     var f$2 = ((emoji) => {
       var emoji$1 = $as_T(emoji);
-      var $x_6 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag()));
+      var $x_6 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
       var $x_5 = $m_sr_ScalaRunTime$();
-      var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-key", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+      var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emoji-btn", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
       var $x_3 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
       var $x_2 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
         this.onEmojiClicked__Lapps_emojionary_View__T__V(view, emoji$1);
@@ -35318,15 +36810,15 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionar
         var f$1 = $as_F0(f);
         return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
       }));
-      return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev$1)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji$1))])));
+      return $n($n($x_6).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev$1))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji$1))])));
     });
-    if ((this$21 === $m_sci_Nil$())) {
-      var xs$1 = $m_sci_Nil$();
+    if ((this$19 === $m_sci_Nil$())) {
+      var $x_7 = $m_sci_Nil$();
     } else {
-      var x0 = this$21.head__O();
+      var x0 = this$19.head__O();
       var h = new $c_sci_$colon$colon(f$2(x0), $m_sci_Nil$());
       var t = h;
-      var rest = $as_sci_List(this$21.tail__O());
+      var rest = $as_sci_List(this$19.tail__O());
       while ((rest !== $m_sci_Nil$())) {
         var x0$1 = $n(rest).head__O();
         var nx = new $c_sci_$colon$colon(f$2(x0$1), $m_sci_Nil$());
@@ -35334,16 +36826,14 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderDescriberControls__Lapps_emojionar
         t = nx;
         rest = $as_sci_List($n(rest).tail__O());
       }
-      var xs$1 = h;
+      var $x_7 = h;
     }
-    var this$23 = $m_s_$less$colon$less$();
-    var ev$2 = this$23.s_$less$colon$less$__f_singleton;
-    var frags$1 = $x_11.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([$x_10, $n($x_9).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, new $c_Lscalatags_JsDom$Cap$SeqFrag(this$24, xs$1, ev$2)])))]));
-    var this$27 = $m_s_$less$colon$less$();
-    var ev$3 = this$27.s_$less$colon$less$__f_singleton;
-    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$25, frags$1, ev$3);
+    var frags$1 = $x_10.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Frag.getArrayOf().constr)([$x_9, $n($x_8).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_7)]));
+    var this$22 = $m_s_$less$colon$less$();
+    var ev$2 = this$22.s_$less$colon$less$__f_singleton;
+    var $x_1 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$20, frags$1, ev$2);
   }
-  return $x_25.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_24.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_12, $x_1])));
+  return $x_21.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_20.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11, $x_1])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.onEmojiClicked__Lapps_emojionary_View__T__V = (function(view, emoji) {
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
@@ -35352,7 +36842,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.onEmojiClicked__Lapps_emojionary_View__T
     if ((!(this$3 === ""))) {
       this.sendEvent__O__V(new $c_Lapps_emojionary_Event$SendFirstHint(word, emoji));
     } else {
-      window.alert("Mot secret obligatoire !");
+      window.alert("Entre d'abord un mot secret !");
     }
   } else {
     this.sendEvent__O__V(new $c_Lapps_emojionary_Event$SendHint(emoji));
@@ -35363,6 +36853,8 @@ $c_Lapps_EmojionaryUIInstance.prototype.resetLocalState__V = (function() {
   this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
   this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
   this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
+  this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
+  this.Lapps_EmojionaryUIInstance__f_endAnimationPlayed = false;
 });
 $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
   var currentHintCount = $n($n(view).Lapps_emojionary_View__f_hints).length__I();
@@ -35370,6 +36862,7 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_
     this.Lapps_EmojionaryUIInstance__f_lastHintCount = 0;
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
     this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
+    this.Lapps_EmojionaryUIInstance__f_animatedHintCount = 0;
   }
   if ((currentHintCount > this.Lapps_EmojionaryUIInstance__f_lastHintCount)) {
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = false;
@@ -35379,6 +36872,10 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_
       this.guessInput__Lorg_scalajs_dom_HTMLInputElement().focus();
     }), 0.0);
   }
+  var hintsToAnimate = this.Lapps_EmojionaryUIInstance__f_animatedHintCount;
+  if ((currentHintCount > this.Lapps_EmojionaryUIInstance__f_animatedHintCount)) {
+    this.Lapps_EmojionaryUIInstance__f_animatedHintCount = currentHintCount;
+  }
   var x = $n(view).Lapps_emojionary_View__f_phase;
   var x$2 = $s_Lapps_emojionary_Phase$__WaitingForHint__Lapps_emojionary_Phase();
   if ((x === null)) {
@@ -35387,70 +36884,35 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuesserControls__Lapps_emojionary_
     var this$2 = $n(x);
     var isWaitingForHintPhase = (this$2 === x$2);
   }
-  var $x_19 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_18 = $m_sr_ScalaRunTime$();
-  var $x_17 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guesser-controls", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var $x_16 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Regarde les indices :"))])));
-  var $x_15 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_14 = $m_sr_ScalaRunTime$();
-  var $x_13 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-display", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+  var $x_20 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guesser-panel", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_19 = $m_sr_ScalaRunTime$();
+  var $x_18 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-section", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_17 = $m_sr_ScalaRunTime$();
+  var $x_16 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-label", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_15 = $m_sr_ScalaRunTime$();
+  $m_Lscalatags_JsDom$all$();
+  var v = (("\ud83d\udca1 Indices (" + $n($n(view).Lapps_emojionary_View__f_hints).length__I()) + "/5)");
+  var $x_14 = $x_16.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_15.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([new $c_Lscalatags_JsDom$StringFrag(v)])));
+  var $x_13 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-box", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])));
+  var $x_12 = $m_sr_ScalaRunTime$();
   if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
-    var $x_12 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("En attente..."))])));
+    var $x_11 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("hints-wait", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("En attente..."))])));
   } else {
-    $m_Lscalatags_JsDom$all$();
+    var this$8 = $m_Lscalatags_JsDom$all$();
     var this$5 = $n($n(view).Lapps_emojionary_View__f_hints);
-    var v = $f_sc_IterableOnceOps__mkString__T__T__T__T(this$5, "", " ", "");
-    var $x_12 = new $c_Lscalatags_JsDom$StringFrag(v);
-  }
-  var $x_11 = $x_15.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_14.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_13, $as_Lscalatags_generic_Modifier($x_12)])));
-  if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3 Le d\u00e9crypteur choisit le premier indice..."))])));
-  } else if ((isWaitingForHintPhase || this.Lapps_EmojionaryUIInstance__f_waitingForNextHint)) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-message", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().style__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("color: #e67e22; font-weight: bold;", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3 En attente du prochain indice..."))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu ne peux plus proposer pour l'indice actuel."))])))])));
-  } else {
-    this.maintainFocus__Lorg_scalajs_dom_HTMLInputElement__V(this.guessInput__Lorg_scalajs_dom_HTMLInputElement());
-    var $x_10 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-    var $x_9 = $m_sr_ScalaRunTime$();
-    var $x_8 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("input-group", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var this$10 = $m_Lscalatags_JsDom$all$();
-    var e = this.guessInput__Lorg_scalajs_dom_HTMLInputElement();
-    var $x_7 = new $c_Lscalatags_LowPriorityImplicits$bindNode(this$10, e);
-    var $x_6 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
-    var $x_5 = $m_sr_ScalaRunTime$();
-    var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-guess", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-    var $x_3 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
-    var $x_2 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
-      this.submitGuess__V();
-    }));
-    $m_Lscalatags_JsDom$all$();
-    var ev = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((f) => {
-      var f$1 = $as_F0(f);
-      return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$1);
-    }));
-    var $x_1 = $x_10.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_9.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_8, $x_7, $n($x_6).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev)), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Deviner"))])))])));
-  }
-  return $x_19.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_18.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_17, $x_16, $x_11, $x_1])));
-});
-$c_Lapps_EmojionaryUIInstance.prototype.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
-  var errors = $n(view).Lapps_emojionary_View__f_myWrongGuesses;
-  var $x_7 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag()));
-  var $x_6 = $m_sr_ScalaRunTime$();
-  var $x_5 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-history", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
-  var this$2 = $n($m_Lscalatags_JsDom$all$().h3__Lscalatags_generic_TypedTag());
-  var xs = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tes erreurs"))]));
-  var $x_4 = this$2.apply__sci_Seq__Lscalatags_JsDom$TypedTag(xs);
-  if ($n(errors).isEmpty__Z()) {
-    var $x_1 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().p__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("empty-history", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Tu n'as encore fait aucune erreur \ud83d\udc4c"))])));
-  } else {
-    var $x_3 = $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().ul__Lscalatags_generic_TypedTag()));
-    var this$4 = $n(errors);
-    var this$7 = $n($as_sci_List($f_sc_SeqOps__distinct__O(this$4)));
-    var f = ((g) => {
-      var g$1 = $as_T(g);
-      return $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().li__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u274c ")), ($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(g$1))])));
+    var this$7 = $n($as_sci_List($f_sc_StrictOptimizedIterableOps__zipWithIndex__O(this$5)));
+    var f = ((x$1) => {
+      var x$1$1 = $as_T2(x$1);
+      if ((x$1$1 !== null)) {
+        var emoji = $as_T($n(x$1$1).T2__f__1);
+        var idx = $uI($n(x$1$1).T2__f__2);
+        var shouldAnimate = (idx >= hintsToAnimate);
+        return $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair((shouldAnimate ? "hint-emoji animate" : "hint-emoji"), $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(emoji))])));
+      }
+      throw new $c_s_MatchError(x$1$1);
     });
     if ((this$7 === $m_sci_Nil$())) {
-      var $x_2 = $m_sci_Nil$();
+      var frags = $m_sci_Nil$();
     } else {
       var x0 = this$7.head__O();
       var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
@@ -35463,11 +36925,74 @@ $c_Lapps_EmojionaryUIInstance.prototype.renderGuessHistory__Lapps_emojionary_Vie
         t = nx;
         rest = $as_sci_List($n(rest).tail__O());
       }
+      var frags = h;
+    }
+    var this$10 = $m_s_$less$colon$less$();
+    var ev = this$10.s_$less$colon$less$__f_singleton;
+    var $x_11 = new $c_Lscalatags_JsDom$Cap$SeqFrag(this$8, frags, ev);
+  }
+  var $x_10 = $x_18.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_17.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_14, $n($x_13).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_12.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_11])))])));
+  if ($n($n(view).Lapps_emojionary_View__f_hints).isEmpty__Z()) {
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box waiting", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u23f3"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Le d\u00e9crypteur choisit..."))])))])));
+  } else if ((isWaitingForHintPhase || this.Lapps_EmojionaryUIInstance__f_waitingForNextHint)) {
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-box blocked", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-icon", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udd12"))]))), $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("status-text", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Attends le prochain indice..."))])))])));
+  } else {
+    this.maintainFocus__Lorg_scalajs_dom_HTMLInputElement__V(this.guessInput__Lorg_scalajs_dom_HTMLInputElement());
+    var $x_9 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("guess-form", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var $x_8 = $m_sr_ScalaRunTime$();
+    var this$15 = $m_Lscalatags_JsDom$all$();
+    var e = this.guessInput__Lorg_scalajs_dom_HTMLInputElement();
+    var $x_7 = new $c_Lscalatags_LowPriorityImplicits$bindNode(this$15, e);
+    var $x_6 = $as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().button__Lscalatags_generic_TypedTag());
+    var $x_5 = $m_sr_ScalaRunTime$();
+    var $x_4 = $n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("btn-guess", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr);
+    var $x_3 = $m_Lscalatags_JsDom$all$().onclick__Lscalatags_generic_Attr();
+    var $x_2 = new $c_sr_AbstractFunction0_$$Lambda$a02b774b97db8234e08c6a02dd06557c99779855((() => {
+      this.submitGuess__V();
+    }));
+    $m_Lscalatags_JsDom$all$();
+    var ev$1 = new $c_sr_AbstractFunction1_$$Lambda$70e1780b84463d18653aacefee3ab989ac625f28(((f$1) => {
+      var f$2 = $as_F0(f$1);
+      return $m_sjs_js_Any$().fromFunction0__F0__sjs_js_Function0(f$2);
+    }));
+    var $x_1 = $x_9.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_8.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_7, $n($n($x_6).apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $n($x_3).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair($x_2, new $c_Lscalatags_LowPriorityImplicits$$anon$2(ev$1))])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Deviner \u2192"))])))])));
+  }
+  return $x_20.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_19.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_10, $x_1])));
+});
+$c_Lapps_EmojionaryUIInstance.prototype.renderGuessHistory__Lapps_emojionary_View__Lscalatags_generic_Frag = (function(view) {
+  var errors = $n(view).Lapps_emojionary_View__f_myWrongGuesses;
+  var $x_6 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("emo-history", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+  var $x_5 = $m_sr_ScalaRunTime$();
+  var $x_4 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-title", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\ud83d\udcdd Tes essais"))])));
+  if ($n(errors).isEmpty__Z()) {
+    var $x_1 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-empty", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("Aucune erreur \ud83d\udc4c"))])));
+  } else {
+    var $x_3 = $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-list", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)]))));
+    var this$3 = $n(errors);
+    var this$6 = $n($as_sci_List($f_sc_SeqOps__distinct__O(this$3)));
+    var f = ((g) => {
+      var g$1 = $as_T(g);
+      return $n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().div__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-item", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$n($m_Lscalatags_JsDom$all$().cls__Lscalatags_generic_Attr()).$colon$eq__O__Lscalatags_generic_AttrValue__Lscalatags_generic_AttrPair("history-x", $m_Lscalatags_JsDom$all$().Lscalatags_JsDom$all$__f_stringAttr)])))).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag("\u2717"))]))), $n($as_Lscalatags_JsDom$TypedTag($m_Lscalatags_JsDom$all$().span__Lscalatags_generic_TypedTag())).apply__sci_Seq__Lscalatags_JsDom$TypedTag($m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([($m_Lscalatags_JsDom$all$(), new $c_Lscalatags_JsDom$StringFrag(g$1))])))])));
+    });
+    if ((this$6 === $m_sci_Nil$())) {
+      var $x_2 = $m_sci_Nil$();
+    } else {
+      var x0 = this$6.head__O();
+      var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+      var t = h;
+      var rest = $as_sci_List(this$6.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var x0$1 = $n(rest).head__O();
+        var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+        $n(t).sci_$colon$colon__f_next = nx;
+        t = nx;
+        rest = $as_sci_List($n(rest).tail__O());
+      }
       var $x_2 = h;
     }
     var $x_1 = $x_3.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_2);
   }
-  return $x_7.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_5, $x_4, $x_1])));
+  return $x_6.apply__sci_Seq__Lscalatags_JsDom$TypedTag($x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_Lscalatags_generic_Modifier.getArrayOf().constr)([$x_4, $x_1])));
 });
 $c_Lapps_EmojionaryUIInstance.prototype.submitGuess__V = (function() {
   var text = $f_T__trim__T($n($as_T(this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value)));
@@ -35477,9 +37002,6 @@ $c_Lapps_EmojionaryUIInstance.prototype.submitGuess__V = (function() {
     this.guessInput__Lorg_scalajs_dom_HTMLInputElement().value = "";
     this.Lapps_EmojionaryUIInstance__f_waitingForNextHint = true;
   }
-});
-$c_Lapps_EmojionaryUIInstance.prototype.css__T = (function() {
-  return "\n    body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; height: 100vh; }\n    .app-container {\n      background: white;\n      width: 900px;              \n      padding: 24px;\n      border-radius: 20px;\n      text-align: left;\n      box-shadow: 0 4px 18px rgba(0,0,0,0.08);\n      margin-top: 20px;\n    }    \n    .role-title { color: #333; margin-bottom: 20px; }\n    .emoji-keyboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 5px; margin-top: 15px; max-height: 300px; overflow-y: auto; padding: 10px; background: #fafafa; border-radius: 8px; }\n    .emoji-key { font-size: 1.5em; background: white; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; padding: 5px; }\n    .emoji-key:hover { background: #e3f2fd; transform: scale(1.1); }\n    .hints-display { font-size: 3em; margin: 20px 0; background: #ecf0f1; padding: 10px; border-radius: 10px; letter-spacing: 5px; min-height: 60px; }\n    #secret-word-input, #guess-input { padding: 10px; font-size: 1.1em; width: 60%; border: 2px solid #ddd; border-radius: 6px; }\n    .btn-start { background: #27ae60; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 1.2em; cursor: pointer; margin-top: 20px;}\n    .btn-guess { background: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-size: 1.1em; margin-left: 5px; cursor: pointer; transition: background 0.3s; }\n    .secret-reminder { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }\n    .status-message { padding: 20px; background: #f8f9fa; border-radius: 8px; color: #7f8c8d; font-size: 1.1em; animation: fadeIn 0.3s; }\n    \n    .game-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: flex-start; }\n    .sidebar { display: flex; flex-direction: column; gap: 12px; }\n    .main-panel { text-align: center; }\n    .scoreboard { background: #f7f9fb; border-radius: 12px; padding: 10px 14px; font-size: 0.9em; border: 1px solid #e3e9f0; }\n    .scoreboard h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }\n    .scoreboard table { width: 100%; border-collapse: collapse; }\n    .scoreboard th, .scoreboard td { padding: 4px 6px; border-bottom: 1px solid #edf1f5; }\n    .score-row.you { background: #eafaf1; font-weight: 600; }\n    .guess-history { background: #fdfefe; border-radius: 12px; padding: 8px 10px; font-size: 0.9em; text-align: left; border: 1px solid #e3e9f0; }\n    .guess-history h3 { margin-top: 0; margin-bottom: 6px; font-size: 1em; }\n    .guess-history ul { list-style: none; padding-left: 0; margin: 4px 0 0 0; max-height: 120px; overflow-y: auto; }\n    .guess-history li { padding: 2px 0; }\n    .empty-history { font-size: 0.85em; color: #7f8c8d; margin: 4px 0 0 0; font-style: italic; }\n    .start-screen { display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; padding: 10px 20px; }\n    .app-title { font-size: 2rem; margin: 0; color: #2c3e50; }\n    .app-subtitle { margin: 4px 0 8px 0; color: #7f8c8d; }\n    .rules-card { background: #f7f9fb; border-radius: 14px; padding: 14px 18px; border: 1px solid #e3e9f0; text-align: left; max-width: 520px; }\n    .rules-list { margin: 0; padding-left: 18px; font-size: 0.95em; color: #555; }\n    .timer { margin: 10px auto 0 auto; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #fdf6e3; border: 1px solid #f1c40f33; font-size: 0.95em; color: #7d6608; }\n    .timer-label { font-weight: 500; }\n    .timer-value { font-weight: 600; }\n    .timer-value.danger { color: #c0392b; }\n    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }\n  ";
 });
 var $d_Lapps_EmojionaryUIInstance = new $TypeData().initClass($c_Lapps_EmojionaryUIInstance, "apps.EmojionaryUIInstance", ({
   Lapps_EmojionaryUIInstance: 1,
@@ -36261,6 +37783,9 @@ $c_ju_LinkedHashMap.prototype.nodeWasAccessed__ju_HashMap$Node__V = (function(no
 $c_ju_LinkedHashMap.prototype.nodeWasAdded__ju_HashMap$Node__V = (function(node) {
   $p_ju_LinkedHashMap__appendToOrderedList__ju_LinkedHashMap$Node__V(this, $as_ju_LinkedHashMap$Node(node));
 });
+$c_ju_LinkedHashMap.prototype.nodeWasRemoved__ju_HashMap$Node__V = (function(node) {
+  $p_ju_LinkedHashMap__removeFromOrderedList__ju_LinkedHashMap$Node__V(this, $as_ju_LinkedHashMap$Node(node));
+});
 var $d_ju_LinkedHashMap = new $TypeData().initClass($c_ju_LinkedHashMap, "java.util.LinkedHashMap", ({
   ju_LinkedHashMap: 1,
   ju_HashMap: 1,
@@ -36655,6 +38180,14 @@ var $d_sc_ArrayOps$ArrayIterator$mcZ$sp = new $TypeData().initClass($c_sc_ArrayO
   sc_IterableOnceOps: 1,
   Ljava_io_Serializable: 1
 }));
+function $f_sc_MapFactoryDefaults__empty__sc_IterableOps($thiz) {
+  if (($thiz instanceof $c_sci_TreeSeqMap)) {
+    var x2 = $as_sci_TreeSeqMap($thiz);
+    return $m_sci_TreeSeqMap$().empty__sci_TreeSeqMap$OrderBy__sci_TreeSeqMap($n(x2).sci_TreeSeqMap__f_orderedBy);
+  } else {
+    return $as_sc_IterableOps($n($thiz.mapFactory__sc_MapFactory()).empty__O());
+  }
+}
 function $f_sc_View__toString__T($thiz) {
   return ($thiz.className__T() + "(<not computed>)");
 }
@@ -38812,6 +40345,38 @@ $c_sc_AbstractView.prototype.toString__T = (function() {
 $c_sc_AbstractView.prototype.stringPrefix__T = (function() {
   return "View";
 });
+$c_sc_AbstractView.prototype.empty__sc_IterableOps = (function() {
+  return $m_sc_View$Empty$();
+});
+/** @constructor */
+function $c_sc_MapOps$$anon$1(outer) {
+  this.sc_MapOps$$anon$1__f_$outer = null;
+  $n(outer);
+  this.sc_MapOps$$anon$1__f_$outer = outer;
+}
+$c_sc_MapOps$$anon$1.prototype = new $h_sc_AbstractIterable();
+$c_sc_MapOps$$anon$1.prototype.constructor = $c_sc_MapOps$$anon$1;
+/** @constructor */
+function $h_sc_MapOps$$anon$1() {
+}
+$h_sc_MapOps$$anon$1.prototype = $c_sc_MapOps$$anon$1.prototype;
+$c_sc_MapOps$$anon$1.prototype.knownSize__I = (function() {
+  return $n(this.sc_MapOps$$anon$1__f_$outer).knownSize__I();
+});
+$c_sc_MapOps$$anon$1.prototype.iterator__sc_Iterator = (function() {
+  return $n(this.sc_MapOps$$anon$1__f_$outer).valuesIterator__sc_Iterator();
+});
+var $d_sc_MapOps$$anon$1 = new $TypeData().initClass($c_sc_MapOps$$anon$1, "scala.collection.MapOps$$anon$1", ({
+  sc_MapOps$$anon$1: 1,
+  sc_AbstractIterable: 1,
+  sc_Iterable: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOps: 1,
+  sc_IterableOnceOps: 1,
+  sc_IterableFactoryDefaults: 1,
+  scg_DefaultSerializable: 1,
+  Ljava_io_Serializable: 1
+}));
 function $f_sc_Set__equals__O__Z($thiz, that) {
   if (($thiz === that)) {
     return true;
@@ -40378,6 +41943,60 @@ function $isArrayOf_sc_LinearSeq(obj, depth) {
 function $asArrayOf_sc_LinearSeq(obj, depth) {
   return (($isArrayOf_sc_LinearSeq(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.LinearSeq;", depth));
 }
+/** @constructor */
+function $c_sc_View$Empty$() {
+}
+$c_sc_View$Empty$.prototype = new $h_sc_AbstractView();
+$c_sc_View$Empty$.prototype.constructor = $c_sc_View$Empty$;
+/** @constructor */
+function $h_sc_View$Empty$() {
+}
+$h_sc_View$Empty$.prototype = $c_sc_View$Empty$.prototype;
+$c_sc_View$Empty$.prototype.iterator__sc_Iterator = (function() {
+  return $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty;
+});
+$c_sc_View$Empty$.prototype.knownSize__I = (function() {
+  return 0;
+});
+$c_sc_View$Empty$.prototype.isEmpty__Z = (function() {
+  return true;
+});
+$c_sc_View$Empty$.prototype.productPrefix__T = (function() {
+  return "Empty";
+});
+$c_sc_View$Empty$.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_sc_View$Empty$.prototype.productElement__I__O = (function(x$1) {
+  return $m_sr_Statics$().ioobe__I__O(x$1);
+});
+$c_sc_View$Empty$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_sr_ScalaRunTime$$anon$1(this);
+});
+$c_sc_View$Empty$.prototype.hashCode__I = (function() {
+  return 67081517;
+});
+var $d_sc_View$Empty$ = new $TypeData().initClass($c_sc_View$Empty$, "scala.collection.View$Empty$", ({
+  sc_View$Empty$: 1,
+  sc_AbstractView: 1,
+  sc_AbstractIterable: 1,
+  sc_Iterable: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOps: 1,
+  sc_IterableOnceOps: 1,
+  sc_IterableFactoryDefaults: 1,
+  sc_View: 1,
+  Ljava_io_Serializable: 1,
+  s_Product: 1,
+  s_Equals: 1
+}));
+var $n_sc_View$Empty$;
+function $m_sc_View$Empty$() {
+  if ((!$n_sc_View$Empty$)) {
+    $n_sc_View$Empty$ = new $c_sc_View$Empty$();
+  }
+  return $n_sc_View$Empty$;
+}
 function $is_sci_Set(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sci_Set)));
 }
@@ -40413,6 +42032,15 @@ $c_sc_AbstractMap.prototype.toString__T = (function() {
 });
 $c_sc_AbstractMap.prototype.fromSpecific__sc_IterableOnce__sc_IterableOps = (function(coll) {
   return $as_sc_IterableOps($n(this.mapFactory__sc_MapFactory()).from__sc_IterableOnce__O(coll));
+});
+$c_sc_AbstractMap.prototype.empty__sc_IterableOps = (function() {
+  return $f_sc_MapFactoryDefaults__empty__sc_IterableOps(this);
+});
+$c_sc_AbstractMap.prototype.getOrElse__O__F0__O = (function(key, default$1) {
+  return $f_sc_MapOps__getOrElse__O__F0__O(this, key, default$1);
+});
+$c_sc_AbstractMap.prototype.apply__O__O = (function(key) {
+  return $f_sc_MapOps__apply__O__O(this, key);
 });
 $c_sc_AbstractMap.prototype.applyOrElse__O__F1__O = (function(x, default$1) {
   return $f_sc_MapOps__applyOrElse__O__F1__O(this, x, default$1);
@@ -40620,6 +42248,46 @@ function $f_scm_MapOps__update__O__O__V($thiz, key, value) {
   var elem = new $c_T2(key, value);
   this$1.addOne__O__scm_Growable(elem);
 }
+function $f_scm_MapOps__updateWith__O__F1__s_Option($thiz, key, remappingFunction) {
+  var previousValue = $thiz.get__O__s_Option(key);
+  var nextValue = $as_s_Option($n(remappingFunction).apply__O__O(previousValue));
+  var x1 = new $c_T2(previousValue, nextValue);
+  matchEnd15: {
+    var p2 = $as_s_Option(x1.T2__f__1);
+    var p3 = $as_s_Option(x1.T2__f__2);
+    var x = $m_s_None$();
+    if ((x === p2)) {
+      var x$3 = $m_s_None$();
+      var $x_1 = (x$3 === p3);
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      break matchEnd15;
+    }
+    var p6 = $as_s_Option(x1.T2__f__1);
+    var p7 = $as_s_Option(x1.T2__f__2);
+    if ((p6 instanceof $c_s_Some)) {
+      var x$5 = $m_s_None$();
+      var $x_2 = (x$5 === p7);
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      $thiz.remove__O__s_Option(key);
+      break matchEnd15;
+    }
+    var p12 = $as_s_Option(x1.T2__f__2);
+    if ((p12 instanceof $c_s_Some)) {
+      var x13 = $as_s_Some(p12);
+      var v = $n(x13).s_Some__f_value;
+      $thiz.update__O__O__V(key, v);
+      break matchEnd15;
+    }
+    throw new $c_s_MatchError(x1);
+  }
+  return nextValue;
+}
 function $f_scm_MapOps__getOrElseUpdate__O__F0__O($thiz, key, defaultValue) {
   var x1 = $thiz.get__O__s_Option(key);
   if ((x1 instanceof $c_s_Some)) {
@@ -40636,6 +42304,14 @@ function $f_scm_MapOps__getOrElseUpdate__O__F0__O($thiz, key, defaultValue) {
       throw new $c_s_MatchError(x1);
     }
   }
+}
+function $f_scm_MapOps__remove__O__s_Option($thiz, key) {
+  var r = $thiz.get__O__s_Option(key);
+  var this$1 = $n(r);
+  if ((!this$1.isEmpty__Z())) {
+    $thiz.subtractOne__O__scm_Shrinkable(key);
+  }
+  return r;
 }
 function $is_sci_Map(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.sci_Map)));
@@ -41631,6 +43307,9 @@ $c_sci_Map$EmptyMap$.prototype.iterator__sc_Iterator = (function() {
 $c_sci_Map$EmptyMap$.prototype.keysIterator__sc_Iterator = (function() {
   return $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty;
 });
+$c_sci_Map$EmptyMap$.prototype.valuesIterator__sc_Iterator = (function() {
+  return $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty;
+});
 $c_sci_Map$EmptyMap$.prototype.updated__O__O__sci_MapOps = (function(key, value) {
   return new $c_sci_Map$Map1(key, value);
 });
@@ -41730,6 +43409,10 @@ $c_sci_Map$Map1.prototype.iterator__sc_Iterator = (function() {
 });
 $c_sci_Map$Map1.prototype.keysIterator__sc_Iterator = (function() {
   var a = this.sci_Map$Map1__f_key1;
+  return new $c_sc_Iterator$$anon$20(a);
+});
+$c_sci_Map$Map1.prototype.valuesIterator__sc_Iterator = (function() {
+  var a = this.sci_Map$Map1__f_value1;
   return new $c_sc_Iterator$$anon$20(a);
 });
 $c_sci_Map$Map1.prototype.updated__O__O__sci_Map = (function(key, value) {
@@ -41841,6 +43524,9 @@ $c_sci_Map$Map2.prototype.iterator__sc_Iterator = (function() {
 });
 $c_sci_Map$Map2.prototype.keysIterator__sc_Iterator = (function() {
   return new $c_sci_Map$Map2$$anon$2(this);
+});
+$c_sci_Map$Map2.prototype.valuesIterator__sc_Iterator = (function() {
+  return new $c_sci_Map$Map2$$anon$3(this);
 });
 $c_sci_Map$Map2.prototype.updated__O__O__sci_Map = (function(key, value) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1) ? new $c_sci_Map$Map2(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, value, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value2) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2) ? new $c_sci_Map$Map2(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, value) : new $c_sci_Map$Map3(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value2, key, value)));
@@ -41962,6 +43648,9 @@ $c_sci_Map$Map3.prototype.iterator__sc_Iterator = (function() {
 });
 $c_sci_Map$Map3.prototype.keysIterator__sc_Iterator = (function() {
   return new $c_sci_Map$Map3$$anon$5(this);
+});
+$c_sci_Map$Map3.prototype.valuesIterator__sc_Iterator = (function() {
+  return new $c_sci_Map$Map3$$anon$6(this);
 });
 $c_sci_Map$Map3.prototype.updated__O__O__sci_Map = (function(key, value) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1) ? new $c_sci_Map$Map3(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, value, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2) ? new $c_sci_Map$Map3(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, value, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3) ? new $c_sci_Map$Map3(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, value) : new $c_sci_Map$Map4(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3, key, value))));
@@ -42094,6 +43783,9 @@ $c_sci_Map$Map4.prototype.iterator__sc_Iterator = (function() {
 });
 $c_sci_Map$Map4.prototype.keysIterator__sc_Iterator = (function() {
   return new $c_sci_Map$Map4$$anon$8(this);
+});
+$c_sci_Map$Map4.prototype.valuesIterator__sc_Iterator = (function() {
+  return new $c_sci_Map$Map4$$anon$9(this);
 });
 $c_sci_Map$Map4.prototype.updated__O__O__sci_Map = (function(key, value) {
   if ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key1)) {
@@ -42865,6 +44557,9 @@ $c_sjsr_WrappedVarArgs.prototype.apply__I__O = (function(idx) {
 $c_sjsr_WrappedVarArgs.prototype.className__T = (function() {
   return "WrappedVarArgs";
 });
+$c_sjsr_WrappedVarArgs.prototype.empty__O = (function() {
+  return $ct_sjsr_WrappedVarArgs__(new $c_sjsr_WrappedVarArgs());
+});
 $c_sjsr_WrappedVarArgs.prototype.fromSpecific__sc_IterableOnce__O = (function(coll) {
   var this$1 = $m_sjsr_WrappedVarArgs$();
   return this$1.from__sc_IterableOnce__sjsr_WrappedVarArgs(coll);
@@ -42977,6 +44672,9 @@ $c_Lupickle_core_LinkedHashMap.prototype.applyOrElse__O__F1__O = (function(x, de
 $c_Lupickle_core_LinkedHashMap.prototype.keysIterator__sc_Iterator = (function() {
   return new $c_sc_MapOps$$anon$2(this);
 });
+$c_Lupickle_core_LinkedHashMap.prototype.valuesIterator__sc_Iterator = (function() {
+  return new $c_sc_MapOps$$anon$3(this);
+});
 $c_Lupickle_core_LinkedHashMap.prototype.foreachEntry__F2__V = (function(f) {
   $f_sc_MapOps__foreachEntry__F2__V(this, f);
 });
@@ -43006,8 +44704,14 @@ $c_Lupickle_core_LinkedHashMap.prototype.sizeHint__I__V = (function(size) {
 $c_Lupickle_core_LinkedHashMap.prototype.update__O__O__V = (function(key, value) {
   $f_scm_MapOps__update__O__O__V(this, key, value);
 });
+$c_Lupickle_core_LinkedHashMap.prototype.updateWith__O__F1__s_Option = (function(key, remappingFunction) {
+  return $f_scm_MapOps__updateWith__O__F1__s_Option(this, key, remappingFunction);
+});
 $c_Lupickle_core_LinkedHashMap.prototype.getOrElseUpdate__O__F0__O = (function(key, defaultValue) {
   return $f_scm_MapOps__getOrElseUpdate__O__F0__O(this, key, defaultValue);
+});
+$c_Lupickle_core_LinkedHashMap.prototype.remove__O__s_Option = (function(key) {
+  return $f_scm_MapOps__remove__O__s_Option(this, key);
 });
 $c_Lupickle_core_LinkedHashMap.prototype.knownSize__I = (function() {
   return (-1);
@@ -43042,11 +44746,18 @@ $c_Lupickle_core_LinkedHashMap.prototype.get__O__s_Option = (function(key) {
   var this$1 = $n(this.Lupickle_core_LinkedHashMap__f_upickle$core$LinkedHashMap$$underlying);
   return $x_1.apply__O__s_Option($p_ju_HashMap__getOrDefaultImpl__O__O__O(this$1, key, null));
 });
+$c_Lupickle_core_LinkedHashMap.prototype.subtractOne__O__Lupickle_core_LinkedHashMap = (function(elem) {
+  $n(this.Lupickle_core_LinkedHashMap__f_upickle$core$LinkedHashMap$$underlying).remove__O__O(elem);
+  return this;
+});
 $c_Lupickle_core_LinkedHashMap.prototype.put__O__O__s_Option = (function(key, value) {
   return $m_s_Option$().apply__O__s_Option(this.upickle$core$LinkedHashMap$$_put__O__O__O(key, value));
 });
 $c_Lupickle_core_LinkedHashMap.prototype.addOne__O__scm_Growable = (function(elem) {
   return this.addOne__T2__Lupickle_core_LinkedHashMap($as_T2(elem));
+});
+$c_Lupickle_core_LinkedHashMap.prototype.subtractOne__O__scm_Shrinkable = (function(elem) {
+  return this.subtractOne__O__Lupickle_core_LinkedHashMap(elem);
 });
 $c_Lupickle_core_LinkedHashMap.prototype.result__O = (function() {
   return this;
@@ -43118,6 +44829,9 @@ $c_sci_HashMap.prototype.iterator__sc_Iterator = (function() {
 });
 $c_sci_HashMap.prototype.keysIterator__sc_Iterator = (function() {
   return (this.isEmpty__Z() ? $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty : new $c_sci_MapKeyIterator(this.sci_HashMap__f_rootNode));
+});
+$c_sci_HashMap.prototype.valuesIterator__sc_Iterator = (function() {
+  return (this.isEmpty__Z() ? $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty : new $c_sci_MapValueIterator(this.sci_HashMap__f_rootNode));
 });
 $c_sci_HashMap.prototype.contains__O__Z = (function(key) {
   var keyUnimprovedHash = $m_sr_Statics$().anyHash__O__I(key);
@@ -43213,8 +44927,234 @@ var $d_sci_HashMap = new $TypeData().initClass($c_sci_HashMap, "scala.collection
   scg_DefaultSerializable: 1,
   Ljava_io_Serializable: 1
 }));
+/** @constructor */
+function $c_sci_TreeSeqMap(ordering, mapping, ordinal, orderedBy) {
+  this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering = null;
+  this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping = null;
+  this.sci_TreeSeqMap__f_ordinal = 0;
+  this.sci_TreeSeqMap__f_orderedBy = null;
+  this.sci_TreeSeqMap__f_size = 0;
+  this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering = ordering;
+  this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping = mapping;
+  this.sci_TreeSeqMap__f_ordinal = ordinal;
+  this.sci_TreeSeqMap__f_orderedBy = orderedBy;
+  this.sci_TreeSeqMap__f_size = $n(mapping).size__I();
+}
+$c_sci_TreeSeqMap.prototype = new $h_sci_AbstractMap();
+$c_sci_TreeSeqMap.prototype.constructor = $c_sci_TreeSeqMap;
+/** @constructor */
+function $h_sci_TreeSeqMap() {
+}
+$h_sci_TreeSeqMap.prototype = $c_sci_TreeSeqMap.prototype;
+$c_sci_TreeSeqMap.prototype.map__F1__O = (function(f) {
+  return $f_sc_StrictOptimizedIterableOps__map__F1__O(this, f);
+});
+$c_sci_TreeSeqMap.prototype.stringPrefix__T = (function() {
+  return "SeqMap";
+});
+$c_sci_TreeSeqMap.prototype.className__T = (function() {
+  return "TreeSeqMap";
+});
+$c_sci_TreeSeqMap.prototype.mapFactory__sc_MapFactory = (function() {
+  return $m_sci_TreeSeqMap$();
+});
+$c_sci_TreeSeqMap.prototype.size__I = (function() {
+  return this.sci_TreeSeqMap__f_size;
+});
+$c_sci_TreeSeqMap.prototype.knownSize__I = (function() {
+  return this.sci_TreeSeqMap__f_size;
+});
+$c_sci_TreeSeqMap.prototype.isEmpty__Z = (function() {
+  return (this.sci_TreeSeqMap__f_size === 0);
+});
+$c_sci_TreeSeqMap.prototype.updated__O__O__sci_TreeSeqMap = (function(key, value) {
+  var rc10 = false;
+  var x2 = null;
+  var x1 = $n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).get__O__s_Option(key);
+  if ((this.sci_TreeSeqMap__f_ordinal === (-1))) {
+    var x = this.sci_TreeSeqMap__f_orderedBy;
+    var x$2 = $m_sci_TreeSeqMap$OrderBy$Modification$();
+    if ((x !== null)) {
+      var this$1 = $n(x);
+      var $x_2 = (this$1 === x$2);
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var $x_1 = true;
+    } else {
+      var $x_1 = $n(x1).isEmpty__Z();
+    }
+  } else {
+    var $x_1 = false;
+  }
+  if ($x_1) {
+    var this$2 = $n($m_sci_TreeSeqMap$().empty__sci_TreeSeqMap$OrderBy__sci_TreeSeqMap(this.sci_TreeSeqMap__f_orderedBy));
+    var this$5 = $n(this$2.concat__sc_IterableOnce__sci_TreeSeqMap(this));
+    return this$5.updated__O__O__sci_TreeSeqMap(key, value);
+  }
+  if ((x1 instanceof $c_s_Some)) {
+    rc10 = true;
+    x2 = $as_s_Some(x1);
+    var p3 = $as_T2($n(x2).s_Some__f_value);
+    if ((p3 !== null)) {
+      var this$6 = $n(p3);
+      var o = $uI(this$6.T2__f__1);
+      var x$3 = this.sci_TreeSeqMap__f_orderedBy;
+      var x$4 = $m_sci_TreeSeqMap$OrderBy$Insertion$();
+      if ((x$3 !== null)) {
+        var this$7 = $n(x$3);
+        var $x_3 = (this$7 === x$4);
+      } else {
+        var $x_3 = false;
+      }
+      if ($x_3) {
+        return new $c_sci_TreeSeqMap($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering).include__I__O__sci_TreeSeqMap$Ordering(o, key), $as_sci_Map($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).updated__O__O__sci_MapOps(key, new $c_T2(o, value))), this.sci_TreeSeqMap__f_ordinal, this.sci_TreeSeqMap__f_orderedBy);
+      }
+    }
+  }
+  if (rc10) {
+    var p6 = $as_T2($n(x2).s_Some__f_value);
+    if ((p6 !== null)) {
+      var this$8 = $n(p6);
+      var o$2 = $uI(this$8.T2__f__1);
+      $m_sci_TreeSeqMap$();
+      var ord = this.sci_TreeSeqMap__f_ordinal;
+      var o1 = ((ord === 2147483647) ? (-2147483648) : ((1 + ord) | 0));
+      return new $c_sci_TreeSeqMap($n($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering).exclude__I__sci_TreeSeqMap$Ordering(o$2)).append__I__O__sci_TreeSeqMap$Ordering(o1, key), $as_sci_Map($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).updated__O__O__sci_MapOps(key, new $c_T2(o1, value))), o1, this.sci_TreeSeqMap__f_orderedBy);
+    }
+  }
+  var x$5 = $m_s_None$();
+  if ((x$5 === x1)) {
+    $m_sci_TreeSeqMap$();
+    var ord$1 = this.sci_TreeSeqMap__f_ordinal;
+    var o1$2 = ((ord$1 === 2147483647) ? (-2147483648) : ((1 + ord$1) | 0));
+    return new $c_sci_TreeSeqMap($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering).append__I__O__sci_TreeSeqMap$Ordering(o1$2, key), $as_sci_Map($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).updated__O__O__sci_MapOps(key, new $c_T2(o1$2, value))), o1$2, this.sci_TreeSeqMap__f_orderedBy);
+  }
+  throw new $c_s_MatchError(x1);
+});
+$c_sci_TreeSeqMap.prototype.get__O__s_Option = (function(key) {
+  var this$1 = $n($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).get__O__s_Option(key));
+  if (this$1.isEmpty__Z()) {
+    return $m_s_None$();
+  } else {
+    var x0 = this$1.get__O();
+    var p$2 = $as_T2(x0);
+    return new $c_s_Some($n(p$2).T2__f__2);
+  }
+});
+$c_sci_TreeSeqMap.prototype.iterator__sc_Iterator = (function() {
+  return new $c_sci_TreeSeqMap$$anon$1(this);
+});
+$c_sci_TreeSeqMap.prototype.keysIterator__sc_Iterator = (function() {
+  return new $c_sci_TreeSeqMap$$anon$2(this);
+});
+$c_sci_TreeSeqMap.prototype.valuesIterator__sc_Iterator = (function() {
+  return new $c_sci_TreeSeqMap$$anon$3(this);
+});
+$c_sci_TreeSeqMap.prototype.contains__O__Z = (function(key) {
+  return $n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).contains__O__Z(key);
+});
+$c_sci_TreeSeqMap.prototype.map__F1__sci_TreeSeqMap = (function(f) {
+  $m_sci_TreeSeqMap$();
+  var orderedBy = this.sci_TreeSeqMap__f_orderedBy;
+  var bdr = new $c_sci_TreeSeqMap$Builder(orderedBy);
+  var iter = $n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering).iterator__sci_TreeSeqMap$Ordering$Iterator();
+  while ($n(iter).hasNext__Z()) {
+    var k = $n(iter).next__O();
+    var x1 = $as_T2($n(this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping).apply__O__O(k));
+    if ((x1 === null)) {
+      throw new $c_s_MatchError(x1);
+    }
+    var v = $n(x1).T2__f__2;
+    var x1$2 = $as_T2($n(f).apply__O__O(new $c_T2(k, v)));
+    if ((x1$2 === null)) {
+      throw new $c_s_MatchError(x1$2);
+    }
+    var k2 = $n(x1$2).T2__f__1;
+    var v2 = $n(x1$2).T2__f__2;
+    bdr.addOne__O__O__sci_TreeSeqMap$Builder(k2, v2);
+  }
+  return bdr.result__sci_TreeSeqMap();
+});
+$c_sci_TreeSeqMap.prototype.concat__sc_IterableOnce__sci_TreeSeqMap = (function(suffix) {
+  var ong = this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$ordering;
+  var mng = this.sci_TreeSeqMap__f_scala$collection$immutable$TreeSeqMap$$mapping;
+  $m_sci_TreeSeqMap$();
+  var ord = this.sci_TreeSeqMap__f_ordinal;
+  var ord$1 = ((ord === 2147483647) ? (-2147483648) : ((1 + ord) | 0));
+  var iter = $n(suffix).iterator__sc_Iterator();
+  while ($n(iter).hasNext__Z()) {
+    var x1 = $as_T2($n(iter).next__O());
+    if ((x1 === null)) {
+      throw new $c_s_MatchError(x1);
+    }
+    var k = $n(x1).T2__f__1;
+    var v2 = $n(x1).T2__f__2;
+    var x1$2 = $n(mng).get__O__s_Option(k);
+    matchEnd6: {
+      if ((x1$2 instanceof $c_s_Some)) {
+        var x2 = $as_s_Some(x1$2);
+        var p3 = $as_T2($n(x2).s_Some__f_value);
+        if ((p3 !== null)) {
+          var this$2 = $n(p3);
+          var o = $uI(this$2.T2__f__1);
+          var v = $n(p3).T2__f__2;
+          var x = this.sci_TreeSeqMap__f_orderedBy;
+          var x$2 = $m_sci_TreeSeqMap$OrderBy$Insertion$();
+          if ((x !== null)) {
+            var this$3 = $n(x);
+            var $x_1 = (this$3 === x$2);
+          } else {
+            var $x_1 = false;
+          }
+          if (($x_1 && (!$m_sr_BoxesRunTime$().equals__O__O__Z(v, v2)))) {
+            mng = $as_sci_Map($n(mng).updated__O__O__sci_MapOps(k, new $c_T2(o, v2)));
+            break matchEnd6;
+          } else {
+            var x$3 = this.sci_TreeSeqMap__f_orderedBy;
+            var x$4 = $m_sci_TreeSeqMap$OrderBy$Modification$();
+            if ((x$3 !== null)) {
+              var this$4 = $n(x$3);
+              var $x_2 = (this$4 === x$4);
+            } else {
+              var $x_2 = false;
+            }
+            if ($x_2) {
+              mng = $as_sci_Map($n(mng).updated__O__O__sci_MapOps(k, new $c_T2(ord$1, v2)));
+              ong = $n($n(ong).exclude__I__sci_TreeSeqMap$Ordering(o)).append__I__O__sci_TreeSeqMap$Ordering(ord$1, k);
+              $m_sci_TreeSeqMap$();
+              var ord$2 = ord$1;
+              ord$1 = ((ord$2 === 2147483647) ? (-2147483648) : ((1 + ord$2) | 0));
+              break matchEnd6;
+            } else {
+              break matchEnd6;
+            }
+          }
+        }
+      }
+      var x$5 = $m_s_None$();
+      if ((x$5 === x1$2)) {
+        mng = $as_sci_Map($n(mng).updated__O__O__sci_MapOps(k, new $c_T2(ord$1, v2)));
+        ong = $n(ong).append__I__O__sci_TreeSeqMap$Ordering(ord$1, k);
+        $m_sci_TreeSeqMap$();
+        var ord$3 = ord$1;
+        ord$1 = ((ord$3 === 2147483647) ? (-2147483648) : ((1 + ord$3) | 0));
+        break matchEnd6;
+      }
+      throw new $c_s_MatchError(x1$2);
+    }
+  }
+  return new $c_sci_TreeSeqMap(ong, mng, ord$1, this.sci_TreeSeqMap__f_orderedBy);
+});
+$c_sci_TreeSeqMap.prototype.map__F1__sc_IterableOps = (function(f) {
+  return this.map__F1__sci_TreeSeqMap(f);
+});
+$c_sci_TreeSeqMap.prototype.updated__O__O__sci_MapOps = (function(key, value) {
+  return this.updated__O__O__sci_TreeSeqMap(key, value);
+});
 function $as_sci_TreeSeqMap(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.TreeSeqMap"));
+  return (((obj instanceof $c_sci_TreeSeqMap) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.TreeSeqMap"));
 }
 function $isArrayOf_sci_TreeSeqMap(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.sci_TreeSeqMap)));
@@ -43222,6 +45162,31 @@ function $isArrayOf_sci_TreeSeqMap(obj, depth) {
 function $asArrayOf_sci_TreeSeqMap(obj, depth) {
   return (($isArrayOf_sci_TreeSeqMap(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lscala.collection.immutable.TreeSeqMap;", depth));
 }
+var $d_sci_TreeSeqMap = new $TypeData().initClass($c_sci_TreeSeqMap, "scala.collection.immutable.TreeSeqMap", ({
+  sci_TreeSeqMap: 1,
+  sci_AbstractMap: 1,
+  sc_AbstractMap: 1,
+  sc_AbstractIterable: 1,
+  sc_Iterable: 1,
+  sc_IterableOnce: 1,
+  sc_IterableOps: 1,
+  sc_IterableOnceOps: 1,
+  sc_IterableFactoryDefaults: 1,
+  sc_Map: 1,
+  sc_MapOps: 1,
+  s_PartialFunction: 1,
+  F1: 1,
+  sc_MapFactoryDefaults: 1,
+  s_Equals: 1,
+  sci_Map: 1,
+  sci_Iterable: 1,
+  sci_MapOps: 1,
+  sci_SeqMap: 1,
+  sc_SeqMap: 1,
+  sc_StrictOptimizedIterableOps: 1,
+  sci_StrictOptimizedMapOps: 1,
+  sc_StrictOptimizedMapOps: 1
+}));
 function $as_sci_VectorMap(obj) {
   return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "scala.collection.immutable.VectorMap"));
 }
@@ -43529,6 +45494,11 @@ $c_sci_ArraySeq.prototype.newSpecificBuilder__scm_Builder = (function() {
   var evidence$12 = this.elemTag__s_reflect_ClassTag();
   return this$1.newBuilder__s_reflect_ClassTag__scm_Builder(evidence$12);
 });
+$c_sci_ArraySeq.prototype.empty__sc_IterableOps = (function() {
+  var this$1 = $m_sci_ArraySeq$();
+  this.elemTag__s_reflect_ClassTag();
+  return $p_sci_ArraySeq$__emptyImpl__sci_ArraySeq$ofRef(this$1);
+});
 $c_sci_ArraySeq.prototype.distinctBy__F1__O = (function(f) {
   return $f_sci_StrictOptimizedSeqOps__distinctBy__F1__O(this, f);
 });
@@ -43631,6 +45601,11 @@ $c_sci_ArraySeq.prototype.sorted__s_math_Ordering__sci_ArraySeq = (function(ord)
     $m_ju_Arrays$().sort__AO__ju_Comparator__V(a, ord);
     return new $c_sci_ArraySeq$ofRef(a);
   }
+});
+$c_sci_ArraySeq.prototype.empty__O = (function() {
+  var this$1 = $m_sci_ArraySeq$();
+  this.elemTag__s_reflect_ClassTag();
+  return $p_sci_ArraySeq$__emptyImpl__sci_ArraySeq$ofRef(this$1);
 });
 $c_sci_ArraySeq.prototype.fromSpecific__sc_IterableOnce__O = (function(coll) {
   var this$1 = $m_sci_ArraySeq$();
@@ -43866,6 +45841,16 @@ $c_scm_ArraySeq.prototype.sortInPlace__s_math_Ordering__scm_IndexedSeqOps = (fun
 $c_scm_ArraySeq.prototype.sorted__s_math_Ordering__O = (function(ord) {
   return this.sorted__s_math_Ordering__scm_ArraySeq(ord);
 });
+$c_scm_ArraySeq.prototype.empty__O = (function() {
+  var this$1 = $m_scm_ArraySeq$();
+  this.elemTag__s_reflect_ClassTag();
+  return this$1.scm_ArraySeq$__f_EmptyArraySeq;
+});
+$c_scm_ArraySeq.prototype.empty__sc_IterableOps = (function() {
+  var this$1 = $m_scm_ArraySeq$();
+  this.elemTag__s_reflect_ClassTag();
+  return this$1.scm_ArraySeq$__f_EmptyArraySeq;
+});
 $c_scm_ArraySeq.prototype.fromSpecific__sc_IterableOnce__O = (function(coll) {
   return this.fromSpecific__sc_IterableOnce__scm_ArraySeq(coll);
 });
@@ -43924,18 +45909,12 @@ function $c_Lscalatags_JsDom$all$() {
   this.Lscalatags_JsDom$all$__f_h1bitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_h2$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_h2bitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_h3$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_h3bitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_h4$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_h4bitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_header$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_headerbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_p$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_pbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_ul$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_ulbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_li$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_libitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_figure$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_figurebitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_figcaption$lzy2 = null;
@@ -43952,18 +45931,6 @@ function $c_Lscalatags_JsDom$all$() {
   this.Lscalatags_JsDom$all$__f_spanbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_img$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_imgbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_table$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_tablebitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_tbody$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_tbodybitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_thead$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_theadbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_tr$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_trbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_td$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_tdbitmap$2 = false;
-  this.Lscalatags_JsDom$all$__f_th$lzy2 = null;
-  this.Lscalatags_JsDom$all$__f_thbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_form$lzy2 = null;
   this.Lscalatags_JsDom$all$__f_formbitmap$2 = false;
   this.Lscalatags_JsDom$all$__f_fieldset$lzy2 = null;
@@ -44126,14 +46093,6 @@ $c_Lscalatags_JsDom$all$.prototype.h2__Lscalatags_generic_TypedTag = (function()
   }
   return this.Lscalatags_JsDom$all$__f_h2$lzy2;
 });
-$c_Lscalatags_JsDom$all$.prototype.h3__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_h3bitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_h3$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "h3", false, ns);
-    this.Lscalatags_JsDom$all$__f_h3bitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_h3$lzy2;
-});
 $c_Lscalatags_JsDom$all$.prototype.h4__Lscalatags_generic_TypedTag = (function() {
   if ((!this.Lscalatags_JsDom$all$__f_h4bitmap$2)) {
     var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
@@ -44157,22 +46116,6 @@ $c_Lscalatags_JsDom$all$.prototype.p__Lscalatags_generic_TypedTag = (function() 
     this.Lscalatags_JsDom$all$__f_pbitmap$2 = true;
   }
   return this.Lscalatags_JsDom$all$__f_p$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.ul__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_ulbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_ul$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "ul", false, ns);
-    this.Lscalatags_JsDom$all$__f_ulbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_ul$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.li__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_libitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_li$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "li", false, ns);
-    this.Lscalatags_JsDom$all$__f_libitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_li$lzy2;
 });
 $c_Lscalatags_JsDom$all$.prototype.figure__Lscalatags_generic_TypedTag = (function() {
   if ((!this.Lscalatags_JsDom$all$__f_figurebitmap$2)) {
@@ -44237,54 +46180,6 @@ $c_Lscalatags_JsDom$all$.prototype.img__Lscalatags_generic_TypedTag = (function(
     this.Lscalatags_JsDom$all$__f_imgbitmap$2 = true;
   }
   return this.Lscalatags_JsDom$all$__f_img$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.table__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_tablebitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_table$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "table", false, ns);
-    this.Lscalatags_JsDom$all$__f_tablebitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_table$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.tbody__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_tbodybitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_tbody$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "tbody", false, ns);
-    this.Lscalatags_JsDom$all$__f_tbodybitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_tbody$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.thead__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_theadbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_thead$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "thead", false, ns);
-    this.Lscalatags_JsDom$all$__f_theadbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_thead$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.tr__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_trbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_tr$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "tr", false, ns);
-    this.Lscalatags_JsDom$all$__f_trbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_tr$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.td__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_tdbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_td$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "td", false, ns);
-    this.Lscalatags_JsDom$all$__f_tdbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_td$lzy2;
-});
-$c_Lscalatags_JsDom$all$.prototype.th__Lscalatags_generic_TypedTag = (function() {
-  if ((!this.Lscalatags_JsDom$all$__f_thbitmap$2)) {
-    var ns = $m_Lscalatags_generic_Namespace$().Lscalatags_generic_Namespace$__f_htmlNamespaceConfig;
-    this.Lscalatags_JsDom$all$__f_th$lzy2 = $f_Lscalatags_jsdom_TagFactory__typedTag__T__Z__Lscalatags_generic_Namespace__Lscalatags_generic_TypedTag(this, "th", false, ns);
-    this.Lscalatags_JsDom$all$__f_thbitmap$2 = true;
-  }
-  return this.Lscalatags_JsDom$all$__f_th$lzy2;
 });
 $c_Lscalatags_JsDom$all$.prototype.form__Lscalatags_generic_TypedTag = (function() {
   if ((!this.Lscalatags_JsDom$all$__f_formbitmap$2)) {
@@ -46755,6 +48650,34 @@ function $p_scm_HashMap__put0__O__O__Z__I__I__s_Some($thiz, key, value, getOld, 
   $thiz.scm_HashMap__f_contentSize = ((1 + $thiz.scm_HashMap__f_contentSize) | 0);
   return null;
 }
+function $p_scm_HashMap__remove0__O__scm_HashMap$Node($thiz, elem) {
+  var originalHash = $m_sr_Statics$().anyHash__O__I(elem);
+  return $p_scm_HashMap__remove0__O__I__scm_HashMap$Node($thiz, elem, (originalHash ^ ((originalHash >>> 16) | 0)));
+}
+function $p_scm_HashMap__remove0__O__I__scm_HashMap$Node($thiz, elem, hash) {
+  var idx = (hash & (((-1) + $n($thiz.scm_HashMap__f_scala$collection$mutable$HashMap$$table).u.length) | 0));
+  var x1 = $n($thiz.scm_HashMap__f_scala$collection$mutable$HashMap$$table).get(idx);
+  if ((x1 === null)) {
+    return null;
+  } else if ((($n(x1).scm_HashMap$Node__f__hash === hash) && $m_sr_BoxesRunTime$().equals__O__O__Z($n(x1).scm_HashMap$Node__f__key, elem))) {
+    $n($thiz.scm_HashMap__f_scala$collection$mutable$HashMap$$table).set(idx, $n(x1).scm_HashMap$Node__f__next);
+    $thiz.scm_HashMap__f_contentSize = (((-1) + $thiz.scm_HashMap__f_contentSize) | 0);
+    return x1;
+  } else {
+    var prev = x1;
+    var next = $n(x1).scm_HashMap$Node__f__next;
+    while (((next !== null) && ($n(next).scm_HashMap$Node__f__hash <= hash))) {
+      if ((($n(next).scm_HashMap$Node__f__hash === hash) && $m_sr_BoxesRunTime$().equals__O__O__Z($n(next).scm_HashMap$Node__f__key, elem))) {
+        $n(prev).scm_HashMap$Node__f__next = $n(next).scm_HashMap$Node__f__next;
+        $thiz.scm_HashMap__f_contentSize = (((-1) + $thiz.scm_HashMap__f_contentSize) | 0);
+        return next;
+      }
+      prev = next;
+      next = $n(next).scm_HashMap$Node__f__next;
+    }
+    return null;
+  }
+}
 function $p_scm_HashMap__growTable__I__V($thiz, newlen) {
   if ((newlen < 0)) {
     throw $ct_jl_RuntimeException__T__(new $c_jl_RuntimeException(), (("new HashMap table size " + newlen) + " exceeds maximum"));
@@ -46893,11 +48816,101 @@ $c_scm_HashMap.prototype.addAll__sc_IterableOnce__scm_HashMap = (function(xs) {
     return $as_scm_HashMap($f_scm_Growable__addAll__sc_IterableOnce__scm_Growable(this, xs));
   }
 });
+$c_scm_HashMap.prototype.updateWith__O__F1__s_Option = (function(key, remappingFunction) {
+  var x = $objectGetClass(this);
+  if ((!(x === $d_scm_HashMap.getClassOf()))) {
+    return $f_scm_MapOps__updateWith__O__F1__s_Option(this, key, remappingFunction);
+  } else {
+    var originalHash = $m_sr_Statics$().anyHash__O__I(key);
+    var hash = (originalHash ^ ((originalHash >>> 16) | 0));
+    var indexedHash = (hash & (((-1) + $n(this.scm_HashMap__f_scala$collection$mutable$HashMap$$table).u.length) | 0));
+    var elem = null;
+    elem = null;
+    var elem$1 = null;
+    elem$1 = null;
+    var x1 = $n(this.scm_HashMap__f_scala$collection$mutable$HashMap$$table).get(indexedHash);
+    if ((x1 !== null)) {
+      var prev = null;
+      var nd = x1;
+      while (true) {
+        if (((hash === $n(nd).scm_HashMap$Node__f__hash) && $m_sr_BoxesRunTime$().equals__O__O__Z(key, $n(nd).scm_HashMap$Node__f__key))) {
+          elem$1 = prev;
+          elem = nd;
+        } else if ((!(($n(nd).scm_HashMap$Node__f__next === null) || ($n(nd).scm_HashMap$Node__f__hash > hash)))) {
+          var temp$prev = nd;
+          var temp$nd = $n(nd).scm_HashMap$Node__f__next;
+          prev = temp$prev;
+          nd = temp$nd;
+          continue;
+        }
+        break;
+      }
+    }
+    var x1$2 = $as_scm_HashMap$Node(elem);
+    var previousValue = ((x1$2 === null) ? $m_s_None$() : new $c_s_Some($n(x1$2).scm_HashMap$Node__f__value));
+    var nextValue = $as_s_Option($n(remappingFunction).apply__O__O(previousValue));
+    var x1$3 = new $c_T2(previousValue, nextValue);
+    matchEnd21: {
+      var p2 = $as_s_Option(x1$3.T2__f__1);
+      var p3 = $as_s_Option(x1$3.T2__f__2);
+      var x$3 = $m_s_None$();
+      if ((x$3 === p2)) {
+        var x$5 = $m_s_None$();
+        var $x_1 = (x$5 === p3);
+      } else {
+        var $x_1 = false;
+      }
+      if ($x_1) {
+        break matchEnd21;
+      }
+      var p6 = $as_s_Option(x1$3.T2__f__1);
+      var p7 = $as_s_Option(x1$3.T2__f__2);
+      if ((p6 instanceof $c_s_Some)) {
+        var x$7 = $m_s_None$();
+        var $x_2 = (x$7 === p7);
+      } else {
+        var $x_2 = false;
+      }
+      if ($x_2) {
+        if (($as_scm_HashMap$Node(elem$1) !== null)) {
+          $n($as_scm_HashMap$Node(elem$1)).scm_HashMap$Node__f__next = $n($as_scm_HashMap$Node(elem)).scm_HashMap$Node__f__next;
+        } else {
+          $n(this.scm_HashMap__f_scala$collection$mutable$HashMap$$table).set(indexedHash, $n($as_scm_HashMap$Node(elem)).scm_HashMap$Node__f__next);
+        }
+        this.scm_HashMap__f_contentSize = (((-1) + this.scm_HashMap__f_contentSize) | 0);
+        break matchEnd21;
+      }
+      var p11 = $as_s_Option(x1$3.T2__f__1);
+      var p12 = $as_s_Option(x1$3.T2__f__2);
+      var x$9 = $m_s_None$();
+      if (((x$9 === p11) && (p12 instanceof $c_s_Some))) {
+        var x13 = $as_s_Some(p12);
+        var value = $n(x13).s_Some__f_value;
+        var newIndexedHash = ((((1 + this.scm_HashMap__f_contentSize) | 0) >= this.scm_HashMap__f_threshold) ? ($p_scm_HashMap__growTable__I__V(this, ($n(this.scm_HashMap__f_scala$collection$mutable$HashMap$$table).u.length << 1)), (hash & (((-1) + $n(this.scm_HashMap__f_scala$collection$mutable$HashMap$$table).u.length) | 0))) : indexedHash);
+        $p_scm_HashMap__put0__O__O__Z__I__I__s_Some(this, key, value, false, hash, newIndexedHash);
+        break matchEnd21;
+      }
+      var p15 = $as_s_Option(x1$3.T2__f__1);
+      var p16 = $as_s_Option(x1$3.T2__f__2);
+      if (((p15 instanceof $c_s_Some) && (p16 instanceof $c_s_Some))) {
+        var x19 = $as_s_Some(p16);
+        var newValue = $n(x19).s_Some__f_value;
+        $n($as_scm_HashMap$Node(elem)).scm_HashMap$Node__f__value = newValue;
+        break matchEnd21;
+      }
+      throw new $c_s_MatchError(x1$3);
+    }
+    return nextValue;
+  }
+});
 $c_scm_HashMap.prototype.iterator__sc_Iterator = (function() {
   return ((this.scm_HashMap__f_contentSize === 0) ? $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty : new $c_scm_HashMap$$anon$1(this));
 });
 $c_scm_HashMap.prototype.keysIterator__sc_Iterator = (function() {
   return ((this.scm_HashMap__f_contentSize === 0) ? $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty : new $c_scm_HashMap$$anon$2(this));
+});
+$c_scm_HashMap.prototype.valuesIterator__sc_Iterator = (function() {
+  return ((this.scm_HashMap__f_contentSize === 0) ? $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty : new $c_scm_HashMap$$anon$3(this));
 });
 $c_scm_HashMap.prototype.nodeIterator__sc_Iterator = (function() {
   return ((this.scm_HashMap__f_contentSize === 0) ? $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty : new $c_scm_HashMap$$anon$4(this));
@@ -46956,11 +48969,19 @@ $c_scm_HashMap.prototype.put__O__O__s_Option = (function(key, value) {
   var x1 = $p_scm_HashMap__put0__O__O__Z__s_Some(this, key, value, true);
   return ((x1 === null) ? $m_s_None$() : x1);
 });
+$c_scm_HashMap.prototype.remove__O__s_Option = (function(key) {
+  var x1 = $p_scm_HashMap__remove0__O__scm_HashMap$Node(this, key);
+  return ((x1 === null) ? $m_s_None$() : new $c_s_Some($n(x1).scm_HashMap$Node__f__value));
+});
 $c_scm_HashMap.prototype.update__O__O__V = (function(key, value) {
   $p_scm_HashMap__put0__O__O__Z__s_Some(this, key, value, false);
 });
 $c_scm_HashMap.prototype.addOne__T2__scm_HashMap = (function(elem) {
   $p_scm_HashMap__put0__O__O__Z__s_Some(this, $n(elem).T2__f__1, $n(elem).T2__f__2, false);
+  return this;
+});
+$c_scm_HashMap.prototype.subtractOne__O__scm_HashMap = (function(elem) {
+  $p_scm_HashMap__remove0__O__scm_HashMap$Node(this, elem);
   return this;
 });
 $c_scm_HashMap.prototype.knownSize__I = (function() {
@@ -47004,6 +49025,9 @@ $c_scm_HashMap.prototype.hashCode__I = (function() {
     var tupleHashIterator = new $c_scm_HashMap$$anon$5(this);
     return $m_s_util_hashing_MurmurHash3$().unorderedHash__sc_IterableOnce__I__I(tupleHashIterator, $m_s_util_hashing_MurmurHash3$().s_util_hashing_MurmurHash3$__f_mapSeed);
   }
+});
+$c_scm_HashMap.prototype.subtractOne__O__scm_Shrinkable = (function(elem) {
+  return this.subtractOne__O__scm_HashMap(elem);
 });
 $c_scm_HashMap.prototype.addOne__O__scm_Growable = (function(elem) {
   return this.addOne__T2__scm_HashMap($as_T2(elem));
@@ -49679,6 +51703,11 @@ $c_scm_StringBuilder.prototype.addOne__C__scm_StringBuilder = (function(x) {
   this$1.jl_StringBuilder__f_java$lang$StringBuilder$$content = (this$1.jl_StringBuilder__f_java$lang$StringBuilder$$content + str);
   return this;
 });
+$c_scm_StringBuilder.prototype.addAll__T__scm_StringBuilder = (function(s) {
+  var this$1 = $n(this.scm_StringBuilder__f_underlying);
+  this$1.jl_StringBuilder__f_java$lang$StringBuilder$$content = (("" + this$1.jl_StringBuilder__f_java$lang$StringBuilder$$content) + s);
+  return this;
+});
 $c_scm_StringBuilder.prototype.toString__T = (function() {
   return $n(this.scm_StringBuilder__f_underlying).jl_StringBuilder__f_java$lang$StringBuilder$$content;
 });
@@ -49746,6 +51775,9 @@ $c_scm_StringBuilder.prototype.result__O = (function() {
 });
 $c_scm_StringBuilder.prototype.addOne__O__scm_Growable = (function(elem) {
   return this.addOne__C__scm_StringBuilder($uC(elem));
+});
+$c_scm_StringBuilder.prototype.empty__sc_IterableOps = (function() {
+  return $ct_scm_StringBuilder__(new $c_scm_StringBuilder());
 });
 $c_scm_StringBuilder.prototype.fromSpecific__sc_IterableOnce__O = (function(coll) {
   return $ct_scm_StringBuilder__(new $c_scm_StringBuilder()).appendAll__sc_IterableOnce__scm_StringBuilder(coll);
