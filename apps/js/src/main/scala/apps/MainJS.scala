@@ -7,6 +7,10 @@ import cs214.webapp.client.*
 import cs214.webapp.client.graphics.WebClientAppInstance
 import apps.emojionary.{Wire, Event, View, Phase}
 
+/**
+ * The main entry point for the Emojionary client application.
+ * It registers the application with the WebClient framework.
+ */
 object MainJS extends WSClientApp {
   def appId: String = "emojionary"
   def uiId: String = "html"
@@ -21,6 +25,14 @@ object MainJS extends WSClientApp {
   }
 }
 
+/**
+ * The specific UI instance for Emojionary.
+ * Handles rendering the view based on the game state and processing user interactions.
+ *
+ * @param userId      The ID of the current user.
+ * @param sendMessage Function to send events to the server.
+ * @param target      The rendering target (container).
+ */
 class EmojionaryUIInstance(
     userId: UserId,
     sendMessage: ujson.Value => Unit,
@@ -29,8 +41,11 @@ class EmojionaryUIInstance(
 
   override val wire = apps.emojionary.Wire
 
-  // --- ÉLÉMENTS PERSISTANTS ---
-  
+  /**
+   * Persistent input element for the secret word.
+   * Defined as a lazy val to ensure the DOM element remains the same instance
+   * across multiple `render` calls, preventing focus loss.
+   */
   lazy val secretInput: dom.html.Input = {
     input(
       id := "secret-word-input", 
@@ -40,6 +55,10 @@ class EmojionaryUIInstance(
     ).render
   }
 
+  /**
+   * Persistent input element for guessing.
+   * Kept persistent to maintain text and focus during UI updates (e.g., timer ticks).
+   */
   lazy val guessInput: dom.html.Input = {
     val el = input(
       id := "guess-input", 
@@ -54,11 +73,18 @@ class EmojionaryUIInstance(
     el
   }
 
-  // --- ÉTAT LOCAL UI ---
+  /** Tracks the number of hints seen to manage local UI blocking logic. */
   private var lastHintCount: Int = 0
+  
+  /** Local flag to optimistically block the guesser while waiting for the next hint. */
   private var waitingForNextHint: Boolean = false
 
-  // Fonction pour maintenir le focus
+  /**
+   * Helper function to forcibly maintain focus on a persistent input element.
+   * Uses a timeout to re-apply focus after the DOM has been updated by the framework.
+   *
+   * @param el The input element to focus.
+   */
   def maintainFocus(el: dom.html.Input): Unit = {
     if (dom.document.activeElement == el) {
       val start = el.selectionStart
@@ -70,6 +96,9 @@ class EmojionaryUIInstance(
     }
   }
 
+  /**
+   * Main render function that dispatches to specific screen renderers based on the game phase.
+   */
   override def render(userId: UserId, view: View): Frag = {
     div(cls := "app-container",
       if (view.phase == Phase.WaitingToStart) 
@@ -81,8 +110,9 @@ class EmojionaryUIInstance(
     )
   }
 
-  // --- TIMER UI ---
-
+  /**
+   * Renders the countdown timer if the game is in the guessing phase.
+   */
   def renderTimer(view: View): Frag = {
     val rawSeconds = (view.remainingTimeMs / 1000L).toInt
     val seconds = if (rawSeconds < 0) 0 else rawSeconds
@@ -99,10 +129,10 @@ class EmojionaryUIInstance(
       frag() 
   }
 
-  // --- ÉCRANS ---
-
+  /**
+   * Renders the initial start screen with rules and a start button.
+   */
   def renderStartButton(): Frag = {
-    // Reset manuel
     resetLocalState()
     
     div(cls := "start-screen",
@@ -127,6 +157,9 @@ class EmojionaryUIInstance(
     )
   }
 
+  /**
+   * Renders the end screen showing the winner, the secret word, and the final scores.
+   */
   def renderEndScreen(currentUser: UserId, view: View): Frag = {
     div(
       h2("Partie Terminée !"),
@@ -140,11 +173,15 @@ class EmojionaryUIInstance(
     )
   }
 
-  // --- TABLEAU DE SCORES ---
-
+  /**
+   * Formatting helper to shorten long User IDs.
+   */
   private def shortId(uid: UserId): String =
     if uid.length <= 6 then uid else uid.take(6) + "…"
 
+  /**
+   * Renders the scoreboard, sorted by score in descending order.
+   */
   def renderScoreBoard(currentUser: UserId, view: View): Frag = {
     val ordered = view.allScores.toSeq.sortBy { case (_, score) => -score }
 
@@ -168,6 +205,9 @@ class EmojionaryUIInstance(
     )
   }
 
+  /**
+   * Renders the main active game layout, split into sidebar and main panel.
+   */
   def renderActiveGame(currentUser: UserId, view: View): Frag = {
     div(cls := "game-layout",
       div(cls := "sidebar",
@@ -192,21 +232,22 @@ class EmojionaryUIInstance(
     )
   }
 
-  // --- CONTROLES ---
-
+  /**
+   * Renders the controls for the player who is describing the word.
+   * Includes the secret word input (initially) and the emoji keyboard.
+   */
   def renderDescriberControls(view: View): Frag = {
-    // Reset automatique si changement de round
+    // Automatically reset input if the round changes
     if (view.hints.isEmpty && lastHintCount > 0) {
         secretInput.value = ""
         lastHintCount = 0
     }
 
-    // Le dessinateur est en attente si le serveur est en phase 'Guessing'
-    // (cela veut dire qu'il a déjà envoyé son indice et que le chrono tourne)
+    // Check if the describer is waiting for guessers (Guessing phase)
     val isWaitingForGuessers = view.phase == Phase.Guessing
 
     div(
-      // 1. Zone du haut : Mot Secret
+      // Top section: Secret Word input or reminder
       if (view.hints.isEmpty) {
         maintainFocus(secretInput)
         div(cls := "secret-word-section",
@@ -218,17 +259,14 @@ class EmojionaryUIInstance(
         div(cls := "secret-reminder", "Mot secret : ", strong(view.secretWord.getOrElse("???").toString))
       },
 
-      // 2. Zone du bas : Messages d'état ou Clavier
+      // Bottom section: Status message or Emoji Keyboard
       if (isWaitingForGuessers) {
-        // Cas : Les autres sont en train de réfléchir
         div(cls := "status-message",
           p(style := "color: #3498db; font-weight: bold;", "⏳ Les joueurs réfléchissent..."),
           p("Tu ne peux pas envoyer d'indice pour le moment.")
         )
       } else {
-        // Cas : C'est à moi de jouer (WaitingForHint)
         frag(
-          // Si ce n'est pas le tout début (où on a déjà le formulaire au-dessus), on ajoute un rappel
           if (view.hints.nonEmpty) 
             div(cls := "status-message", style := "background: #eafaf1; color: #27ae60;",
                p(style := "font-weight: bold;", "👉 C'est à toi !"),
@@ -246,6 +284,9 @@ class EmojionaryUIInstance(
     )
   }
 
+  /**
+   * Handles emoji clicks. Sends the first hint (with secret word) or subsequent hints.
+   */
   def onEmojiClicked(view: View, emoji: String): Unit = {
     if (view.hints.isEmpty) {
       val word = secretInput.value.trim
@@ -259,6 +300,9 @@ class EmojionaryUIInstance(
     }
   }
 
+  /**
+   * Resets the local UI state variables.
+   */
   def resetLocalState(): Unit = {
     secretInput.value = ""
     guessInput.value = ""
@@ -266,15 +310,20 @@ class EmojionaryUIInstance(
     waitingForNextHint = false
   }
 
+  /**
+   * Renders the controls for the players guessing the word.
+   */
   def renderGuesserControls(view: View): Frag = {
     val currentHintCount = view.hints.length
 
+    // Reset state if it's the start of a new round
     if (view.hints.isEmpty) {
        lastHintCount = 0
        waitingForNextHint = false
        guessInput.value = "" 
     }
 
+    // Unlock input if a new hint has arrived
     if (currentHintCount > lastHintCount) {
       waitingForNextHint = false
       lastHintCount = currentHintCount
@@ -312,6 +361,9 @@ class EmojionaryUIInstance(
     )
   }
 
+  /**
+   * Renders the history of incorrect guesses for the current user.
+   */
   def renderGuessHistory(view: View): Frag = {
     val errors = view.myWrongGuesses
 
@@ -328,6 +380,9 @@ class EmojionaryUIInstance(
     )
   }
 
+  /**
+   * Submits the current guess to the server and locks the input locally.
+   */
   def submitGuess(): Unit = {
     val text = guessInput.value.trim
     if (text.nonEmpty) {
@@ -337,7 +392,9 @@ class EmojionaryUIInstance(
     }
   }
 
-  // --- CSS ---
+  /**
+   * CSS styles for the application.
+   */
   override def css: String = super.css + """
     body { background-color: #f0f2f5; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; height: 100vh; }
     .app-container {
