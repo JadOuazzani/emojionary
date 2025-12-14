@@ -55,7 +55,7 @@ class Logic extends ClockDrivenStateMachine[Event, State, View]:
    * Application metadata displayed in the webapp interface.
    */
   override val appInfo: AppInfo = AppInfo(
-    id = "emojionary",
+    id = "UL2025APP93",
     name = "Emojionary",
     description = "Guess the word using emojis!",
     year = 2025
