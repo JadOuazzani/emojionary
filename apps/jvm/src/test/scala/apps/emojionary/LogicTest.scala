@@ -9,6 +9,7 @@ class LogicTest extends FunSuite {
   private val sm = new Logic
   private val u0: String = "u0"
   private val u1: String = "u1"
+  private val u2: String = "u2"
 
   private def renderState(res: Try[Seq[Action[State]]]): State =
     res match {
@@ -33,6 +34,8 @@ class LogicTest extends FunSuite {
     sm.transition(st)(u0, Left(Tick(millis)))
 
   private def init2(): State = sm.init(Seq(u0, u1))
+  
+  private def init3(): State = sm.init(Seq(u0, u1, u2))
 
   test("init: WaitingToStart, scores=0") {
     val st = init2()
@@ -72,14 +75,17 @@ class LogicTest extends FunSuite {
   }
 
   test("SubmitGuess: wrong guess -> stays Guessing and appends guess") {
-    val st0 = init2()
+    // Need 3 players so that when u1 guesses wrong, u2 hasn't guessed yet
+    // so everyoneAnswered = false and we stay in Guessing
+    val st0 = init3()
     val st1 = renderState(send(st0, u0, Event.StartGame))
     val emoji = sm.AllEmojis.head
     val st2 = renderState(send(st1, u0, Event.SendFirstHint("scala", emoji)))
 
+    // u1 guesses wrong - should stay in Guessing because u2 hasn't guessed yet
     val st3 = renderState(send(st2, u1, Event.SubmitGuess("python")))
     assertEquals(st3.phase, Phase.Guessing, "should remain Guessing")
-    assert(st3.guesses.contains("python"), "should contain guess")
+    assert(st3.guesses.exists(_.text == "python"), "should contain guess")
     assertEquals(st3.winner, None, "no winner on wrong guess")
   }
 
@@ -105,14 +111,16 @@ class LogicTest extends FunSuite {
   }
 
   test("Tick: Guessing timer expired + max hints -> GameEnd (no winner)") {
+    // Use 5 DIFFERENT emojis to satisfy State invariant (no duplicates)
+    val fiveUniqueEmojis = sm.AllEmojis.take(Rules.MaxHints).toList
     val st = init2().copy(
       phase = Phase.Guessing,
       secretWord = Some("scala"),
-      hints = List.fill(Rules.MaxHints)("😀"),
+      hints = fiveUniqueEmojis,
       timerEndMs = 0L,
       winner = None
     )
-    val st2 = renderState(tick(st, 0L))
+    val st2 = renderState(tick(st, 1L))
     assertEquals(st2.phase, Phase.GameEnd, "should go to GameEnd")
     assertEquals(st2.winner, None, "no winner when max hints reached")
   }
@@ -123,7 +131,7 @@ class LogicTest extends FunSuite {
       winner = Some(u1),
       timerEndMs = 0L
     )
-    val st2 = renderState(tick(st, 0L))
+    val st2 = renderState(tick(st, 1L))
     assertEquals(st2.phase, Phase.WaitingForHint, "should start next round")
     assertEquals(st2.describerIndex, st2.playerOrder.indexOf(u1), "winner becomes describer")
     assertEquals(st2.secretWord, None, "secretWord reset")

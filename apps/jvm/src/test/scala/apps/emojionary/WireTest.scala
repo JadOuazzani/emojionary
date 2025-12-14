@@ -337,11 +337,11 @@ class WireTest extends FunSuite {
 
   // ========== EDGE CASES ==========
 
-  test("Event: empty string in SubmitGuess") {
-    val e = Event.SubmitGuess("")
-    val json = Wire.eventFormat.encode(e)
-    val decoded = Wire.eventFormat.decode(json).get
-    assertEquals(decoded, e)
+  test("Event: empty string in SubmitGuess should fail") {
+    // Empty guess text is not allowed per Wire.scala require
+    intercept[IllegalArgumentException] {
+      Wire.eventFormat.encode(Event.SubmitGuess(""))
+    }
   }
 
   test("Event: special characters in secretWord") {
