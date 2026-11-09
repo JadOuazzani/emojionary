@@ -1,6 +1,8 @@
 # 🎮 Emojionary
 
-A multiplayer emoji-based word guessing game built with Scala.js for the CS-214 Unguided Lab.
+A multiplayer emoji-based word guessing game in Scala and Scala.js, built as the unguided lab project of EPFL's CS-214 *Software Construction* course (fall 2025) by Jad Chahed Ouazzani, Riad Elhariry, Sara and Lilya.
+
+![Emojionary](apps/jvm/src/main/resources/www/static/UL2025APP93.png)
 
 ## 📖 Game Overview
 
@@ -27,19 +29,18 @@ Emojionary is a turn-based party game where one player (the **Describer**) must 
 
 ```
 apps/
-├── js/src/main/scala/apps/
-│   └── emojionary/
-│       └── MainJS.scala      # Frontend UI (Scala.js)
+├── shared/src/main/scala/apps/emojionary/
+│   ├── Types.scala           # State, View, Event, Phase definitions
+│   └── Wire.scala            # JSON serialization/deserialization
 ├── jvm/src/main/scala/apps/
-│   └── emojionary/
-│       ├── Types.scala       # State, View, Event, Phase definitions
-│       ├── Wire.scala        # JSON serialization/deserialization
-│       └── Logic.scala       # Game state machine & business logic
-└── jvm/src/test/scala/apps/
-    └── emojionary/
-        ├── StateTest.scala   # State invariants & require tests
-        ├── WireTest.scala    # Serialization round-trip tests
-        └── LogicTest.scala   # Game logic & transitions tests
+│   ├── ul2025app93/Logic.scala   # Game state machine & business logic
+│   └── MainJVM.scala             # Server entry point
+├── js/src/main/scala/apps/
+│   └── MainJS.scala          # Frontend UI (Scala.js + Laminar)
+└── jvm/src/test/scala/apps/emojionary/
+    ├── StateTest.scala       # State invariants & require tests
+    ├── WireTest.scala        # Serialization round-trip tests
+    └── LogicTest.scala       # Game logic & transitions tests
 ```
 
 ## 🧩 Components
@@ -119,6 +120,8 @@ val newState = state.copy(phase = Phase.Guessing, ...)
 
 ## 🚀 Running the Game
 
+> **Note:** the build depends on the course's `webapp-lib`, hosted on EPFL's GitLab (see `build.sbt`), so compiling the project requires access to it.
+
 1. Start the server:
 ```bash
 sbt run
@@ -170,4 +173,4 @@ WaitingToStart ──StartGame──> WaitingForHint ──SendFirstHint──> 
 
 ## 📄 License
 
-CS-214 Unguided Lab Project - EPFL 2025
+CS-214 Unguided Lab Project — EPFL 2025. Published after the end of the semester, as allowed by the course's unguided-lab policy.
