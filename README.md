@@ -10,11 +10,11 @@ Emojionary is a turn-based party game where one player (the **Describer**) must 
 
 ### How to Play
 
-1. **Start**: One player becomes the Describer and chooses a secret word
-2. **Describe**: The Describer selects emojis (up to 5) to represent the word
-3. **Guess**: Other players try to guess the word within the time limit
-4. **Score**: Fewer hints = more points! (5 pts for 1 hint, 1 pt for 5 hints)
-5. **Rotate**: The winner becomes the next Describer
+1. **Start**: One player becomes the Describer and chooses a secret word.
+2. **Describe**: The Describer selects emojis (up to 5) to represent the word.
+3. **Guess**: Other players try to guess the word within the time limit.
+4. **Score**: Fewer hints = more points! (5 pts for 1 hint, 1 pt for 5 hints).
+5. **Rotate**: The winner becomes the next Describer.
 
 ### Game Rules
 
