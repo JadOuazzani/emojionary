@@ -59,9 +59,9 @@ Defines the core data structures with Design by Contract validation:
 
 Handles JSON encoding/decoding for client-server communication:
 
-- `eventFormat`: Encodes/decodes player events
-- `viewFormat`: Encodes/decodes game views
-- Includes validation with `require` and `ensuring` clauses
+- `eventFormat`: Encodes/decodes player events.
+- `viewFormat`: Encodes/decodes game views.
+- Includes validation with `require` and `ensuring` clauses.
 
 ### Logic (`Logic.scala`)
 
